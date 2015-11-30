@@ -3,6 +3,7 @@ gundo                   https://github.com/sjl/gundo.vim.git
 indentLine              https://github.com/Yggdroot/indentLine.git
 L9                      https://github.com/vim-scripts/L9.git
 matchit.zip             https://github.com/vim-scripts/matchit.zip.git
+neocomplete.vim         https://github.com/Shougo/neocomplete.vim.git
 nerdtree                https://github.com/scrooloose/nerdtree.git
 OmniCppComplete         https://github.com/vim-scripts/OmniCppComplete.git
 python-syntax           https://github.com/hdima/python-syntax.git
