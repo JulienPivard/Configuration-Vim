@@ -1,0 +1,57 @@
+.\" -*- mode: nroff; coding: utf-8; -*-
+.\" Les lignes de commentaires
+." Une ligne vide avant le début de la page de titre
+." permet d'avoir une page blanche juste après.
+
+.\" Pour mettre en place le header des pages
+.he 'TitreDocument''%'
+.\" Pour mettre en place le footer des pages
+.fo 'TitreDocument''%'
+.\" Ajoute un niveau d'indentation par niveau de profondeur du chapitre
+.\" Ici c'est 3 espaces peuvent être aussi des i ou c
+.nr si 3n
+.\"
+.\" Pour une page de titre
+.tp
+.sp 7c
+.(l C
+.sz +10
+LES LIGAMENTS CROISÉ DU GOBELIN
+SUR PLUSIEURS LIGNES
+.sz
+.sp
+.sm par
+.sp
+.sm PIVARD \c
+ Julien
+.)l
+.bp
+.\" Fin de la page de titre
+.\"
+.\" Pour avoir des chapitres numéroté automatiquement
+.+c "Pour un chapitre"
+.\" Pour l'indexation
+.(x t
+Pour un chapitre
+.)x
+.\" Un titre de niveau 1
+.sh 1 "Pour un titre avec niveau du titre à gauche"
+.pp
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum dolor sit amet.
+.\" Pour remettre à zéro l'indentation des titres
+.sh 0
+
+.++ B
+.+c Bibliographie
+.(x t
+Bibliographie
+.)x
+
+.\" Fait repartir la numérotation de 1
+.++ P
+.+c Sommaire
+.\" Pour imprimer l'index "t"
+.xp t

@@ -1,0 +1,7 @@
+[user]
+	name = Pivard Julien
+	email = 21001698@etu.unicaen.fr
+[push]
+	default = simple
+[alias]
+    log = log --graph

@@ -1,0 +1,21 @@
+set nocompatible
+"sdhbczb cehz
+
+set background=&
+colorscheme icansee
+highlight NonText guibg=black
+highlight Normal guifg=White guibg=black
+highlight Comment guifg=darkblue
+highlight Constant guifg=darkred
+highlight String guifg=darkgreen
+highlight Type gui=underline guifg=darkgreen
+highlight SpecialChar guifg=red
+highlight Statement guifg=blue
+highlight Repeat guifg=darkyellow
+highlight Operator guifg=darkyellow
+highlight Label guifg=yellow
+highlight Folded guifg=darkyellow guibg=darkgrey
+highlight FoldColumn guifg=darkyellow guibg=darkgrey
+highlight VertSplit gui=bold guifg=darkyellow guibg=black
+highlight CursorLine gui=underline guibg=NONE
+highlight CursorColumn gui=underline guibg=NONE gui=underline guibg=NONE

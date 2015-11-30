@@ -1,0 +1,18 @@
+{
+  "default_hour": 9,
+  "linewrap": 130,
+  "encrypt": false,
+  "default_minute": 0,
+  "tagsymbols": "@",
+  "editor": "/usr/bin/vim",
+  "timeformat": "%d/%m/%Y %H:%M",
+  "highlight": true,
+  "journals": {
+    "default":      "/home/asmodee/Dropbox/Jrnl/default.txt",
+    "aitv":         "/home/asmodee/Dropbox/Jrnl/aitv.txt",
+    "changelog":    "/home/asmodee/Dropbox/Jrnl/changeLog.txt",
+    "astuce":       "/home/asmodee/Dropbox/Jrnl/astuce.txt",
+    "princesse":    "/home/asmodee/Dropbox/Jrnl/pourMaPrincesse.txt",
+    "film":         "/home/asmodee/Dropbox/Jrnl/film.txt"
+  }
+}

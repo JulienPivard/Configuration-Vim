@@ -1,0 +1,33 @@
+body *
+{
+    display: flex;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: auto;
+    flex-direction: column;
+    background: lightsteelblue;
+}
+
+a:link      /*Liens non visité*/
+{
+    color: blue;
+}
+
+a:hover     /*Liens survolé par la souris*/
+{
+    color: #CACACA;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:visited   /*Liens déjà visité*/
+{
+    text-decoration: underline;
+}

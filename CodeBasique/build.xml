@@ -1,0 +1,98 @@
+<project name="usine" default="compile" basedir=".">
+    <property name="appname"       value="usine"/>
+    <property name="buildhome"     value="${basedir}/build"/>
+    <property name="buildtest"     value="${basedir}/buildTest"/>
+    <property name="disthome"      value="${basedir}/dist"/>
+    <property name="docshome"      value="${basedir}/docs"/>
+	<property name="libhome"       value="${basedir}/lib"/>
+    <property name="srchome"       value="${basedir}/src"/>
+    <property name="srctest"       value="${basedir}/test"/>
+    <property name="ressources"    value="${basedir}/ressources"/>
+    <property name="javacversion"  value="1.7"/>
+    <property name="javacencoding" value="UTF-8"/>
+
+    <!-- Pour éviter des warning inutiles à partir de ant 1.8 -->
+    <presetdef name="javac">
+        <javac includeantruntime="false"/>
+    </presetdef>
+
+    <!-- ==================== Compile Target ================================== -->
+
+    <target name="compile" description="Compile les sources java et produit les classes">
+        <mkdir dir="${buildhome}"/>
+        <javac srcdir="${srchome}" destdir="${buildhome}" encoding="${javacencoding}"/>
+        <!-- Si on a des ressources graphiques on les copies -->
+        <copy todir="${buildhome}/ressources/images" >
+            <fileset dir="${ressources}/images">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+    </target>
+
+	<!-- ==================== Compilation jar et run ===================================== -->
+
+	<target name="runjar" depends="clean,compile" description="Crée un jar exécutable">
+        <mkdir dir="${disthome}"/>
+		<jar jarfile="${disthome}/${appname}.jar" basedir="${buildhome}">
+			<manifest>
+				<attribute name="Main-Class" value="Client"/>
+			</manifest>
+		</jar>
+        <java jar="${disthome}/${appname}.jar" fork="true" spawn="true"/>
+	</target>
+
+    <!-- ==================== Javadoc Target ================================== -->
+
+    <target name="javadoc" description="Compile la documentation java">
+        <mkdir dir="${docshome}"/>
+        <javadoc encoding="UTF-8" docencoding="UTF-8" charset="UTF-8" sourcepath="${srchome}" destdir="${docshome}" packagenames="*"/>
+    </target>
+
+    <!-- ==================== Clean Target ==================================== -->
+
+    <target name="clean" description="Supprime les dossier créée à la compilation">
+        <delete dir="${buildhome}"/>
+        <delete dir="${docshome}"/>
+        <delete dir="${buildtest}"/>
+        <delete dir="${disthome}"/>
+    </target>
+
+    <!-- ==================== Run =================================== -->
+
+    <target name="run">
+        <java classname="MainClass" classpath="${buildhome}">
+            <!-- Pour lancer une application en mode graphique ajouter ces deux fonctions la première pour lancer la fenêtre graphique et l'autre pour garder la main sur le terminal-->
+            <!-- fork="true" spawn="true" -->
+        </java>
+    </target>
+
+    <!-- ========================= Compile test ========================== -->
+
+	<target name="compiletest" depends="compile" description="Compile Java sources">
+        <mkdir dir="${buildtest}"/>
+		<javac srcdir="${srctest}" destdir="${buildtest}">
+			<classpath>
+				<pathelement location="${buildhome}"/>
+                <fileset dir="${libhome}">
+                    <include name="**/*.jar"/>
+                </fileset>
+			</classpath>
+		</javac>
+    </target>
+
+    <!-- ==================== Test Target ===================================== -->
+
+    <target name="test" depends="compiletest">
+        <junit showoutput="on" printsummary="withOutAndErr" haltonfailure="no" fork="true">
+            <formatter type="plain" usefile="false" />
+            <classpath>
+                <pathelement location="${buildtest}"/>
+                <pathelement location="${buildhome}"/>
+                <fileset dir="${libhome}">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+            <test name="TestSuite" haltonfailure="no" />
+        </junit>
+    </target>
+</project>

@@ -1,0 +1,249 @@
+\documentclass[a4paper, 10pt, onecolumn, draft]{article}
+
+% vim: foldmethod=marker:foldlevel=0:
+
+%\documentclass[a4paper, 10pt, onecolumn, draft]{book}
+%\documentclass[a4paper, 10pt, onecolumn, draft]{report}
+%\documentclass[a4paper, 10pt, onecolumn, draft]{lettre}
+%\documentclass[draft]{beamer}
+% twoside pour obtenir une mise en page type livre
+% twocolumn Pour avoir un texte multicolonne
+% landscape Pour avoir une orientation paysage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Options                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Options LaTeX et XeTeX %(((
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Faciliter l'utilisation par d'autres  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour ne pas avoir à changer manuellement                  %(((
+% entre xetex et luatex et pdftex
+\usepackage{ifxetex,ifluatex}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Si on utilise la commande latex normal %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[T1]{fontenc}                                   %(((
+%\usepackage[utf8]{inputenc}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Si on utilise la commande XeTeX/LuaTeX %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour changer localement la police                         %(((
+% La commande {\fontspec{police}texte}
+% Pour changer dans tout le document
+%\setmainfont{police}
+\ifxetex{}
+    \usepackage{xltxtra}
+    \usepackage{fontspec}
+\fi
+\ifluatex{}
+    \usepackage{luatextra}
+\fi
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Paquets de mise en forme        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[francais]{babel}                                %(((
+\usepackage[normalem]{ulem}     % normalem pour ne pas redéfinir emph
+\usepackage{microtype}          % Pour un meilleurs gris typographique
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            Couleur en latex            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mettre du texte en couleur \textcolor{couleur}{blabla}    %(((
+% Mettre du texte dans une boite colorée \colorbox{couleur}{blabla}
+%\usepackage{xcolor}
+%\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+%\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+%\definecolor{codepurple}{rgb}{0.58,0,0.82}
+%\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         Encadré de code source         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour créer un environnement d'affichage de code.
+%  dans lstlisting
+%\usepackage{listings}
+%\lstdefinestyle{mystyle}{%
+%    backgroundcolor=\color{backcolour},
+%    commentstyle=\color{codegreen},
+%    keywordstyle=\color{magenta},
+%    numberstyle=\tiny\color{codegray},
+%    stringstyle=\color{codepurple},
+%    basicstyle=\footnotesize,
+%    breakatwhitespace=false,
+%    breaklines=true,
+%    captionpos=b,
+%    keepspaces=true,
+%    numbers=left,
+%    numbersep=5pt,
+%    showspaces=false,
+%    showstringspaces=false,
+%    showtabs=false,
+%    tabsize=2
+%}
+%\lstset{language=sh, style=mystyle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour ajouter des caractères avec ding  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utiliser \ding{nombre} ou \dingfill{nombre}               %(((
+%\usepackage{pifont}
+    %=)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour formater les nombres correctement %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour formater automatiquement les nombres \numprint{}     %(((
+% Ou \nombre{}
+%\usepackage{numprint}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Pour avoir des lettrines        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utiliser \lettrine[lines=2]{lettre}{reste du mot}         %(((
+%\usepackage{lettrine}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Faire des tableaux            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utiliser \toprule \midrule \bottomrule pour les lignes    %(((
+% environnement tabular
+%\usepackage{booktabs}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Entête et pied de pages personnalisée  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{fancyhdr}                                      %(((
+%                                        %
+%      Pour créer un style de page       %
+%                                        %
+%\pagestyle{fancy}
+%\addtolength{\headheight}{\baselineskip}
+%\fancyhead[LE,RO]{\thepage}
+%\fancyfoot[C]{\ding{164}}
+%\fancyfoot[LE, RO]{\auteur}
+%\fancyfoot[RE, LO]{\titre}
+%\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0.5pt}
+%                                        %
+%  Pour redéfinir un style préexistant   %
+%                                        %
+%\fancypagestyle{plain}
+%{\addtolength{\headheight}{\baselineskip}
+%    \fancyhead[LE,RO]{\thepage}
+%    \fancyhead[LO,RE]{\leftmark}
+%    \fancyfoot[C]{\ding{164}}
+%    \fancyfoot[LE,RO]{\auteur}
+%    \fancyfoot[LO,RE]{\titre}
+%    \renewcommand{\headrulewidth}{0.5pt}
+%    \renewcommand{\footrulewidth}{0.5pt}
+%}
+%\pagestyle{plain}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Pour changer les marges         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour avoir des marges à l'échelle 0.65 par défaut         %(((
+%\usepackage[xetex, scale=0.65]{geometry}
+%\usepackage[xetex, top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Pour faire un index           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ajouter \printindex à la où on veut afficher l'index.     %(((
+% Utiliser \index{marque} dans le texte
+%\usepackage{makeidx}
+%\makeindex
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Pour faire des colonnes multiples    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour avoir un environnement avec plusieurs colonnes.      %(((
+% Utiliser l'environnement multicols avec le nombre de colonne.
+% Le nombre de colonne est entre {} facile.
+% En option on peut ajouter le titre de la section sur une colonne.
+% Pour ajouter une ligne entre les deux colonnes de texte :
+% Mettre \setlength{\columnseprule}{0.5pt}
+%\usepackage{multicol}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Pour avoir des liens cliquable     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ce package doit toujours être chargé en dernier           %(((
+% hidelinks pour ne pas avoir la box rouge ni la couleur des liens
+% colorlinks active les couleurs des liens et retire l'encadrement
+\usepackage[unicode,pdfencoding=auto]{hyperref}
+\hypersetup{%hidelinks,
+    colorlinks=true,
+    linkcolor=blue,
+    pdftitle={Titre},
+    pdfauthor={PIVARD Julien},
+    pdfsubject={Squelette},
+    pdfkeywords={Hyp,PDF,XeLaTeX,LaTeX,TeX}
+}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Macro défini par l'utilisateur     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Quand la forme se répète utilisez une macro.              %(((
+% La/les valeurs par défaut s'applique toujours aux premiers arguments.
+% Une nouvelle commande : \newcommand{\nomcommande}[nbarg][valdefaut]{definition}
+\newcommand{\titre}{Titre}
+\newcommand{\auteur}{\textsc{Pivard} Julien}
+\newcommand{\nom}[1]{\emph{#1}}
+\newcommand{\oldstyle}[1]
+{%Pour avoir un autre affichage des nombres
+    {\fontspec[Numbers={Proportional,OldStyle}]{TeX Gyre Adventor}#1}
+}
+    %)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      Pour faire une page de titre      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mettre \maketitle la où on veut mettre la page de titre   %(((
+\title{\titre}
+\author{\auteur}
+\date{\today}
+    %)))
+
+%)))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Document                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+%\renewcommand{\contentsname}{Sommaire}
+%\tableofcontents    % Si on veut une table des matières
+%\listoftables       % Si on veut une liste des tableaux
+%\listoffigures      % Si on veut une liste des images
+
+\hfill{}À remplir comme les petites filles!\hfill{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      Pour faire une bibliographie     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utiliser \cite{marque} dans le texte
+% abbrv, unsrt (trie par ordre d'apparition) et alpha
+%\bibliographystyle{plain}
+%\bibliography{bibliographie}
+
+\end{document}

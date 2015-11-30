@@ -1,0 +1,16 @@
+FuzzyFinder
+gundo
+indentLine
+L9
+matchit.zip
+nerdtree
+OmniCppComplete
+python-syntax
+syntastic
+tagbar
+ultisnips
+undotree.vim
+vim-antlr
+vim-fugitive
+vim-gitbranch
+vim-surround
