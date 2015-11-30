@@ -5,12 +5,12 @@ L9                      https://github.com/vim-scripts/L9.git
 matchit.zip             https://github.com/vim-scripts/matchit.zip.git
 nerdtree                https://github.com/scrooloose/nerdtree.git
 OmniCppComplete         https://github.com/vim-scripts/OmniCppComplete.git
-python-syntax
-syntastic
-tagbar
-ultisnips
-undotree.vim
-vim-antlr
-vim-fugitive
+python-syntax           https://github.com/hdima/python-syntax.git
+syntastic               https://github.com/scrooloose/syntastic.git
+tagbar                  https://github.com/majutsushi/tagbar.git
+ultisnips               https://github.com/SirVer/ultisnips.git
+undotree.vim            https://github.com/vim-scripts/undotree.vim.git
+vim-antlr               https://github.com/phongnh/vim-antlr.git
+vim-fugitive            https://github.com/tpope/vim-fugitive.git
 vim-gitbranch
-vim-surround
+vim-surroundA           https://github.com/tpope/vim-surround.git
