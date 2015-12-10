@@ -4,7 +4,7 @@
     <property name="buildtest"     value="${basedir}/buildTest"/>
     <property name="disthome"      value="${basedir}/dist"/>
     <property name="docshome"      value="${basedir}/docs"/>
-	<property name="libhome"       value="${basedir}/lib"/>
+    <property name="libhome"       value="${basedir}/lib"/>
     <property name="srchome"       value="${basedir}/src"/>
     <property name="srctest"       value="${basedir}/test"/>
     <property name="ressources"    value="${basedir}/ressources"/>
@@ -29,17 +29,17 @@
         </copy>
     </target>
 
-	<!-- ==================== Compilation jar et run ===================================== -->
+    <!-- ==================== Compilation jar et run ===================================== -->
 
-	<target name="runjar" depends="clean,compile" description="Crée un jar exécutable">
+    <target name="runjar" depends="clean,compile" description="Crée un jar exécutable">
         <mkdir dir="${disthome}"/>
-		<jar jarfile="${disthome}/${appname}.jar" basedir="${buildhome}">
-			<manifest>
-				<attribute name="Main-Class" value="Client"/>
-			</manifest>
-		</jar>
+        <jar jarfile="${disthome}/${appname}.jar" basedir="${buildhome}">
+            <manifest>
+                <attribute name="Main-Class" value="Client"/>
+            </manifest>
+        </jar>
         <java jar="${disthome}/${appname}.jar" fork="true" spawn="true"/>
-	</target>
+    </target>
 
     <!-- ==================== Javadoc Target ================================== -->
 
@@ -68,16 +68,16 @@
 
     <!-- ========================= Compile test ========================== -->
 
-	<target name="compiletest" depends="compile" description="Compile Java sources">
+    <target name="compiletest" depends="compile" description="Compile Java sources">
         <mkdir dir="${buildtest}"/>
-		<javac srcdir="${srctest}" destdir="${buildtest}">
-			<classpath>
-				<pathelement location="${buildhome}"/>
+        <javac srcdir="${srctest}" destdir="${buildtest}">
+            <classpath>
+                <pathelement location="${buildhome}"/>
                 <fileset dir="${libhome}">
                     <include name="**/*.jar"/>
                 </fileset>
-			</classpath>
-		</javac>
+            </classpath>
+        </javac>
     </target>
 
     <!-- ==================== Test Target ===================================== -->

@@ -5,7 +5,7 @@ use warnings;
 
 {
     my $i = "\n§" . "(=^.^=)" x 4 . "§\n";
-    print($i);
-    print("§         Hello world        §");
-    print($i . "\n");
+    print( $i );
+    print( "§         Hello world        §" );
+    print( $i . "\n" );
 }

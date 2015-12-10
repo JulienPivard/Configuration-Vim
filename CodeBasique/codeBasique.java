@@ -24,17 +24,17 @@ public class NOMFICHIER
      */
     public static void main(String[] args)
     {
-        String nomfichier = new String("#            NOMFICHIER            #");
-        String ligneIntro = new String("####################################");
-        System.out.printf("\n%s\n%s\n%s\n\n", ligneIntro, nomfichier, ligneIntro);
-        if(args.length==0)
+        String nomfichier = new String( "#            NOMFICHIER            #" );
+        String ligneIntro = new String( "####################################" );
+        System.out.printf( "\n%s\n%s\n%s\n\n", ligneIntro, nomfichier, ligneIntro );
+        if( args.length==0 )
         {
-            System.out.printf("Usage java NOMFICHIER argument\n");
+            System.out.printf( "Usage java NOMFICHIER argument\n" );
             return;
         }
-        if(args.length!=nbarguments)
+        if( args.length!=nbarguments )
         {
-            System.err.printf("Nombres d'arguments incorrect, %d trop d'arguments\n", args.length);
+            System.err.printf( "Nombres d'arguments incorrect, %d trop d'arguments\n", args.length );
             return;
         }
     }

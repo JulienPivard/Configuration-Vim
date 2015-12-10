@@ -10,3 +10,5 @@ tags
 .zcache/
 undodir/*
 backup/*
+bundle/*
+shada
