@@ -2,7 +2,6 @@ FuzzyFinder             https://github.com/vim-scripts/FuzzyFinder.git
 gundo                   https://github.com/sjl/gundo.vim.git
 indentLine              https://github.com/Yggdroot/indentLine.git
 L9                      https://github.com/vim-scripts/L9.git
-matchit.zip             https://github.com/vim-scripts/matchit.zip.git
 neocomplete.vim         https://github.com/Shougo/neocomplete.vim.git
 nerdtree                https://github.com/scrooloose/nerdtree.git
 OmniCppComplete         https://github.com/vim-scripts/OmniCppComplete.git
@@ -14,4 +13,5 @@ undotree.vim            https://github.com/vim-scripts/undotree.vim.git
 vim-antlr               https://github.com/phongnh/vim-antlr.git
 vim-fugitive            https://github.com/tpope/vim-fugitive.git
 vim-gitbranch
-vim-surroundA           https://github.com/tpope/vim-surround.git
+vim-matchit             https://github.com/edsono/vim-matchit.git
+vim-surround            https://github.com/tpope/vim-surround.git
