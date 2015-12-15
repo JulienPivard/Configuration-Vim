@@ -383,15 +383,15 @@ map  <F8>           :FufBuffer<CR>
 map! <F8>     <Esc> :FufBuffer<CR>
 map  <F9>           :FufBufferTagAll<CR>
 map! <F9>     <Esc> :FufBufferTagAll<CR>
-map  <S-F12>        :vsp ~/.vimrc<CR>
-map! <S-F12>  <Esc> :vsp ~/.vimrc<CR>
+map  <S-F12>        :vsp ~/.vim/vimrc<CR>
+map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
 
 " Mappage des touches en fonctions du type de fichier
 autocmd FileType html,css,php,javascript    map  <buffer> <F10>      :!firefox % &<CR>
 autocmd FileType html,css,php,javascript    map! <buffer> <F10> <Esc>:!firefox % &<CR>
 " Recharge le vimrc quand utilise F5
-autocmd FileType vim                        map  <buffer> <F5>       :source ~/.vimrc<CR>
-autocmd FileType vim                        map! <buffer> <F5>  <Esc>:source ~/.vimrc<CR>
+autocmd FileType vim                        map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
+autocmd FileType vim                        map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
 " Execute le script avec F5
 autocmd Filetype perl,sh,python map  <buffer> <F5>       :!./%<CR>
 autocmd Filetype perl,sh,python map! <buffer> <F5>  <Esc>:!./%<CR>
@@ -441,7 +441,6 @@ scriptencoding utf-8
 "gundo
 "indentLine
 "L9
-"matchit.zip
 "neocomplete.vim
 "neosnippet-snippets
 "neosnippet.vim
@@ -452,6 +451,7 @@ scriptencoding utf-8
 "tagbar
 "ultisnips
 "vim-antlr
+"vim-matchit
 "vim-surround
 
 " Réglages pour GundoToggle
