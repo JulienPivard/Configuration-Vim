@@ -12,23 +12,26 @@ set noautochdir                     " Pour ne pas se changer automatiquement de 
 set   autoindent                    " Adapte l'indentation automatiquement
 set   autoread                      " Permet de relire les fichiers modifier à l'extérieur
 set   autowrite                     " Sauvegarde automatiquement le document
-set   autowriteall                  " Sauvegarde automatiquement le document dans plus de cas
+set noautowriteall                  " Sauvegarde automatiquement le document dans plus de cas
 set   background=dark               " Fixe la valeur du fond en sombre pour les thèmes
 set   backspace=indent,eol,start    " Fixe le comportement de la touche backspace
 set   backup                        " Conserve une copie de tout les fichiers édité
 set   backupdir=$HOME/.vim/backup   " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
-set   breakindent                   " TODO
+set   breakindent                   " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes.
 set   completeopt=menuone,longest,preview    "Pour CPP
-set   concealcursor=                " Quand le curseur est sur un caractère conceal il reste en conceal
+set   concealcursor=c               " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                " Change les combinaison de caractère en leur équivalent utf-8
+set   confirm                       " Affiche une ligne de dialogue pour choisir une action
 set   copyindent                    " Adapte l'indentation des lignes collées
 set   cryptmethod=blowfish          " Change l'algorithme de cryptage
 set nocursorcolumn                  " Surligne la colonne ou se situe le curseur
 set nocursorline                    " Surligne la ligne ou se situe le curseur
+set nodigraph                       " seul i_ctl-k suivit de deux lettres permet d'écrire des caractères spéciaux
 set   display=lastline,uhex         " Les lignes trop longues ne sont plus remplacées par @
 set   encoding=utf-8                " Encodage des fichiers en utf-8
 set noexrc                          " Bloque la lecture de vimrc locaux
 set   expandtab                     " Change les tabulations en espaces
+set noerrorbells                    " Pas de beep lors des erreurs
 set   foldclose=all                 " Ferme le replis si le curseur en sort et level>foldlevel
 set   foldcolumn=1                  " Taille de la colonne qui indique les marques
 set   foldenable                    " Activer les replis
@@ -50,7 +53,7 @@ set   modeline                      " Options spécifiques à vim dans les premi
 set   modelines=3                   " Nombres de lignes vérifiées à l'ouverture
 set   nrformats=alpha,octal,hex     " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
 set   number                        " Affiche les numéros de ligne
-set   printencoding=utf-8           " Fixe l'encodage pour l'impression
+set   printencoding=utf8            " Fixe l'encodage pour l'impression
 set   printoptions=paper:A4         " Permet de régler plusieurs options dont la taille du papier
 set norelativenumber                " Affiche le nombre de ligne relatif à la position
 set   report=0                      " Affiche toujours le nombre de lignes modifié
@@ -59,7 +62,7 @@ set   shiftround                    " Indentation arrondie à un multiple de shi
 set   shiftwidth=4                  " Taille des tabulations avec >> ou <<
 set   showmatch                     " Affiche la parenthèse correspondante
 set   showcmd                       " Affiche la commande quand elle est tapé
-set   showbreak=<------>            " Affiche un caractère au début d'une ligne enroulée
+set   showbreak=―――>                " Affiche un caractère au début d'une ligne enroulée
 set   smartcase                     " Casse intelligente
 set   smartindent                   " Indentation intelligente
 set   smarttab                      " Suppression de tabulation intelligente
@@ -358,6 +361,23 @@ function! ConfigAntlr()
     map! <buffer> <F10> <Esc> :!./runAntlr.sh %< test.code <CR>
 endfunction
 
+" Permet de changer
+function ModeChange()
+    if getline(1) =~ "^#!.*/bin/"
+        silent !chmod u+x <afile>
+    endif
+endfunction
+
+fun CleanText()
+    let curcol = col(".")
+    let curline = line(".")
+    exe ":retab"
+$//ge"xe ":%s/
+/ /ge"xe ":%s/
+    exe ":%s/ \\+$//e"
+    call cursor(curline, curcol)
+endfun
+
 iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
@@ -410,6 +430,9 @@ autocmd FileType nroff,groff            call AffichageGroff()
 autocmd Filetype antlr                  call ConfigAntlr()
 autocmd FileType cpp                    call MacrosCPP()
 autocmd FileType c,h                    call ExistMakeFileC()
+
+" Rend le fichier courant exécutable à l'enregistrement si c'est pertinent
+au BufWritePost * call ModeChange()
 
 " Définition du colorsheme
 " dans ~/.vim/colors/icansee.vim
@@ -464,7 +487,7 @@ let g:gundo_preview_height = 15     " Hauteur de la fenêtre d'aperçus.
 let g:gundo_right = 0               " Ouvre l'arbre à gauche.
 let g:gundo_preview_bottom = 1      " Pour que la fenêtre d'aperçus prenne toute la largeur.
 let g:gundo_close_on_revert = 1     " Fermer automatiquement après annulation.
-let g:gundo_auto_preview = 0        " Désactive l'affichage automatique des différence.
+let g:gundo_auto_preview = 1        " Désactive l'affichage automatique des différence.
 let g:gundo_prefer_python3 = 1
 let g:gundo_tree_statusline='%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline='%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
@@ -508,9 +531,6 @@ let g:indentLine_color_gui = '#CA9700'
 let g:indentLine_concealcursor = ''
 let g:indentLine_conceallevel = 2
 let g:indentLine_leadingSpaceEnabled = 0
-"let g:indentLine_char = '│'
-"let g:indentLine_char = '•'
-"let g:indentLine_char = '࿖'
 let g:indentLine_char = '✔'
 let g:indentLine_faster = 1
 
