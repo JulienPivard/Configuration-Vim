@@ -9,68 +9,72 @@ filetype plugin on
 filetype indent on
 
 set noautochdir                     " Pour ne pas se changer automatiquement de répertoire
-set autowrite                       " Sauvegarde automatiquement le document
-set background=dark                 " Fixe la valeur du fond en sombre pour les thèmes
-set backspace=indent,eol,start      " Fixe le comportement de la touche backspace
-set backup                          " Conserve une copie de tout les fichiers édité
-set backupdir=$HOME/.vim/backup     " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
-set completeopt=menuone,longest,preview    "Pour CPP
-set concealcursor=                  " Quand le curseur est sur un caractère conceal il reste en conceal
-set conceallevel=2                  " Change les combinaison de caractère en leur équivalent utf-8
-set copyindent                      " Adapte l'indentation des lignes collées
-set cryptmethod=blowfish            " Change l'algorithme de cryptage
+set   autoindent                    " Adapte l'indentation automatiquement
+set   autoread                      " Permet de relire les fichiers modifier à l'extérieur
+set   autowrite                     " Sauvegarde automatiquement le document
+set   autowriteall                  " Sauvegarde automatiquement le document dans plus de cas
+set   background=dark               " Fixe la valeur du fond en sombre pour les thèmes
+set   backspace=indent,eol,start    " Fixe le comportement de la touche backspace
+set   backup                        " Conserve une copie de tout les fichiers édité
+set   backupdir=$HOME/.vim/backup   " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
+set   breakindent                   " TODO
+set   completeopt=menuone,longest,preview    "Pour CPP
+set   concealcursor=                " Quand le curseur est sur un caractère conceal il reste en conceal
+set   conceallevel=2                " Change les combinaison de caractère en leur équivalent utf-8
+set   copyindent                    " Adapte l'indentation des lignes collées
+set   cryptmethod=blowfish          " Change l'algorithme de cryptage
 set nocursorcolumn                  " Surligne la colonne ou se situe le curseur
 set nocursorline                    " Surligne la ligne ou se situe le curseur
-set display=lastline,uhex           " Les lignes trop longues ne sont plus remplacées par @
-set encoding=utf-8                  " Encodage des fichiers en utf-8
+set   display=lastline,uhex         " Les lignes trop longues ne sont plus remplacées par @
+set   encoding=utf-8                " Encodage des fichiers en utf-8
 set noexrc                          " Bloque la lecture de vimrc locaux
-set expandtab                       " Change les tabulations en espaces
-set foldclose=all                   " Ferme le replis si le curseur en sort et level>foldlevel
-set foldcolumn=1                    " Taille de la colonne qui indique les marques
-set foldenable                      " Activer les replis
-set foldlevel=1                     " Ferme tout les replis de niveau supérieur
-set foldmethod=syntax               " Génère des replis automatiquement selon le type de fichier
-set foldmarker=(((,)))              " Si on utilise des marqueurs utilisent ce codage
-set foldtext=MonFoldText()          " Redéfinir le texte de la ligne de repli
-set fileencoding=utf-8              " Force l'encodage des fichiers en utf-8
-set fileformat=unix                 " Force l'encodage des fin de lignes en unix
-set fileformats=unix,mac,dos        " Formats à essayer à l'ouverture
-set history=100                     " Taille de l'historique de commande
-set hlsearch                        " Active le sur lignage lors de la recherche
-set incsearch                       " Se déplace au premier terme trouvé pendant la frappe
-set ignorecase                      " Désactive la casse pour utiliser la casse intelligente
+set   expandtab                     " Change les tabulations en espaces
+set   foldclose=all                 " Ferme le replis si le curseur en sort et level>foldlevel
+set   foldcolumn=1                  " Taille de la colonne qui indique les marques
+set   foldenable                    " Activer les replis
+set   foldlevel=1                   " Ferme tout les replis de niveau supérieur
+set   foldmethod=syntax             " Génère des replis automatiquement selon le type de fichier
+set   foldmarker=(((,)))            " Si on utilise des marqueurs utilisent ce codage
+set   foldtext=MonFoldText()        " Redéfinir le texte de la ligne de repli
+set   fileencoding=utf-8            " Force l'encodage des fichiers en utf-8
+set   fileformat=unix               " Force l'encodage des fin de lignes en unix
+set   fileformats=unix,mac,dos      " Formats à essayer à l'ouverture
+set   history=100                   " Taille de l'historique de commande
+set   hlsearch                      " Active le sur lignage lors de la recherche
+set   incsearch                     " Se déplace au premier terme trouvé pendant la frappe
+set   ignorecase                    " Désactive la casse pour utiliser la casse intelligente
 set nojoinspaces                    " Ne met qu'un seul espace quand on joint des lignes
-set laststatus=2                    " La barre de statut s'affiche toujours
-set linebreak                       " Enroule la ligne a partir de la coupure d'un mot
-set modeline                        " Options spécifiques à vim dans les premières lignes
-set modelines=3                     " Nombres de lignes vérifiées à l'ouverture
-set nrformats=alpha,octal,hex       " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
-set number                          " Affiche les numéros de ligne
-set printencoding=utf-8             " Fixe l'encodage pour l'impression
-set printoptions=paper:A4           " Permet de régler plusieurs options dont la taille du papier
+set   laststatus=2                  " La barre de statut s'affiche toujours
+set   linebreak                     " Enroule la ligne a partir de la coupure d'un mot
+set   modeline                      " Options spécifiques à vim dans les premières lignes
+set   modelines=3                   " Nombres de lignes vérifiées à l'ouverture
+set   nrformats=alpha,octal,hex     " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
+set   number                        " Affiche les numéros de ligne
+set   printencoding=utf-8           " Fixe l'encodage pour l'impression
+set   printoptions=paper:A4         " Permet de régler plusieurs options dont la taille du papier
 set norelativenumber                " Affiche le nombre de ligne relatif à la position
-set report=0                        " Affiche toujours le nombre de lignes modifié
-set scrolloff=7                     " Affiche au minimum les 3 lignes autour du curseur
-set shiftround                      " Indentation arrondie à un multiple de shiftwidth
-set shiftwidth=4                    " Taille des tabulations avec >> ou <<
-set showmatch                       " Affiche la parenthèse correspondante
-set showcmd                         " Affiche la commande quand elle est tapé
-set showbreak=<------>              " Affiche un caractère au début d'une ligne enroulée
-set smartcase                       " Casse intelligente
-set smartindent                     " Indentation intelligente
-set smarttab                        " Suppression de tabulation intelligente
-set softtabstop=4                   " Taille des tabulation en édition
+set   report=0                      " Affiche toujours le nombre de lignes modifié
+set   scrolloff=7                   " Affiche au minimum les 3 lignes autour du curseur
+set   shiftround                    " Indentation arrondie à un multiple de shiftwidth
+set   shiftwidth=4                  " Taille des tabulations avec >> ou <<
+set   showmatch                     " Affiche la parenthèse correspondante
+set   showcmd                       " Affiche la commande quand elle est tapé
+set   showbreak=<------>            " Affiche un caractère au début d'une ligne enroulée
+set   smartcase                     " Casse intelligente
+set   smartindent                   " Indentation intelligente
+set   smarttab                      " Suppression de tabulation intelligente
+set   softtabstop=4                 " Taille des tabulation en édition
 set nospell                         " Désactive la vérification orthographique
-set spelllang=fr                    " Dictionnaire en français
-set tabstop=4                       " Taille des tabulations avec tab
-set textwidth=0                     " Pour ne pas avoir de limite à la longueur des lignes
-set title                           " Modifier le titre du terminal
-set titlelen=255                    " Taille de la string dans le titre de la fenêtre d'application
-set undodir=~/.vim/undodir          " Définit le dossier d'annulation
-set undofile                        " Historique d'annulation persistant
-set undolevels=2500                 " Fixe le nombre de changements conservé
-set wildmenu                        " Affiche le menu de complétion pour les commandes dans la barre de statut
-set wildmode=longest:full,full      " Complète d'abord avec la correspondance la plus longue sans ambigüité
+set   spelllang=fr                  " Dictionnaire en français
+set   tabstop=4                     " Taille des tabulations avec tab
+set   textwidth=0                   " Pour ne pas avoir de limite à la longueur des lignes
+set   title                         " Modifier le titre du terminal
+set   titlelen=255                  " Taille de la string dans le titre de la fenêtre d'application
+set   undodir=~/.vim/undodir        " Définit le dossier d'annulation
+set   undofile                      " Historique d'annulation persistant
+set   undolevels=2500               " Fixe le nombre de changements conservé
+set   wildmenu                      " Affiche le menu de complétion pour les commandes dans la barre de statut
+set   wildmode=longest:full,full    " Complète d'abord avec la correspondance la plus longue sans ambigüité
 
 " Changer la ligne de statut de vim.
 set statusline=%<%f\ %h%1*%m%0*%r%w%=\ %-10.(%3l/%L,\ C%02c%02V%)\ \|\ %y\ tmp:%n%a\ \|\ 0x%02B\ \|\ %P\ %2*\|
