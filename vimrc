@@ -10,14 +10,15 @@ filetype indent on
 
 set noautochdir                     " Pour ne pas se changer automatiquement de répertoire
 set   autoindent                    " Adapte l'indentation automatiquement
-set   autoread                      " Permet de relire les fichiers modifier à l'extérieur
+set   autoread                      " Permet de relire les fichiers modifié à l'extérieur
 set   autowrite                     " Sauvegarde automatiquement le document
 set noautowriteall                  " Sauvegarde automatiquement le document dans plus de cas
 set   background=dark               " Fixe la valeur du fond en sombre pour les thèmes
 set   backspace=indent,eol,start    " Fixe le comportement de la touche backspace
 set   backup                        " Conserve une copie de tout les fichiers édité
 set   backupdir=$HOME/.vim/backup   " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
-set   breakindent                   " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes.
+set   breakindent                   " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes, la ligne ne commence plus collée à gauche
+set breakindentopt=min:20,shift:0   " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr.
 set   completeopt=menuone,longest,preview    "Pour CPP
 set   concealcursor=c               " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                " Change les combinaison de caractère en leur équivalent utf-8
@@ -161,7 +162,7 @@ autocmd FileType tex setlocal keywordprg=texdoc
 autocmd BufNewFile *.1                  :%substitute?NOMCOMMANDE?\=expand('%:t:r')?
 
 " Active la vérification orthographique pour certains type de fichier seulement
-autocmd FileType tex,c,h,ocaml,python,java,html,css,javascript,php,make,vim,sh,nroff,groff,svn,perl,cpp setlocal spell
+autocmd FileType tex,c,h,ocaml,python,java,html,css,javascript,php,make,vim,sh,nroff,groff,svn,perl,cpp,markdown,gitcommit setlocal spell
 
 " Pour éviter les ralentissement dans les fichiers latex et plugin gundo
 "autocmd FileType tex        setlocal nocursorline nocursorcolumn
@@ -446,19 +447,19 @@ colorscheme icansee
 scriptencoding utf-8
 
 " Pour configurer la compilation.
-" ./configure --with-features=huge \
-"             --enable-multibyte \
-"             --enable-rubyinterp \
-"             --enable-pythoninterp \
-"             --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
-"             --enable-perlinterp \
-"             --enable-luainterp \
-"             --enable-gui=gtk3 --with-x --enable-cscope --prefix=/usr \
-"             --enable-python3interp=dynamic\
-"             --with-python3-config-dir=/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu/ \
-"             --with-lua-prefix=/usr/include/lua5.2 \
-"             --with-python-config-dir=/usr/lib/ \
-"             --enable-fail-if-missing
+"./configure --with-features=huge \
+"            --enable-multibyte \
+"            --enable-rubyinterp \
+"            --enable-pythoninterp \
+"            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+"            --enable-perlinterp \
+"            --enable-luainterp \
+"            --enable-gui=gtk3 --with-x --enable-cscope --prefix=/usr \
+"            --enable-python3interp=dynamic\
+"            --with-python3-config-dir=/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu/ \
+"            --with-lua-prefix=/usr/include/lua5.2 \
+"            --with-python-config-dir=/usr/lib/ \
+"            --enable-fail-if-missing
 
 " :r ! ls ~/.vim/bundle/
 " Liste des extension installée
