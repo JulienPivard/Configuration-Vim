@@ -18,7 +18,7 @@ set   backspace=indent,eol,start    " Fixe le comportement de la touche backspac
 set   backup                        " Conserve une copie de tout les fichiers édité
 set   backupdir=$HOME/.vim/backup   " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
 set   breakindent                   " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes, la ligne ne commence plus collée à gauche
-set breakindentopt=min:20,shift:0   " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr.
+set breakindentopt=min:55,shift:0   " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr.
 set   completeopt=menuone,longest,preview    "Pour CPP
 set   concealcursor=c               " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                " Change les combinaison de caractère en leur équivalent utf-8
