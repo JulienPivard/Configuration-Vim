@@ -71,5 +71,6 @@ hi SpellBad         ctermbg=Red       guibg=Red    guifg=NONE
 hi SyntasticWarningSign     ctermbg=Yellow  ctermfg=Black
 
 " Pour la coloration de la statusLine
-hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red     gui=inverse,bold    guifg=red
-hi User2 term=reverse,bold  cterm=reverse,bold  ctermfg=Cyan    gui=inverse,bold    guifg=cyan
+hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red         gui=inverse,bold    guifg=red
+hi User2 term=reverse,bold  cterm=reverse,bold  ctermfg=Cyan        gui=inverse,bold    guifg=cyan
+hi User3 term=reverse,bold  cterm=reverse,bold  ctermfg=DarkGreen   gui=inverse,bold    guifg=green

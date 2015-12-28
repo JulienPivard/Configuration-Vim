@@ -70,6 +70,7 @@ set   smarttab                      " Suppression de tabulation intelligente
 set   softtabstop=4                 " Taille des tabulation en édition
 set nospell                         " Désactive la vérification orthographique
 set   spelllang=fr                  " Dictionnaire en français
+set   statusline=%!MaLigneStatus()  " La ligne de statut du buffer.
 set   tabstop=4                     " Taille des tabulations avec tab
 set   textwidth=0                   " Pour ne pas avoir de limite à la longueur des lignes
 set   title                         " Modifier le titre du terminal
@@ -80,21 +81,47 @@ set   undolevels=2500               " Fixe le nombre de changements conservé
 set   wildmenu                      " Affiche le menu de complétion pour les commandes dans la barre de statut
 set   wildmode=longest:full,full    " Complète d'abord avec la correspondance la plus longue sans ambigüité
 
-" Changer la ligne de statut de vim.
-set statusline=%<%f\ %h%1*%m%0*%r%w%=\ %-10.(%3l/%L,\ C%02c%02V%)\ \|\ %y\ tmp:%n%a\ \|\ 0x%02B\ \|\ %P\ %2*\|
-
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
 "set patchmode=.original            " Crée une copie de l'original du fichier édité
 
+" Changer la ligne de statut de vim.
+" Couper si la ligne est trop logue %<
+" Le nom du chemin complet %f
+" le tag d'aide %h
+" la coloration utilisateur %1* ... %0*
+" Si le fichier à été modifié %m
+" Si le fichier est readonly %r
+" Si la fenêtre est une preview %w
+" La branche en cours d'utilisation %{fugitive#statusline()}
+" Séparation entre gauche est droite %=
+" Taille minimum de 10 caractères %-10
+" Le numéro de la ligne %l. Le nombre de lignes %L
+" Le numéro du caractère %c. Le numéro de la colonne virtuelle %V
+" Groupe %(%) . Formatage de nombre de caractères minimum %02 %3
+" Le type du fichier %y. Le numéro du buffer actuel %n. Si plusieurs fichiers
+" ouverts en même temps %a.
+" Le code hexadécimal du caractère sous le curseur %B.
+" La position dans le fichier en pourcentage %P
+function! MaLigneStatus()
+    let nomFichier = "%f "
+    let fugitLigne = "%<%3*%{fugitive#statusline()}%0* "
+    let flagStatLigne = "%h%1*%m%0*%r%w "
+    let posiCurseur = "%-10.(%P, %3l/%L, C%02c%)"
+    let buffInfos = "%y tmp:%n%a"
+    let hexaCara = "0x%02B %2*|"
+    return "" . nomFichier . fugitLigne . flagStatLigne . "%=" . posiCurseur . " | " . buffInfos . " | " . hexaCara
+endfunction
+
+" Définie l'affichage de le ligne de repli.
 function! MonFoldText()
     let line = getline(v:foldstart)
     let lignes = v:foldend - v:foldstart + 1
-    let sub = substitute(line, '^\s*\|(((\=', '', 'g')
+    let subFold = substitute(line, '^\s*\|(((\=', '', 'g')
     let debut = '+' . v:folddashes . ' | ' . v:foldstart . '-' . v:foldend . ' |  '
     let nbLignes = printf('%12s', lignes . ' lignes : ')
-    return  debut . nbLignes . sub
+    return  debut . nbLignes . subFold
 endfunction
 
 " Voir les espaces en fin de lignes
@@ -370,18 +397,11 @@ function ModeChange()
     endif
 endfunction
 
-" Permet de nettoyer le fichier des espaces en fin de ligne.
-" Permet de transformer l'indentation pour avoir la même partout.
-" Permet de transformer les fin de ligne au format unix.
-fun CleanText()
-    let curcol = col(".")
-    let curline = line(".")
-    exe ":retab"
-$//ge"xe ":%s/
-/ /ge"xe ":%s/
-    exe ":%s/ \\+$//e"
-    call cursor(curline, curcol)
-endfun
+" Change le caractère pour déclencher le mapping en mode commande.
+let mapleader = "ù"
+map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>b :buffers<CR>
 
 "iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
