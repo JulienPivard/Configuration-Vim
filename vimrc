@@ -295,11 +295,12 @@ function! MacrosLatexSpecifique()
     iabbrev <buffer> begin \begin{}<CR>\end{}<Esc>k$i
 endfunction
 
+inoremap <buffer> ;; ->
+
 " Macros pour le php
 function! ProgEnPHP()
-    inoremap ;; ->
-    inoremap ,, =>
-    inoremap t<Tab> $this->
+    inoremap <buffer> ,, =>
+    inoremap <buffer> t<Tab> $this->
 endfunction
 
 " Macros pour l'affichage formaté des fichiers groff
@@ -362,13 +363,16 @@ function! ConfigAntlr()
     map! <buffer> <F10> <Esc> :!./runAntlr.sh %< test.code <CR>
 endfunction
 
-" Permet de changer
+" Permet de changer les droits d'un fichier pour le rendre exécutable
 function ModeChange()
     if getline(1) =~ "^#!.*/bin/"
         silent !chmod u+x <afile>
     endif
 endfunction
 
+" Permet de nettoyer le fichier des espaces en fin de ligne.
+" Permet de transformer l'indentation pour avoir la même partout.
+" Permet de transformer les fin de ligne au format unix.
 fun CleanText()
     let curcol = col(".")
     let curline = line(".")
@@ -379,7 +383,7 @@ $//ge"xe ":%s/
     call cursor(curline, curcol)
 endfun
 
-iabbrev { {<CR>}<Esc>k$a
+"iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
 
@@ -418,8 +422,8 @@ autocmd FileType html,css,php,javascript    map! <buffer> <F10> <Esc>:!firefox %
 autocmd FileType vim                        map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
 autocmd FileType vim                        map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
 " Execute le script avec F5
-autocmd Filetype perl,sh,python map  <buffer> <F5>       :!./%<CR>
-autocmd Filetype perl,sh,python map! <buffer> <F5>  <Esc>:!./%<CR>
+autocmd Filetype perl,sh,python             map  <buffer> <F5>       :!./%<CR>
+autocmd Filetype perl,sh,python             map! <buffer> <F5>  <Esc>:!./%<CR>
 
 " Mappage selon la présence de makefile
 autocmd FileType java,ant               call ExistConfigurationJava()
@@ -554,6 +558,9 @@ let g:neocomplete#enable_auto_close_preview = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_multibyte_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
+
+" Pour que les double quote ne soit pas fermé dans les fichiers type vimrc.
+let g:autoclose_vim_commentmode = 1
 
 "" pour neosnippets
 "let g:neosnippet#enable_snipmate_compatibility = 1
