@@ -111,7 +111,7 @@ function! MaLigneStatus()
     let posiCurseur = "%-10.(%P, %3l/%L, C%02c%)"
     let buffInfos = "%y tmp:%n%a"
     let hexaCara = "0x%02B %2*|"
-    return "" . nomFichier . fugitLigne . flagStatLigne . "%=" . posiCurseur . " | " . buffInfos . " | " . hexaCara
+    return "" . nomFichier . fugitLigne . flagStatLigne . "%=" . posiCurseur . " ‖ " . buffInfos . " ‖ " . hexaCara
 endfunction
 
 " Définie l'affichage de le ligne de repli.
@@ -402,6 +402,8 @@ let mapleader = "ù"
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>b :buffers<CR>
+map <leader>gh :GitGutterLineHighlightsToggle<CR>
+map <leader>ggt :GitGutterToggle<CR>
 
 "iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
@@ -581,6 +583,10 @@ let g:neocomplcache_enable_camel_case_completion = 1
 
 " Pour que les double quote ne soit pas fermé dans les fichiers type vimrc.
 let g:autoclose_vim_commentmode = 1
+
+" Réglages pour gitgutter
+let g:gitgutter_sign_removed = '━'
+let g:gitgutter_override_sign_column_highlight = 0
 
 "" pour neosnippets
 "let g:neosnippet#enable_snipmate_compatibility = 1

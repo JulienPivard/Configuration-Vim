@@ -69,6 +69,8 @@ hi SpellBad         ctermbg=Red       guibg=Red    guifg=NONE
 
 " Pour syntastic
 hi SyntasticWarningSign     ctermbg=Yellow  ctermfg=Black
+" Pour gitgutter
+hi SignColumn               ctermbg=Black
 
 " Pour la coloration de la statusLine
 hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red         gui=inverse,bold    guifg=red
