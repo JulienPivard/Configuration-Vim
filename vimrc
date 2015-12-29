@@ -29,8 +29,8 @@ Plugin 'vim-scripts/undotree.vim.git'
 Plugin 'phongnh/vim-antlr.git'
 Plugin 'spf13/vim-autoclose.git'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'edsono/vim-matchit.git'
+Plugin 'mhinz/vim-signify.git'
 Plugin 'tpope/vim-surround.git'
 
 call vundle#end()
@@ -150,17 +150,47 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 " Le code hexadécimal du caractère sous le curseur %B.
 " La position dans le fichier en pourcentage %P
 function! MaLigneStatus()
-    let nomFichier = "%<%F "
-    if exists('*fugitive#statusline')
-        let fugitLigne = "%3*%{fugitive#statusline()}%0* "
+    let nomFichier = '%<%f '
+    if exists('*sy#repo#get_stats()')
+        let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0* '
     else
-        let fugitLigne = ""
+        let etatDepot = ''
     endif
-    let flagStatLigne = "%h%1*%m%0*%r%w "
-    let posiCurseur = "%-10.(%P, %3l/%L, C%02c%)"
-    let buffInfos = "%y tmp:%n%a"
-    let hexaCara = "0x%02B %2*|"
-    return "" . nomFichier . fugitLigne . flagStatLigne . "%=" . posiCurseur . " ‖ " . buffInfos . " ‖ " . hexaCara
+    let flagStatLigne = '%h%1*%m%0*%r%w '
+    let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
+    let buffInfos = '%y tmp:%n%a'
+    let hexaCara = '0x%02B %2*|'
+    return '' . nomFichier . etatDepot . flagStatLigne . '%=' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+endfunction
+
+" Pour connaitre le nombre de lignes ajoutées au fichier courant [git]
+function! SyStatAjout()
+    let [added, modified, removed] = sy#repo#get_stats()
+    if added > 0
+        return '[' . printf('+%s', added ) . ']'
+    else
+        return ''
+    endif
+endfunction
+
+" Pour connaitre le nombre de lignes supprimées au fichier courant [git]
+function! SyStatSuppression()
+    let [added, modified, removed] = sy#repo#get_stats()
+    if removed > 0
+        return '[' . printf('-%s', removed ) . ']'
+    else
+        return ''
+    endif
+endfunction
+
+" Pour connaitre le nombre de lignes modifiées au fichier courant [git]
+function! SyStatModifications()
+    let [added, modified, removed] = sy#repo#get_stats()
+    if modified > 0
+        return '[' . printf('~%s', modified ) . ']'
+    else
+        return ''
+    endif
 endfunction
 
 " Définie l'affichage de le ligne de repli.
@@ -171,6 +201,13 @@ function! MonFoldText()
     let debut = '+' . v:folddashes . ' | ' . v:foldstart . '-' . v:foldend . ' |  '
     let nbLignes = printf('%12s', lignes . ' lignes : ')
     return  debut . nbLignes . subFold
+endfunction
+
+" Permet de changer les droits d'un fichier pour le rendre exécutable
+function! ModeChange()
+    if getline(1) =~ "^#!.*/bin/"
+        silent !chmod u+x <afile>
+    endif
 endfunction
 
 " Voir les espaces en fin de lignes
@@ -439,20 +476,17 @@ function! ConfigAntlr()
     map! <buffer> <F10> <Esc> :!./runAntlr.sh %< test.code <CR>
 endfunction
 
-" Permet de changer les droits d'un fichier pour le rendre exécutable
-function ModeChange()
-    if getline(1) =~ "^#!.*/bin/"
-        silent !chmod u+x <afile>
-    endif
-endfunction
-
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = "ù"
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>b :buffers<CR>
-map <leader>gh :GitGutterLineHighlightsToggle<CR>
-map <leader>ggt :GitGutterToggle<CR>
+
+map <leader>sh :SignifyToggleHighlight<CR>
+map <leader>st :SignifyToggle<CR>
+map <leader>sr :SignifyRefresh<CR>
+nmap <leader>sj <plug>(signify-next-hunk)
+nmap <leader>sk <plug>(signify-prev-hunk)
 
 "iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
@@ -636,9 +670,17 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " Pour que les double quote ne soit pas fermé dans les fichiers type vimrc.
 let g:autoclose_vim_commentmode = 1
 
+" Réglages pour signify
+let g:signify_cursorhold_insert     = 0
+let g:signify_cursorhold_normal     = 0
+let g:signify_update_on_bufenter    = 0
+let g:signify_update_on_focusgained = 1
+let g:signify_sign_delete            = '↓'
+let g:signify_sign_delete_first_line = '↑'
+
 " Réglages pour gitgutter
-let g:gitgutter_sign_removed = '━'
-let g:gitgutter_override_sign_column_highlight = 0
+"let g:gitgutter_sign_removed = '━'
+"let g:gitgutter_override_sign_column_highlight = 0
 
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "

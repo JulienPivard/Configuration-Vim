@@ -69,10 +69,16 @@ hi SpellBad         ctermbg=Red       guibg=Red    guifg=NONE
 
 " Pour syntastic
 hi SyntasticWarningSign     ctermbg=Yellow  ctermfg=Black
-" Pour gitgutter
+" Pour gitgutter et signify
 hi SignColumn               ctermbg=Black
+
+hi SignifySignAdd    cterm=reverse,bold ctermbg=Black  ctermfg=DarkGreen
+hi SignifySignDelete cterm=reverse,bold ctermbg=Black  ctermfg=DarkRed
+hi SignifySignChange cterm=reverse,bold ctermbg=Black  ctermfg=DarkYellow
 
 " Pour la coloration de la statusLine
 hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red         gui=inverse,bold    guifg=red
 hi User2 term=reverse,bold  cterm=reverse,bold  ctermfg=Cyan        gui=inverse,bold    guifg=cyan
-hi User3 term=reverse,bold  cterm=reverse,bold  ctermfg=DarkGreen   gui=inverse,bold    guifg=green
+hi User3 term=bold  cterm=bold  ctermfg=DarkGreen   gui=inverse,bold    guifg=green
+hi User4 term=bold  cterm=bold  ctermfg=DarkRed     gui=inverse,bold    guifg=red
+hi User5 term=bold  cterm=bold  ctermfg=DarkMagenta gui=inverse,bold    guifg=magenta

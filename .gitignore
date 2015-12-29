@@ -11,4 +11,5 @@ tags
 undodir/*
 backup/*
 bundle/*
+bundleOld/
 shada

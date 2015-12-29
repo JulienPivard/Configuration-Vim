@@ -14,6 +14,10 @@ vim-antlr               https://github.com/phongnh/vim-antlr.git
 vim-autoclose           https://github.com/spf13/vim-autoclose.git
 vim-fugitive            https://github.com/tpope/vim-fugitive.git
 vim-gitbranch
-vim-gitgutter           https://github.com/airblade/vim-gitgutter
 vim-matchit             https://github.com/edsono/vim-matchit.git
 vim-surround            https://github.com/tpope/vim-surround.git
+vim-signify             https://github.com/mhinz/vim-signify.git
+
+Avant
+
+vim-gitgutter           https://github.com/airblade/vim-gitgutter
