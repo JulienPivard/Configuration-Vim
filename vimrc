@@ -214,18 +214,32 @@ function! ModeChange()
     endif
 endfunction
 
+" Suppression automatique des espaces superflus
+" \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
+" /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
+function! Nettoyage()
+    let curcol = col(".")
+    let curline = line(".")
+    :%s/\s\+$//e
+    call cursor(curline, curcol)
+endfunction
+
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
 augroup recuperationEtatSessionsPrecedente
     autocmd!
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup end
 
-" Suppression automatique des espaces superflus
-" \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
-" /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
+" Pour supprimer les espaces en fin de ligne.
 augroup nettoyage
     autocmd!
-    autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * call Nettoyage()
+augroup end
+
+" Active la vérification orthographique pour certains type de fichier seulement
+augroup langue
+    autocmd!
+    autocmd FileType haskell,fuf,gundo,diff,vundle setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
@@ -267,12 +281,12 @@ augroup end
 " Pour configurer automatiquement le make de vim selon le type de fichier
 augroup reglageMake
     autocmd!
-    autocmd FileType haskell        setlocal makeprg=ghci\ %
-    autocmd FileType ocaml          setlocal makeprg=ocaml\ -init\ %
-    autocmd FileType java           setlocal makeprg=javac\ -g\ %
-    autocmd FileType sql            setlocal makeprg=mysql\ --password\ <\ %
-    autocmd FileType tex            setlocal makeprg=xelatex\ %
-    autocmd Filetype php            setlocal makeprg=php\ -l\ %
+    autocmd FileType haskell    setlocal makeprg=ghci\ %
+    autocmd FileType ocaml      setlocal makeprg=ocaml\ -init\ %
+    autocmd FileType java       setlocal makeprg=javac\ -g\ %
+    autocmd FileType sql        setlocal makeprg=mysql\ --password\ <\ %
+    autocmd FileType tex        setlocal makeprg=xelatex\ %
+    autocmd Filetype php        setlocal makeprg=php\ -l\ %
 augroup end
 "autocmd FileType cpp            setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
 " Ancienne version pour les fichier LaTeX
@@ -307,12 +321,6 @@ augroup manuel
     autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand('%:t:r')?
 augroup end
 
-" Active la vérification orthographique pour certains type de fichier seulement
-augroup langue
-    autocmd!
-    autocmd FileType haskell setlocal nospell
-augroup end
-
 augroup commandesLocale
     autocmd!
     " Redéfinition de la commande d'aide utilisée avec K
@@ -333,8 +341,8 @@ augroup end
 " Recharge le vimrc quand utilise F5
 augroup vimSource
     autocmd!
-    autocmd FileType vim                        map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
-    autocmd FileType vim                        map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
+    autocmd FileType vim    map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
+    autocmd FileType vim    map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
 augroup end
 
 " Mappage selon la présence de makefile
