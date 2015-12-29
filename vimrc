@@ -611,6 +611,7 @@ let g:indentLine_conceallevel = 2
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_char = '✔'
 let g:indentLine_faster = 1
+let g:indentLine_fileTypeExclude = ['help']
 
 " Réglages pour syntastic
 let g:syntastic_check_on_open = 0
