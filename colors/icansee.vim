@@ -72,9 +72,9 @@ hi SyntasticWarningSign     ctermbg=Yellow  ctermfg=Black
 " Pour gitgutter et signify
 hi SignColumn               ctermbg=Black
 
-hi SignifySignAdd    cterm=reverse,bold ctermbg=Black  ctermfg=DarkGreen
-hi SignifySignDelete cterm=reverse,bold ctermbg=Black  ctermfg=DarkRed
-hi SignifySignChange cterm=reverse,bold ctermbg=Black  ctermfg=DarkYellow
+hi SignifySignAdd     ctermbg=Black  ctermfg=DarkGreen
+hi SignifySignDelete  ctermbg=Black  ctermfg=DarkRed
+hi SignifySignChange  ctermbg=Black  ctermfg=DarkYellow
 
 " Pour la coloration de la statusLine
 hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red         gui=inverse,bold    guifg=red

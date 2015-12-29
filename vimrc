@@ -139,18 +139,22 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 " Si le fichier à été modifié %m
 " Si le fichier est readonly %r
 " Si la fenêtre est une preview %w
-" La branche en cours d'utilisation %{fugitive#statusline()}
 " Séparation entre gauche est droite %=
 " Taille minimum de 10 caractères %-10
 " Le numéro de la ligne %l. Le nombre de lignes %L
-" Le numéro du caractère %c. Le numéro de la colonne virtuelle %V
+" Le numéro du caractère %c.
 " Groupe %(%) . Formatage de nombre de caractères minimum %02 %3
 " Le type du fichier %y. Le numéro du buffer actuel %n. Si plusieurs fichiers
 " ouverts en même temps %a.
 " Le code hexadécimal du caractère sous le curseur %B.
 " La position dans le fichier en pourcentage %P
 function! MaLigneStatus()
-    let nomFichier = '%<%f '
+    let nomFichier = '%<%f'
+    if exists('*fugitive#head()')
+        let fugitLigne = '%{fugitive#head()} '
+    else
+        let fugitLigne = ' '
+    endif
     if exists('*sy#repo#get_stats()')
         let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0* '
     else
@@ -160,7 +164,7 @@ function! MaLigneStatus()
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y tmp:%n%a'
     let hexaCara = '0x%02B %2*|'
-    return '' . nomFichier . etatDepot . flagStatLigne . '%=' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+    return '' . nomFichier . ':' . fugitLigne . etatDepot . flagStatLigne . '%=' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
 endfunction
 
 " Pour connaitre le nombre de lignes ajoutées au fichier courant [git]
@@ -599,7 +603,7 @@ let g:gundo_preview_height = 15     " Hauteur de la fenêtre d'aperçus.
 let g:gundo_right = 0               " Ouvre l'arbre à gauche.
 let g:gundo_preview_bottom = 1      " Pour que la fenêtre d'aperçus prenne toute la largeur.
 let g:gundo_close_on_revert = 1     " Fermer automatiquement après annulation.
-let g:gundo_auto_preview = 1        " Désactive l'affichage automatique des différence.
+let g:gundo_auto_preview = 0        " Désactive l'affichage automatique des différence.
 let g:gundo_prefer_python3 = 1
 let g:gundo_tree_statusline='%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline='%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
@@ -667,7 +671,7 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_multibyte_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 
-" Pour que les double quote ne soit pas fermé dans les fichiers type vimrc.
+" Pour que les double quotte ne soit pas fermé dans les fichiers type vimrc.
 let g:autoclose_vim_commentmode = 1
 
 " Réglages pour signify
