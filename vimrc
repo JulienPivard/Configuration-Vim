@@ -150,8 +150,12 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 " Le code hexadécimal du caractère sous le curseur %B.
 " La position dans le fichier en pourcentage %P
 function! MaLigneStatus()
-    let nomFichier = "%f "
-    let fugitLigne = "%<%3*%{fugitive#statusline()}%0* "
+    let nomFichier = "%<%F "
+    if exists('*fugitive#statusline')
+        let fugitLigne = "%3*%{fugitive#statusline()}%0* "
+    else
+        let fugitLigne = ""
+    endif
     let flagStatLigne = "%h%1*%m%0*%r%w "
     let posiCurseur = "%-10.(%P, %3l/%L, C%02c%)"
     let buffInfos = "%y tmp:%n%a"
@@ -634,21 +638,6 @@ let g:autoclose_vim_commentmode = 1
 " Réglages pour gitgutter
 let g:gitgutter_sign_removed = '━'
 let g:gitgutter_override_sign_column_highlight = 0
-
-"" pour neosnippets
-"let g:neosnippet#enable_snipmate_compatibility = 1
-""let g:neosnippet#snippets_directory = '~/.vim/UltiSnips/'
-"let g:neosnippet#snippets_directory = '~/.vim/bundle/neosnippet-snippets/neosnippets/'
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" Réglages pour youcompleteme
-" TODO
-" Changer le capslock en F13.
-"let g:ycm_filetype_blacklist = {}
-"let g:ycm_key_list_select_completion = ['ù', '<Down>']
-"let g:ycm_key_list_previous_completion = ['§', '<Up>']
 
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "
