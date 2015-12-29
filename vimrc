@@ -1,85 +1,130 @@
-set nocompatible                    " Casser compatible avec vielle version
+set nocompatible                        " Casser compatible avec vielle version
 
-execute pathogen#infect('bundle/{}')
-call pathogen#helptags()
+" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
+" (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
+"                                    Début des réglages de Vundle                                    "
+" -------------------------------------------------------------------------------------------------- "
+
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim       " Ajoute le chemin pour initialiser Vundle au démarrage.
+call vundle#begin()
+" Si on veut installer ailleurs que dans le dossier par défaut.
+"call vundle#begin('~/some/path/here')
+
+" Pour se maintenir à jours.
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'vim-scripts/FuzzyFinder.git'
+Plugin 'sjl/gundo.vim.git'
+Plugin 'Yggdroot/indentLine.git'
+Plugin 'vim-scripts/L9.git'
+Plugin 'Shougo/neocomplete.vim.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'vim-scripts/OmniCppComplete.git'
+Plugin 'hdima/python-syntax.git'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'majutsushi/tagbar.git'
+Plugin 'SirVer/ultisnips.git'
+Plugin 'vim-scripts/undotree.vim.git'
+Plugin 'phongnh/vim-antlr.git'
+Plugin 'spf13/vim-autoclose.git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'edsono/vim-matchit.git'
+Plugin 'tpope/vim-surround.git'
+
+call vundle#end()
+filetype plugin indent on
+" Pense bête
+" :PluginList       - Liste les extensions configuré
+" :PluginInstall    - Installer
+" :PluginUpdate     - Mettre à jours
+" :PluginSearch foo - Cherche foo
+" :PluginClean      - Supprime les extensions inutilisée
+
+" -------------------------------------------------------------------------------------------------- "
+"                                     Fin des réglages de Vundle                                     "
+" (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
+" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
+
+"execute pathogen#infect('bundle/{}')
+"call pathogen#helptags()
+"filetype plugin indent on
 
 syntax on
-filetype on
-filetype plugin on
-filetype indent on
 
-set noautochdir                     " Pour ne pas se changer automatiquement de répertoire
-set   autoindent                    " Adapte l'indentation automatiquement
-set   autoread                      " Permet de relire les fichiers modifié à l'extérieur
-set   autowrite                     " Sauvegarde automatiquement le document
-set noautowriteall                  " Sauvegarde automatiquement le document dans plus de cas
-set   background=dark               " Fixe la valeur du fond en sombre pour les thèmes
-set   backspace=indent,eol,start    " Fixe le comportement de la touche backspace
-set   backup                        " Conserve une copie de tout les fichiers édité
-set   backupdir=$HOME/.vim/backup   " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
-set   breakindent                   " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes, la ligne ne commence plus collée à gauche
-set breakindentopt=min:55,shift:0   " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr.
-set   completeopt=menuone,longest,preview    "Pour CPP
-set   concealcursor=c               " Quand le curseur est sur un caractère conceal il reste en conceal
-set   conceallevel=2                " Change les combinaison de caractère en leur équivalent utf-8
-set   confirm                       " Affiche une ligne de dialogue pour choisir une action
-set   copyindent                    " Adapte l'indentation des lignes collées
-set   cryptmethod=blowfish          " Change l'algorithme de cryptage
-set nocursorcolumn                  " Surligne la colonne ou se situe le curseur
-set nocursorline                    " Surligne la ligne ou se situe le curseur
-set nodigraph                       " seul i_ctl-k suivit de deux lettres permet d'écrire des caractères spéciaux
-set   display=lastline,uhex         " Les lignes trop longues ne sont plus remplacées par @
-set   encoding=utf-8                " Encodage des fichiers en utf-8
-set noexrc                          " Bloque la lecture de vimrc locaux
-set   expandtab                     " Change les tabulations en espaces
-set noerrorbells                    " Pas de beep lors des erreurs
-set   foldclose=all                 " Ferme le replis si le curseur en sort et level>foldlevel
-set   foldcolumn=1                  " Taille de la colonne qui indique les marques
-set   foldenable                    " Activer les replis
-set   foldlevel=1                   " Ferme tout les replis de niveau supérieur
-set   foldmethod=syntax             " Génère des replis automatiquement selon le type de fichier
-set   foldmarker=(((,)))            " Si on utilise des marqueurs utilisent ce codage
-set   foldtext=MonFoldText()        " Redéfinir le texte de la ligne de repli
-set   fileencoding=utf-8            " Force l'encodage des fichiers en utf-8
-set   fileformat=unix               " Force l'encodage des fin de lignes en unix
-set   fileformats=unix,mac,dos      " Formats à essayer à l'ouverture
-set   history=100                   " Taille de l'historique de commande
-set   hlsearch                      " Active le sur lignage lors de la recherche
-set   incsearch                     " Se déplace au premier terme trouvé pendant la frappe
-set   ignorecase                    " Désactive la casse pour utiliser la casse intelligente
-set nojoinspaces                    " Ne met qu'un seul espace quand on joint des lignes
-set   laststatus=2                  " La barre de statut s'affiche toujours
-set   linebreak                     " Enroule la ligne a partir de la coupure d'un mot
-set   modeline                      " Options spécifiques à vim dans les premières lignes
-set   modelines=3                   " Nombres de lignes vérifiées à l'ouverture
-set   nrformats=alpha,octal,hex     " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
-set   number                        " Affiche les numéros de ligne
-set   printencoding=utf8            " Fixe l'encodage pour l'impression
-set   printoptions=paper:A4         " Permet de régler plusieurs options dont la taille du papier
-set norelativenumber                " Affiche le nombre de ligne relatif à la position
-set   report=0                      " Affiche toujours le nombre de lignes modifié
-set   scrolloff=7                   " Affiche au minimum les 3 lignes autour du curseur
-set   shiftround                    " Indentation arrondie à un multiple de shiftwidth
-set   shiftwidth=4                  " Taille des tabulations avec >> ou <<
-set   showmatch                     " Affiche la parenthèse correspondante
-set   showcmd                       " Affiche la commande quand elle est tapé
-set   showbreak=―――>                " Affiche un caractère au début d'une ligne enroulée
-set   smartcase                     " Casse intelligente
-set   smartindent                   " Indentation intelligente
-set   smarttab                      " Suppression de tabulation intelligente
-set   softtabstop=4                 " Taille des tabulation en édition
-set nospell                         " Désactive la vérification orthographique
-set   spelllang=fr                  " Dictionnaire en français
-set   statusline=%!MaLigneStatus()  " La ligne de statut du buffer.
-set   tabstop=4                     " Taille des tabulations avec tab
-set   textwidth=0                   " Pour ne pas avoir de limite à la longueur des lignes
-set   title                         " Modifier le titre du terminal
-set   titlelen=255                  " Taille de la string dans le titre de la fenêtre d'application
-set   undodir=~/.vim/undodir        " Définit le dossier d'annulation
-set   undofile                      " Historique d'annulation persistant
-set   undolevels=2500               " Fixe le nombre de changements conservé
-set   wildmenu                      " Affiche le menu de complétion pour les commandes dans la barre de statut
-set   wildmode=longest:full,full    " Complète d'abord avec la correspondance la plus longue sans ambigüité
+set noautochdir                         " Pour ne pas se changer automatiquement de répertoire
+set   autoindent                        " Adapte l'indentation automatiquement
+set   autoread                          " Permet de relire les fichiers modifié à l'extérieur
+set   autowrite                         " Sauvegarde automatiquement le document
+set noautowriteall                      " Sauvegarde automatiquement le document dans plus de cas
+set   background=dark                   " Fixe la valeur du fond en sombre pour les thèmes
+set   backspace=indent,eol,start        " Fixe le comportement de la touche backspace
+set   backup                            " Conserve une copie de tout les fichiers édité
+set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
+set   breakindent                       " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes, la ligne ne commence plus collée à gauche
+set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr.
+set   completeopt=menuone,longest       " Options pour le menu de l'omnicompletion
+set   concealcursor=c                   " Quand le curseur est sur un caractère conceal il reste en conceal
+set   conceallevel=2                    " Change les combinaison de caractère en leur équivalent utf-8
+set   confirm                           " Affiche une ligne de dialogue pour choisir une action
+set   copyindent                        " Adapte l'indentation des lignes collées
+set   cryptmethod=blowfish              " Change l'algorithme de cryptage
+set nocursorcolumn                      " Surligne la colonne ou se situe le curseur
+set nocursorline                        " Surligne la ligne ou se situe le curseur
+set nodigraph                           " seul i_ctl-k suivit de deux lettres permet d'écrire des caractères spéciaux
+set   display=lastline,uhex             " Les lignes trop longues ne sont plus remplacées par @
+set   encoding=utf-8                    " Encodage des fichiers en utf-8
+set noexrc                              " Bloque la lecture de vimrc locaux
+set   expandtab                         " Change les tabulations en espaces
+set noerrorbells                        " Pas de beep lors des erreurs
+set   foldclose=all                     " Ferme le replis si le curseur en sort et level>foldlevel
+set   foldcolumn=1                      " Taille de la colonne qui indique les marques
+set   foldenable                        " Activer les replis
+set   foldlevel=1                       " Ferme tout les replis de niveau supérieur
+set   foldmethod=syntax                 " Génère des replis automatiquement selon le type de fichier
+set   foldmarker=(((,)))                " Si on utilise des marqueurs utilisent ce codage
+set   foldtext=MonFoldText()            " Redéfinir le texte de la ligne de repli
+set   fileencoding=utf-8                " Force l'encodage des fichiers en utf-8
+set   fileformat=unix                   " Force l'encodage des fin de lignes en unix
+set   fileformats=unix,mac,dos          " Formats à essayer à l'ouverture
+set   history=100                       " Taille de l'historique de commande
+set   hlsearch                          " Active le sur lignage lors de la recherche
+set   incsearch                         " Se déplace au premier terme trouvé pendant la frappe
+set   ignorecase                        " Désactive la casse pour utiliser la casse intelligente
+set nojoinspaces                        " Ne met qu'un seul espace quand on joint des lignes
+set   laststatus=2                      " La barre de statut s'affiche toujours
+set   linebreak                         " Enroule la ligne a partir de la coupure d'un mot
+set   modeline                          " Options spécifiques à vim dans les premières lignes
+set   modelines=3                       " Nombres de lignes vérifiées à l'ouverture
+set   nrformats=alpha,octal,hex         " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
+set   number                            " Affiche les numéros de ligne
+set   printencoding=utf8                " Fixe l'encodage pour l'impression
+set   printoptions=paper:A4             " Permet de régler plusieurs options dont la taille du papier
+set norelativenumber                    " Affiche le nombre de ligne relatif à la position
+set   report=0                          " Affiche toujours le nombre de lignes modifié
+set   scrolloff=7                       " Affiche au minimum les 3 lignes autour du curseur
+set   shiftround                        " Indentation arrondie à un multiple de shiftwidth
+set   shiftwidth=4                      " Taille des tabulations avec >> ou <<
+set   showmatch                         " Affiche la parenthèse correspondante
+set   showcmd                           " Affiche la commande quand elle est tapé
+set   showbreak=―――>                    " Affiche un caractère au début d'une ligne enroulée
+set   smartcase                         " Casse intelligente
+set   smartindent                       " Indentation intelligente
+set   smarttab                          " Suppression de tabulation intelligente
+set   softtabstop=4                     " Taille des tabulation en édition
+set nospell                             " Désactive la vérification orthographique
+set   spelllang=fr                      " Dictionnaire en français
+set   statusline=%!MaLigneStatus()      " La ligne de statut du buffer.
+set   tabstop=4                         " Taille des tabulations avec tab
+set   textwidth=0                       " Pour ne pas avoir de limite à la longueur des lignes
+set   title                             " Modifier le titre du terminal
+set   titlelen=255                      " Taille de la string dans le titre de la fenêtre d'application
+set   undodir=~/.vim/undodir            " Définit le dossier d'annulation
+set   undofile                          " Historique d'annulation persistant
+set   undolevels=2500                   " Fixe le nombre de changements conservé
+set   wildmenu                          " Affiche le menu de complétion pour les commandes dans la barre de statut
+set   wildmode=longest:full,full        " Complète d'abord avec la correspondance la plus longue sans ambigüité
 
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
@@ -490,23 +535,25 @@ scriptencoding utf-8
 " :r ! ls ~/.vim/bundle/
 " Liste des extension installée
 
-"ctags.vim-master
-"FuzzyFinder
-"gundo
-"indentLine
-"L9
-"neocomplete.vim
-"neosnippet-snippets
-"neosnippet.vim
-"nerdtree
-"OmniCppComplete
-"python-syntax
-"syntastic
-"tagbar
-"ultisnips
-"vim-antlr
-"vim-matchit
-"vim-surround
+" FuzzyFinder
+" gundo.vim
+" indentLine
+" L9
+" neocomplete.vim
+" nerdtree
+" OmniCppComplete
+" python-syntax
+" syntastic
+" tagbar
+" ultisnips
+" undotree.vim
+" vim-antlr
+" vim-autoclose
+" vim-fugitive
+" vim-gitgutter
+" vim-matchit
+" vim-surround
+" Vundle.vim
 
 " Réglages pour GundoToggle
 let g:gundo_width = 45              " Largeur de la fenêtre d'aperçus.
