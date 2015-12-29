@@ -15,7 +15,7 @@ hi lCursor      guifg=NONE          guibg=Cyan
 hi CursorLine   term=underline      cterm=underline     ctermbg=None    guibg=#222222
 hi CursorColumn term=underline      cterm=underline     ctermbg=None    guibg=#222222
 
-hi DiffAdd      ctermfg=White           ctermbg=LightBlue       guibg=LightBlue
+hi DiffAdd      ctermfg=White           ctermbg=LightGreen      guibg=LightBlue
 hi DiffChange   ctermfg=White           ctermbg=LightMagenta    guibg=LightMagenta
 hi DiffDelete   ctermfg=Blue	        ctermbg=LightCyan       gui=bold            guifg=Blue  guibg=LightCyan
 hi DiffText     ctermfg=White           ctermbg=Red	            gui=bold            guibg=Red
