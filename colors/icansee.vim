@@ -74,7 +74,7 @@ hi SignColumn               ctermbg=Black
 
 hi SignifySignAdd     ctermbg=Black  ctermfg=DarkGreen
 hi SignifySignDelete  ctermbg=Black  ctermfg=DarkRed
-hi SignifySignChange  ctermbg=Black  ctermfg=DarkYellow
+hi SignifySignChange  ctermbg=Black  ctermfg=DarkMagenta
 
 " Pour la coloration de la statusLine
 hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red         gui=inverse,bold    guifg=red

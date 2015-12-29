@@ -113,7 +113,7 @@ set   smartcase                         " Casse intelligente
 set   smartindent                       " Indentation intelligente
 set   smarttab                          " Suppression de tabulation intelligente
 set   softtabstop=4                     " Taille des tabulation en édition
-set nospell                             " Désactive la vérification orthographique
+set   spell                             " Désactive la vérification orthographique
 set   spelllang=fr                      " Dictionnaire en français
 set   statusline=%!MaLigneStatus()      " La ligne de statut du buffer.
 set   tabstop=4                         " Taille des tabulations avec tab
@@ -214,54 +214,66 @@ function! ModeChange()
     endif
 endfunction
 
-" Voir les espaces en fin de lignes
-set listchars=nbsp:¤,tab:>-,trail:¤
-autocmd FileType make setlocal list                 " Affiche les caractères non imprimable
-autocmd FileType make setlocal tabstop=8            " Taille des tabulations avec tab
-autocmd FileType make setlocal shiftwidth=8         " Taille des tabulations avec >> ou <<
-autocmd FileType make setlocal softtabstop=8        " Taille des tabulation en édition
-
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" Définition de la coloration syntaxique pour les fichier antlr
-autocmd BufRead *.g4 setlocal filetype=antlr
+augroup recuperationEtatSessionsPrecedente
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup end
 
 " Suppression automatique des espaces superflus
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
 " /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
-autocmd BufWritePre * :%s/\s\+$//e
+augroup nettoyage
+    autocmd!
+    autocmd BufWritePre * :%s/\s\+$//e
+augroup end
+
+" Voir les espaces en fin de lignes
+augroup ficmake
+    autocmd!
+    autocmd Filetype make set listchars=nbsp:¤,tab:>-,trail:¤
+    autocmd FileType make setlocal list                 " Affiche les caractères non imprimable
+    autocmd FileType make setlocal tabstop=8            " Taille des tabulations avec tab
+    autocmd FileType make setlocal shiftwidth=8         " Taille des tabulations avec >> ou <<
+    autocmd FileType make setlocal softtabstop=8        " Taille des tabulation en édition
+augroup end
 
 " Avoir squelette de base à la création d'un fichier
-autocmd BufNewFile *.sh                 0r ~/.vim/CodeBasique/codeBasique.sh
-autocmd BufNewFile *.c                  0r ~/.vim/CodeBasique/codeBasique.c
-autocmd BufNewFile *.h                  0r ~/.vim/CodeBasique/codeBasique.h
-autocmd BufNewFile *.py                 0r ~/.vim/CodeBasique/codeBasique.py
-autocmd BufNewFile *.tex                0r ~/.vim/CodeBasique/codeBasique.tex
-autocmd BufNewFile *.java               call ConfigurationNouveauFichierJAVA()
-autocmd BufNewFile *.html               0r ~/.vim/CodeBasique/codeBasique.html
-autocmd BufNewFile *.css                0r ~/.vim/CodeBasique/codeBasique.css
-autocmd BufNewFile *.js                 0r ~/.vim/CodeBasique/codeBasique.js
-autocmd BufNewFile *.php                0r ~/.vim/CodeBasique/codeBasique.php
-autocmd BufNewFile *.me                 0r ~/.vim/CodeBasique/codeBasique.me
-autocmd BufNewFile *.1                  0r ~/.vim/CodeBasique/codeBasique.1
-autocmd BufNewFile *.pl                 0r ~/.vim/CodeBasique/codeBasique.pl
-autocmd BufNewFile client.cpp           0r ~/.vim/CodeBasique/client.cpp
-autocmd BufNewFile *.cpp                0r ~/.vim/CodeBasique/codeBasique.cpp
-autocmd BufNewFile *.hpp                0r ~/.vim/CodeBasique/codeBasique.hpp
-autocmd BufNewFile build.xml            0r ~/.vim/CodeBasique/build.xml
-autocmd BufNewFile bibliographie.bib    0r ~/.vim/CodeBasique/bibliographie.bib
-autocmd BufNewFile makefile             0r ~/.vim/CodeBasique/makefileBasique
-autocmd BufNewFile CMakeLists.txt       0r ~/.vim/CodeBasique/CMakeLists.txt
-autocmd BufNewFile Doxyfile             0r ~/.vim/CodeBasique/Doxyfile.base
+augroup squelette
+    autocmd!
+    autocmd BufNewFile *.sh                 0r ~/.vim/CodeBasique/codeBasique.sh
+    autocmd BufNewFile *.c                  0r ~/.vim/CodeBasique/codeBasique.c
+    autocmd BufNewFile *.h                  0r ~/.vim/CodeBasique/codeBasique.h
+    autocmd BufNewFile *.py                 0r ~/.vim/CodeBasique/codeBasique.py
+    autocmd BufNewFile *.tex                0r ~/.vim/CodeBasique/codeBasique.tex
+    autocmd BufNewFile *.java               call ConfigurationNouveauFichierJAVA()
+    autocmd BufNewFile *.html               0r ~/.vim/CodeBasique/codeBasique.html
+    autocmd BufNewFile *.css                0r ~/.vim/CodeBasique/codeBasique.css
+    autocmd BufNewFile *.js                 0r ~/.vim/CodeBasique/codeBasique.js
+    autocmd BufNewFile *.php                0r ~/.vim/CodeBasique/codeBasique.php
+    autocmd BufNewFile *.me                 0r ~/.vim/CodeBasique/codeBasique.me
+    autocmd BufNewFile *.1                  0r ~/.vim/CodeBasique/codeBasique.1
+    autocmd BufNewFile *.pl                 0r ~/.vim/CodeBasique/codeBasique.pl
+    autocmd BufNewFile client.cpp           0r ~/.vim/CodeBasique/client.cpp
+    autocmd BufNewFile *.cpp                0r ~/.vim/CodeBasique/codeBasique.cpp
+    autocmd BufNewFile *.hpp                0r ~/.vim/CodeBasique/codeBasique.hpp
+    autocmd BufNewFile build.xml            0r ~/.vim/CodeBasique/build.xml
+    autocmd BufNewFile bibliographie.bib    0r ~/.vim/CodeBasique/bibliographie.bib
+    autocmd BufNewFile makefile             0r ~/.vim/CodeBasique/makefileBasique
+    autocmd BufNewFile CMakeLists.txt       0r ~/.vim/CodeBasique/CMakeLists.txt
+    autocmd BufNewFile Doxyfile             0r ~/.vim/CodeBasique/Doxyfile.base
+augroup end
 
 " Pour configurer automatiquement le make de vim selon le type de fichier
-autocmd FileType haskell        setlocal makeprg=ghci\ %
-autocmd FileType ocaml          setlocal makeprg=ocaml\ -init\ %
-autocmd FileType java           setlocal makeprg=javac\ -g\ %
-autocmd FileType sql            setlocal makeprg=mysql\ --password\ <\ %
-autocmd FileType tex            setlocal makeprg=xelatex\ %
-autocmd Filetype php            setlocal makeprg=php\ -l\ %
+augroup reglageMake
+    autocmd!
+    autocmd FileType haskell        setlocal makeprg=ghci\ %
+    autocmd FileType ocaml          setlocal makeprg=ocaml\ -init\ %
+    autocmd FileType java           setlocal makeprg=javac\ -g\ %
+    autocmd FileType sql            setlocal makeprg=mysql\ --password\ <\ %
+    autocmd FileType tex            setlocal makeprg=xelatex\ %
+    autocmd Filetype php            setlocal makeprg=php\ -l\ %
+augroup end
 "autocmd FileType cpp            setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
 " Ancienne version pour les fichier LaTeX
 "autocmd FileType tex setlocal makeprg=latex\ %\ &&\ dvips\ %<.dvi\ &&\ ps2pdf\ %<.ps
@@ -269,23 +281,83 @@ autocmd Filetype php            setlocal makeprg=php\ -l\ %
 " Mappage de la touche de compilation
 " Les scripts n'utilisent pas ce raccourci de compilation
 " pour des raisons de vitesse de retour à l'édition
-autocmd FileType tex,haskell,ocaml,sql,php  map  <buffer> <F5>       :make <CR>
-autocmd FileType tex,haskell,ocaml,sql,php  map! <buffer> <F5>  <Esc>:make <CR>
+augroup compilation
+    autocmd!
+    autocmd FileType tex,haskell,ocaml,sql,php  map  <buffer> <F5>       :make <CR>
+    autocmd FileType tex,haskell,ocaml,sql,php  map! <buffer> <F5>  <Esc>:make <CR>
+    autocmd Filetype perl,sh,python             map  <buffer> <F5>       :!./% <CR>
+    autocmd Filetype perl,sh,python             map! <buffer> <F5>  <Esc>:!./% <CR>
+augroup end
 
-" Redéfinition de la commande d'aide utilisée avec K
-autocmd FileType tex setlocal keywordprg=texdoc
+" Définition de la coloration syntaxique pour les fichier antlr
+augroup ficherAntlr
+    autocmd!
+    autocmd BufRead *.g4    setlocal filetype=antlr
+augroup end
+
+" Rend le fichier courant exécutable à l'enregistrement si c'est pertinent
+augroup rendreExecuable
+    autocmd!
+    autocmd BufWritePost * call ModeChange()
+augroup end
 
 " Création d'une page de manuel avec ajout du nom automatiquement
-autocmd BufNewFile *.1                  :%substitute?NOMCOMMANDE?\=expand('%:t:r')?
+augroup manuel
+    autocmd!
+    autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand('%:t:r')?
+augroup end
 
 " Active la vérification orthographique pour certains type de fichier seulement
-autocmd FileType tex,c,h,ocaml,python,java,html,css,javascript,php,make,vim,sh,nroff,groff,svn,perl,cpp,markdown,gitcommit setlocal spell
+augroup langue
+    autocmd!
+    autocmd FileType haskell setlocal nospell
+augroup end
 
-" Pour éviter les ralentissement dans les fichiers latex et plugin gundo
-"autocmd FileType tex        setlocal nocursorline nocursorcolumn
+augroup commandesLocale
+    autocmd!
+    " Redéfinition de la commande d'aide utilisée avec K
+    autocmd FileType tex            setlocal keywordprg=texdoc
+    " Pour éviter les ralentissement dans les fichiers latex et plugin gundo
+    autocmd FileType tex            setlocal nocursorline nocursorcolumn
+    " Active les replis en se basant sur l'indentation
+    autocmd FileType python,sh,perl setlocal foldmethod=indent
+augroup end
 
-" Active les replis spécifique pour python
-autocmd FileType python,sh setlocal foldmethod=indent
+" Mappage des touches en fonctions du type de fichier
+augroup web
+    autocmd!
+    autocmd FileType html,css,php,javascript    map  <buffer> <F10>      :!firefox % &<CR>
+    autocmd FileType html,css,php,javascript    map! <buffer> <F10> <Esc>:!firefox % &<CR>
+augroup end
+
+" Recharge le vimrc quand utilise F5
+augroup vimSource
+    autocmd!
+    autocmd FileType vim                        map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
+    autocmd FileType vim                        map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
+augroup end
+
+" Mappage selon la présence de makefile
+augroup fonctionsConfiguration
+    autocmd!
+    autocmd FileType java,ant               call ExistConfigurationJava()
+    autocmd FileType tex                    call MacrosLatexSpecifique()
+    autocmd FileType html,java,xml,ant,php  call PagesInternet()
+    autocmd FileType php                    call ProgEnPHP()
+    autocmd FileType sh                     call ScriptBash()
+    autocmd FileType nroff,groff            call AffichageGroff()
+    autocmd Filetype antlr                  call ConfigAntlr()
+    autocmd FileType cpp                    call MacrosCPP()
+    autocmd FileType c,h                    call ExistMakeFileC()
+augroup end
+
+" Active l'omnicompletion
+if exists ('+omnifunc') && &omnifunc == ""
+    setlocal omnifunc=syntaxcomplete#Complete
+endif
+
+setlocal completefunc=syntaxcomplete#Complete
+autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
 " Ajoute de tags pour l'omnicompletion
 " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
@@ -297,15 +369,10 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
 let OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
-" Active l'omnicompletion
-if exists ('+omnifunc') && &omnifunc == ""
-    setlocal omnifunc=syntaxcomplete#Complete
-endif
-
-setlocal completefunc=syntaxcomplete#Complete
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+augroup menuAutocompletion
+    autocmd!
+    autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+augroup end
 
 " Si un makefile existe on utilise la commande de shell make plutôt que celle de vim sinon on utilise l'utilitaire make de vim
 " Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule sinon c'est le nom du fichier sans majuscule
@@ -489,8 +556,10 @@ map <leader>b :buffers<CR>
 map <leader>sh :SignifyToggleHighlight<CR>
 map <leader>st :SignifyToggle<CR>
 map <leader>sr :SignifyRefresh<CR>
-nmap <leader>sj <plug>(signify-next-hunk)
-nmap <leader>sk <plug>(signify-prev-hunk)
+map <leader>sj <plug>(signify-next-hunk)
+map <leader>sk <plug>(signify-prev-hunk)
+
+map <leader><leader> :bnext<CR>
 
 "iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
@@ -523,30 +592,6 @@ map  <F9>           :FufBufferTagAll<CR>
 map! <F9>     <Esc> :FufBufferTagAll<CR>
 map  <S-F12>        :vsp ~/.vim/vimrc<CR>
 map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
-
-" Mappage des touches en fonctions du type de fichier
-autocmd FileType html,css,php,javascript    map  <buffer> <F10>      :!firefox % &<CR>
-autocmd FileType html,css,php,javascript    map! <buffer> <F10> <Esc>:!firefox % &<CR>
-" Recharge le vimrc quand utilise F5
-autocmd FileType vim                        map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
-autocmd FileType vim                        map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
-" Execute le script avec F5
-autocmd Filetype perl,sh,python             map  <buffer> <F5>       :!./%<CR>
-autocmd Filetype perl,sh,python             map! <buffer> <F5>  <Esc>:!./%<CR>
-
-" Mappage selon la présence de makefile
-autocmd FileType java,ant               call ExistConfigurationJava()
-autocmd FileType tex                    call MacrosLatexSpecifique()
-autocmd FileType html,java,xml,ant,php  call PagesInternet()
-autocmd FileType php                    call ProgEnPHP()
-autocmd FileType sh                     call ScriptBash()
-autocmd FileType nroff,groff            call AffichageGroff()
-autocmd Filetype antlr                  call ConfigAntlr()
-autocmd FileType cpp                    call MacrosCPP()
-autocmd FileType c,h                    call ExistMakeFileC()
-
-" Rend le fichier courant exécutable à l'enregistrement si c'est pertinent
-au BufWritePost * call ModeChange()
 
 " Définition du colorsheme
 " dans ~/.vim/colors/icansee.vim
