@@ -420,9 +420,10 @@ function! MacrosCPP()
         map  <buffer> <S-F9>        :make clean<CR>
         map! <buffer> <S-F9>  <Esc> :make clean<CR>
     else
+        let $nomFichier = substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\l\\0", "")
         setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
-        map  <buffer> <F10>         :!./client<CR>
-        map! <buffer> <F10>   <Esc> :!./client<CR>
+        map  <buffer> <F10>         :!./$nomFichier<CR>
+        map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
     endif
     map  <buffer> <F5>          :make<CR>
     map! <buffer> <F5>    <Esc> :make<CR>
@@ -480,7 +481,6 @@ function! ExistConfigurationJava()
 endfunction
 
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
-" TODO changer par zathura
 function! MacrosLatexSpecifique()
     map  <buffer> <S-F8>        :!makeindex %<.idx<CR>
     map! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<CR>
