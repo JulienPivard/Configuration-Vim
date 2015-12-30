@@ -1,12 +1,13 @@
 " Vim color file
-" Maintainer:	David Schweikert <dws@ee.ethz.ch>
-" Last Change:	2006 Apr 30
+" Maintainer:	PIVARD Julien <pivardjulien@gmail.com>
+" Last Change:	mercredi 30 décembre 2015
+" Inspiré par le colorscheme icansee de : David Schweikert <dws@ee.ethz.ch>
 " Pour avoir les noms des groupes de coloration avec ce qu'il reconnaisse
 " :h group-name
 
 hi clear
 
-let colors_name = "icansee"
+let colors_name = "interstellaire"
 
 " Normal should come first
 hi Normal       guifg=White         guibg=Black
@@ -15,10 +16,10 @@ hi lCursor      guifg=NONE          guibg=Cyan
 hi CursorLine   term=underline      cterm=underline     ctermbg=None    guibg=#222222
 hi CursorColumn term=underline      cterm=underline     ctermbg=None    guibg=#222222
 
-hi DiffAdd      ctermfg=White           ctermbg=LightGreen      guibg=LightBlue
-hi DiffChange   ctermfg=White           ctermbg=LightMagenta    guibg=LightMagenta
-hi DiffDelete   ctermfg=Blue	        ctermbg=LightCyan       gui=bold            guifg=Blue  guibg=LightCyan
-hi DiffText     ctermfg=White           ctermbg=Red	            gui=bold            guibg=Red
+hi DiffAdd      ctermfg=White       ctermbg=LightGreen      guibg=LightBlue
+hi DiffChange   ctermfg=White       ctermbg=LightMagenta    guibg=LightMagenta
+hi DiffDelete   ctermfg=Red         ctermbg=LightRed        gui=bold            guibg=Red
+hi DiffText     ctermfg=White       ctermbg=LightCyan       gui=bold            guifg=Blue  guibg=LightCyan
 hi Directory    ctermfg=DarkBlue	    guifg=Blue
 hi ErrorMsg     ctermfg=White	        ctermbg=DarkRed         guibg=Red	        guifg=White
 hi FoldColumn   ctermfg=DarkRed         ctermbg=DarkGrey        guifg=darkyellow    guibg=#222222
@@ -26,6 +27,7 @@ hi Folded       ctermfg=DarkYellow      ctermbg=DarkGrey	    guifg=darkyellow   
 hi IncSearch    cterm=reverse	        gui=reverse
 hi Label        ctermfg=Yellow          guifg=yellow
 hi LineNr       ctermfg=DarkYellow      guifg=Brown
+hi CursorLineNr	ctermfg=Yellow          guifg=yellow
 hi ModeMsg      cterm=bold	            gui=bold
 hi MoreMsg      ctermfg=DarkGreen       gui=bold            guifg=SeaGreen
 hi NonText      ctermfg=Magenta	        gui=bold            guifg=LightMagenta      guibg=Black
@@ -67,6 +69,9 @@ hi phpMemberSelector    cterm=underline     ctermfg=DarkYellow      gui=underlin
 hi TagbarSignature  ctermfg=darkyellow
 hi SpellBad         ctermbg=Red       guibg=Red    guifg=NONE
 
+" Pour la documentation doxygen
+hi doxygenErrorComment	ctermfg=White	ctermbg=DarkRed     guibg=Red	guifg=White
+
 " Pour syntastic
 hi SyntasticWarningSign     ctermbg=Yellow  ctermfg=Black
 " Pour gitgutter et signify
@@ -82,3 +87,4 @@ hi User2 term=reverse,bold  cterm=reverse,bold  ctermfg=Cyan        gui=inverse,
 hi User3 term=bold  cterm=bold  ctermfg=DarkGreen   gui=inverse,bold    guifg=green
 hi User4 term=bold  cterm=bold  ctermfg=DarkRed     gui=inverse,bold    guifg=red
 hi User5 term=bold  cterm=bold  ctermfg=DarkMagenta gui=inverse,bold    guifg=magenta
+hi User6 term=bold  cterm=bold  ctermfg=yellow      ctermbg=DarkYellow

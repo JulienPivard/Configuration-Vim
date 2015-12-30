@@ -151,20 +151,20 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 function! MaLigneStatus()
     let nomFichier = '%<%f'
     if exists('*fugitive#head()')
-        let fugitLigne = '%{fugitive#head()} '
+        let fugitLigne = '%6*%{fugitive#head()}%0* '
     else
         let fugitLigne = ' '
     endif
     if exists('*sy#repo#get_stats()')
-        let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0* '
+        let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0*'
     else
         let etatDepot = ''
     endif
-    let flagStatLigne = '%h%1*%m%0*%r%w '
+    let flagStatutLigne = '%h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y tmp:%n%a'
     let hexaCara = '0x%02B %2*|'
-    return '' . nomFichier . ':' . fugitLigne . etatDepot . flagStatLigne . '%=' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+    return '' . nomFichier . ':' . fugitLigne . flagStatutLigne . '%=' . etatDepot . ' ‖ ' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
 endfunction
 
 " Pour connaitre le nombre de lignes ajoutées au fichier courant [git]
@@ -239,7 +239,7 @@ augroup end
 " Active la vérification orthographique pour certains type de fichier seulement
 augroup langue
     autocmd!
-    autocmd FileType haskell,fuf,gundo,diff,vundle setlocal nospell
+    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
@@ -409,19 +409,33 @@ function! ExistMakeFileC()
     endif
 endfunction
 
+" Maccros pour le cpp
+" Compilation via makeprg
+" Exécution via F10 du binaire
+" Création des tags et compilation de la documentation.
 function! MacrosCPP()
-    map  <buffer> <F5>         :make<CR>
-    map! <buffer> <F5>   <Esc> :make<CR>
-    map  <buffer> <F10>        :!./bin/Release/client<CR>
-    map! <buffer> <F10>  <Esc> :!./bin/Release/client<CR>
-    map  <buffer> <S-F8>       :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ./src/<CR>
-    map! <buffer> <S-F8> <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ./src/<CR>
-    map  <buffer> <S-F7>       :!doxygen<CR>
-    map! <buffer> <S-F7> <Esc> :!doxygen<CR>
-    "map! <buffer> <F10> <Esc> :!./bin/Release/%:t:r<CR>
-    set path+=src/include
-    set path+=src/include/modele
-    set path+=src/include/builders
+    if filereadable("makefile") || filereadable("Makefile")
+        map  <buffer> <F10>         :!./bin/Release/client<CR>
+        map! <buffer> <F10>   <Esc> :!./bin/Release/client<CR>
+        map  <buffer> <S-F9>        :make clean<CR>
+        map! <buffer> <S-F9>  <Esc> :make clean<CR>
+    else
+        setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
+        map  <buffer> <F10>         :!./client<CR>
+        map! <buffer> <F10>   <Esc> :!./client<CR>
+    endif
+    map  <buffer> <F5>          :make<CR>
+    map! <buffer> <F5>    <Esc> :make<CR>
+    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ./src/<CR>
+    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ./src/<CR>
+    map  <buffer> <S-F11>       :!doxygen<CR>
+    map! <buffer> <S-F11> <Esc> :!doxygen<CR>
+    setlocal path+=src/include
+    setlocal path+=src/include/modele
+    setlocal path+=src/include/builders
+    setlocal path+=src/include/builders/lorraine
+	let g:load_doxygen_syntax = 1
+    let g:doxygen_enhanced_color = 1
 endfunction
 
 "Configuration des nouveaux fichiers en java
@@ -439,30 +453,26 @@ endfunction
 " fichier java on convertit la première lettre du dossier en majuscule
 function! ExistConfigurationJava()
     " Si il existe un fichier d'automatisation dans le dossier courant ou juste au dessus.
-    if filereadable("build.xml") || filereadable("../build.xml")
+    if filereadable("build.xml")
         let $chemin = './'
-        while !filereadable($chemin . 'build.xml')
-            let $chemin = $chemin . '../'
-        endwhile
-        map  <buffer> <F5>          :!cd $chemin ; ant compile<CR>
-        map! <buffer> <F5>    <Esc> :!cd $chemin ; ant compile<CR>
-        map  <buffer> <S-F8>        :!cd $chemin ; ant test<CR>
-        map! <buffer> <S-F8>  <Esc> :!cd $chemin ; ant test<CR>
-        map  <buffer> <S-F9>        :!cd $chemin ; ant clean<CR>
-        map! <buffer> <S-F9>  <Esc> :!cd $chemin ; ant clean<CR>
-        map  <buffer> <F10>         :!cd $chemin ; ant run<CR>
-        map! <buffer> <F10>   <Esc> :!cd $chemin ; ant run<CR>
-        map  <buffer> <S-F11>       :!cd $chemin ; ant javadoc<CR>
-        map! <buffer> <S-F11> <Esc> :!cd $chemin ; ant javadoc<CR>
+        setlocal makeprg=ant\ compile
+        map  <buffer> <S-F8>        :!ant test<CR>
+        map! <buffer> <S-F8>  <Esc> :!ant test<CR>
+        map  <buffer> <S-F9>        :!ant clean<CR>
+        map! <buffer> <S-F9>  <Esc> :!ant clean<CR>
+        map  <buffer> <F10>         :!ant run<CR>
+        map! <buffer> <F10>   <Esc> :!ant run<CR>
+        map  <buffer> <S-F11>       :!ant javadoc<CR>
+        map! <buffer> <S-F11> <Esc> :!ant javadoc<CR>
     else
         " Il n'y a pas de fichier d'automatisation, compilation du fichier à la main.
-        map  <buffer> <F5>          :make<CR>
-        map! <buffer> <F5>    <Esc> :make<CR>
         map  <buffer> <F10>         :!java %<<CR>
         map! <buffer> <F10>   <Esc> :!java %<<CR>
         map  <buffer> <S-F11>       :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
         map! <buffer> <S-F11> <Esc> :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
     endif
+    map  <buffer> <F5>          :make<CR>
+    map! <buffer> <F5>    <Esc> :make<CR>
     iabbrev <buffer> sopl System.out.println("")<Esc>hi
     iabbrev <buffer> sopf System.out.printf("")<Esc>hi
     iabbrev <buffer> sepl System.err.println("")<Esc>hi
@@ -555,24 +565,6 @@ function! ConfigAntlr()
     map! <buffer> <F10> <Esc> :!./runAntlr.sh %< test.code <CR>
 endfunction
 
-" Change le caractère pour déclencher le mapping en mode commande.
-let mapleader = "ù"
-map <leader>gs :Gstatus<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>b :buffers<CR>
-
-map <leader>sh :SignifyToggleHighlight<CR>
-map <leader>st :SignifyToggle<CR>
-map <leader>sr :SignifyRefresh<CR>
-map <leader>sj <plug>(signify-next-hunk)
-map <leader>sk <plug>(signify-prev-hunk)
-
-map <leader><leader> :bnext<CR>
-
-"iabbrev { {<CR>}<Esc>k$a
-iabbrev /** /**<CR>*/<Esc>ka
-iabbrev /* /*<CR>*/<Esc>ka
-
 " Mappage des touches utiles
 " Pour inverser une option booléenne utiliser set option!
 " Pour afficher la valeur d'une option set option?
@@ -601,9 +593,29 @@ map! <F9>     <Esc> :FufBufferTagAll<CR>
 map  <S-F12>        :vsp ~/.vim/vimrc<CR>
 map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
 
+"iabbrev { {<CR>}<Esc>k$a
+iabbrev /** /**<CR>*/<Esc>ka
+iabbrev /* /*<CR>*/<Esc>ka
+
+" Change le caractère pour déclencher le mapping en mode commande.
+let mapleader = "ù"
+map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>b :buffers<CR>
+
+map <leader>sh :SignifyToggleHighlight<CR>
+map <leader>st :SignifyToggle<CR>
+map <leader>sr :SignifyRefresh<CR>
+map <leader>sj <plug>(signify-next-hunk)
+map <leader>sk <plug>(signify-prev-hunk)
+
+map <leader><leader> :bnext<CR>
+map <leader>cn :cnext<CR>
+map <leader>cp :cprevious<CR>
+
 " Définition du colorsheme
 " dans ~/.vim/colors/icansee.vim
-colorscheme icansee
+colorscheme interstellaire
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -712,7 +724,7 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_jump = 2       " Saute à la première erreur trouvée à la sauvegarde.
 let g:syntastic_php_checkers = ['php']  " Pour ne pas avoir le checker de style et d'indentation.
 let g:syntastic_python_checkers = ['python']  " Pour ne pas avoir le checker de style et d'indentation.
-let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/' ]
+let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 
