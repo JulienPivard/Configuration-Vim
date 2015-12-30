@@ -151,20 +151,28 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 function! MaLigneStatus()
     let nomFichier = '%<%f'
     if exists('*fugitive#head()')
-        let fugitLigne = '%6*%{fugitive#head()}%0* '
+        if fugitive#head() == ""
+            let fugitLigne = ""
+        else
+            let fugitLigne = ':%6*%{fugitive#head()}%0* '
+        endif
     else
         let fugitLigne = ' '
     endif
     if exists('*sy#repo#get_stats()')
-        let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0*'
+        if sy#repo#get_stats() == [-1, -1, -1]
+            let etatDepot = ""
+        else
+            let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0*'
+        endif
     else
         let etatDepot = ''
     endif
     let flagStatutLigne = '%h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y tmp:%n%a'
-    let hexaCara = '0x%02B %2*|'
-    return '' . nomFichier . ':' . fugitLigne . flagStatutLigne . '%=' . etatDepot . ' ‖ ' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+    let hexaCara = '0x%02B'
+    return '' . nomFichier . fugitLigne . flagStatutLigne . '%=' . etatDepot . ' ‖ ' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
 endfunction
 
 " Pour connaitre le nombre de lignes ajoutées au fichier courant [git]
