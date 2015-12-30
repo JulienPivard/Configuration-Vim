@@ -151,8 +151,8 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 function! MaLigneStatus()
     let nomFichier = '%<%f'
     if exists('*fugitive#head()')
-        if fugitive#head() == ""
-            let fugitLigne = ""
+        if fugitive#head() == ''
+            let fugitLigne = ' '
         else
             let fugitLigne = ':%6*%{fugitive#head()}%0* '
         endif
@@ -161,7 +161,7 @@ function! MaLigneStatus()
     endif
     if exists('*sy#repo#get_stats()')
         if sy#repo#get_stats() == [-1, -1, -1]
-            let etatDepot = ""
+            let etatDepot = ''
         else
             let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0*'
         endif
@@ -247,7 +247,7 @@ augroup end
 " Active la vérification orthographique pour certains type de fichier seulement
 augroup langue
     autocmd!
-    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake setlocal nospell
+    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
@@ -731,6 +731,8 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_jump = 2       " Saute à la première erreur trouvée à la sauvegarde.
 let g:syntastic_php_checkers = ['php']  " Pour ne pas avoir le checker de style et d'indentation.
+let g:syntastic_enable_perl_checker = 1     " À désactiver si on travail sur des perl écrit par d'autres.
+let g:syntastic_perl_checkers = ['perl', 'podchecker']
 let g:syntastic_python_checkers = ['python']  " Pour ne pas avoir le checker de style et d'indentation.
 let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
 let g:syntastic_cpp_compiler = 'g++'
