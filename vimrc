@@ -29,6 +29,7 @@ Plugin 'vim-scripts/undotree.vim.git'
 Plugin 'phongnh/vim-antlr.git'
 Plugin 'spf13/vim-autoclose.git'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'edsono/vim-matchit.git'
 Plugin 'mhinz/vim-signify.git'
 Plugin 'tpope/vim-surround.git'
@@ -104,6 +105,7 @@ set   printoptions=paper:A4             " Permet de régler plusieurs options do
 set norelativenumber                    " Affiche le nombre de ligne relatif à la position
 set   report=0                          " Affiche toujours le nombre de lignes modifié
 set   scrolloff=7                       " Affiche au minimum les 3 lignes autour du curseur
+set   shell=/bin/bash                   " Règle le shell à utiliser pour exécuter des commandes
 set   shiftround                        " Indentation arrondie à un multiple de shiftwidth
 set   shiftwidth=4                      " Taille des tabulations avec >> ou <<
 set   showmatch                         " Affiche la parenthèse correspondante
@@ -149,35 +151,37 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 " Le code hexadécimal du caractère sous le curseur %B.
 " La position dans le fichier en pourcentage %P
 function! MaLigneStatus()
-    let nomFichier = '%<%f'
+    let nomFichier = '%f '
     if exists('*fugitive#head()')
         if fugitive#head() == ''
-            let fugitLigne = ' '
+            let fugitLigne = ''
         else
-            let fugitLigne = ':%6*%{fugitive#head()}%0* '
+            let fugitLigne = '%6*%{fugitive#head()}:%0*'
         endif
     else
-        let fugitLigne = ' '
+        let fugitLigne = ''
     endif
-    if exists('*sy#repo#get_stats()')
-        if sy#repo#get_stats() == [-1, -1, -1]
-            let etatDepot = ''
-        else
-            let etatDepot = '%3*%{SyStatAjout()}%0*' . '%4*%{SyStatSuppression()}%0*' . '%5*%{SyStatModifications()}%0*'
-        endif
-    else
-        let etatDepot = ''
-    endif
+    let etatDepot = '%3*%{StatAjout()}%0*' . '%4*%{StatSuppression()}%0*' . '%5*%{StatModifications()}%0*'
     let flagStatutLigne = '%h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y tmp:%n%a'
     let hexaCara = '0x%02B'
-    return '' . nomFichier . fugitLigne . flagStatutLigne . '%=' . etatDepot . ' ‖ ' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+    return '%<' . fugitLigne . nomFichier . flagStatutLigne . '%=' . etatDepot . ' ‖ ' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+endfunction
+
+function! StatWrapperGit()
+    if exists('*fugitive#head()') && g:gitgutter_enabled == 0
+        return sy#repo#get_stats()
+    elseif exists('*GitGutterGetHunkSummary()') && g:gitgutter_enabled == 1
+        return GitGutterGetHunkSummary()
+    else
+        return [0, 0, 0]
+    endif
 endfunction
 
 " Pour connaitre le nombre de lignes ajoutées au fichier courant [git]
-function! SyStatAjout()
-    let [added, modified, removed] = sy#repo#get_stats()
+function! StatAjout()
+    let [added, modified, removed] = StatWrapperGit()
     if added > 0
         return '[' . printf('+%s', added ) . ']'
     else
@@ -186,8 +190,8 @@ function! SyStatAjout()
 endfunction
 
 " Pour connaitre le nombre de lignes supprimées au fichier courant [git]
-function! SyStatSuppression()
-    let [added, modified, removed] = sy#repo#get_stats()
+function! StatSuppression()
+    let [added, modified, removed] = StatWrapperGit()
     if removed > 0
         return '[' . printf('-%s', removed ) . ']'
     else
@@ -196,8 +200,8 @@ function! SyStatSuppression()
 endfunction
 
 " Pour connaitre le nombre de lignes modifiées au fichier courant [git]
-function! SyStatModifications()
-    let [added, modified, removed] = sy#repo#get_stats()
+function! StatModifications()
+    let [added, modified, removed] = StatWrapperGit()
     if modified > 0
         return '[' . printf('~%s', modified ) . ']'
     else
@@ -230,6 +234,8 @@ function! Nettoyage()
     let curline = line(".")
     :%s/\s\+$//e
     call cursor(curline, curcol)
+    unlet curcol
+    unlet curline
 endfunction
 
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
@@ -611,6 +617,11 @@ map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>b :buffers<CR>
 
+map <leader>ggt :GitGutterToggle<CR>
+map <leader>gh  :GitGutterLineHighlightsToggle<CR>
+map <leader>gk <Plug>GitGutterPrevHunk
+map <leader>gj <Plug>GitGutterNextHunk
+
 map <leader>sh :SignifyToggleHighlight<CR>
 map <leader>st :SignifyToggle<CR>
 map <leader>sr :SignifyRefresh<CR>
@@ -750,16 +761,19 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:autoclose_vim_commentmode = 1
 
 " Réglages pour signify
-let g:signify_cursorhold_insert     = 0
-let g:signify_cursorhold_normal     = 0
-let g:signify_update_on_bufenter    = 0
-let g:signify_update_on_focusgained = 1
+let g:signify_disable_by_default     = 0
+let g:signify_cursorhold_insert      = 0
+let g:signify_cursorhold_normal      = 0
+let g:signify_update_on_bufenter     = 0
+let g:signify_update_on_focusgained  = 1
 let g:signify_sign_delete            = '↓'
 let g:signify_sign_delete_first_line = '↑'
 
 " Réglages pour gitgutter
-"let g:gitgutter_sign_removed = '━'
-"let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_enabled = 0
+let g:gitgutter_map_keys = 0
+let g:gitgutter_sign_removed = '↓'
+let g:gitgutter_override_sign_column_highlight = 0
 
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "
