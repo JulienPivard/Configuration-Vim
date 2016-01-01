@@ -606,7 +606,7 @@ iabbrev <buffer> ;; ->
 " Macros pour le php
 function! ProgEnPHP()
     iabbrev <buffer> ,, =>
-    iabbrev <buffer> t<Tab> $this->
+    iabbrev <buffer> t $this->
 endfunction
 
 " Change le caractère pour déclencher le mapping en mode commande.
