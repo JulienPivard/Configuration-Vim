@@ -404,7 +404,6 @@ augroup end
 " :echo substitute(split(getcwd(), '/')[-1], ".*", "\\l\\0", "")
 " :echo substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\L\\0", "")
 function! ExistMakeFileC()
-    iabbrev <buffer> { {<CR>}<Esc>ka
     if filereadable("makefile") || filereadable("Makefile")
         let $nomFichier = substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\l\\0", "")
         setlocal makeprg=make
