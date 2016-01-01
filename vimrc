@@ -450,7 +450,6 @@ function! MacrosCPP()
     setlocal path+=src/include/builders
     setlocal path+=src/include/builders/lorraine
 	let g:load_doxygen_syntax = 1
-    let g:doxygen_enhanced_color = 1
 endfunction
 
 "Configuration des nouveaux fichiers en java
