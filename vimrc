@@ -509,14 +509,6 @@ function! MacrosLatexSpecifique()
     iabbrev <buffer> begin \begin{}<CR>\end{}<Esc>k$i
 endfunction
 
-inoremap <buffer> ;; ->
-
-" Macros pour le php
-function! ProgEnPHP()
-    inoremap <buffer> ,, =>
-    inoremap <buffer> t<Tab> $this->
-endfunction
-
 " Macros pour l'affichage formaté des fichiers groff
 " La touche F5 affiche un aperçus dans le terminal pour les me
 " La touche F10 affiche un aperçus dans le terminal pour les man
@@ -608,6 +600,14 @@ map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
 "iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
+
+iabbrev <buffer> ;; ->
+
+" Macros pour le php
+function! ProgEnPHP()
+    iabbrev <buffer> ,, =>
+    iabbrev <buffer> t<Tab> $this->
+endfunction
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = "ù"
