@@ -253,7 +253,7 @@ augroup end
 " Active la vérification orthographique pour certains type de fichier seulement
 augroup langue
     autocmd!
-    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig setlocal nospell
+    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
@@ -465,7 +465,7 @@ endfunction
 " La première lettre du nom de dossier java est en minuscule pour exécuter le
 " fichier java on convertit la première lettre du dossier en majuscule
 function! ExistConfigurationJava()
-    " Si il existe un fichier d'automatisation dans le dossier courant ou juste au dessus.
+    " Si il existe un fichier d'automatisation dans le dossier courant.
     if filereadable("build.xml")
         let $chemin = './'
         setlocal makeprg=ant\ compile
@@ -601,7 +601,7 @@ map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
 iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
 
-iabbrev <buffer> ;; ->
+iabbrev <buffer> !! ->
 
 " Macros pour le php
 function! ProgEnPHP()
