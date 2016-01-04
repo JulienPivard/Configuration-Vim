@@ -25,7 +25,7 @@ Plugin 'hdima/python-syntax.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'majutsushi/tagbar.git'
 Plugin 'SirVer/ultisnips.git'
-Plugin 'vim-scripts/undotree.vim.git'
+Plugin 'mbbill/undotree.git'
 Plugin 'phongnh/vim-antlr.git'
 Plugin 'spf13/vim-autoclose.git'
 Plugin 'tpope/vim-fugitive'
@@ -691,7 +691,6 @@ let g:gundo_tree_statusline='%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline='%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
 " Réglage pour undotree
-let g:loaded_undotree = 1
 let g:undotree_WindowLayout = 2
 let g:undotree_SplitWidth = 45
 let g:undotree_DiffpanelHeight = 15
