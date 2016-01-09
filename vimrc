@@ -48,10 +48,6 @@ filetype plugin indent on
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
-"execute pathogen#infect('bundle/{}')
-"call pathogen#helptags()
-"filetype plugin indent on
-
 syntax on
 
 set noautochdir                         " Pour ne pas se changer automatiquement de répertoire
@@ -166,7 +162,9 @@ function! MaLigneStatus()
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y tmp:%n%a'
     let hexaCara = '0x%02B'
-    return '%<' . fugitLigne . nomFichier . flagStatutLigne . '%=' . etatDepot . ' ‖ ' . posiCurseur . ' ‖ ' . buffInfos . ' ‖ ' . hexaCara
+    let carSepa = ''
+    "let carSepa = '‖'
+    return '%<' . fugitLigne . nomFichier . flagStatutLigne . '%=' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
 endfunction
 
 function! StatWrapperGit()
@@ -387,10 +385,10 @@ set tags+=~/.vim/tags/cpp
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_ShowPrototypeInAbbr = 1 " Montre les paramètres des fonctions.
+let OmniCpp_MayCompleteDot = 1      " auto complète après .
+let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
+let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 augroup menuAutocompletion
     autocmd!
     autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
