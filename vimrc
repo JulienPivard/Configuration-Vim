@@ -164,7 +164,7 @@ function! MaLigneStatus()
     let hexaCara = '0x%02B'
     let carSepa = ''
     "let carSepa = '‖'
-    return '%<' . fugitLigne . nomFichier . flagStatutLigne . '%=' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
+    return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
 endfunction
 
 function! StatWrapperGit()
