@@ -28,11 +28,17 @@ Plugin 'SirVer/ultisnips.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'phongnh/vim-antlr.git'
 Plugin 'spf13/vim-autoclose.git'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'edsono/vim-matchit.git'
 Plugin 'mhinz/vim-signify.git'
 Plugin 'tpope/vim-surround.git'
+" Pour pouvoir ajuster les couleurs facilement.
+" Plugin 'zefei/vim-colortuner'
+
+Plugin 'reedes/vim-pencil'
+Plugin 'vim-scripts/SpellCheck'
+Plugin 'vim-scripts/ingo-library'
 
 call vundle#end()
 filetype plugin indent on
@@ -120,7 +126,7 @@ set   title                             " Modifier le titre du terminal
 set   titlelen=255                      " Taille de la string dans le titre de la fenêtre d'application
 set   undodir=~/.vim/undodir            " Définit le dossier d'annulation
 set   undofile                          " Historique d'annulation persistant
-set   undolevels=2500                   " Fixe le nombre de changements conservé
+set   undolevels=500                    " Fixe le nombre de changements conservé
 set   wildmenu                          " Affiche le menu de complétion pour les commandes dans la barre de statut
 set   wildmode=longest:full,full        " Complète d'abord avec la correspondance la plus longue sans ambigüité
 
@@ -152,7 +158,7 @@ function! MaLigneStatus()
         if fugitive#head() == ''
             let fugitLigne = ''
         else
-            let fugitLigne = '%6*%{fugitive#head()}:%0*'
+            let fugitLigne = '%6*%{fugitive#head()}:%0*'
         endif
     else
         let fugitLigne = ''
@@ -160,18 +166,16 @@ function! MaLigneStatus()
     let etatDepot = '%3*%{StatAjout()}%0*' . '%4*%{StatSuppression()}%0*' . '%5*%{StatModifications()}%0*'
     let flagStatutLigne = '%h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
-    let buffInfos = '%y tmp:%n%a'
+    let buffInfos = '%y buf:%n%a'
     let hexaCara = '0x%02B'
-    let carSepa = ''
+    let carSepa = ''
     "let carSepa = '‖'
-    return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
+    return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
 endfunction
 
 function! StatWrapperGit()
-    if exists('*fugitive#head()') && g:gitgutter_enabled == 0
+    if exists('*fugitive#head()')
         return sy#repo#get_stats()
-    elseif exists('*GitGutterGetHunkSummary()') && g:gitgutter_enabled == 1
-        return GitGutterGetHunkSummary()
     else
         return [0, 0, 0]
     endif
@@ -251,11 +255,11 @@ augroup end
 " Active la vérification orthographique pour certains type de fichier seulement
 augroup langue
     autocmd!
-    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant setlocal nospell
+    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant,tags,qf setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
-augroup ficmake
+augroup configmake
     autocmd!
     autocmd Filetype make set listchars=nbsp:¤,tab:>-,trail:¤
     autocmd FileType make setlocal list                 " Affiche les caractères non imprimable
@@ -377,7 +381,10 @@ if exists ('+omnifunc') && &omnifunc == ""
 endif
 
 setlocal completefunc=syntaxcomplete#Complete
-autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+augroup completion
+    autocmd!
+    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+augroup end
 
 " Ajoute de tags pour l'omnicompletion
 " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
@@ -392,6 +399,12 @@ let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 augroup menuAutocompletion
     autocmd!
     autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+augroup end
+
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text         call pencil#init()
 augroup end
 
 " Si un makefile existe on utilise la commande de shell make plutôt que celle de vim sinon on utilise l'utilitaire make de vim
@@ -611,12 +624,8 @@ endfunction
 let mapleader = "ù"
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
-map <leader>b :buffers<CR>
-
-map <leader>ggt :GitGutterToggle<CR>
-map <leader>gh  :GitGutterLineHighlightsToggle<CR>
-map <leader>gk <Plug>GitGutterPrevHunk
-map <leader>gj <Plug>GitGutterNextHunk
+map <leader>bs :buffers<CR>
+map <leader>b :bnext<CR>
 
 map <leader>sh :SignifyToggleHighlight<CR>
 map <leader>st :SignifyToggle<CR>
@@ -624,9 +633,12 @@ map <leader>sr :SignifyRefresh<CR>
 map <leader>sj <plug>(signify-next-hunk)
 map <leader>sk <plug>(signify-prev-hunk)
 
-map <leader><leader> :bnext<CR>
-map <leader>cn :cnext<CR>
-map <leader>cp :cprevious<CR>
+map <leader>us :UpdateAndSpellCheck<CR>
+
+map <leader>o :copen 20<CR>
+map <leader>c :cclose<CR>
+map <leader>n :cnext<CR>
+map <leader>p :cprevious<CR>
 
 " Définition du colorsheme
 " dans ~/.vim/colors/icansee.vim
@@ -672,7 +684,6 @@ scriptencoding utf-8
 " vim-antlr
 " vim-autoclose
 " vim-fugitive
-" vim-gitgutter
 " vim-matchit
 " vim-surround
 " Vundle.vim
@@ -694,7 +705,6 @@ let g:undotree_SplitWidth = 45
 let g:undotree_DiffpanelHeight = 15
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
-"let g:undotree_TreeNodeShape = '|'
 
 " Réglages pour NERDTree
 let NERDTreeShowHidden = 1          " Pour afficher les fichiers caché.
@@ -751,6 +761,10 @@ let g:neocomplete#enable_auto_close_preview = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_multibyte_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
 
 " Pour que les double quotte ne soit pas fermé dans les fichiers type vimrc.
 let g:autoclose_vim_commentmode = 1
@@ -766,9 +780,9 @@ let g:signify_sign_delete_first_line = '↑'
 
 " Réglages pour gitgutter
 let g:gitgutter_enabled = 0
-let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_removed = '↓'
-let g:gitgutter_override_sign_column_highlight = 0
+
+" Réglages pour SpellCheck
+let g:SpellCheck_DefineQuickfixMappings = 1
 
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "
