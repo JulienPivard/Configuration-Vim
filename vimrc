@@ -158,7 +158,7 @@ function! MaLigneStatus()
         if fugitive#head() == ''
             let fugitLigne = ''
         else
-            let fugitLigne = '%6*%{fugitive#head()}:%0*'
+            let fugitLigne = '%6* %{fugitive#head()}:%0*'
         endif
     else
         let fugitLigne = ''
@@ -625,7 +625,7 @@ let mapleader = "ù"
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>bs :buffers<CR>
-map <leader>b :bnext<CR>
+map <leader>bb :bnext<CR>
 
 map <leader>sh :SignifyToggleHighlight<CR>
 map <leader>st :SignifyToggle<CR>
@@ -634,6 +634,8 @@ map <leader>sj <plug>(signify-next-hunk)
 map <leader>sk <plug>(signify-prev-hunk)
 
 map <leader>us :UpdateAndSpellCheck<CR>
+
+map <leader>sy :SyntasticToggleMode<CR>
 
 map <leader>o :copen 20<CR>
 map <leader>c :cclose<CR>
@@ -668,25 +670,6 @@ scriptencoding utf-8
 
 " :r ! ls ~/.vim/bundle/
 " Liste des extension installée
-
-" FuzzyFinder
-" gundo.vim
-" indentLine
-" L9
-" neocomplete.vim
-" nerdtree
-" OmniCppComplete
-" python-syntax
-" syntastic
-" tagbar
-" ultisnips
-" undotree.vim
-" vim-antlr
-" vim-autoclose
-" vim-fugitive
-" vim-matchit
-" vim-surround
-" Vundle.vim
 
 " Réglages pour GundoToggle
 let g:gundo_width = 45              " Largeur de la fenêtre d'aperçus.
