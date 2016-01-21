@@ -1,4 +1,5 @@
 <project name="usine" default="compile" basedir=".">
+
     <property name="appname"       value="usine"/>
     <property name="buildhome"     value="${basedir}/build"/>
     <property name="buildtest"     value="${basedir}/buildTest"/>
@@ -95,4 +96,5 @@
             <test name="TestSuite" haltonfailure="no" />
         </junit>
     </target>
+
 </project>

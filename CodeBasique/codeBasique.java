@@ -24,6 +24,7 @@ public class NOMFICHIER
      */
     public static void main(String[] args)
     {
+
         String nomfichier = new String( "#            NOMFICHIER            #" );
         String ligneIntro = new String( "####################################" );
         System.out.printf( "\n%s\n%s\n%s\n\n", ligneIntro, nomfichier, ligneIntro );
@@ -37,6 +38,7 @@ public class NOMFICHIER
             System.err.printf( "Nombres d'arguments incorrect, %d trop d'arguments\n", args.length );
             return;
         }
+
     }
 
 }

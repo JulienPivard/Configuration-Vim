@@ -15,65 +15,27 @@ NOMFICHIEREXECUTABLE = truc
 FICHIER1 = bidule
 FICHIERAAPPELLER = $(FICHIER1).o
 DEBUG = -W -Wall
-NOMCLASS1 = bidule
-DEPENDANCES = $(NOMCLASS1).class
-CCDOC = javadoc
-ENCODAGE = -encoding utf8 -docencoding utf8 -charset utf8
-# Choisir le compilateur
-#CC = gcc
-#CC = javac
+CC = gcc
 
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
 #                               Pour le C                                    #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
 
 
-#all : $(NOMFICHIEREXECUTABLE)
-#
-#$(NOMFICHIEREXECUTABLE) : $(NOMFICHIEREXECUTABLE).o $(FICHIERAAPPELLER)
-#	$(CC) $(DEBUG) -o $@ $^
-#
-#$(NOMFICHIEREXECUTABLE).o : $(NOMFICHIEREXECUTABLE).c
-#	$(CC) $(DEBUG) -c $<
-#
-#$(FICHIER1).o : $(FICHIER1).c $(FICHIER1).h
-#	$(CC) $(DEBUG) -c $<
-#
-##Pour supprimer tout les fichiers créée
-#clean :
-#	rm -f *.o $(NOMFICHIEREXECUTABLE)
+all : $(NOMFICHIEREXECUTABLE)
 
+$(NOMFICHIEREXECUTABLE) : $(NOMFICHIEREXECUTABLE).o $(FICHIERAAPPELLER)
+	$(CC) $(DEBUG) -o $@ $^
 
-#Pivard Julien
+$(NOMFICHIEREXECUTABLE).o : $(NOMFICHIEREXECUTABLE).c
+	$(CC) $(DEBUG) -c $<
 
+$(FICHIER1).o : $(FICHIER1).c $(FICHIER1).h
+	$(CC) $(DEBUG) -c $<
 
-#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
-#                             Pour le JAVA                                   #
-#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
-
-
-#all : $(NOMFICHIEREXECUTABLE).class
-#
-#$(NOMFICHIEREXECUTABLE).class : $(NOMFICHIEREXECUTABLE).java $(DEPENDANCES)
-#	$(CC) -g $<
-#
-## Documentation
-#documentation : $(NOMFICHIEREXECUTABLE).html $(NOMCLASS1).html
-#
-#$(NOMFICHIEREXECUTABLE).html : $(NOMFICHIEREXECUTABLE).java
-#	$(CCDOC) $(ENCODAGE) $<
-#
-#
-#$(NOMCLASS1).class : $(NOMCLASS1).java
-#	$(CC) -g $<
-#
-## Documentation
-#$(NOMCLASS1).html : $(NOMCLASS1).java
-#	$(CCDOC) $(ENCODAGE) $<
-#
-##Pour supprimer tout les fichiers créée
-#clean :
-#	rm -f *.class *.html
+#Pour supprimer tout les fichiers créée
+clean :
+	rm -f *.o $(NOMFICHIEREXECUTABLE)
 
 
 #Pivard Julien

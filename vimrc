@@ -255,7 +255,7 @@ augroup end
 " Active la vérification orthographique pour certains type de fichier seulement
 augroup langue
     autocmd!
-    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant,tags,qf setlocal nospell
+    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant,tags,bib,conf setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
