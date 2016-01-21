@@ -761,9 +761,6 @@ let g:signify_update_on_focusgained  = 1
 let g:signify_sign_delete            = '↓'
 let g:signify_sign_delete_first_line = '↑'
 
-" Réglages pour gitgutter
-let g:gitgutter_enabled = 0
-
 " Réglages pour SpellCheck
 let g:SpellCheck_DefineQuickfixMappings = 1
 

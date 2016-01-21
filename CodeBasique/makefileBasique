@@ -10,17 +10,15 @@
 # $^ Représente toute les dépendances
 # $+ Même chose que $^ mais supprime les doublons
 # $? Représente les dépendances qui ont été modifiés
+
 # Ne pas mettre d'extension
 NOMFICHIEREXECUTABLE = truc
 FICHIER1 = bidule
+
 FICHIERAAPPELLER = $(FICHIER1).o
+
 DEBUG = -W -Wall
 CC = gcc
-
-#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
-#                               Pour le C                                    #
-#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
-
 
 all : $(NOMFICHIEREXECUTABLE)
 
@@ -36,6 +34,5 @@ $(FICHIER1).o : $(FICHIER1).c $(FICHIER1).h
 #Pour supprimer tout les fichiers créée
 clean :
 	rm -f *.o $(NOMFICHIEREXECUTABLE)
-
 
 #Pivard Julien
