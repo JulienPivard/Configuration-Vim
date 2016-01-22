@@ -497,10 +497,10 @@ function! ExistConfigurationJava()
     endif
     map  <buffer> <F5>          :make<CR>
     map! <buffer> <F5>    <Esc> :make<CR>
-    iabbrev <buffer> sopl System.out.println( "" )<Esc>hi
-    iabbrev <buffer> sopf System.out.printf( "" )<Esc>hi
-    iabbrev <buffer> sepl System.err.println( "" )<Esc>hi
-    iabbrev <buffer> sepf System.err.printf( "" )<Esc>hi
+    iabbrev <buffer> sopl System.out.println( "" )<Esc>hhi
+    iabbrev <buffer> sopf System.out.printf( "" )<Esc>hhi
+    iabbrev <buffer> sepl System.err.println( "" )<Esc>hhi
+    iabbrev <buffer> sepf System.err.printf( "" )<Esc>hhi
 endfunction
 
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
