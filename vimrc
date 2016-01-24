@@ -163,6 +163,7 @@ function! MaLigneStatus()
     else
         let fugitLigne = ''
     endif
+    let etatCheckCompil = '%#warningmsg#' . '%{SyntasticStatuslineFlag()}' . '%*'
     let etatDepot = '%3*%{StatAjout()}%0*' . '%4*%{StatSuppression()}%0*' . '%5*%{StatModifications()}%0*'
     let flagStatutLigne = '%h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
@@ -170,7 +171,7 @@ function! MaLigneStatus()
     let hexaCara = '0x%02B'
     let carSepa = ''
     "let carSepa = '‖'
-    return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
+    return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatCheckCompil . ' ' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
 endfunction
 
 function! StatWrapperGit()
@@ -671,7 +672,9 @@ scriptencoding utf-8
 " :r ! ls ~/.vim/bundle/
 " Liste des extension installée
 
+" -----------------------
 " Réglages pour GundoToggle
+" -----------------------
 let g:gundo_width = 45              " Largeur de la fenêtre d'aperçus.
 let g:gundo_preview_height = 15     " Hauteur de la fenêtre d'aperçus.
 let g:gundo_right = 0               " Ouvre l'arbre à gauche.
@@ -682,20 +685,50 @@ let g:gundo_prefer_python3 = 1
 let g:gundo_tree_statusline='%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline='%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
+" -----------------------
+" Réglages pour syntastic
+" -----------------------
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0     " N'effectue pas de vérification à la fermeture du fichier.
+let g:syntastic_always_populate_loc_list = 1        " Remplie ll avec les erreurs trouvé.
+let g:syntastic_auto_loc_list = 2       " ne pas ouvrir automatiquement ll mais fermer automatiquement.
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_auto_jump = 2       " Saute à la première erreur trouvée à la sauvegarde.
+" php
+let g:syntastic_php_checkers = ['php']  " Pour ne pas avoir le checker de style et d'indentation.
+" perl
+let g:syntastic_enable_perl_checker = 1     " À désactiver si on travail sur des perl écrit par d'autres.
+let g:syntastic_perl_checkers = ['perl', 'podchecker']
+" python
+let g:syntastic_python_checkers = ['python']  " Pour ne pas avoir le checker de style et d'indentation.
+" cpp
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
+let g:syntastic_stl_format = '[%E{Err ligne: %fe #%e}%B{, }%W{Warn ligne: %fw #%w}]'
+let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
+
+" -----------------------
 " Réglage pour undotree
+" -----------------------
 let g:undotree_WindowLayout = 2
 let g:undotree_SplitWidth = 45
 let g:undotree_DiffpanelHeight = 15
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 
+" -----------------------
 " Réglages pour NERDTree
+" -----------------------
 let NERDTreeShowHidden = 1          " Pour afficher les fichiers caché.
 let NERDTreeWinSize = 40
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1          " Ferme automatiquement NERDTree quand on ouvre un fichier.
 
+" -----------------------
 " Réglages pour tagbar
+" -----------------------
 " Installer exuberant-ctags
 let g:tagbar_autoclose = 1          " Ferme automatiquement tagbar
 let g:tagbar_autofocus = 1          " Place le curseur dans la fenêtre tagbar
@@ -706,14 +739,18 @@ let g:tagbar_width = 50
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
 
+" -----------------------
 " Réglages pour UltiSnips
+" -----------------------
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-h>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-l>'
 
+" -----------------------
 " Réglages pour indentLine
+" -----------------------
 let g:indentLine_color_term = 3         " Jaune
 let g:indentLine_color_gui = '#CA9700'
 let g:indentLine_concealcursor = ''
@@ -723,21 +760,9 @@ let g:indentLine_char = '✔'
 let g:indentLine_faster = 1
 let g:indentLine_fileTypeExclude = ['help']
 
-" Réglages pour syntastic
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0     " N'effectue pas de vérification à la fermeture du fichier.
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_auto_jump = 2       " Saute à la première erreur trouvée à la sauvegarde.
-let g:syntastic_php_checkers = ['php']  " Pour ne pas avoir le checker de style et d'indentation.
-let g:syntastic_enable_perl_checker = 1     " À désactiver si on travail sur des perl écrit par d'autres.
-let g:syntastic_perl_checkers = ['perl', 'podchecker']
-let g:syntastic_python_checkers = ['python']  " Pour ne pas avoir le checker de style et d'indentation.
-let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
-
+" -----------------------
 " Réglages pour neocomplete
+" -----------------------
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_close_preview = 1
@@ -749,10 +774,15 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns._ = '\h\w*'
 
+" -----------------------
+" Réglages pour autoclose
+" -----------------------
 " Pour que les double quotte ne soit pas fermé dans les fichiers type vimrc.
 let g:autoclose_vim_commentmode = 1
 
+" -----------------------
 " Réglages pour signify
+" -----------------------
 let g:signify_disable_by_default     = 0
 let g:signify_cursorhold_insert      = 0
 let g:signify_cursorhold_normal      = 0
@@ -761,7 +791,9 @@ let g:signify_update_on_focusgained  = 1
 let g:signify_sign_delete            = '↓'
 let g:signify_sign_delete_first_line = '↑'
 
+" -----------------------
 " Réglages pour SpellCheck
+" -----------------------
 let g:SpellCheck_DefineQuickfixMappings = 1
 
 " -------------------------------------------------------------------------------------------------- "
