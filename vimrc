@@ -163,7 +163,11 @@ function! MaLigneStatus()
     else
         let fugitLigne = ''
     endif
-    let etatCheckCompil = '%#warningmsg#' . '%{SyntasticStatuslineFlag()}' . '%*'
+    if exists('*SyntasticStatuslineFlag()')
+        let etatCheckCompil = '%#warningmsg#' . '%{SyntasticStatuslineFlag()}' . '%*'
+    else
+        let etatCheckCompil = ''
+    endif
     let etatDepot = '%3*%{StatAjout()}%0*' . '%4*%{StatSuppression()}%0*' . '%5*%{StatModifications()}%0*'
     let flagStatutLigne = '%h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
@@ -174,6 +178,8 @@ function! MaLigneStatus()
     return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatCheckCompil . ' ' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
 endfunction
 
+" Affiche les statistiques de modification du fichier courante par rapport à
+" la version précédente du fichier.
 function! StatWrapperGit()
     if exists('*fugitive#head()')
         return sy#repo#get_stats()
