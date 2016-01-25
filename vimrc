@@ -773,7 +773,7 @@ let g:indentLine_conceallevel = 2
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_char = '✔'
 let g:indentLine_faster = 0
-let g:indentLine_fileTypeExclude = ['help', 'text']
+let g:indentLine_fileTypeExclude = ['help', 'text', '']
 
 " -----------------------
 " Réglages pour neocomplete
