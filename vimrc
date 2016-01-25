@@ -14,31 +14,32 @@ call vundle#begin()
 " Pour se maintenir à jours.
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'vim-scripts/FuzzyFinder.git'
-Plugin 'sjl/gundo.vim.git'
-Plugin 'Yggdroot/indentLine.git'
-Plugin 'vim-scripts/L9.git'
-Plugin 'Shougo/neocomplete.vim.git'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'vim-scripts/OmniCppComplete.git'
-Plugin 'hdima/python-syntax.git'
-Plugin 'scrooloose/syntastic.git'
-Plugin 'majutsushi/tagbar.git'
-Plugin 'SirVer/ultisnips.git'
-Plugin 'mbbill/undotree.git'
-Plugin 'phongnh/vim-antlr.git'
-Plugin 'spf13/vim-autoclose.git'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'Yggdroot/indentLine'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
-Plugin 'edsono/vim-matchit.git'
-Plugin 'mhinz/vim-signify.git'
-Plugin 'tpope/vim-surround.git'
-" Pour pouvoir ajuster les couleurs facilement.
-" Plugin 'zefei/vim-colortuner'
-
+Plugin 'edsono/vim-matchit'
+Plugin 'gregsexton/gitv'
+Plugin 'hdima/python-syntax'
+Plugin 'majutsushi/tagbar'
+Plugin 'mbbill/undotree'
+Plugin 'mhinz/vim-signify'
+Plugin 'phongnh/vim-antlr'
 Plugin 'reedes/vim-pencil'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'spf13/vim-autoclose'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/FSwitch'
+Plugin 'vim-scripts/FuzzyFinder'
+Plugin 'vim-scripts/L9'
+Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/SpellCheck'
 Plugin 'vim-scripts/ingo-library'
+" Pour pouvoir ajuster les couleurs facilement.
+" Plugin 'zefei/vim-colortuner'
 
 call vundle#end()
 filetype plugin indent on
@@ -262,7 +263,7 @@ augroup end
 " Active la vérification orthographique pour certains type de fichier seulement
 augroup langue
     autocmd!
-    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant,tags,bib,conf setlocal nospell
+    autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant,tags,bib,conf,vundlelog,git,gitv setlocal nospell
 augroup end
 
 " Voir les espaces en fin de lignes
@@ -293,7 +294,7 @@ augroup squelette
     autocmd BufNewFile *.pl                 0r ~/.vim/CodeBasique/codeBasique.pl
     autocmd BufNewFile client.cpp           0r ~/.vim/CodeBasique/client.cpp
     autocmd BufNewFile *.cpp                0r ~/.vim/CodeBasique/codeBasique.cpp
-    autocmd BufNewFile *.hpp                0r ~/.vim/CodeBasique/codeBasique.hpp
+    autocmd BufNewFile *.hpp                call ConfigurationNouveauFichierHPP()
     autocmd BufNewFile build.xml            0r ~/.vim/CodeBasique/build.xml
     autocmd BufNewFile bibliographie.bib    0r ~/.vim/CodeBasique/bibliographie.bib
     autocmd BufNewFile makefile             0r ~/.vim/CodeBasique/makefileBasique
@@ -440,10 +441,18 @@ function! ExistMakeFileC()
     endif
 endfunction
 
+" Configure les nouveaux fichiers cpp
+function! ConfigurationNouveauFichierHPP()
+    0r ~/.vim/CodeBasique/codeBasique.hpp
+    :%substitute?MANOUVELLECLASSE?\=expand('%:t:r')?g
+    :%substitute@VARIABLE_A_CHANGER@\=expand('%:t:r') . '_hpp'@
+endfunction
+
 " Maccros pour le cpp
 " Compilation via makeprg
 " Exécution via F10 du binaire
 " Création des tags et compilation de la documentation.
+" Pour trouver la classe correspondante taper :tag nomclasse.cpp
 function! MacrosCPP()
     if filereadable("makefile") || filereadable("Makefile")
         map  <buffer> <F10>         :!./bin/Release/client<CR>
@@ -458,15 +467,13 @@ function! MacrosCPP()
     endif
     map  <buffer> <F5>          :make<CR>
     map! <buffer> <F5>    <Esc> :make<CR>
-    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ./src/<CR>
-    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ./src/<CR>
+    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq ./src/<CR>
+    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq ./src/<CR>
     map  <buffer> <S-F11>       :!doxygen<CR>
     map! <buffer> <S-F11> <Esc> :!doxygen<CR>
-    setlocal path+=src/include
-    setlocal path+=src/include/modele
-    setlocal path+=src/include/builders
-    setlocal path+=src/include/builders/lorraine
+    setlocal path=.,src/include,src/include/modele,src/include/builders,src/include/builders/lorraine
 	let g:load_doxygen_syntax = 1
+    setlocal syntax=cpp.doxygen
 endfunction
 
 "Configuration des nouveaux fichiers en java
@@ -713,7 +720,9 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 let g:syntastic_stl_format = '[%E{Err ligne: %fe #%e}%B{, }%W{Warn ligne: %fw #%w}]'
-let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
+" Les fichiers doivent être de la forme -Ichemin/du/dossier
+let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+"let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
 
 " -----------------------
 " Réglage pour undotree
@@ -763,14 +772,18 @@ let g:indentLine_concealcursor = ''
 let g:indentLine_conceallevel = 2
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_char = '✔'
-let g:indentLine_faster = 1
-let g:indentLine_fileTypeExclude = ['help']
+let g:indentLine_faster = 0
+let g:indentLine_fileTypeExclude = ['help', 'text']
 
 " -----------------------
 " Réglages pour neocomplete
 " -----------------------
+let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#max_list = 15
+let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#enable_auto_close_preview = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_multibyte_completion = 1
@@ -778,7 +791,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 if !exists('g:neocomplete#keyword_patterns')
   let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplete#keyword_patterns._ = '\h\w*'
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " -----------------------
 " Réglages pour autoclose
@@ -801,6 +814,12 @@ let g:signify_sign_delete_first_line = '↑'
 " Réglages pour SpellCheck
 " -----------------------
 let g:SpellCheck_DefineQuickfixMappings = 1
+
+" -----------------------
+" Réglages pour gitv
+" -----------------------
+let g:Gitv_OpenHorizontal = 1
+let g:Gitv_DoNotMapCtrlKey = 1
 
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "
