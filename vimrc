@@ -519,6 +519,7 @@ endfunction
 
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
 function! MacrosLatexSpecifique()
+    NoMatchParen
     map  <buffer> <S-F8>        :!makeindex %<.idx<CR>
     map! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<CR>
     map  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<CR>
@@ -675,7 +676,8 @@ scriptencoding utf-8
 "            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
 "            --enable-perlinterp \
 "            --enable-luainterp \
-"            --enable-gui=gtk3 --with-x --enable-cscope --prefix=/usr \
+"            --enable-cscope \
+"            --enable-gui=gtk3 --with-x --prefix=/usr \
 "            --enable-python3interp=dynamic\
 "            --with-python3-config-dir=/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu/ \
 "            --with-lua-prefix=/usr/include/lua5.2 \
@@ -720,8 +722,8 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 let g:syntastic_stl_format = '[%E{Err ligne: %fe #%e}%B{, }%W{Warn ligne: %fw #%w}]'
-" Les fichiers doivent être de la forme -Ichemin/du/dossier
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+" Les fichiers doivent être de la forme -Ichemin/du/dossier
 "let g:syntastic_cpp_include_dirs = ['src/include/', 'src/include/modele/', 'src/include/builders/', 'src/include/builders/lorraine' ]
 
 " -----------------------
