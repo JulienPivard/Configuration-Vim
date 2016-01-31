@@ -18,7 +18,7 @@ if exists('syntax_on')
 endif
 let colors_name = 'interstellaire'
 
-" ======================================================================================================== )))
+" ====================================== )))
 
 " Définition de la palette de couleurs " (((
 
@@ -28,7 +28,7 @@ if has('gui_running')
     let s:vmode         = 'gui'
 
     let s:noir          = '#000000'
-    let s:grissombre    = '#222222'
+    let s:grissombre    = '#111111'
     let s:rougesombre   = '#aa0000'
     let s:rouge         = '#ff0000'
     let s:rougeclair    = '#ff4444'
@@ -156,7 +156,7 @@ else
 
 endif
 
-" ======================================================================================================== )))
+" ====================================== )))
 
 " Options de mise en forme. " (((
 
@@ -168,7 +168,7 @@ endif
     let s:underline = ',underline'
     let s:italic    = ',italic'
 
-" ======================================================================================================== )))
+" =========================== )))
 
 " Fond, texte, mise en forme " (((
 
@@ -177,7 +177,7 @@ let s:fond  = ' ' . s:vmode . 'bg='
 let s:texte = ' ' . s:vmode . 'fg='
 let s:forme = ' ' . s:vmode . '=NONE'
 
-" ======================================================================================================== )))
+" ============================ )))
 
 " Coloration basique " (((
 
@@ -234,7 +234,7 @@ exe 'highlight Error'          . s:forme                               . s:texte
 exe 'highlight Todo'           . s:forme                               . s:texte . s:noir              . s:fond . s:cyan
 " TODO FIXME XXX
 
-" ======================================================================================================== )))
+" ==================== )))
 
 " Coloration étendue "(((
 
@@ -260,7 +260,7 @@ exe 'highlight Folded'         . s:forme                               . s:texte
 exe 'highlight IncSearch'      . s:forme . s:reverse                   . s:texte . s:none              . s:fond . s:none
 
 exe 'highlight Label'          . s:forme                               . s:texte . s:jaune             . s:fond . s:none
-exe 'highlight LineNr'         . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
+exe 'highlight LineNr'         . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:grissombre
 exe 'highlight MatchParen'     . s:forme                               . s:texte . s:vertsombre        . s:fond . s:bleusombre
 exe 'highlight ModeMsg'        . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:none
 exe 'highlight MoreMsg'        . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
@@ -273,13 +273,13 @@ exe 'highlight PmenuSel'       . s:forme . s:bold                      . s:texte
 exe 'highlight PmenuThumb'     . s:forme                               . s:texte . s:none              . s:fond . s:blanc
 
 exe 'highlight Question'       . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
-exe 'highlight Repeat'         . s:forme . s:bold                      . s:texte . s:jauneclair        . s:fond . s:none
+exe 'highlight Repeat'         . s:forme . s:bold                      . s:texte . s:jaune             . s:fond . s:none
 exe 'highlight Search'         . s:forme . s:bold                      . s:texte . s:noir              . s:fond . s:jauneclair
 exe 'highlight SignColumn'     . s:forme                               . s:texte . s:none              . s:fond . s:grissombre
 exe 'highlight SpecialKey'     . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
 
 exe 'highlight SpellBad'       . s:forme . s:ucurl . s:italic          . s:texte . s:none              . s:fond . s:grissombre
-exe 'highlight SpellCap'       . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:bleu
+exe 'highlight SpellCap'       . s:forme                               . s:texte . s:noir              . s:fond . s:bleu
 exe 'highlight SpellLocal'     . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:none
 exe 'highlight SpellRare'      . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:none
 
@@ -300,13 +300,13 @@ exe 'highlight WarningMsg'     . s:forme                               . s:texte
 exe 'highlight WildMenu'       . s:forme                               . s:texte . s:noir              . s:fond . s:violetsombre
 exe 'highlight lCursor'        . s:forme                               . s:texte . s:none              . s:fond . s:cyan
 
-" ======================================================================================================== )))
+" =================== )))
 
 " Coloration pour TagBar    "(((
 
 exe 'highlight TagbarSignature'    . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:cyan
 
-" ======================================================================================================== )))
+" ========================== )))
 
 " Coloration de la syntaxe vim  "(((
 
@@ -329,26 +329,26 @@ exe 'highlight vimCommand'     . s:forme . s:underline . s:bold        . s:texte
 exe 'highlight vimSynType'     . s:forme . s:underline                 . s:texte . s:orange            . s:fond . s:none
 exe 'highlight vimGroup'       . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
 
-" ======================================================================================================== )))
+" ============================== )))
 
 " Coloration pour les fichiers en php   "(((
 
 exe 'highlight phpMemberSelector'  . s:forme . s:underline                 . s:texte . s:jaunesombre       . s:fond . s:none
 
-" ======================================================================================================== )))
+" ====================================== )))
 
 " Coloration pour la documentation doxygen "(((
 
 exe 'highlight doxygenErrorComment'    . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
 exe 'highlight doxygenParam'           . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:none
 
-" ======================================================================================================== )))
+" ========================================= )))
 
 " Pour syntastic "(((
 
 exe 'highlight SyntasticWarningSign'   . s:forme                               . s:texte . s:noir              . s:fond . s:jaunesombre
 
-" ======================================================================================================== )))
+" =============== )))
 
 " Coloration pour signify "(((
 
@@ -356,7 +356,7 @@ exe 'highlight SignifySignAdd'     . s:forme                               . s:t
 exe 'highlight SignifySignDelete'  . s:forme                               . s:texte . s:rougesombre       . s:fond . s:grissombre
 exe 'highlight SignifySignChange'  . s:forme                               . s:texte . s:violetsombre      . s:fond . s:grissombre
 
-" ======================================================================================================== )))
+" ======================== )))
 
 " Coloration définie par l'utilisateur (((
 
@@ -370,6 +370,6 @@ exe 'highlight User5'          . s:forme                               . s:texte
 " La couleur de la branche git en cours.
 exe 'highlight User6'          . s:forme                               . s:texte . s:grissombre        . s:fond . s:jaune
 
-" ======================================================================================================== )))
+" ==================================== )))
 
 " vim:foldmethod=marker

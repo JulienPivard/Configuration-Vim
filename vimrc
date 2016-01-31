@@ -242,10 +242,10 @@ endfunction
 
 " Pour connaitre le groupe de coloration de la zone sous le curseur.
 function! MontrerGroupeSyntax()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
 " Suppression automatique des espaces superflus
