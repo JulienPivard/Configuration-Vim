@@ -7,9 +7,7 @@ set nocompatible                        " Casser compatible avec vielle version
 
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim       " Ajoute le chemin pour initialiser Vundle au démarrage.
-call vundle#begin()
-" Si on veut installer ailleurs que dans le dossier par défaut.
-"call vundle#begin('~/some/path/here')
+call vundle#begin('~/.vim/bundle/')
 
 " Pour se maintenir à jours.
 Plugin 'VundleVim/Vundle.vim'
@@ -38,8 +36,9 @@ Plugin 'vim-scripts/L9'
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/SpellCheck'
 Plugin 'vim-scripts/ingo-library'
-" Pour pouvoir ajuster les couleurs facilement.
-" Plugin 'zefei/vim-colortuner'
+
+" Plugin pour gvim.
+Plugin 'vim-scripts/hexHighlight.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -134,10 +133,13 @@ set   wildmode=longest:full,full        " Complète d'abord avec la correspondan
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
+" Pour gvim
+set guifont=Ubuntu\ Mono\ derivative\ powerline
+
 "set patchmode=.original            " Crée une copie de l'original du fichier édité
 
-" Changer la ligne de statut de vim.
-" Couper si la ligne est trop logue %<
+" ================== Changer la ligne de statut de vim. ==================
+" Couper si la ligne est trop longue %<
 " Le nom du chemin complet %f
 " le tag d'aide %h
 " la coloration utilisateur %1* ... %0*
@@ -159,7 +161,7 @@ function! MaLigneStatus()
         if fugitive#head() == ''
             let fugitLigne = ''
         else
-            let fugitLigne = '%6* %{fugitive#head()}:%0*'
+            let fugitLigne = '%6*%{fugitive#head()}:%0*'
         endif
     else
         let fugitLigne = ''
@@ -219,7 +221,9 @@ function! StatModifications()
     endif
 endfunction
 
-" Définie l'affichage de le ligne de repli.
+" ================== Fin des fonctions de la ligne de statut de vim. ==================
+
+" Définie l'affichage de la ligne de repli.
 function! MonFoldText()
     let line = getline(v:foldstart)
     let lignes = v:foldend - v:foldstart + 1
@@ -235,6 +239,14 @@ function! ModeChange()
         silent !chmod u+x <afile>
     endif
 endfunction
+
+" Pour connaitre le groupe de coloration de la zone sous le curseur.
+function! MontrerGroupeSyntax()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " Suppression automatique des espaces superflus
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
@@ -386,24 +398,14 @@ augroup end
 " Active l'omnicompletion
 if exists ('+omnifunc') && &omnifunc == ""
     setlocal omnifunc=syntaxcomplete#Complete
+    setlocal completefunc=syntaxcomplete#Complete
 endif
 
-setlocal completefunc=syntaxcomplete#Complete
 augroup completion
     autocmd!
     autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 augroup end
 
-" Ajoute de tags pour l'omnicompletion
-" ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
-set tags+=~/.vim/tags/cpp
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " Montre les paramètres des fonctions.
-let OmniCpp_MayCompleteDot = 1      " auto complète après .
-let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
-let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 augroup menuAutocompletion
     autocmd!
     autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -474,6 +476,16 @@ function! MacrosCPP()
     setlocal path=.,src/include,src/include/modele,src/include/builders,src/include/builders/lorraine
 	let g:load_doxygen_syntax = 1
     setlocal syntax=cpp.doxygen
+    " Ajoute de tags pour l'omnicompletion
+    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
+    setlocal tags+=~/.vim/tags/cpp
+    let OmniCpp_NamespaceSearch = 1
+    let OmniCpp_GlobalScopeSearch = 1
+    let OmniCpp_ShowAccess = 1
+    let OmniCpp_ShowPrototypeInAbbr = 1 " Montre les paramètres des fonctions.
+    let OmniCpp_MayCompleteDot = 1      " auto complète après .
+    let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
+    let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 endfunction
 
 "Configuration des nouveaux fichiers en java
@@ -595,6 +607,12 @@ function! ConfigAntlr()
     map! <buffer> <F10> <Esc> :!./runAntlr.sh %< test.code <CR>
 endfunction
 
+" Macros pour le php
+function! ProgEnPHP()
+    iabbrev <buffer> ,, =>
+    iabbrev <buffer> t $this->
+endfunction
+
 " Mappage des touches utiles
 " Pour inverser une option booléenne utiliser set option!
 " Pour afficher la valeur d'une option set option?
@@ -622,6 +640,8 @@ map  <F9>           :FufBufferTagAll<CR>
 map! <F9>     <Esc> :FufBufferTagAll<CR>
 map  <S-F12>        :vsp ~/.vim/vimrc<CR>
 map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
+map  <C-F12> 	  	:call MontrerGroupeSyntax()<CR>
+map! <C-F12> <Esc>	:call MontrerGroupeSyntax()<CR>
 
 "iabbrev { {<CR>}<Esc>k$a
 iabbrev /** /**<CR>*/<Esc>ka
@@ -629,14 +649,8 @@ iabbrev /* /*<CR>*/<Esc>ka
 
 iabbrev <buffer> !! ->
 
-" Macros pour le php
-function! ProgEnPHP()
-    iabbrev <buffer> ,, =>
-    iabbrev <buffer> t $this->
-endfunction
-
 " Change le caractère pour déclencher le mapping en mode commande.
-let mapleader = "ù"
+let mapleader = 'ù'
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>bs :buffers<CR>
@@ -656,10 +670,6 @@ map <leader>o :copen 20<CR>
 map <leader>c :cclose<CR>
 map <leader>n :cnext<CR>
 map <leader>p :cprevious<CR>
-
-" Définition du colorsheme
-" dans ~/.vim/colors/icansee.vim
-colorscheme interstellaire
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -823,7 +833,19 @@ let g:SpellCheck_DefineQuickfixMappings = 1
 let g:Gitv_OpenHorizontal = 1
 let g:Gitv_DoNotMapCtrlKey = 1
 
+" -----------------------
+" Réglage pour mon thème de couleurs.
+" -----------------------
+let g:interstellaire_termcolors = 256
+
+
+let g:solarized_termcolors=256
+
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
+
+" Définition du colorsheme
+" dans ~/.vim/colors/icansee.vim
+colorscheme interstellaire

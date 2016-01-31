@@ -1,93 +1,371 @@
-" Vim color file
-" Maintainer:	PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:	mercredi 30 décembre 2015
-" Inspiré par le colorscheme icansee de : David Schweikert <dws@ee.ethz.ch>
-" Pour avoir les noms des groupes de coloration avec ce qu'il reconnaisse
-" :h group-name
+" Name:         Interstellaire
+" Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
+" Last Change:  Vendredi 29 janvier 2016
+" Created:      1er janvier 2012
+"
+" Inspiré par le thème icansee de : David Schweikert <dws@ee.ethz.ch>
+" et par le thème Solarized de : Ethan Schoonover <es@ethanschoonover.com>
 
-hi clear
+" Initialisation du thème de couleurs. " (((
 
-let colors_name = "interstellaire"
+highlight clear
+if exists("syntax_on")
+  syntax reset
+endif
+let colors_name = 'interstellaire'
 
-" Normal should come first
-hi Normal       guifg=White         guibg=Black
-hi Cursor       guifg=bg            guibg=fg
-hi lCursor      guifg=NONE          guibg=Cyan
-hi CursorLine   term=underline      cterm=underline     ctermbg=None    guibg=#222222
-hi CursorColumn term=underline      cterm=underline     ctermbg=None    guibg=#222222
+" ======================================================================================================== )))
 
-hi DiffAdd      ctermfg=White       ctermbg=LightGreen      guibg=LightBlue
-hi DiffChange   ctermfg=White       ctermbg=LightMagenta    guibg=LightMagenta
-hi DiffDelete   ctermfg=Red         ctermbg=LightRed        gui=bold            guibg=Red
-hi DiffText     ctermfg=White       ctermbg=LightCyan       gui=bold            guifg=Blue  guibg=LightCyan
-hi Directory    ctermfg=DarkBlue	    guifg=Blue
-hi ErrorMsg     ctermfg=White	        ctermbg=DarkRed         guibg=Red	        guifg=White
-hi FoldColumn   ctermfg=DarkRed         ctermbg=DarkGrey        guifg=darkyellow    guibg=#222222
-hi Folded       ctermfg=DarkYellow      ctermbg=DarkGrey	    guifg=darkyellow    guibg=#222222
-hi IncSearch    cterm=reverse	        gui=reverse
-hi Label        ctermfg=Yellow          guifg=yellow
-hi LineNr       ctermfg=DarkYellow      guifg=Brown
-hi CursorLineNr	ctermfg=Yellow          guifg=yellow
-hi ModeMsg      cterm=bold	            gui=bold
-hi MoreMsg      ctermfg=DarkGreen       gui=bold            guifg=SeaGreen
-hi NonText      ctermfg=Magenta	        gui=bold            guifg=LightMagenta      guibg=Black
-hi Operator     ctermfg=darkyellow      guifg=darkyellow
-hi Exception    ctermfg=Red
-hi Pmenu        guibg=LightBlue
-hi PmenuSel     ctermfg=White	        ctermbg=DarkBlue    guifg=White     guibg=DarkBlue
-hi Question     ctermfg=DarkGreen       gui=bold            guifg=SeaGreen
-hi Repeat       ctermfg=DarkYellow      guifg=darkyellow
-hi Search       ctermfg=Black           ctermbg=Yellow      guibg=Yellow    guifg=NONE
-hi SpecialChar  ctermfg=Red             guifg=red
-hi Character    ctermfg=Green           guifg=green
-hi SpecialKey   ctermfg=DarkBlue	    guifg=Blue
-hi StatusLine   cterm=bold              ctermbg=Yellow      ctermfg=Black       gui=bold guifg=gold guibg=blue
-hi StatusLineNC	cterm=bold              ctermbg=DarkBlue    ctermfg=Yellow      gui=bold guifg=black guibg=blue
-hi String       ctermfg=DarkGreen       guifg=darkgreen
-hi Title        ctermfg=DarkMagenta     gui=bold            guifg=Magenta
-hi VertSplit    cterm=bold              ctermfg=DarkCyan    ctermbg=Blue    gui=bold guifg=darkyellow guibg=black
-hi Visual       ctermbg=NONE	        cterm=reverse       gui=reverse     guifg=Grey guibg=fg
-hi VisualNOS    cterm=underline,bold    gui=underline,bold
-hi WarningMsg   ctermfg=DarkRed	        guifg=Red
-hi WildMenu     ctermfg=Black	        ctermbg=Magenta     guibg=Yellow    guifg=Black
+" Définition de la palette de couleurs " (((
 
-" syntax highlighting
-hi Todo         ctermbg=Cyan
-hi MatchParen   ctermfg=Darkred     ctermbg=Yellow
-hi ModeMsg      ctermfg=Red
-hi Comment      cterm=NONE          ctermfg=DarkBlue        gui=NONE            guifg=darkblue
-hi Constant     cterm=NONE          ctermfg=DarkRed         gui=NONE            guifg=darkred
-hi Identifier   cterm=NONE          ctermfg=DarkCyan        gui=NONE            guifg=cyan4
-hi Function     cterm=NONE          ctermfg=DarkCyan        gui=NONE            guifg=cyan4
-hi PreProc      cterm=NONE          ctermfg=DarkMagenta     gui=NONE            guifg=magenta3
-hi Special      cterm=NONE          ctermfg=LightRed        gui=bold            guifg=red
-hi Statement    cterm=bold          ctermfg=Blue	        gui=bold            guifg=darkcyan
-hi Type	        cterm=underline     ctermfg=darkgreen       gui=underline       guifg=green
-hi phpMemberSelector    cterm=underline     ctermfg=DarkYellow      gui=underline       guifg=yellow
+if has('gui_running')
+    " Si on utilise Gvim
 
-" Pour TagBar
-hi TagbarSignature  ctermfg=darkyellow
-hi SpellBad         ctermbg=Red       guibg=Red    guifg=NONE
+    let s:vmode         = 'gui'
 
-" Pour la documentation doxygen
-hi doxygenErrorComment	ctermfg=White	ctermbg=DarkRed     guibg=Red	guifg=White
+    let s:noir          = '#000000'
+    let s:grissombre    = '#222222'
+    let s:rougesombre   = '#aa0000'
+    let s:rouge         = '#ff0000'
+    let s:rougeclair    = '#ff4444'
+    let s:orangesombre  = '#ff4400'
+    let s:orange        = '#ff6600'
+    let s:orangeclair   = '#ff9900'
+    let s:vertsombre    = '#009900'
+    let s:vert          = '#00bb00'
+    let s:vertclair     = '#00ff00'
+    let s:jaunesombre   = '#cccc00'
+    let s:jaune         = '#ffff00'
+    let s:jauneclair    = '#ffff44'
+    let s:bleusombre    = '#0000ff'
+    let s:bleu          = '#2828ff'
+    let s:bleuclair     = '#5050ff'
+    let s:violetsombre  = '#880088'
+    let s:violet        = '#bb00ff'
+    let s:violetclair   = '#ff00ff'
+    let s:cyansombre    = '#007777'
+    let s:cyan          = '#00aaaa'
+    let s:cyanclair     = '#00ffff'
+    let s:gris          = '#aaaaaa'
+    let s:blanc         = '#ffffff'
 
-" Pour syntastic
-hi SyntasticWarningSign     ctermbg=Yellow  ctermfg=Black
-" Pour gitgutter et signify
-hi SignColumn               ctermbg=Black
+    let s:couleurfond   = '#000000'
 
-hi SignifySignAdd     ctermbg=Black  ctermfg=DarkGreen
-hi SignifySignDelete  ctermbg=Black  ctermfg=DarkRed
-hi SignifySignChange  ctermbg=Black  ctermfg=DarkMagenta
+elseif g:interstellaire_termcolors != 256 && &t_Co >= 16
+    " Pour un terminal 16 couleurs.
 
-hi GitGutterChange    ctermbg=Black  ctermfg=DarkMagenta
-hi GitGutterChangeDelete    ctermbg=Black   ctermfg=DarkMagenta
+    let s:vmode         = 'cterm'
 
-" Pour la coloration de la statusLine
-hi User1 term=reverse,bold  cterm=reverse,bold  ctermfg=Red         gui=inverse,bold    guifg=red
-hi User2 term=reverse,bold  cterm=reverse,bold  ctermfg=Cyan        gui=inverse,bold    guifg=cyan
-hi User3 term=bold  cterm=bold  ctermfg=DarkGreen   gui=inverse,bold    guifg=green
-hi User4 term=bold  cterm=bold  ctermfg=DarkRed     gui=inverse,bold    guifg=red
-hi User5 term=bold  cterm=bold  ctermfg=DarkMagenta gui=inverse,bold    guifg=magenta
-hi User6 term=bold  cterm=bold  ctermfg=yellow      ctermbg=DarkYellow
+    let s:noir          = '0'
+    let s:grissombre    = '8'
+    let s:rougesombre   = '1'
+    let s:rouge         = '9'
+    let s:rougeclair    = '9'
+    let s:orangesombre  = '3'
+    let s:orange        = '3'
+    let s:orangeclair   = '3'
+    let s:vertsombre    = '2'
+    let s:vert          = '10'
+    let s:vertclair     = '10'
+    let s:jaunesombre   = '3'
+    let s:jaune         = '11'
+    let s:jauneclair    = '11'
+    let s:bleusombre    = '4'
+    let s:bleu          = '12'
+    let s:bleuclair     = '12'
+    let s:violetsombre  = '5'
+    let s:violet        = '13'
+    let s:violetclair   = '13'
+    let s:cyansombre    = '6'
+    let s:cyan          = '14'
+    let s:cyanclair     = '14'
+    let s:gris          = '7'
+    let s:blanc         = '15'
+
+    let s:couleurfond   = 'NONE'
+
+elseif g:interstellaire_termcolors == 256
+    " Pour un terminal 256 couleurs.
+
+    let s:vmode         = 'cterm'
+
+    let s:noir          = '16'
+    let s:grissombre    = '233'
+    let s:rougesombre   = '1'
+    let s:rouge         = '160'
+    let s:rougeclair    = '9'
+    let s:orangesombre  = '130'
+    let s:orange        = '166'
+    let s:orangeclair   = '202'
+    let s:vertsombre    = '2'
+    let s:vert          = '34'
+    let s:vertclair     = '10'
+    let s:jaunesombre   = '3'
+    let s:jaune         = '220'
+    let s:jauneclair    = '11'
+    let s:bleusombre    = '4'
+    let s:bleu          = '27'
+    let s:bleuclair     = '12'
+    let s:violetsombre  = '5'
+    let s:violet        = '162'
+    let s:violetclair   = '13'
+    let s:cyansombre    = '6'
+    let s:cyan          = '45'
+    let s:cyanclair     = '14'
+    let s:gris          = '250'
+    let s:blanc         = '255'
+
+    let s:couleurfond   = 'NONE'
+
+else
+    " Pour un terminal 8 couleurs.
+
+    let s:vmode         = 'cterm'
+
+    let s:noir          = 'Black'         " 0
+    let s:grissombre    = 'DarkGray'      " 0*
+    let s:rougesombre   = 'DarkRed'       " 1
+    let s:rouge         = 'Red'
+    let s:rougeclair    = 'LightRed'      " 1*
+    let s:orangesombre  = 'DarkYellow'
+    let s:orange        = 'DarkYellow'
+    let s:orangeclair   = 'DarkYellow'
+    let s:vertsombre    = 'DarkGreen'     " 2
+    let s:vert          = 'Green'
+    let s:vertclair     = 'LightGreen'    " 2*
+    let s:jaunesombre   = 'DarkYellow'    " 3
+    let s:jaune         = 'Yellow'
+    let s:jauneclair    = 'LightYellow'   " 3*
+    let s:bleusombre    = 'DarkBlue'      " 4
+    let s:bleu          = 'Blue'
+    let s:bleuclair     = 'LightBlue'     " 4*
+    let s:violetsombre  = 'DarkMagenta'   " 5
+    let s:violet        = 'Magenta'
+    let s:violetclair   = 'LightMagenta'  " 5*
+    let s:cyansombre    = 'DarkCyan'      " 6
+    let s:cyan          = 'Cyan'
+    let s:cyanclair     = 'LightCyan'     " 6*
+    let s:gris          = 'LightGray'     " 7
+    let s:blanc         = 'White'         " 7*
+
+    let s:couleurfond   = 'NONE'
+
+endif
+
+" ======================================================================================================== )))
+
+" Options de mise en forme. " (((
+
+    let s:none      = 'NONE'
+    let s:bold      = ',bold'
+    let s:ucurl     = ',undercurl'
+    let s:reverse   = ',reverse'
+    let s:stdout    = ',standout'
+    let s:underline = ',underline'
+    let s:italic    = ',italic'
+
+" ======================================================================================================== )))
+
+" Fond, texte, mise en forme " (((
+
+
+let s:fond  = ' ' . s:vmode . 'bg='
+let s:texte = ' ' . s:vmode . 'fg='
+let s:forme = ' ' . s:vmode . '=NONE'
+
+" ======================================================================================================== )))
+
+" Coloration basique " (((
+
+exe 'highlight Normal'         . s:forme                               . s:texte . s:blanc             . s:fond . s:couleurfond
+exe 'highlight Comment'        . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
+exe 'highlight Constant'       . s:forme                               . s:texte . s:rougesombre       . s:fond . s:none
+" String        Une chaine de caractères
+" Character     Un caractère
+" Number        Un nombre 234 0xff
+" Boolean       Un booléen
+" Float         Un nombre flottant 2.3e10
+
+exe 'highlight Identifier'     . s:forme                               . s:texte . s:cyansombre        . s:fond . s:none
+" Identifier    Un nom de variable
+" Function      Un nom de fonction ou de méthode
+
+exe 'highlight Statement'      . s:forme . s:bold                      . s:texte . s:bleuclair         . s:fond . s:none
+" Conditional   if, then, else, endif, switch
+" Repeat        for, do, while
+" Label         case, default
+" Operator      sizeof, +, -, *
+" Keyword       Tous les autres mots clefs
+" Exception     try, catch, throw
+
+exe 'highlight PreProc'        . s:forme                               . s:texte . s:violetsombre      . s:fond . s:none
+" Preproc       Les instructions de préprocesseur
+" Include       #include
+" Define        #define
+" Macro         pareil que define
+" PreCondit     #if, #else, #endif
+
+exe 'highlight Type'           . s:forme . s:underline                 . s:texte . s:vertsombre        . s:fond . s:none
+" Type          int, long, double, char
+" StorageClass  static, register, volatile
+" Structure     struct, union, enum
+" Typedef       typedef
+
+exe 'highlight Special'        . s:forme . s:bold                      . s:texte . s:rougeclair        . s:fond . s:none
+" SpecialChar   Les caractère spéciaux
+" Tag           Les liens CTRL-]
+" Delimiter
+" SpecialComment
+" Debug
+
+exe 'highlight Underlined'     . s:forme . s:underline                 . s:texte . s:violetsombre      . s:fond . s:none
+" Texte qui sera souligné en html ou tex
+
+exe 'highlight Ignore'         . s:forme                               . s:texte . s:none              . s:fond . s:none
+" Blanc à gauche ou caché.
+
+exe 'highlight Error'          . s:forme                               . s:texte . s:blanc             . s:fond . s:rouge
+" Toutes les erreurs de constructions
+
+exe 'highlight Todo'           . s:forme                               . s:texte . s:noir              . s:fond . s:cyan
+" TODO FIXME XXX
+
+" ======================================================================================================== )))
+
+" Coloration étendue "(((
+
+exe 'highlight Character'      . s:forme . s:bold                      . s:texte . s:vertclair         . s:fond . s:none
+exe 'highlight ColorColumn'    . s:forme                               . s:texte . s:none              . s:fond . s:none
+exe 'highlight Conceal'        . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
+
+exe 'highlight Cursor'         . s:forme                               . ' guifg=bg'                   . ' guibg=fg'
+exe 'highlight CursorColumn'   . s:forme . s:underline                 . s:texte . s:grissombre        . s:fond . s:none
+exe 'highlight CursorLine'     . s:forme . s:underline                 . s:texte . s:grissombre        . s:fond . s:none
+exe 'highlight CursorLineNr'   . s:forme                               . s:texte . s:jauneclair        . s:fond . s:none
+
+exe 'highlight DiffAdd'        . s:forme                               . s:texte . s:blanc             . s:fond . s:vertsombre
+exe 'highlight DiffChange'     . s:forme                               . s:texte . s:blanc             . s:fond . s:violetsombre
+exe 'highlight DiffDelete'     . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:rougesombre
+exe 'highlight DiffText'       . s:forme . s:bold                      . s:texte . s:blanc             . s:fond . s:cyansombre
+
+exe 'highlight Directory'      . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
+exe 'highlight ErrorMsg'       . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
+exe 'highlight Exception'      . s:forme . s:bold                      . s:texte . s:rougeclair        . s:fond . s:none
+exe 'highlight FoldColumn'     . s:forme                               . s:texte . s:gris              . s:fond . s:grissombre
+exe 'highlight Folded'         . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:grissombre
+exe 'highlight IncSearch'      . s:forme . s:reverse                   . s:texte . s:none              . s:fond . s:none
+
+exe 'highlight Label'          . s:forme                               . s:texte . s:jaune             . s:fond . s:none
+exe 'highlight LineNr'         . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
+exe 'highlight MatchParen'     . s:forme                               . s:texte . s:vertsombre        . s:fond . s:bleusombre
+exe 'highlight ModeMsg'        . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:none
+exe 'highlight MoreMsg'        . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
+exe 'highlight NonText'        . s:forme . s:bold                      . s:texte . s:violetsombre      . s:fond . s:none
+
+exe 'highlight Operator'       . s:forme                               . s:texte . s:orangesombre      . s:fond . s:none
+exe 'highlight Pmenu'          . s:forme                               . s:texte . s:noir              . s:fond . s:violetsombre
+exe 'highlight PmenuSbar'      . s:forme                               . s:texte . s:none              . s:fond . s:gris
+exe 'highlight PmenuSel'       . s:forme . s:bold                      . s:texte . s:blanc             . s:fond . s:bleusombre
+exe 'highlight PmenuThumb'     . s:forme                               . s:texte . s:none              . s:fond . s:blanc
+
+exe 'highlight Question'       . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
+exe 'highlight Repeat'         . s:forme . s:bold                      . s:texte . s:jauneclair        . s:fond . s:none
+exe 'highlight Search'         . s:forme . s:bold                      . s:texte . s:noir              . s:fond . s:jauneclair
+exe 'highlight SignColumn'     . s:forme                               . s:texte . s:none              . s:fond . s:grissombre
+exe 'highlight SpecialKey'     . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
+
+exe 'highlight SpellBad'       . s:forme . s:ucurl . s:italic          . s:texte . s:none              . s:fond . s:grissombre
+exe 'highlight SpellCap'       . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:bleu
+exe 'highlight SpellLocal'     . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:none
+exe 'highlight SpellRare'      . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:none
+
+exe 'highlight StatusLine'     . s:forme                               . s:texte . s:noir              . s:fond . s:jaune
+exe 'highlight StatusLineNC'   . s:forme                               . s:texte . s:jauneclair        . s:fond . s:bleusombre
+
+exe 'highlight String'         . s:forme                               . s:texte . s:vertsombre        . s:fond . s:none
+exe 'highlight TabLine'        . s:forme                               . s:texte . s:none              . s:fond . s:none
+exe 'highlight TabLineFill'    . s:forme                               . s:texte . s:none              . s:fond . s:none
+exe 'highlight TabLineSel'     . s:forme                               . s:texte . s:none              . s:fond . s:none
+exe 'highlight Title'          . s:forme . s:bold                      . s:texte . s:violetsombre      . s:fond . s:none
+
+exe 'highlight VertSplit'      . s:forme . s:bold                      . s:texte . s:cyansombre        . s:fond . s:bleuclair
+exe 'highlight Visual'         . s:forme . s:reverse                   . s:texte . s:none              . s:fond . s:none
+exe 'highlight VisualNOS'      . s:forme . s:underline . s:bold        . s:texte . s:none              . s:fond . s:none
+exe 'highlight WarningMsg'     . s:forme                               . s:texte . s:rougesombre       . s:fond . s:none
+
+exe 'highlight WildMenu'       . s:forme                               . s:texte . s:noir              . s:fond . s:violetsombre
+exe 'highlight lCursor'        . s:forme                               . s:texte . s:none              . s:fond . s:cyan
+
+" ======================================================================================================== )))
+
+" Coloration pour TagBar    "(((
+
+exe 'highlight TagbarSignature'    . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:cyan
+
+" ======================================================================================================== )))
+
+" Coloration de la syntaxe vim  "(((
+
+highlight link vimLineComment vimComment
+highlight link vimComment Comment
+highlight link vimVar Identifier
+highlight link vimFunc vimError
+highlight link vimUserFunc Function
+highlight link vimSet Normal
+highlight link vimSetEqual Normal
+highlight link vimCommentString vimString
+highlight link vimCommand Statement
+highlight link vimSynMtchOpt vimSynOption
+highlight link vimIsCommand Normal
+highlight link vimHiGroup vimGroup
+highlight link vimHiLink Normal
+
+exe 'highlight vimCmdSep'      . s:forme . s:underline                 . s:texte . s:jaunesombre       . s:fond . s:none
+exe 'highlight vimCommand'     . s:forme . s:underline . s:bold        . s:texte . s:bleuclair         . s:fond . s:none
+exe 'highlight vimSynType'     . s:forme . s:underline                 . s:texte . s:orange            . s:fond . s:none
+exe 'highlight vimGroup'       . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
+
+" ======================================================================================================== )))
+
+" Coloration pour les fichiers en php   "(((
+
+exe 'highlight phpMemberSelector'  . s:forme . s:underline                 . s:texte . s:jaunesombre       . s:fond . s:none
+
+" ======================================================================================================== )))
+
+" Coloration pour la documentation doxygen "(((
+
+exe 'highlight doxygenErrorComment'    . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
+exe 'highlight doxygenParam'           . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:none
+
+" ======================================================================================================== )))
+
+" Pour syntastic "(((
+
+exe 'highlight SyntasticWarningSign'   . s:forme                               . s:texte . s:noir              . s:fond . s:jaunesombre
+
+" ======================================================================================================== )))
+
+" Coloration pour signify "(((
+
+exe 'highlight SignifySignAdd'     . s:forme                               . s:texte . s:vertsombre        . s:fond . s:grissombre
+exe 'highlight SignifySignDelete'  . s:forme                               . s:texte . s:rougesombre       . s:fond . s:grissombre
+exe 'highlight SignifySignChange'  . s:forme                               . s:texte . s:violetsombre      . s:fond . s:grissombre
+
+" ======================================================================================================== )))
+
+" Coloration définie par l'utilisateur (((
+
+" Pour mieux mettre en valeur le symbole qui signale une modification du
+" fichier courant.
+exe 'highlight User1'          . s:forme . s:bold                      . s:texte . s:noir              . s:fond . s:rougesombre
+" Nombre d'ajout de suppression et de modifications
+exe 'highlight User3'          . s:forme                               . s:texte . s:vertsombre        . s:fond . s:none
+exe 'highlight User4'          . s:forme                               . s:texte . s:rougesombre       . s:fond . s:none
+exe 'highlight User5'          . s:forme                               . s:texte . s:violetsombre      . s:fond . s:none
+" La couleur de la branche git en cours.
+exe 'highlight User6'          . s:forme                               . s:texte . s:grissombre        . s:fond . s:jaune
+
+" ======================================================================================================== )))
+
+" vim:foldmethod=marker
