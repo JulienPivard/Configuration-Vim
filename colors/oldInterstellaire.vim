@@ -7,7 +7,7 @@
 
 hi clear
 
-let colors_name = "interstellaireOld"
+let colors_name = "oldInterstellaire"
 
 " Normal should come first
 hi Normal       guifg=White         guibg=Black

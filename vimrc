@@ -838,9 +838,6 @@ let g:Gitv_DoNotMapCtrlKey = 1
 " -----------------------
 let g:interstellaire_termcolors = 256
 
-
-let g:solarized_termcolors=256
-
 " -------------------------------------------------------------------------------------------------- "
 "                           Fin des réglages des extensions de Vim                                   "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "

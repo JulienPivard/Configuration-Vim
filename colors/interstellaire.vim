@@ -8,8 +8,12 @@
 
 " Initialisation du thème de couleurs. " (((
 
+if !exists('interstellaire_termcolors')
+    let g:interstellaire_termcolors = 0
+endif
+
 highlight clear
-if exists("syntax_on")
+if exists('syntax_on')
   syntax reset
 endif
 let colors_name = 'interstellaire'
@@ -279,7 +283,7 @@ exe 'highlight SpellCap'       . s:forme . s:ucurl                     . s:texte
 exe 'highlight SpellLocal'     . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:none
 exe 'highlight SpellRare'      . s:forme . s:ucurl                     . s:texte . s:none              . s:fond . s:none
 
-exe 'highlight StatusLine'     . s:forme                               . s:texte . s:noir              . s:fond . s:jaune
+exe 'highlight StatusLine'     . s:forme                               . s:texte . s:noir              . s:fond . s:jaunesombre
 exe 'highlight StatusLineNC'   . s:forme                               . s:texte . s:jauneclair        . s:fond . s:bleusombre
 
 exe 'highlight String'         . s:forme                               . s:texte . s:vertsombre        . s:fond . s:none
