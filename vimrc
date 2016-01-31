@@ -800,10 +800,6 @@ let g:neocomplete#enable_auto_close_preview = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_multibyte_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " -----------------------
 " Réglages pour autoclose
@@ -844,5 +840,4 @@ let g:interstellaire_termcolors = 256
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
 " Définition du colorsheme
-" dans ~/.vim/colors/icansee.vim
 colorscheme interstellaire
