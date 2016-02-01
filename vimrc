@@ -17,6 +17,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'Yggdroot/indentLine'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edsono/vim-matchit'
+Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'gregsexton/gitv'
 Plugin 'hdima/python-syntax'
 Plugin 'majutsushi/tagbar'
@@ -414,7 +415,7 @@ augroup end
 augroup pencil
     autocmd!
     autocmd FileType markdown,mkd call pencil#init()
-    autocmd FileType text         call pencil#init()
+"    autocmd FileType text         call pencil#init()
 augroup end
 
 " Si un makefile existe on utilise la commande de shell make plutôt que celle de vim sinon on utilise l'utilitaire make de vim
