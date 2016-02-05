@@ -7,7 +7,7 @@ set nocompatible                        " Casser compatible avec vielle version
 
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim       " Ajoute le chemin pour initialiser Vundle au démarrage.
-call vundle#begin('~/.vim/bundle/')
+call vundle#begin( '~/.vim/bundle/' )
 
 " Pour se maintenir à jours.
 Plugin 'VundleVim/Vundle.vim'
@@ -159,35 +159,52 @@ set guifont=Ubuntu\ Mono\ derivative\ powerline
 " Le code hexadécimal du caractère sous le curseur %B.
 " La position dans le fichier en pourcentage %P
 function! MaLigneStatus()
-    let nomFichier = '%f '
-    if exists('*fugitive#head()')
+
+    if exists( '*fugitive#head()' )
+
         if fugitive#head() == ''
             let fugitLigne = ''
         else
-            let fugitLigne = '%6*%{fugitive#head()}:%0*'
+            let fugitLigne = '%6*%{ fugitive#head() }:%0*'
         endif
+        let etatDepot = '%3*%{ StatAjout() }%0*' . '%4*%{ StatSuppression() }%0*' . '%5*%{ StatModifications() }%0*'
+
     else
+
         let fugitLigne = ''
+        let etatDepot = ''
+
     endif
-    if exists('*SyntasticStatuslineFlag()')
-        let etatCheckCompil = '%#warningmsg#' . '%{SyntasticStatuslineFlag()}' . '%*'
+
+    if exists( '*SyntasticStatuslineFlag()' )
+        let etatCheckCompil = '%#warningmsg#' . '%{ SyntasticStatuslineFlag() }' . '%*'
     else
         let etatCheckCompil = ''
     endif
-    let etatDepot = '%3*%{StatAjout()}%0*' . '%4*%{StatSuppression()}%0*' . '%5*%{StatModifications()}%0*'
-    let flagStatutLigne = '%h%1*%m%0*%r%w '
+
+    let nomFichier = '%f '
+    let flagStatutLigne = ' %h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y buf:%n%a'
     let hexaCara = '0x%02B'
-    let carSepa = ''
-    "let carSepa = '‖'
-    return '%<' . fugitLigne . nomFichier . ' ' . flagStatutLigne . '%=' . etatCheckCompil . ' ' . etatDepot . ' ' . carSepa . ' ' . posiCurseur . ' ' . carSepa . ' ' . buffInfos . ' ' . carSepa . ' ' . hexaCara
+    let encodageCara = ' %{ strlen( &fileencoding )? &fileencoding : &enc }'
+    let typeFinLigne = '%{ &fileformat }'
+    let carSepa = '  '
+    "let carSepa = '│'
+
+    let posDansFic = carSepa . posiCurseur
+    let resumeErreur = etatCheckCompil . ' ' . etatDepot
+    let gauche = '%<' . fugitLigne . nomFichier . ' ' . typeFinLigne . encodageCara . flagStatutLigne
+    let droite = resumeErreur . posDansFic . carSepa . buffInfos . carSepa . hexaCara
+
+    return gauche . '%=' . droite
+
 endfunction
 
 " Affiche les statistiques de modification du fichier courante par rapport à
 " la version précédente du fichier.
 function! StatWrapperGit()
-    if exists('*fugitive#head()')
+    if exists( '*sy#repo#get_stats()' )
         return sy#repo#get_stats()
     else
         return [0, 0, 0]
@@ -198,7 +215,7 @@ endfunction
 function! StatAjout()
     let [added, modified, removed] = StatWrapperGit()
     if added > 0
-        return '[' . printf('+%s', added ) . ']'
+        return '[' . printf( '+%s', added ) . ']'
     else
         return ''
     endif
@@ -208,7 +225,7 @@ endfunction
 function! StatSuppression()
     let [added, modified, removed] = StatWrapperGit()
     if removed > 0
-        return '[' . printf('-%s', removed ) . ']'
+        return '[' . printf( '-%s', removed ) . ']'
     else
         return ''
     endif
@@ -218,7 +235,7 @@ endfunction
 function! StatModifications()
     let [added, modified, removed] = StatWrapperGit()
     if modified > 0
-        return '[' . printf('~%s', modified ) . ']'
+        return '[' . printf( '~%s', modified ) . ']'
     else
         return ''
     endif
@@ -230,35 +247,35 @@ endfunction
 function! MonFoldText()
     let line = getline(v:foldstart)
     let lignes = v:foldend - v:foldstart + 1
-    let subFold = substitute(line, '^\s*\|(((\=', '', 'g')
+    let subFold = substitute( line, '^\s*\|(((\=', '', 'g' )
     let debut = '+' . v:folddashes . ' | ' . v:foldstart . '-' . v:foldend . ' |  '
-    let nbLignes = printf('%12s', lignes . ' lignes : ')
+    let nbLignes = printf( '%12s', lignes . ' lignes : ' )
     return  debut . nbLignes . subFold
 endfunction
 
 " Permet de changer les droits d'un fichier pour le rendre exécutable
 function! ModeChange()
-    if getline(1) =~ "^#!.*/bin/"
+    if getline( 1 ) =~ "^#!.*/bin/"
         silent !chmod u+x <afile>
     endif
 endfunction
 
 " Pour connaitre le groupe de coloration de la zone sous le curseur.
 function! MontrerGroupeSyntax()
-    if !exists("*synstack")
+    if !exists( '*synstack' )
         return
     endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    echo map( synstack( line('.'), col('.') ), 'synIDattr(v:val, "name")' )
 endfunc
 
 " Suppression automatique des espaces superflus
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
 " /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
 function! Nettoyage()
-    let curcol = col(".")
-    let curline = line(".")
+    let curcol = col( '.' )
+    let curline = line( '.' )
     :%s/\s\+$//e
-    call cursor(curline, curcol)
+    call cursor( curline, curcol )
     unlet curcol
     unlet curline
 endfunction
@@ -266,7 +283,7 @@ endfunction
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
 augroup recuperationEtatSessionsPrecedente
     autocmd!
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line( "'\"" ) > 1 && line( "'\"" ) <= line( "$" ) | exe "normal! g'\"" | endif
 augroup end
 
 " Pour supprimer les espaces en fin de ligne.
@@ -399,7 +416,7 @@ augroup fonctionsConfiguration
 augroup end
 
 " Active l'omnicompletion
-if exists ('+omnifunc') && &omnifunc == ""
+if exists( '+omnifunc' ) && &omnifunc == ""
     setlocal omnifunc=syntaxcomplete#Complete
     setlocal completefunc=syntaxcomplete#Complete
 endif
@@ -428,8 +445,8 @@ augroup end
 " :echo substitute(split(getcwd(), '/')[-1], ".*", "\\l\\0", "")
 " :echo substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\L\\0", "")
 function! ExistMakeFileC()
-    if filereadable("makefile") || filereadable("Makefile")
-        let $nomFichier = substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\l\\0", "")
+    if filereadable( 'makefile' ) || filereadable( 'Makefile' )
+        let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=make
         map  <buffer> <F5>          :make<CR>
         map! <buffer> <F5>    <Esc> :make<CR>
@@ -465,13 +482,13 @@ endfunction
 " Création des tags et compilation de la documentation.
 " Pour trouver la classe correspondante taper :tag nomclasse.cpp
 function! MacrosCPP()
-    if filereadable("makefile") || filereadable("Makefile")
+    if filereadable( 'makefile' ) || filereadable( 'Makefile' )
         map  <buffer> <F10>         :!./bin/Release/client<CR>
         map! <buffer> <F10>   <Esc> :!./bin/Release/client<CR>
         map  <buffer> <S-F9>        :make clean<CR>
         map! <buffer> <S-F9>  <Esc> :make clean<CR>
     else
-        let $nomFichier = substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\l\\0", "")
+        let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
         map  <buffer> <F10>         :!./$nomFichier<CR>
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
@@ -512,7 +529,7 @@ endfunction
 " fichier java on convertit la première lettre du dossier en majuscule
 function! ExistConfigurationJava()
     " Si il existe un fichier d'automatisation dans le dossier courant.
-    if filereadable("build.xml")
+    if filereadable( 'build.xml' )
         let $chemin = './'
         setlocal makeprg=ant\ compile
         map  <buffer> <S-F8>        :!ant test<CR>
@@ -549,7 +566,7 @@ function! MacrosLatexSpecifique()
     map! <buffer> <F10>   <Esc> :!evince %<.pdf &<CR>
     map  <buffer> <S-F10>       :!zathura %<.pdf &<CR>
     map! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<CR>
-    if filereadable("bibliographie.bib")
+    if filereadable( 'bibliographie.bib' )
         map  <buffer> <S-F11>       :!bibtex %< <CR>
         map! <buffer> <S-F11> <Esc> :!bibtex %< <CR>
     endif
@@ -740,6 +757,8 @@ let g:syntastic_enable_perl_checker = 1     " À désactiver si on travail sur d
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
 " python
 let g:syntastic_python_checkers = ['python']  " Pour ne pas avoir le checker de style et d'indentation.
+" LaTeX
+let g:syntastic_tex_checkers = ['lacheck']  " Pour ne pas avoir le checker d'accent.
 " cpp
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
