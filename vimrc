@@ -12,23 +12,25 @@ call vundle#begin('~/.vim/bundle/')
 " Pour se maintenir à jours.
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/neocomplete.vim'
 Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'Yggdroot/indentLine'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edsono/vim-matchit'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'gregsexton/gitv'
 Plugin 'hdima/python-syntax'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 'mbbill/undotree'
 Plugin 'mhinz/vim-signify'
 Plugin 'phongnh/vim-antlr'
+Plugin 'rdnetto/YCM-Generator'
 Plugin 'reedes/vim-pencil'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
-Plugin 'spf13/vim-autoclose'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/FSwitch'
@@ -306,7 +308,7 @@ augroup squelette
     autocmd BufNewFile *.1                  0r ~/.vim/CodeBasique/codeBasique.1
     autocmd BufNewFile *.pl                 0r ~/.vim/CodeBasique/codeBasique.pl
     autocmd BufNewFile client.cpp           0r ~/.vim/CodeBasique/client.cpp
-    autocmd BufNewFile *.cpp                0r ~/.vim/CodeBasique/codeBasique.cpp
+    autocmd BufNewFile *.cpp                call ConfigurationNouveauFichierCPP()
     autocmd BufNewFile *.hpp                call ConfigurationNouveauFichierHPP()
     autocmd BufNewFile build.xml            0r ~/.vim/CodeBasique/build.xml
     autocmd BufNewFile bibliographie.bib    0r ~/.vim/CodeBasique/bibliographie.bib
@@ -443,6 +445,12 @@ function! ExistMakeFileC()
         map! <buffer> <F10> <Esc> :!./%<<CR>
     endif
 endfunction
+
+" COnfiguration des nouveaux fichiers cpp
+function! ConfigurationNouveauFichierCPP()
+    0r ~/.vim/CodeBasique/codeBasique.cpp
+    :%substitute?NOMFICHIER?\=expand('%:t:r')?g
+endfunc
 
 " Configure les nouveaux fichiers cpp
 function! ConfigurationNouveauFichierHPP()
@@ -637,6 +645,8 @@ map  <S-F7>         :nohls<CR>
 map! <S-F7>   <Esc> :nohls<CR>
 map  <F8>           :FufBuffer<CR>
 map! <F8>     <Esc> :FufBuffer<CR>
+map  <C-F8>         :YcmGenerateConfig<CR>
+map! <C-F8>   <Esc> :YcmGenerateConfig<CR>
 map  <F9>           :FufBufferTagAll<CR>
 map! <F9>     <Esc> :FufBufferTagAll<CR>
 map  <S-F12>        :vsp ~/.vim/vimrc<CR>
@@ -649,6 +659,8 @@ iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
 
 iabbrev <buffer> !! ->
+
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
@@ -707,7 +719,7 @@ let g:gundo_right = 0               " Ouvre l'arbre à gauche.
 let g:gundo_preview_bottom = 1      " Pour que la fenêtre d'aperçus prenne toute la largeur.
 let g:gundo_close_on_revert = 1     " Fermer automatiquement après annulation.
 let g:gundo_auto_preview = 0        " Désactive l'affichage automatique des différence.
-let g:gundo_prefer_python3 = 1
+let g:gundo_prefer_python3 = 0
 let g:gundo_tree_statusline='%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline='%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
@@ -770,7 +782,7 @@ let g:tagbar_systemenc = 'utf-8'
 " -----------------------
 " Réglages pour UltiSnips
 " -----------------------
-let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-h>'
@@ -791,22 +803,26 @@ let g:indentLine_fileTypeExclude = ['help', 'text', '']
 " -----------------------
 " Réglages pour neocomplete
 " -----------------------
-let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_delimiter = 1
-let g:neocomplete#max_list = 15
-let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#enable_auto_close_preview = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#enable_multibyte_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplete#auto_completion_start_length = 3
+let g:neocomplete#manual_completion_start_length = 3
+let g:neocomplete#max_list = 15
 
 " -----------------------
-" Réglages pour autoclose
+" Réglage pour YouCompleteMe
 " -----------------------
-" Pour que les double quotte ne soit pas fermé dans les fichiers type vimrc.
-let g:autoclose_vim_commentmode = 1
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_complete_in_comments = 0
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_confirm_extra_conf = 1
+let g:ycm_extra_conf_globlist = ['/home/asmodee/Programmation/Master1/Parallellisme/Devoir/systeme_expert_0plus/.ycm_extra_conf.py']
 
 " -----------------------
 " Réglages pour signify

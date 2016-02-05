@@ -243,13 +243,13 @@ exe 'highlight ColorColumn'    . s:forme                               . s:texte
 exe 'highlight Conceal'        . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
 
 exe 'highlight Cursor'         . s:forme                               . ' guifg=bg'                   . ' guibg=fg'
-exe 'highlight CursorColumn'   . s:forme . s:underline                 . s:texte . s:grissombre        . s:fond . s:none
-exe 'highlight CursorLine'     . s:forme . s:underline                 . s:texte . s:grissombre        . s:fond . s:none
-exe 'highlight CursorLineNr'   . s:forme                               . s:texte . s:jauneclair        . s:fond . s:none
+exe 'highlight CursorColumn'   . s:forme . s:underline                 . s:texte . s:none              . s:fond . s:grissombre
+exe 'highlight CursorLine'     . s:forme . s:underline                 . s:texte . s:none              . s:fond . s:grissombre
+exe 'highlight CursorLineNr'   . s:forme                               . s:texte . s:jauneclair        . s:fond . s:grissombre
 
 exe 'highlight DiffAdd'        . s:forme                               . s:texte . s:blanc             . s:fond . s:vertsombre
 exe 'highlight DiffChange'     . s:forme                               . s:texte . s:blanc             . s:fond . s:violetsombre
-exe 'highlight DiffDelete'     . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:rougesombre
+exe 'highlight DiffDelete'     . s:forme . s:bold                      . s:texte . s:blanc             . s:fond . s:rouge
 exe 'highlight DiffText'       . s:forme . s:bold                      . s:texte . s:blanc             . s:fond . s:cyansombre
 
 exe 'highlight Directory'      . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
