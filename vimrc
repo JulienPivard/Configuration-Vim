@@ -182,20 +182,24 @@ function! MaLigneStatus()
         let etatCheckCompil = ''
     endif
 
-    let nomFichier = '%f '
+    let nomFichier = '%f'
     let flagStatutLigne = ' %h%1*%m%0*%r%w '
     let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
     let buffInfos = '%y buf:%n%a'
     let hexaCara = '0x%02B'
-    let encodageCara = ' %{ strlen( &fileencoding )? &fileencoding : &enc }'
+    let encodageCara = '%{ strlen( &fileencoding )? &fileencoding : &enc }'
     let typeFinLigne = '%{ &fileformat }'
-    let carSepa = '  '
-    "let carSepa = '│'
+    let carSepaPGauche = '  '
+    let carSepaPDroit = '  '
+    "let carSepaPDroit = '│'
 
-    let posDansFic = carSepa . posiCurseur
+    let ficEtBranche = fugitLigne . nomFichier
+    let ficFormat = typeFinLigne . carSepaPGauche . encodageCara
+    let gauche = '%<' . ficEtBranche . carSepaPGauche . ficFormat . flagStatutLigne
+
+    let posDansFic = carSepaPDroit . posiCurseur
     let resumeErreur = etatCheckCompil . ' ' . etatDepot
-    let gauche = '%<' . fugitLigne . nomFichier . ' ' . typeFinLigne . encodageCara . flagStatutLigne
-    let droite = resumeErreur . posDansFic . carSepa . buffInfos . carSepa . hexaCara
+    let droite = resumeErreur . posDansFic . carSepaPDroit . buffInfos . carSepaPDroit . hexaCara
 
     return gauche . '%=' . droite
 
