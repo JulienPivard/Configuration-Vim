@@ -259,7 +259,7 @@ endfunction
 
 " Permet de changer les droits d'un fichier pour le rendre exécutable
 function! ModeChange()
-    if getline( 1 ) =~ "^#!.*/bin/"
+    if getline( 1 ) =~ '^#!.*/bin/'
         silent !chmod u+x <afile>
     endif
 endfunction

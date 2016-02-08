@@ -261,7 +261,7 @@ exe 'highlight IncSearch'      . s:forme . s:reverse                   . s:texte
 
 exe 'highlight Label'          . s:forme                               . s:texte . s:jaune             . s:fond . s:none
 exe 'highlight LineNr'         . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:grissombre
-exe 'highlight MatchParen'     . s:forme                               . s:texte . s:vertsombre        . s:fond . s:bleusombre
+exe 'highlight MatchParen'     . s:forme                               . s:texte . s:blanc             . s:fond . s:bleusombre
 exe 'highlight ModeMsg'        . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:none
 exe 'highlight MoreMsg'        . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
 exe 'highlight NonText'        . s:forme . s:bold                      . s:texte . s:violetsombre      . s:fond . s:none
