@@ -342,9 +342,10 @@ exe 'highlight phpMemberSelector'   . s:forme . s:underline                 . s:
 
 exe 'highlight doxygenErrorComment'         . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
 exe 'highlight doxygenParam'                . s:forme                               . s:texte . s:bleu              . s:fond . s:none
-exe 'highlight doxygenSpecial'              . s:forme . s:bold                      . s:texte . s:bleuclair         . s:fond . s:none
-exe 'highlight doxygenBrief'                . s:forme . s:bold                      . s:texte . s:bleuclair         . s:fond . s:none
-exe 'highlight doxygenSpecialOnelineDesc'   . s:forme . s:bold                      . s:texte . s:bleuclair         . s:fond . s:none
+exe 'highlight doxygenSpecial'              . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
+exe 'highlight doxygenBrief'                . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
+exe 'highlight doxygenSpecialOnelineDesc'   . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
+highlight link doxygenBOther doxygenParam
 
 " ========================================= )))
 
