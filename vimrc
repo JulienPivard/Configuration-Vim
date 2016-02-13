@@ -844,8 +844,8 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_confirm_extra_conf = 1
-let g:ycm_extra_conf_globlist = ['/home/asmodee/Programmation/Master1/Parallellisme/Devoir/systeme_expert_0plus/.ycm_extra_conf.py']
+let g:ycm_confirm_extra_conf = 0            " À changer dés que possible.
+let g:ycm_extra_conf_globlist = []
 
 " -----------------------
 " Réglages pour signify
