@@ -345,6 +345,7 @@ exe 'highlight doxygenParam'                . s:forme                           
 exe 'highlight doxygenSpecial'              . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight doxygenBrief'                . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight doxygenSpecialOnelineDesc'   . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
+highlight link doxygenSmallSpecial doxygenSpecial
 highlight link doxygenBOther doxygenParam
 
 " ========================================= )))

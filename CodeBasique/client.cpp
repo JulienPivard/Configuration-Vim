@@ -42,6 +42,12 @@ std::string affichageTest( std::string nomZone )
 
 }
 
+/*
+ * - in     : lecture du paramètre, comme pour l'argument d'une fonction.
+ * - out    : écriture du paramètre uniquement (correspond à un résultat de sortie).
+ * - in out : lecture et écriture: la valeur du paramètre est prise en compte et peut être modifiée.
+ * */
+
 /**
  * Programme principal.
  *

@@ -420,20 +420,20 @@ augroup fonctionsConfiguration
 augroup end
 
 " Active l'omnicompletion
-if exists( '+omnifunc' ) && &omnifunc == ""
-    setlocal omnifunc=syntaxcomplete#Complete
-    setlocal completefunc=syntaxcomplete#Complete
-endif
+"if exists( '+omnifunc' ) && &omnifunc == ""
+"    setlocal omnifunc=syntaxcomplete#Complete
+"    setlocal completefunc=syntaxcomplete#Complete
+"endif
 
-augroup completion
-    autocmd!
-    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-augroup end
+"augroup completion
+"    autocmd!
+"    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+"augroup end
 
-augroup menuAutocompletion
-    autocmd!
-    autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-augroup end
+"augroup menuAutocompletion
+"    autocmd!
+"    autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"augroup end
 
 augroup pencil
     autocmd!
@@ -841,9 +841,9 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_complete_in_comments = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_insertion = 0
 let g:ycm_confirm_extra_conf = 0            " À changer dés que possible.
 let g:ycm_extra_conf_globlist = []
 
