@@ -33,6 +33,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-scripts/FSwitch'
 Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'vim-scripts/L9'
@@ -137,7 +138,7 @@ set   wildmode=longest:full,full        " Complète d'abord avec la correspondan
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
 " Pour gvim
-set guifont=Ubuntu\ Mono\ derivative\ powerline
+set guifont=Source\ Code\ Pro\ for\ Powerline
 
 "set patchmode=.original            " Crée une copie de l'original du fichier édité
 
@@ -504,7 +505,7 @@ function! MacrosCPP()
     map  <buffer> <S-F11>       :!doxygen<CR>
     map! <buffer> <S-F11> <Esc> :!doxygen<CR>
     setlocal path=.,src/include,src/include/modele,src/include/builders,src/include/builders/lorraine
-	let g:load_doxygen_syntax = 1
+    let g:load_doxygen_syntax = 1
     setlocal syntax=cpp.doxygen
     " Ajoute de tags pour l'omnicompletion
     " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
@@ -732,7 +733,7 @@ scriptencoding utf-8
 " Liste des extension installée
 
 " -----------------------
-" Réglages pour GundoToggle
+" Réglages pour Gundo
 " -----------------------
 let g:gundo_width = 45              " Largeur de la fenêtre d'aperçus.
 let g:gundo_preview_height = 15     " Hauteur de la fenêtre d'aperçus.
@@ -868,6 +869,13 @@ let g:SpellCheck_DefineQuickfixMappings = 1
 " -----------------------
 let g:Gitv_OpenHorizontal = 1
 let g:Gitv_DoNotMapCtrlKey = 1
+
+" -----------------------
+" Réglage pour airline
+" -----------------------
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'newDark'
 
 " -----------------------
 " Réglage pour mon thème de couleurs.
