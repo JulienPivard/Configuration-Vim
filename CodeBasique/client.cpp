@@ -66,7 +66,7 @@ int main( int argc, char* argv[] )
         << std::endl;
     std::cout << "==================================================="
         << std::endl;
-    // Controle du nombre d'argument sur la ligne de commande
+    // Contrôle du nombre d'argument sur la ligne de commande
     if( argc == 1 )
     {
         std::cout << "Usage "
@@ -81,12 +81,12 @@ int main( int argc, char* argv[] )
         return EXIT_FAILURE;
     }
 
-    // Cast de chaine dans un type précis.
+    // Conversion de chaine dans un type précis.
     std::istringstream laChaine( argv[1] );
     int e ;
     laChaine >> e;
 
-    // Vérification de la réussite du cast.
+    // Vérification de la réussite de la conversion.
     if( laChaine && laChaine.eof() )
     {
         std::cout << argv[1]

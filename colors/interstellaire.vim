@@ -305,7 +305,7 @@ exe 'highlight lCursor'         . s:forme                               . s:text
 
 " Coloration pour TagBar    "(((
 
-exe 'highlight TagbarSignature'     . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:cyan
+exe 'highlight TagbarSignature'     . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
 
 " ========================== )))
 
