@@ -28,29 +28,23 @@ let g:airline#themes#newDark#palette = {}
 " to the dictionary.  The array is in the format:
 " [ guifg, guibg, ctermfg, ctermbg, opts ]. See "help attr-list" for valid
 " values for the "opt" value.
-let s:N1   = [ '#00005f' , '#dfff00' , 17  , 190 ]
+let s:N1   = [ '#00005f' , '#00ff77' , 17  , 42  , 'bold' ]
 let s:N2   = [ '#ffffff' , '#444444' , 255 , 238 ]
 let s:N3   = [ '#9cffd3' , '#202020' , 85  , 234 ]
 let g:airline#themes#newDark#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
-
-" Here we define overrides for when the buffer is modified.  This will be
-" applied after g:airline#themes#newDark#palette.normal, hence why only certain keys are
-" declared.
 let g:airline#themes#newDark#palette.normal_modified = {
-      \ 'airline_c': [ '#ffffff' , '#900000' , 255     , 88      , ''     ] ,
+      \ 'airline_c': [ '#ffffff' , '#cc0000' , 255     , 160      , ''     ] ,
       \ }
 
 
 let s:I1 = [ '#00005f' , '#00ff00' , 17  , 46  ]
-let s:I2 = [ '#ffffff' , '#00bb00' , 255 , 28  ]
-let s:I3 = [ '#ffffff' , '#008000' , 15  , 22  ]
+let s:I2 = [ '#ffffff' , '#444444' , 255 , 238 ]
+let s:I3 = [ '#9cffd3' , '#202020' , 85  , 234 ]
 let g:airline#themes#newDark#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
-let g:airline#themes#newDark#palette.insert_modified = {
-      \ 'airline_c': [ '#ffffff' , '#900000' , 255     , 88      , ''     ] ,
-      \ }
-let g:airline#themes#newDark#palette.insert_paste = {
-      \ 'airline_a': [ s:I1[0]   , '#d78700' , s:I1[2] , 172     , ''     ] ,
-      \ }
+let g:airline#themes#newDark#palette.insert_modified = copy( g:airline#themes#newDark#palette.normal_modified )
+"let g:airline#themes#newDark#palette.insert_paste = {
+"      \ 'airline_a': [ s:I1[0]   , '#d78700' , s:I1[2] , 46      , ''     ] ,
+"      \ }
 
 
 let g:airline#themes#newDark#palette.replace = copy(g:airline#themes#newDark#palette.insert)
@@ -58,13 +52,11 @@ let g:airline#themes#newDark#palette.replace.airline_a = [ s:I2[0]   , '#af0000'
 let g:airline#themes#newDark#palette.replace_modified = g:airline#themes#newDark#palette.insert_modified
 
 
-let s:V1 = [ '#00005f' , '#ffff00' , 17 , 190 ]
-let s:V2 = [ '#000000' , '#ffbf00' , 232 , 214 ]
-let s:V3 = [ '#ffffff' , '#ff5f00' , 15  , 166  ]
+let s:V1 = [ '#00005f' , '#ff5f00' , 17  , 166 ]
+let s:V2 = [ '#ffffff' , '#444444' , 255 , 238 ]
+let s:V3 = [ '#9cffd3' , '#202020' , 85  , 234 ]
 let g:airline#themes#newDark#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
-let g:airline#themes#newDark#palette.visual_modified = {
-      \ 'airline_c': [ '#ffffff' , '#900000' , 255     , 88      , ''     ] ,
-      \ }
+let g:airline#themes#newDark#palette.visual_modified =  copy( g:airline#themes#newDark#palette.normal_modified )
 
 
 let s:IA1 = [ '#9e9e9e' , '#1c1c1c' , 245 , 234 , '' ]
