@@ -6,6 +6,10 @@
 " Ancienne version pour les fichier LaTeX
 "autocmd FileType tex setlocal makeprg=latex\ %\ &&\ dvips\ %<.dvi\ &&\ ps2pdf\ %<.ps
 
+
+
+"Plugin 'Shougo/neocomplete.vim'
+
 " -----------------------
 " Réglages pour neocomplete
 " -----------------------

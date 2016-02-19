@@ -12,7 +12,6 @@ call vundle#begin( '~/.vim/bundle/' )
 " Pour se maintenir à jours.
 Plugin 'VundleVim/Vundle.vim'
 
-"Plugin 'Shougo/neocomplete.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Yggdroot/indentLine'
