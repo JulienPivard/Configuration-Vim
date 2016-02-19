@@ -1,0 +1,47 @@
+"set patchmode=.original            " Crée une copie de l'original du fichier édité
+
+" :r ! ls ~/.vim/bundle/
+" Liste des extension installée
+
+" Ancienne version pour les fichier LaTeX
+"autocmd FileType tex setlocal makeprg=latex\ %\ &&\ dvips\ %<.dvi\ &&\ ps2pdf\ %<.ps
+
+" -----------------------
+" Réglages pour neocomplete
+" -----------------------
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#enable_auto_close_preview = 1
+let g:neocomplete#auto_completion_start_length = 3
+let g:neocomplete#manual_completion_start_length = 3
+let g:neocomplete#max_list = 15
+
+
+
+" Active l'omnicompletion
+"if exists( '+omnifunc' ) && &omnifunc == ""
+"    setlocal omnifunc=syntaxcomplete#Complete
+"    setlocal completefunc=syntaxcomplete#Complete
+"endif
+
+"augroup completion
+"    autocmd!
+"    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+"augroup end
+
+"augroup menuAutocompletion
+"    autocmd!
+"    autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"augroup end
+
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+
+
+
+" Pour retirer la première majuscule sont équivalent :
+" :echo substitute(split(getcwd(), '/')[-1], "\\(\\<\\u\\)", "\\l\\1", "")
+" :echo substitute(split(getcwd(), '/')[-1], "\\(\\<\\u\\)", "\\L\\1", "")
+" :echo substitute(split(getcwd(), '/')[-1], ".*", "\\l\\0", "")
+" :echo substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\L\\0", "")

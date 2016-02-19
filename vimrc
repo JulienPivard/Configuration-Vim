@@ -140,8 +140,6 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 " Pour gvim
 set guifont=Source\ Code\ Pro\ for\ Powerline
 
-"set patchmode=.original            " Crée une copie de l'original du fichier édité
-
 " ================== Changer la ligne de statut de vim. ==================
 " Couper si la ligne est trop longue %<
 " Le nom du chemin complet %f
@@ -349,9 +347,6 @@ augroup reglageMake
     autocmd FileType tex        setlocal makeprg=xelatex\ %
     autocmd Filetype php        setlocal makeprg=php\ -l\ %
 augroup end
-"autocmd FileType cpp            setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
-" Ancienne version pour les fichier LaTeX
-"autocmd FileType tex setlocal makeprg=latex\ %\ &&\ dvips\ %<.dvi\ &&\ ps2pdf\ %<.ps
 
 " Mappage de la touche de compilation
 " Les scripts n'utilisent pas ce raccourci de compilation
@@ -420,52 +415,29 @@ augroup fonctionsConfiguration
     autocmd FileType c,h                    call ExistMakeFileC()
 augroup end
 
-" Active l'omnicompletion
-"if exists( '+omnifunc' ) && &omnifunc == ""
-"    setlocal omnifunc=syntaxcomplete#Complete
-"    setlocal completefunc=syntaxcomplete#Complete
-"endif
-
-"augroup completion
-"    autocmd!
-"    autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-"augroup end
-
-"augroup menuAutocompletion
-"    autocmd!
-"    autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-"augroup end
-
 augroup pencil
     autocmd!
     autocmd FileType markdown,mkd call pencil#init()
 "    autocmd FileType text         call pencil#init()
 augroup end
 
-" Si un makefile existe on utilise la commande de shell make plutôt que celle de vim sinon on utilise l'utilitaire make de vim
-" Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule sinon c'est le nom du fichier sans majuscule
-" Pour retirer la première majuscule sont équivalent :
-" :echo substitute(split(getcwd(), '/')[-1], "\\(\\<\\u\\)", "\\l\\1", "")
-" :echo substitute(split(getcwd(), '/')[-1], "\\(\\<\\u\\)", "\\L\\1", "")
-" :echo substitute(split(getcwd(), '/')[-1], ".*", "\\l\\0", "")
-" :echo substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\L\\0", "")
+" Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
+" sinon c'est le nom du fichier sans majuscule
 function! ExistMakeFileC()
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=make
-        map  <buffer> <F5>          :make<CR>
-        map! <buffer> <F5>    <Esc> :make<CR>
         map  <buffer> <S-F9>        :make clean<CR>
         map! <buffer> <S-F9>  <Esc> :make clean<CR>
         map  <buffer> <F10>         :!./$nomFichier<CR>
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
     else
         setlocal makeprg=gcc\ -Wall\ -o\ %<\ %<.c
-        map  <buffer> <F5>        :make<CR>
-        map! <buffer> <F5>  <Esc> :make<CR>
         map  <buffer> <F10>       :!./%<<CR>
         map! <buffer> <F10> <Esc> :!./%<<CR>
     endif
+    map  <buffer> <F5>        :make<CR>
+    map! <buffer> <F5>  <Esc> :make<CR>
 endfunction
 
 " COnfiguration des nouveaux fichiers cpp
@@ -682,26 +654,30 @@ iabbrev /* /*<CR>*/<Esc>ka
 
 iabbrev <buffer> !! ->
 
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
-map <leader>gs :Gstatus<CR>
-map <leader>gd :Gdiff<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
 
-map <leader>sh :SignifyToggleHighlight<CR>
-map <leader>sr :SignifyRefresh<CR>
-map <leader>sj <plug>(signify-next-hunk)
-map <leader>sk <plug>(signify-prev-hunk)
+nmap <leader>sh :SignifyToggleHighlight<CR>
+nmap <leader>sr :SignifyRefresh<CR>
+nmap <leader>sj <plug>(signify-next-hunk)
+nmap <leader>sk <plug>(signify-prev-hunk)
 
-map <leader>us :UpdateAndSpellCheck<CR>
+nmap <leader>us :UpdateAndSpellCheck<CR>
 
-map <leader>sy :SyntasticToggleMode<CR>
+nmap <leader>sy :SyntasticToggleMode<CR>
 
-map <leader>o :copen 20<CR>
-map <leader>c :cclose<CR>
-map <leader>n :cnext<CR>
-map <leader>p :cprevious<CR>
+nmap <silent> <Leader>fff :FSHere<cr>
+nmap <silent> <Leader>fg :FSLeft<cr>
+nmap <silent> <Leader>ffg :FSSplitLeft<cr>
+nmap <silent> <Leader>fr :FSRight<cr>
+nmap <silent> <Leader>ffr :FSSplitRight<cr>
+
+nmap <leader>o :copen 20<CR>
+nmap <leader>c :cclose<CR>
+nmap <leader>n :cnext<CR>
+nmap <leader>p :cprevious<CR>
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -721,25 +697,6 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " -------------------------------------------------------------------------------------------------- "
 
 scriptencoding utf-8
-
-" Pour configurer la compilation.
-"./configure --with-features=huge \
-"            --enable-multibyte \
-"            --enable-rubyinterp \
-"            --enable-pythoninterp \
-"            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
-"            --enable-perlinterp \
-"            --enable-luainterp \
-"            --enable-cscope \
-"            --enable-gui=gtk3 --with-x --prefix=/usr \
-"            --enable-python3interp=dynamic\
-"            --with-python3-config-dir=/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu/ \
-"            --with-lua-prefix=/usr/include/lua5.2 \
-"            --with-python-config-dir=/usr/lib/ \
-"            --enable-fail-if-missing
-
-" :r ! ls ~/.vim/bundle/
-" Liste des extension installée
 
 " -----------------------
 " Réglages pour Gundo
@@ -834,17 +791,6 @@ let g:indentLine_faster = 0
 let g:indentLine_fileTypeExclude = ['help', 'text', '']
 
 " -----------------------
-" Réglages pour neocomplete
-" -----------------------
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_delimiter = 1
-let g:neocomplete#enable_auto_close_preview = 1
-let g:neocomplete#auto_completion_start_length = 3
-let g:neocomplete#manual_completion_start_length = 3
-let g:neocomplete#max_list = 15
-
-" -----------------------
 " Réglage pour YouCompleteMe
 " -----------------------
 let g:ycm_python_binary_path = '/usr/bin/python3'
@@ -878,6 +824,24 @@ let g:SpellCheck_DefineQuickfixMappings = 1
 " -----------------------
 let g:Gitv_OpenHorizontal = 1
 let g:Gitv_DoNotMapCtrlKey = 1
+
+" -----------------------
+" Réglages pour FSwitch
+" -----------------------
+let g:fsnonewfiles = 1
+" Réglages de FSwitch pour les hpp
+augroup fichierHpp
+    autocmd!
+    autocmd BufEnter *.hpp let b:fswitchdst  = 'cpp'
+    autocmd BufEnter *.hpp let b:fswitchlocs = 'reg:|include||'
+augroup end
+
+" Réglages de FSwitch pour les cpp
+augroup fichierCpp
+    autocmd!
+    autocmd BufEnter *.cpp let b:fswitchdst  = 'hpp'
+    autocmd BufEnter *.cpp let b:fswitchlocs = 'reg:|src|src/include|'
+augroup end
 
 " -----------------------
 " Réglage pour airline
