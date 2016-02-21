@@ -29,7 +29,7 @@ let g:airline#themes#newDark#palette = {}
 " [ guifg, guibg, ctermfg, ctermbg, opts ]. See "help attr-list" for valid
 " values for the "opt" value.
 let s:N1   = [ '#00005f' , '#00dd00' , 17  , 34  , 'bold' ]
-let s:N2   = [ '#ffffff' , '#444444' , 255 , 238 ]
+let s:N2   = [ '#ffffff' , '#333333' , 255 , 236 ]
 let s:N3   = [ '#9cffd3' , '#005500' , 85  , 22  ]
 let g:airline#themes#newDark#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 let g:airline#themes#newDark#palette.normal_modified = {
@@ -39,7 +39,7 @@ let g:airline#themes#newDark#palette.normal_modified = {
 
 
 let s:I1 = [ '#00005f' , '#ffff00' , 17  , 190 , 'bold' ]
-let s:I2 = [ '#ffffff' , '#444444' , 255 , 238 ]
+let s:I2 = [ '#ffffff' , '#333333' , 255 , 236 ]
 let s:I3 = [ '#9cffd3' , '#888800' , 19  , 142 ]
 let g:airline#themes#newDark#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
 let g:airline#themes#newDark#palette.insert_modified = copy( g:airline#themes#newDark#palette.normal_modified )
@@ -49,12 +49,12 @@ let g:airline#themes#newDark#palette.insert_modified = copy( g:airline#themes#ne
 
 
 let g:airline#themes#newDark#palette.replace = copy(g:airline#themes#newDark#palette.insert)
-let g:airline#themes#newDark#palette.replace.airline_a = [ s:I2[0]   , '#aa00aa' , s:I2[2] , 90      , ''     ]
+let g:airline#themes#newDark#palette.replace.airline_a = [ s:I2[0]   , '#990099' , s:I2[2] , 90      , ''     ]
 let g:airline#themes#newDark#palette.replace_modified = g:airline#themes#newDark#palette.insert_modified
 
 
 let s:V1 = [ '#00005f' , '#00aaff' , 17  , 36  , 'bold' ]
-let s:V2 = [ '#ffffff' , '#444444' , 255 , 238 ]
+let s:V2 = [ '#ffffff' , '#333333' , 255 , 236 ]
 let s:V3 = [ '#9cffd3' , '#0066aa' , 85  , 25  ]
 let g:airline#themes#newDark#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
 let g:airline#themes#newDark#palette.visual_modified =  copy( g:airline#themes#newDark#palette.normal_modified )
