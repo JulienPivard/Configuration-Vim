@@ -28,18 +28,19 @@ let g:airline#themes#newDark#palette = {}
 " to the dictionary.  The array is in the format:
 " [ guifg, guibg, ctermfg, ctermbg, opts ]. See "help attr-list" for valid
 " values for the "opt" value.
-let s:N1   = [ '#00005f' , '#00ff00' , 17  , 34  , 'bold' ]
+let s:N1   = [ '#00005f' , '#00dd00' , 17  , 34  , 'bold' ]
 let s:N2   = [ '#ffffff' , '#444444' , 255 , 238 ]
-let s:N3   = [ '#9cffd3' , '#202020' , 85  , 234 ]
+let s:N3   = [ '#9cffd3' , '#005500' , 85  , 22  ]
 let g:airline#themes#newDark#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 let g:airline#themes#newDark#palette.normal_modified = {
-      \ 'airline_c': [ '#ffffff' , '#cc0000' , 255     , 160      , ''     ] ,
+      \ 'airline_b': [ '#ffffff' , '#cc0000' , 255     , 160      , ''     ] ,
+      \ 'airline_y': [ '#ffffff' , '#cc0000' , 255     , 160      , ''     ] ,
       \ }
 
 
 let s:I1 = [ '#00005f' , '#ffff00' , 17  , 190 , 'bold' ]
 let s:I2 = [ '#ffffff' , '#444444' , 255 , 238 ]
-let s:I3 = [ '#9cffd3' , '#202020' , 85  , 234 ]
+let s:I3 = [ '#9cffd3' , '#888800' , 19  , 142 ]
 let g:airline#themes#newDark#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
 let g:airline#themes#newDark#palette.insert_modified = copy( g:airline#themes#newDark#palette.normal_modified )
 "let g:airline#themes#newDark#palette.insert_paste = {
@@ -48,25 +49,34 @@ let g:airline#themes#newDark#palette.insert_modified = copy( g:airline#themes#ne
 
 
 let g:airline#themes#newDark#palette.replace = copy(g:airline#themes#newDark#palette.insert)
-let g:airline#themes#newDark#palette.replace.airline_a = [ s:I2[0]   , '#af0000' , s:I2[2] , 124     , ''     ]
+let g:airline#themes#newDark#palette.replace.airline_a = [ s:I2[0]   , '#aa00aa' , s:I2[2] , 90      , ''     ]
 let g:airline#themes#newDark#palette.replace_modified = g:airline#themes#newDark#palette.insert_modified
 
 
-let s:V1 = [ '#00005f' , '#00aaff' , 17  , 33  , 'bold' ]
+let s:V1 = [ '#00005f' , '#00aaff' , 17  , 36  , 'bold' ]
 let s:V2 = [ '#ffffff' , '#444444' , 255 , 238 ]
-let s:V3 = [ '#9cffd3' , '#202020' , 85  , 234 ]
+let s:V3 = [ '#9cffd3' , '#0066aa' , 85  , 25  ]
 let g:airline#themes#newDark#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
 let g:airline#themes#newDark#palette.visual_modified =  copy( g:airline#themes#newDark#palette.normal_modified )
 
 
-let s:IA1 = [ '#9e9e9e' , '#1c1c1c' , 245 , 234 , 'bold' ]
-let s:IA2 = [ '#9e9e9e' , '#262626' , 245 , 235 , '' ]
-let s:IA3 = [ '#9e9e9e' , '#303030' , 245 , 236 , '' ]
+let s:IA1 = [ '#9e9e9e' , '#0f0f0f' , 246 , 232 , 'bold' ]
+let s:IA2 = [ '#9e9e9e' , '#1c1c1c' , 246 , 233 , '' ]
+let s:IA3 = [ '#9e9e9e' , '#2a2a2a' , 246 , 234 , '' ]
 let g:airline#themes#newDark#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
 let g:airline#themes#newDark#palette.inactive_modified = {
-      \ 'airline_c': [ '#875faf' , '' , 219 , '' , 'bold' ] ,
+      \ 'airline_c': [ '#ccaa00' , '' , 184 , '' , 'bold' ] ,
       \ }
 
+let g:airline#themes#newDark#palette.tabline = {
+      \ 'airline_tab':          ['#c8c8c8' , '#005500' , 188 , 22  , '' ],
+      \ 'airline_tabsel':       ['#00005f' , '#00cc00' , 17  , 34  , 'bold' ],
+      \ 'airline_tabtype':      ['#00005f' , '#00aaff' , 17  , 25  , 'bold' ],
+      \ 'airline_tabfill':      ['#c8c8c8' , '#1e1e1e' , 188 , 234 , '' ],
+      \ 'airline_tabmod':       ['#1e1e1e' , '#dddd00' , 235 , 220 , 'bold' ],
+      \ 'airline_tabhid':       ['#ffffff' , '#444444' , 255 , 238 , '' ],
+      \ 'airline_tabmod_unsel': ['#1e1e1e' , '#eeee00' , 235 , 221 , '' ],
+      \ }
 
 " Accents are used to give parts within a section a slightly different look or
 " color. Here we are defining a "red" accent, which is used by the 'readonly'
@@ -91,4 +101,3 @@ let g:airline#themes#newDark#palette.ctrlp = airline#extensions#ctrlp#generate_c
       \ [ '#d7d7ff' , '#5f00af' , 189 , 55  , ''     ],
       \ [ '#ffffff' , '#875fd7' , 231 , 98  , ''     ],
       \ [ '#5f00af' , '#ffffff' , 55  , 231 , 'bold' ])
-

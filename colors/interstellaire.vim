@@ -29,9 +29,10 @@ if has('gui_running')
 
     let s:noir          = '#000000'
     let s:grissombre    = '#111111'
+    let s:grissombre2   = '#222222'
     let s:rougesombre   = '#aa0000'
     let s:rouge         = '#ff0000'
-    let s:rougeclair    = '#ff4444'
+    let s:rougeclair    = '#ff1f1f'
     let s:orangesombre  = '#ff4400'
     let s:orange        = '#ff6600'
     let s:orangeclair   = '#ff9900'
@@ -62,6 +63,7 @@ elseif g:interstellaire_termcolors != 256 && &t_Co >= 16
 
     let s:noir          = '0'
     let s:grissombre    = '8'
+    let s:grissombre2   = '8'
     let s:rougesombre   = '1'
     let s:rouge         = '9'
     let s:rougeclair    = '9'
@@ -95,6 +97,7 @@ elseif g:interstellaire_termcolors == 256
 
     let s:noir          = '16'
     let s:grissombre    = '233'
+    let s:grissombre2   = '235'
     let s:rougesombre   = '1'
     let s:rouge         = '160'
     let s:rougeclair    = '9'
@@ -128,6 +131,7 @@ else
 
     let s:noir          = 'Black'         " 0
     let s:grissombre    = 'DarkGray'      " 0*
+    let s:grissombre2   = 'DarkGray'
     let s:rougesombre   = 'DarkRed'       " 1
     let s:rouge         = 'Red'
     let s:rougeclair    = 'LightRed'      " 1*
@@ -306,6 +310,13 @@ exe 'highlight lCursor'         . s:forme                               . s:text
 " Coloration pour TagBar    "(((
 
 exe 'highlight TagbarSignature'     . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
+
+" ========================== )))
+
+" Coloration pour Indent Guides
+
+exe 'highlight IndentGuidesOdd'     . s:forme                               . s:texte . s:none              . s:fond . s:grissombre2
+exe 'highlight IndentGuidesEven'    . s:forme                               . s:texte . s:none              . s:fond . s:grissombre
 
 " ========================== )))
 

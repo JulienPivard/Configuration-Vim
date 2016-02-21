@@ -49,3 +49,21 @@ let g:neocomplete#max_list = 15
 " :echo substitute(split(getcwd(), '/')[-1], "\\(\\<\\u\\)", "\\L\\1", "")
 " :echo substitute(split(getcwd(), '/')[-1], ".*", "\\l\\0", "")
 " :echo substitute(split(getcwd(), '/')[-1], "\\<\\u", "\\L\\0", "")
+
+
+
+
+Plugin 'Yggdroot/indentLine'
+
+" -----------------------
+" Réglages pour indentLine
+" -----------------------
+let g:indentLine_loaded = 0
+let g:indentLine_color_term = 3         " Jaune
+let g:indentLine_color_gui = '#CA9700'
+let g:indentLine_concealcursor = ''
+let g:indentLine_conceallevel = 2
+let g:indentLine_leadingSpaceEnabled = 0
+let g:indentLine_char = '✔'
+let g:indentLine_faster = 0
+let g:indentLine_fileTypeExclude = ['help', 'text', '']

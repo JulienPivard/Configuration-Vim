@@ -14,7 +14,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'Yggdroot/indentLine'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edsono/vim-matchit'
 Plugin 'gorodinskiy/vim-coloresque'
@@ -39,6 +38,8 @@ Plugin 'vim-scripts/L9'
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/SpellCheck'
 Plugin 'vim-scripts/ingo-library'
+
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " Plugin pour gvim.
 Plugin 'vim-scripts/hexHighlight.vim'
@@ -137,7 +138,7 @@ set   wildmode=longest:full,full        " Complète d'abord avec la correspondan
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
 " Pour gvim
-set guifont=Source\ Code\ Pro\ for\ Powerline
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
 " ================== Changer la ligne de statut de vim. ==================
 " Couper si la ligne est trop longue %<
@@ -247,7 +248,7 @@ endfunction
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()
-    let line = getline(v:foldstart)
+    let line = getline( v:foldstart )
     let lignes = v:foldend - v:foldstart + 1
     let subFold = substitute( line, '^\s*\|(((\=', '', 'g' )
     let debut = '+' . v:folddashes . ' | ' . v:foldstart . '-' . v:foldend . ' |  '
@@ -267,7 +268,7 @@ function! MontrerGroupeSyntax()
     if !exists( '*synstack' )
         return
     endif
-    echo map( synstack( line('.'), col('.') ), 'synIDattr(v:val, "name")' )
+    echo map( synstack( line('.'), col('.') ), 'synIDattr( v:val, "name" )' )
 endfunc
 
 " Suppression automatique des espaces superflus
@@ -373,7 +374,7 @@ augroup end
 " Création d'une page de manuel avec ajout du nom automatiquement
 augroup manuel
     autocmd!
-    autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand('%:t:r')?
+    autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand( '%:t:r' )?
 augroup end
 
 augroup commandesLocale
@@ -442,14 +443,14 @@ endfunction
 " COnfiguration des nouveaux fichiers cpp
 function! ConfigurationNouveauFichierCPP()
     0r ~/.vim/CodeBasique/codeBasique.cpp
-    :%substitute?NOMFICHIER?\=expand('%:t:r')?g
+    :%substitute?NOMFICHIER?\=expand( '%:t:r' )?g
 endfunc
 
 " Configure les nouveaux fichiers cpp
 function! ConfigurationNouveauFichierHPP()
     0r ~/.vim/CodeBasique/codeBasique.hpp
-    :%substitute?MANOUVELLECLASSE?\=expand('%:t:r')?g
-    :%substitute@VARIABLE_A_CHANGER@\=expand('%:t:r') . '_hpp'@
+    :%substitute?MANOUVELLECLASSE?\=expand( '%:t:r' )?g
+    :%substitute@VARIABLE_A_CHANGER@\=expand( '%:t:r' ) . '_hpp'@
 endfunction
 
 " Maccros pour le cpp
@@ -493,11 +494,11 @@ endfunction
 "Configuration des nouveaux fichiers en java
 function! ConfigurationNouveauFichierJAVA()
     0r ~/.vim/CodeBasique/codeBasique.java
-    :%substitute?NOMFICHIER?\=expand('%:t:r')?
-    :1substitute?package truc?\= "package ".expand('%:p:.:h')?
+    :%substitute?NOMFICHIER?\=expand( '%:t:r' )?
+    :1substitute?package truc?\= "package ".expand( '%:p:.:h' )?
     :1substitute?/?\.?ge
     " Permet d'utiliser gf sur les fichiers java.
-    set includeexpr=substitute(v:fname,'\\.','/','g')
+    set includeexpr=substitute( v:fname,'\\.','/','g' )
 endfunction
 
 " Fonction pour exécuter les fichiers java compilé selon l'existence ou non d'un makefile
@@ -707,8 +708,8 @@ let g:gundo_preview_bottom = 1      " Pour que la fenêtre d'aperçus prenne tou
 let g:gundo_close_on_revert = 1     " Fermer automatiquement après annulation.
 let g:gundo_auto_preview = 0        " Désactive l'affichage automatique des différence.
 let g:gundo_prefer_python3 = 0
-let g:gundo_tree_statusline='%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
-let g:gundo_preview_statusline='%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
+let g:gundo_tree_statusline = '%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
+let g:gundo_preview_statusline = '%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
 " -----------------------
 " Réglages pour syntastic
@@ -778,18 +779,6 @@ let g:UltiSnipsJumpForwardTrigger = '<c-h>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-l>'
 
 " -----------------------
-" Réglages pour indentLine
-" -----------------------
-let g:indentLine_color_term = 3         " Jaune
-let g:indentLine_color_gui = '#CA9700'
-let g:indentLine_concealcursor = ''
-let g:indentLine_conceallevel = 2
-let g:indentLine_leadingSpaceEnabled = 0
-let g:indentLine_char = '✔'
-let g:indentLine_faster = 0
-let g:indentLine_fileTypeExclude = ['help', 'text', '']
-
-" -----------------------
 " Réglage pour YouCompleteMe
 " -----------------------
 let g:ycm_python_binary_path = '/usr/bin/python3'
@@ -799,6 +788,7 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 0
+let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_confirm_extra_conf = 0            " À changer dés que possible.
 let g:ycm_extra_conf_globlist = []
 
@@ -834,13 +824,13 @@ augroup fichierHpp
     autocmd BufEnter *.hpp let b:fswitchdst  = 'cpp'
     autocmd BufEnter *.hpp let b:fswitchlocs = 'reg:|include||'
 augroup end
-
 " Réglages de FSwitch pour les cpp
 augroup fichierCpp
     autocmd!
     autocmd BufEnter *.cpp let b:fswitchdst  = 'hpp'
     autocmd BufEnter *.cpp let b:fswitchlocs = 'reg:|src|src/include|'
 augroup end
+" -----------------------
 
 " -----------------------
 " Réglage pour airline
@@ -851,6 +841,14 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'newDark'
 let g:airline#extensions#branch#empty_message = '···'
+
+" -----------------------
+" Réglages pour indent guides
+" -----------------------
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 " -----------------------
 " Réglage pour mon thème de couleurs.
