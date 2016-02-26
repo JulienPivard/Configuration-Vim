@@ -27,9 +27,10 @@ if has('gui_running')
 
     let s:vmode         = 'gui'
 
+    let s:indent1       = '#003300'
+    let s:indent2       = '#000033'
     let s:noir          = '#000000'
     let s:grissombre    = '#111111'
-    let s:grissombre2   = '#222222'
     let s:rougesombre   = '#aa0000'
     let s:rouge         = '#ff0000'
     let s:rougeclair    = '#ff1f1f'
@@ -61,9 +62,10 @@ elseif g:interstellaire_termcolors != 256 && &t_Co >= 16
 
     let s:vmode         = 'cterm'
 
+    let s:indent1       = '2'
+    let s:indent2       = '4'
     let s:noir          = '0'
     let s:grissombre    = '8'
-    let s:grissombre2   = '8'
     let s:rougesombre   = '1'
     let s:rouge         = '9'
     let s:rougeclair    = '9'
@@ -95,9 +97,10 @@ elseif g:interstellaire_termcolors == 256
 
     let s:vmode         = 'cterm'
 
+    let s:indent1       = '22'
+    let s:indent2       = '17'
     let s:noir          = '16'
     let s:grissombre    = '233'
-    let s:grissombre2   = '235'
     let s:rougesombre   = '1'
     let s:rouge         = '160'
     let s:rougeclair    = '9'
@@ -129,9 +132,10 @@ else
 
     let s:vmode         = 'cterm'
 
+    let s:indent1       = 'DarkGreen'
+    let s:indent2       = 'DarkBlue'
     let s:noir          = 'Black'         " 0
     let s:grissombre    = 'DarkGray'      " 0*
-    let s:grissombre2   = 'DarkGray'
     let s:rougesombre   = 'DarkRed'       " 1
     let s:rouge         = 'Red'
     let s:rougeclair    = 'LightRed'      " 1*
@@ -315,8 +319,8 @@ exe 'highlight TagbarSignature'     . s:forme                               . s:
 
 " Coloration pour Indent Guides
 
-exe 'highlight IndentGuidesOdd'     . s:forme                               . s:texte . s:none              . s:fond . s:grissombre2
-exe 'highlight IndentGuidesEven'    . s:forme                               . s:texte . s:none              . s:fond . s:grissombre
+exe 'highlight IndentGuidesOdd'     . s:forme                               . s:texte . s:none              . s:fond . s:indent2
+exe 'highlight IndentGuidesEven'    . s:forme                               . s:texte . s:none              . s:fond . s:indent1
 
 " ========================== )))
 

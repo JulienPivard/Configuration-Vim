@@ -23,6 +23,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 'mbbill/undotree'
 Plugin 'mhinz/vim-signify'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'phongnh/vim-antlr'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'reedes/vim-pencil'
@@ -38,8 +39,6 @@ Plugin 'vim-scripts/L9'
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/SpellCheck'
 Plugin 'vim-scripts/ingo-library'
-
-Plugin 'nathanaelkane/vim-indent-guides'
 
 " Plugin pour gvim.
 Plugin 'vim-scripts/hexHighlight.vim'
@@ -659,6 +658,9 @@ let mapleader = 'ù'
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 
+nmap <leader>bs :buffers<CR>
+nmap <leader>bb :bnext<CR>
+
 nmap <leader>sh :SignifyToggleHighlight<CR>
 nmap <leader>sr :SignifyRefresh<CR>
 nmap <leader>sj <plug>(signify-next-hunk)
@@ -673,6 +675,10 @@ nmap <silent> <Leader>fg :FSLeft<cr>
 nmap <silent> <Leader>ffg :FSSplitLeft<cr>
 nmap <silent> <Leader>fr :FSRight<cr>
 nmap <silent> <Leader>ffr :FSSplitRight<cr>
+nmap <silent> <Leader>fk :FSAbove<cr>
+nmap <silent> <Leader>ffk :FSSplitAbove<cr>
+nmap <silent> <Leader>fj :FSBelow<cr>
+nmap <silent> <Leader>ffj :FSSplitBelow<cr>
 
 nmap <leader>o :copen 20<CR>
 nmap <leader>c :cclose<CR>
@@ -790,6 +796,7 @@ let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 0
 let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_confirm_extra_conf = 0            " À changer dés que possible.
+let g:ycm_allow_changing_updatetime = 0
 let g:ycm_extra_conf_globlist = []
 
 " -----------------------
