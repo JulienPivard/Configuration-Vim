@@ -27,8 +27,8 @@ if has('gui_running')
 
     let s:vmode         = 'gui'
 
-    let s:indent1       = '#003300'
-    let s:indent2       = '#000033'
+    let s:indent1       = '#131313'
+    let s:indent2       = '#222222'
     let s:noir          = '#000000'
     let s:grissombre    = '#111111'
     let s:rougesombre   = '#aa0000'
@@ -62,8 +62,8 @@ elseif g:interstellaire_termcolors != 256 && &t_Co >= 16
 
     let s:vmode         = 'cterm'
 
-    let s:indent1       = '2'
-    let s:indent2       = '4'
+    let s:indent1       = '0'
+    let s:indent2       = '8'
     let s:noir          = '0'
     let s:grissombre    = '8'
     let s:rougesombre   = '1'
@@ -97,8 +97,8 @@ elseif g:interstellaire_termcolors == 256
 
     let s:vmode         = 'cterm'
 
-    let s:indent1       = '22'
-    let s:indent2       = '17'
+    let s:indent1       = '234'
+    let s:indent2       = '236'
     let s:noir          = '16'
     let s:grissombre    = '233'
     let s:rougesombre   = '1'
@@ -132,8 +132,8 @@ else
 
     let s:vmode         = 'cterm'
 
-    let s:indent1       = 'DarkGreen'
-    let s:indent2       = 'DarkBlue'
+    let s:indent1       = 'Black'
+    let s:indent2       = 'DarkGray'
     let s:noir          = 'Black'         " 0
     let s:grissombre    = 'DarkGray'      " 0*
     let s:rougesombre   = 'DarkRed'       " 1
