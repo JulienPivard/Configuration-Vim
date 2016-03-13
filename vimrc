@@ -140,6 +140,7 @@ set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
 " ================== Changer la ligne de statut de vim. ==================
+
 " Couper si la ligne est trop longue %<
 " Le nom du chemin complet %f
 " le tag d'aide %h
@@ -352,10 +353,10 @@ augroup end
 " pour des raisons de vitesse de retour à l'édition
 augroup compilation
     autocmd!
-    autocmd FileType tex,haskell,ocaml,sql,php  map  <buffer> <F5>       :make <CR>
-    autocmd FileType tex,haskell,ocaml,sql,php  map! <buffer> <F5>  <Esc>:make <CR>
-    autocmd Filetype perl,sh,python             map  <buffer> <F5>       :!./% <CR>
-    autocmd Filetype perl,sh,python             map! <buffer> <F5>  <Esc>:!./% <CR>
+    autocmd FileType tex,haskell,ocaml,sql,php  map  <buffer> <s-F5>       :make <CR>
+    autocmd FileType tex,haskell,ocaml,sql,php  map! <buffer> <s-F5>  <Esc>:make <CR>
+    autocmd Filetype perl,sh,python             map  <buffer> <s-F5>       :!./% <CR>
+    autocmd Filetype perl,sh,python             map! <buffer> <s-F5>  <Esc>:!./% <CR>
 augroup end
 
 " Définition de la coloration syntaxique pour les fichier antlr
@@ -383,7 +384,7 @@ augroup commandesLocale
     " Pour éviter les ralentissement dans les fichiers latex et plugin gundo
     autocmd FileType tex            setlocal nocursorline nocursorcolumn
     " Active les replis en se basant sur l'indentation
-    autocmd FileType python,sh,perl setlocal foldmethod=indent
+    autocmd FileType python,sh,perl,vim setlocal foldmethod=indent
 augroup end
 
 " Mappage des touches en fonctions du type de fichier
@@ -396,8 +397,8 @@ augroup end
 " Recharge le vimrc quand utilise F5
 augroup vimSource
     autocmd!
-    autocmd FileType vim    map  <buffer> <F5>       :source ~/.vim/vimrc<CR>
-    autocmd FileType vim    map! <buffer> <F5>  <Esc>:source ~/.vim/vimrc<CR>
+    autocmd FileType vim    map  <buffer> <s-F5>       :source ~/.vim/vimrc<CR>
+    autocmd FileType vim    map! <buffer> <s-F5>  <Esc>:source ~/.vim/vimrc<CR>
 augroup end
 
 " Mappage selon la présence de makefile
@@ -435,8 +436,8 @@ function! ExistMakeFileC()
         map  <buffer> <F10>       :!./%<<CR>
         map! <buffer> <F10> <Esc> :!./%<<CR>
     endif
-    map  <buffer> <F5>        :make<CR>
-    map! <buffer> <F5>  <Esc> :make<CR>
+    map  <buffer> <s-F5>        :make<CR>
+    map! <buffer> <s-F5>  <Esc> :make<CR>
 endfunction
 
 " COnfiguration des nouveaux fichiers cpp
@@ -465,14 +466,14 @@ function! MacrosCPP()
         map! <buffer> <S-F9>  <Esc> :make clean<CR>
     else
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
-        setlocal makeprg=g++\ -Wall\ -Wextra\ -o\ %<\ %
+        setlocal makeprg=g++\ -Wall\ -Wextra\ -std=c++11\ -o\ %<\ %
         map  <buffer> <F10>         :!./$nomFichier<CR>
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
     endif
-    map  <buffer> <F5>          :make<CR>
-    map! <buffer> <F5>    <Esc> :make<CR>
-    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq ./src/<CR>
-    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq ./src/<CR>
+    map  <buffer> <s-F5>        :make<CR>
+    map! <buffer> <s-F5>  <Esc> :make<CR>
+    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
+    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map  <buffer> <S-F11>       :!doxygen<CR>
     map! <buffer> <S-F11> <Esc> :!doxygen<CR>
     setlocal path=.,src/include,src/include/modele,src/include/builders,src/include/builders/lorraine
@@ -481,13 +482,6 @@ function! MacrosCPP()
     " Ajoute de tags pour l'omnicompletion
     " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
     setlocal tags+=~/.vim/tags/cpp
-    let OmniCpp_NamespaceSearch = 1
-    let OmniCpp_GlobalScopeSearch = 1
-    let OmniCpp_ShowAccess = 1
-    let OmniCpp_ShowPrototypeInAbbr = 1 " Montre les paramètres des fonctions.
-    let OmniCpp_MayCompleteDot = 1      " auto complète après .
-    let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
-    let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 endfunction
 
 "Configuration des nouveaux fichiers en java
@@ -523,8 +517,8 @@ function! ExistConfigurationJava()
         map  <buffer> <S-F11>       :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
         map! <buffer> <S-F11> <Esc> :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
     endif
-    map  <buffer> <F5>          :make<CR>
-    map! <buffer> <F5>    <Esc> :make<CR>
+    map  <buffer> <s-F5>        :make<CR>
+    map! <buffer> <s-F5>  <Esc> :make<CR>
     iabbrev <buffer> sopl System.out.println( "" )<Esc>hhi
     iabbrev <buffer> sopf System.out.printf( "" )<Esc>hhi
     iabbrev <buffer> sepl System.err.println( "" )<Esc>hhi
@@ -555,8 +549,8 @@ endfunction
 " La touche F12 ouvre le lecteur pdf
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
 function! AffichageGroff()
-    map  <buffer> <F5>         :!groff -Kutf8 -me  -Tutf8 % <CR>
-    map! <buffer> <F5>    <Esc>:!groff -Kutf8 -me  -Tutf8 % <CR>
+    map  <buffer> <s-F5>       :!groff -Kutf8 -me  -Tutf8 % <CR>
+    map! <buffer> <s-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <CR>
     map  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <CR>
     map! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <CR>
     map  <buffer> <F10>        :!groff -Kutf8 -man -Tutf8 % <CR>
@@ -603,16 +597,16 @@ endfunction
 
 " Raccourcis pour les fichiers antlr compile et lance les tests
 function! ConfigAntlr()
-    map  <buffer> <F5>        :!./runAntlr.sh %< <CR>
-    map! <buffer> <F5>  <Esc> :!./runAntlr.sh %< <CR>
-    map  <buffer> <F10>       :!./runAntlr.sh %< test.code <CR>
-    map! <buffer> <F10> <Esc> :!./runAntlr.sh %< test.code <CR>
+    map  <buffer> <s-F5>       :!./runAntlr.sh %< <CR>
+    map! <buffer> <s-F5> <Esc> :!./runAntlr.sh %< <CR>
+    map  <buffer> <F10>        :!./runAntlr.sh %< test.code <CR>
+    map! <buffer> <F10>  <Esc> :!./runAntlr.sh %< test.code <CR>
 endfunction
 
 " Macros pour le php
 function! ProgEnPHP()
-    iabbrev <buffer> ,, =>
-    iabbrev <buffer> t $this->
+    imap <buffer>,, =>
+    imap <buffer>t $this->
 endfunction
 
 " Mappage des touches utiles
@@ -626,8 +620,8 @@ map  <F3>           :setlocal spell!<CR>:setlocal spell?<CR>
 map! <F3>     <Esc> :setlocal spell!<CR>:setlocal spell?<CR>
 map  <F4>           :GundoToggle<CR>
 map! <F4>     <Esc> :GundoToggle<CR>
-map  <S-F5>         :w<CR>
-map! <S-F5>   <Esc> :w<CR>
+map  <F5>         :w<CR>
+map! <F5>   <Esc> :w<CR>
 map  <F6>           :NERDTreeToggle<CR>
 map! <F6>     <Esc> :NERDTreeToggle<CR>
 map  <S-F6>         :UndotreeToggle<CR>
@@ -651,7 +645,7 @@ map! <C-F12> <Esc>	:call MontrerGroupeSyntax()<CR>
 iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
 
-iabbrev <buffer> !! ->
+imap <buffer>!! ->
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
@@ -840,6 +834,17 @@ augroup end
 " -----------------------
 
 " -----------------------
+" Réglage pour OmniCppComplete
+" -----------------------
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " Montre les paramètres des fonctions.
+let OmniCpp_MayCompleteDot = 1      " auto complète après .
+let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
+let OmniCpp_MayCompleteScope = 1    " auto complète après ::
+
+" -----------------------
 " Réglage pour airline
 " -----------------------
 let g:airline#extensions#ycm#enabled = 1
@@ -857,6 +862,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+let g:indent_guides_default_mapping = 1
 
 " -----------------------
 " Réglage pour mon thème de couleurs.

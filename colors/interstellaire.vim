@@ -301,7 +301,7 @@ exe 'highlight TabLineFill'     . s:forme                               . s:text
 exe 'highlight TabLineSel'      . s:forme                               . s:texte . s:none              . s:fond . s:none
 exe 'highlight Title'           . s:forme . s:bold                      . s:texte . s:violetsombre      . s:fond . s:none
 
-exe 'highlight VertSplit'       . s:forme . s:bold                      . s:texte . s:cyansombre        . s:fond . s:bleuclair
+exe 'highlight VertSplit'       . s:forme . s:bold                      . s:texte . s:cyansombre        . s:fond . s:bleusombre
 exe 'highlight Visual'          . s:forme . s:reverse                   . s:texte . s:none              . s:fond . s:none
 exe 'highlight VisualNOS'       . s:forme . s:underline . s:bold        . s:texte . s:none              . s:fond . s:none
 exe 'highlight WarningMsg'      . s:forme                               . s:texte . s:rougesombre       . s:fond . s:none
@@ -360,7 +360,7 @@ exe 'highlight doxygenParam'                . s:forme                           
 exe 'highlight doxygenSpecial'              . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight doxygenBrief'                . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight doxygenSpecialOnelineDesc'   . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
-highlight link doxygenSmallSpecial doxygenSpecial
+highlight link doxygenSmallSpecial doxygenParam
 highlight link doxygenBOther doxygenParam
 
 " ========================================= )))
