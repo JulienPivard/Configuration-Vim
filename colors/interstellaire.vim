@@ -1,12 +1,13 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  Vendredi 29 janvier 2016
-" Created:      1er janvier 2012
+" Last Change:  Vendredi 20 mars 2016
+" Created:      1er janvier 2016
 "
 " Inspiré par le thème icansee de : David Schweikert <dws@ee.ethz.ch>
 " et par le thème Solarized de : Ethan Schoonover <es@ethanschoonover.com>
 
 " Initialisation du thème de couleurs. " (((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 if !exists('interstellaire_termcolors')
     let g:interstellaire_termcolors = 0
@@ -18,9 +19,12 @@ if exists('syntax_on')
 endif
 let colors_name = 'interstellaire'
 
-" ====================================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Définition de la palette de couleurs " (((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 if has('gui_running')
     " Si on utilise Gvim
@@ -164,30 +168,38 @@ else
 
 endif
 
-" ====================================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Options de mise en forme. " (((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-    let s:none      = 'NONE'
-    let s:bold      = ',bold'
-    let s:ucurl     = ',undercurl'
-    let s:reverse   = ',reverse'
-    let s:stdout    = ',standout'
-    let s:underline = ',underline'
-    let s:italic    = ',italic'
+let s:none      = 'NONE'
+let s:bold      = ',bold'
+let s:ucurl     = ',undercurl'
+let s:reverse   = ',reverse'
+let s:stdout    = ',standout'
+let s:underline = ',underline'
+let s:italic    = ',italic'
 
-" =========================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Fond, texte, mise en forme " (((
-
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 let s:fond  = ' ' . s:vmode . 'bg='
 let s:texte = ' ' . s:vmode . 'fg='
 let s:forme = ' ' . s:vmode . '=NONE'
 
-" ============================ )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration basique " (((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight Normal'          . s:forme                               . s:texte . s:blanc             . s:fond . s:couleurfond
 exe 'highlight Comment'         . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
@@ -242,9 +254,12 @@ exe 'highlight Error'           . s:forme                               . s:text
 exe 'highlight Todo'            . s:forme                               . s:texte . s:noir              . s:fond . s:cyan
 " TODO FIXME XXX
 
-" ==================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration étendue "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight Character'       . s:forme . s:bold                      . s:texte . s:vertclair         . s:fond . s:none
 exe 'highlight ColorColumn'     . s:forme                               . s:texte . s:none              . s:fond . s:none
@@ -309,22 +324,31 @@ exe 'highlight WarningMsg'      . s:forme                               . s:text
 exe 'highlight WildMenu'        . s:forme                               . s:texte . s:noir              . s:fond . s:violetsombre
 exe 'highlight lCursor'         . s:forme                               . s:texte . s:none              . s:fond . s:cyan
 
-" =================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration pour TagBar    "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight TagbarSignature'     . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
 
-" ========================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration pour Indent Guides
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight IndentGuidesOdd'     . s:forme                               . s:texte . s:none              . s:fond . s:indent2
 exe 'highlight IndentGuidesEven'    . s:forme                               . s:texte . s:none              . s:fond . s:indent1
 
-" ========================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration de la syntaxe vim  "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 highlight link vimLineComment vimComment
 highlight link vimComment Comment
@@ -345,15 +369,21 @@ exe 'highlight vimCommand'      . s:forme . s:underline . s:bold        . s:text
 exe 'highlight vimSynType'      . s:forme . s:underline                 . s:texte . s:orange            . s:fond . s:none
 exe 'highlight vimGroup'        . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
 
-" ============================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration pour les fichiers en php   "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight phpMemberSelector'   . s:forme . s:underline                 . s:texte . s:jaunesombre       . s:fond . s:none
 
-" ====================================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration pour la documentation doxygen "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight doxygenErrorComment'         . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
 exe 'highlight doxygenParam'                . s:forme                               . s:texte . s:bleu              . s:fond . s:none
@@ -363,23 +393,42 @@ exe 'highlight doxygenSpecialOnelineDesc'   . s:forme                           
 highlight link doxygenSmallSpecial doxygenParam
 highlight link doxygenBOther doxygenParam
 
-" ========================================= )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
+
+" Coloration pour la documentation javadoc "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+highlight link javaDocComment SpecialComment
+highlight link javaCommentStar SpecialComment
+
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Pour syntastic "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight SyntasticWarningSign'    . s:forme                               . s:texte . s:noir              . s:fond . s:jaunesombre
 
-" =============== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration pour signify "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight SignifySignAdd'      . s:forme                               . s:texte . s:vertsombre        . s:fond . s:grissombre
 exe 'highlight SignifySignDelete'   . s:forme                               . s:texte . s:rougesombre       . s:fond . s:grissombre
 exe 'highlight SignifySignChange'   . s:forme                               . s:texte . s:violetsombre      . s:fond . s:grissombre
 
-" ======================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
 
 " Coloration définie par l'utilisateur (((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 " Pour mieux mettre en valeur le symbole qui signale une modification du
 " fichier courant.
@@ -391,6 +440,7 @@ exe 'highlight User5'           . s:forme                               . s:text
 " La couleur de la branche git en cours.
 exe 'highlight User6'           . s:forme                               . s:texte . s:grissombre        . s:fond . s:jaune
 
-" ==================================== )))
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
 
 " vim:foldmethod=marker

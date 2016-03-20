@@ -632,8 +632,8 @@ map  <S-F7>         :nohls<CR>
 map! <S-F7>   <Esc> :nohls<CR>
 map  <F8>           :FufBuffer<CR>
 map! <F8>     <Esc> :FufBuffer<CR>
-map  <C-F8>         :YcmGenerateConfig<CR>
-map! <C-F8>   <Esc> :YcmGenerateConfig<CR>
+map  <C-F8>         :YcmGenerateConfig -f<CR>
+map! <C-F8>   <Esc> :YcmGenerateConfig -f<CR>
 map  <F9>           :FufBufferTagAll<CR>
 map! <F9>     <Esc> :FufBufferTagAll<CR>
 map  <S-F12>        :vsp ~/.vim/vimrc<CR>
