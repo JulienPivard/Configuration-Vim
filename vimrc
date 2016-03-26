@@ -491,7 +491,7 @@ function! MacrosCPP()
     map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map  <buffer> <S-F11>       :!doxygen<CR>
     map! <buffer> <S-F11> <Esc> :!doxygen<CR>
-    setlocal path=.,src/include,src/include/modele,src/include/builders,src/include/builders/lorraine
+    setlocal path=.,src/include
     let g:load_doxygen_syntax = 1
     setlocal syntax=cpp.doxygen
     " Ajoute de tags pour l'omnicompletion
@@ -876,7 +876,7 @@ let g:airline#extensions#branch#empty_message = '···'
 " -----------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 2
+let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_default_mapping = 1
 
