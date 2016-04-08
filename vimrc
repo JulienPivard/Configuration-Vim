@@ -283,25 +283,25 @@ function! Nettoyage()
     unlet curline
 endfunction
 
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=0
-    set cst
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
+if has( 'cscope' )
+    set   cscopeprg=/usr/bin/cscope
+    set   cscopetagorder=0
+    set   cscopetag
+    set nocscopeverbose
+    " Ajoute la base de donnée cscope qui se trouve dans le dossier courant.
+    if filereadable( 'cscope.out' )
         cs add cscope.out
-    " else add database pointed to by environment
+    " sinon pointe la base définie par une variable d'environnement.
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     endif
-    set csverb
+    set   cscopeverbose
 endif
 
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
 augroup recuperationEtatSessionsPrecedente
     autocmd!
-    autocmd BufReadPost * if line( "'\"" ) > 1 && line( "'\"" ) <= line( "$" ) | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line( "'\"" ) > 1 && line( "'\"" ) <= line( '$' ) | exe "normal! g'\"" | endif
 augroup end
 
 " Pour supprimer les espaces en fin de ligne.
@@ -491,7 +491,6 @@ function! MacrosCPP()
     map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map  <buffer> <S-F11>       :!doxygen<CR>
     map! <buffer> <S-F11> <Esc> :!doxygen<CR>
-    setlocal path=.,src/include
     let g:load_doxygen_syntax = 1
     setlocal syntax=cpp.doxygen
     " Ajoute de tags pour l'omnicompletion
@@ -635,8 +634,8 @@ map  <F3>           :setlocal spell!<CR>:setlocal spell?<CR>
 map! <F3>     <Esc> :setlocal spell!<CR>:setlocal spell?<CR>
 map  <F4>           :GundoToggle<CR>
 map! <F4>     <Esc> :GundoToggle<CR>
-map  <F5>         :w<CR>
-map! <F5>   <Esc> :w<CR>
+map  <F5>           :w<CR>
+map! <F5>     <Esc> :w<CR>
 map  <F6>           :NERDTreeToggle<CR>
 map! <F6>     <Esc> :NERDTreeToggle<CR>
 map  <S-F6>         :UndotreeToggle<CR>
@@ -828,7 +827,7 @@ let g:SpellCheck_DefineQuickfixMappings = 1
 " -----------------------
 " Réglages pour gitv
 " -----------------------
-let g:Gitv_OpenHorizontal = 1
+let g:Gitv_OpenHorizontal = 0
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " -----------------------
@@ -836,13 +835,13 @@ let g:Gitv_DoNotMapCtrlKey = 1
 " -----------------------
 let g:fsnonewfiles = 1
 " Réglages de FSwitch pour les hpp
-augroup fichierHpp
+augroup fichierHppHeader
     autocmd!
     autocmd BufEnter *.hpp let b:fswitchdst  = 'cpp'
-    autocmd BufEnter *.hpp let b:fswitchlocs = 'reg:|include||'
+    autocmd BufEnter *.hpp let b:fswitchlocs = 'reg:|src/include|src|'
 augroup end
 " Réglages de FSwitch pour les cpp
-augroup fichierCpp
+augroup fichierCppCode
     autocmd!
     autocmd BufEnter *.cpp let b:fswitchdst  = 'hpp'
     autocmd BufEnter *.cpp let b:fswitchlocs = 'reg:|src|src/include|'
@@ -869,7 +868,7 @@ let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'newDark'
-let g:airline#extensions#branch#empty_message = '···'
+let g:airline#extensions#branch#empty_message = '····'
 
 " -----------------------
 " Réglages pour indent guides
