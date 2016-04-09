@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  Vendredi 20 mars 2016
+" Last Change:  samedi 09 avril[04] 2016
 " Created:      1er janvier 2016
 "
 " Inspiré par le thème icansee de : David Schweikert <dws@ee.ethz.ch>
