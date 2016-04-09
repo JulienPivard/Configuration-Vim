@@ -337,7 +337,7 @@ exe 'highlight TagbarSignature'     . s:forme                               . s:
 " )))
 
 
-" Coloration pour Indent Guides
+" Coloration pour Indent Guides (((
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight IndentGuidesOdd'     . s:forme                               . s:texte . s:none              . s:fond . s:indent2
@@ -363,6 +363,7 @@ highlight link vimSynMtchOpt vimSynOption
 highlight link vimIsCommand Normal
 highlight link vimHiGroup vimGroup
 highlight link vimHiLink Normal
+highlight link vimIsCommand vimOption
 
 exe 'highlight vimCmdSep'       . s:forme . s:underline                 . s:texte . s:jaunesombre       . s:fond . s:none
 exe 'highlight vimCommand'      . s:forme . s:underline . s:bold        . s:texte . s:bleuclair         . s:fond . s:none

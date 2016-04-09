@@ -606,9 +606,9 @@ augroup END
 augroup commandesLocale
     autocmd!
     " Redéfinition de la commande d'aide utilisée avec K
-    autocmd FileType tex            setlocal keywordprg=texdoc
+    autocmd FileType tex                setlocal keywordprg=texdoc
     " Pour éviter les ralentissement dans les fichiers latex et plugin gundo
-    autocmd FileType tex            setlocal nocursorline nocursorcolumn
+    autocmd FileType tex                setlocal nocursorline nocursorcolumn
     " Active les replis en se basant sur l'indentation
     autocmd FileType python,sh,perl,vim setlocal foldmethod=indent
 augroup END
