@@ -262,7 +262,7 @@ exe 'highlight Todo'            . s:forme                               . s:text
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight Character'       . s:forme . s:bold                      . s:texte . s:vertclair         . s:fond . s:none
-exe 'highlight ColorColumn'     . s:forme                               . s:texte . s:none              . s:fond . s:none
+exe 'highlight ColorColumn'     . s:forme                               . s:texte . s:none              . s:fond . s:indent1
 exe 'highlight Conceal'         . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
 
 exe 'highlight Cursor'          . s:forme                               . ' guifg=bg'                   . ' guibg=fg'

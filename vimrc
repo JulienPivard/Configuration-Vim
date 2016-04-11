@@ -69,9 +69,10 @@ set noautowriteall                      " Sauvegarde automatiquement le document
 set   background=dark                   " Fixe la valeur du fond en sombre pour les thèmes
 set   backspace=indent,eol,start        " Fixe le comportement de la touche backspace
 set   backup                            " Conserve une copie de tout les fichiers édité
-set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup sauvegarde le fichier avant de commencer à le modifier
-set   breakindent                       " Permet une meilleur conservation de l'indentation lors de l'enroulement des lignes, la ligne ne commence plus collée à gauche
-set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr.
+set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup, sauvegarde le fichier avant de le modifier
+set   breakindent                       " La ligne ne commence plus collée à gauche
+set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr
+set   colorcolumn=0                     " Affiche une colonne avec une couleur de fond
 set   completeopt=menuone,longest       " Options pour le menu de l'omnicompletion
 set   concealcursor=c                   " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                    " Change les combinaison de caractère en leur équivalent utf-8
@@ -163,19 +164,15 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 function! MaLigneStatus()
 
     if exists( '*fugitive#head()' )
-
         if fugitive#head() == ''
             let fugitLigne = ''
         else
             let fugitLigne = '%6*%{ fugitive#head() }:%0*'
         endif
         let etatDepot = '%3*%{ StatAjout() }%0*' . '%4*%{ StatSuppression() }%0*' . '%5*%{ StatModifications() }%0*'
-
     else
-
         let fugitLigne = ''
         let etatDepot = ''
-
     endif
 
     if exists( '*SyntasticStatuslineFlag()' )
@@ -279,25 +276,34 @@ endfunc
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
 " /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
 function! Nettoyage()
+    " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
     let curline = line( '.' )
+    " Effectue la suppression des espaces en trop en fin de ligne.
     :%substitute/\s\+$//e
+    " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
+    " On retire les variables.
     unlet curcol
     unlet curline
 endfunction
 
 " Pour pouvoir ajouter ou modifier la date courante au début du fichier
 function! DerniereModification()
+    " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
     let curline = line( '.' )
+    " On ne prend que les 20 premières lignes.
     if line( '$' ) > 20
         let l = 20
     else
         let l = line( '$' )
     endif
+    " Met à jours la date dans les 20 premières ligne du fichier si il est
+    " présent.
     exe '1,' . l . 'substitute/Dernière modification : .*/Dernière modification : ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
     exe '1,' . l . 'substitute/Last Change:  .*/Last Change:  ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
+    " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
     unlet curcol
     unlet curline
@@ -315,11 +321,16 @@ function! ExistMakeFileC()
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
     else
         setlocal makeprg=gcc\ -Wall\ -o\ %<\ %<.c
-        map  <buffer> <F10>       :!./%<<CR>
-        map! <buffer> <F10> <Esc> :!./%<<CR>
+        map  <buffer> <F10>         :!./%<<CR>
+        map! <buffer> <F10>   <Esc> :!./%<<CR>
     endif
-    map  <buffer> <s-F5>        :make<CR>
-    map! <buffer> <s-F5>  <Esc> :make<CR>
+endfunction
+
+" Configuration des raccourcis pour compiler en ada.
+function! ExistBuildAda()
+    map  <buffer> <F10>         :!./%<<CR>
+    map! <buffer> <F10>   <Esc> :!./%<<CR>
+    setlocal makeprg=gnatmake\ %
 endfunction
 
 " Configuration des nouveaux fichiers cpp
@@ -352,8 +363,6 @@ function! MacrosCPP()
         map  <buffer> <F10>         :!./$nomFichier<CR>
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
     endif
-    map  <buffer> <s-F5>        :make<CR>
-    map! <buffer> <s-F5>  <Esc> :make<CR>
     map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map  <buffer> <S-F11>       :!doxygen<CR>
@@ -494,6 +503,7 @@ endfunction
 " Les groupes d'actions.
 " ----------------------
 
+" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti.
 if has( 'cscope' )
     set   cscopeprg=/usr/bin/cscope
     set   cscopetagorder=0
@@ -508,6 +518,13 @@ if has( 'cscope' )
     endif
     set   cscopeverbose
 endif
+
+" Pour l'ada permet de voir si on dépasse la colonne des 80 caractères
+augroup codeSourceAda
+    autocmd!
+    autocmd Filetype ada setlocal textwidth=80
+    autocmd Filetype ada setlocal colorcolumn=80
+augroup END
 
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
 augroup recuperationEtatSessionsPrecedente
@@ -579,10 +596,10 @@ augroup END
 " pour des raisons de vitesse de retour à l'édition
 augroup compilation
     autocmd!
-    autocmd FileType tex,haskell,ocaml,sql,php  map  <buffer> <s-F5>       :make <CR>
-    autocmd FileType tex,haskell,ocaml,sql,php  map! <buffer> <s-F5>  <Esc>:make <CR>
-    autocmd Filetype perl,sh,python             map  <buffer> <s-F5>       :!./% <CR>
-    autocmd Filetype perl,sh,python             map! <buffer> <s-F5>  <Esc>:!./% <CR>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    map  <buffer> <s-F5>       :make <CR>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    map! <buffer> <s-F5>  <Esc>:make <CR>
+    autocmd Filetype perl,sh,python                         map  <buffer> <s-F5>       :!./% <CR>
+    autocmd Filetype perl,sh,python                         map! <buffer> <s-F5>  <Esc>:!./% <CR>
 augroup END
 
 " Définition de la coloration syntaxique pour les fichier antlr
@@ -639,6 +656,7 @@ augroup fonctionsConfiguration
     autocmd Filetype antlr                  call ConfigAntlr()
     autocmd FileType cpp                    call MacrosCPP()
     autocmd FileType c,h                    call ExistMakeFileC()
+    autocmd Filetype ada                    call ExistBuildAda()
 augroup END
 
 augroup pencil
