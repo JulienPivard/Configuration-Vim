@@ -10,4 +10,4 @@
             --with-x --prefix=/usr \
             --with-lua-prefix=/usr/include/lua5.2 \
             --with-python-config-dir=/usr/lib/ \
-            --enable-fail-if-missing
+            --enable-fail-if-missing; make

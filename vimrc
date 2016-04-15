@@ -249,12 +249,14 @@ endfunction
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()
+
     let line = getline( v:foldstart )
     let lignes = v:foldend - v:foldstart + 1
     let subFold = substitute( line, '^\s*\|(((\=', '', 'g' )
     let debut = '+' . v:folddashes . ' | ' . v:foldstart . '-' . v:foldend . ' |  '
     let nbLignes = printf( '%12s', lignes . ' lignes : ' )
     return  debut . nbLignes . subFold
+
 endfunction
 
 " Permet de changer les droits d'un fichier pour le rendre exécutable
@@ -276,6 +278,7 @@ endfunc
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
 " /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
 function! Nettoyage()
+
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
     let curline = line( '.' )
@@ -286,10 +289,12 @@ function! Nettoyage()
     " On retire les variables.
     unlet curcol
     unlet curline
+
 endfunction
 
 " Pour pouvoir ajouter ou modifier la date courante au début du fichier
 function! DerniereModification()
+
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
     let curline = line( '.' )
@@ -307,43 +312,69 @@ function! DerniereModification()
     call cursor( curline, curcol )
     unlet curcol
     unlet curline
+
 endfun
 
 " Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
 " sinon c'est le nom du fichier sans majuscule
 function! ExistMakeFileC()
+
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
+
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=make
         map  <buffer> <S-F9>        :make clean<CR>
         map! <buffer> <S-F9>  <Esc> :make clean<CR>
         map  <buffer> <F10>         :!./$nomFichier<CR>
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
+
     else
+
         setlocal makeprg=gcc\ -Wall\ -o\ %<\ %<.c
         map  <buffer> <F10>         :!./%<<CR>
         map! <buffer> <F10>   <Esc> :!./%<<CR>
+
     endif
+
 endfunction
 
 " Configuration des raccourcis pour compiler en ada.
 function! ExistBuildAda()
-    map  <buffer> <F10>         :!./%<<CR>
-    map! <buffer> <F10>   <Esc> :!./%<<CR>
-    setlocal makeprg=gnatmake\ %
+
+    if filereadable( './build.gpr' )
+
+        setlocal makeprg=gnatmake\ -P\ ./build.gpr
+        call g:gnat.Set_Project_File( './build.gpr' )
+        map  <buffer> <F10>         :!./bin/%:t:r<CR>
+        map! <buffer> <F10>   <Esc> :!./bin/%:t:r<CR>
+        map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<CR>
+        map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<CR>
+
+    else
+
+        setlocal makeprg=gnatmake\ %
+        map  <buffer> <F10>         :!./%<<CR>
+        map! <buffer> <F10>   <Esc> :!./%<<CR>
+
+    endif
+
 endfunction
 
 " Configuration des nouveaux fichiers cpp
 function! ConfigurationNouveauFichierCPP()
+
     0r ~/.vim/CodeBasique/codeBasique.cpp
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?g
+
 endfunc
 
 " Configure les nouveaux fichiers cpp
 function! ConfigurationNouveauFichierHPP()
+
     0r ~/.vim/CodeBasique/codeBasique.hpp
     :%substitute?MANOUVELLECLASSE?\=expand( '%:t:r' )?g
     :%substitute@VARIABLE_A_CHANGER@\=expand( '%:t:r' ) . '_hpp'@
+
 endfunction
 
 " Maccros pour le cpp
@@ -352,17 +383,23 @@ endfunction
 " Création des tags et compilation de la documentation.
 " Pour trouver la classe correspondante taper :tag nomclasse.cpp
 function! MacrosCPP()
+
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
+
         map  <buffer> <F10>         :!./bin/Release/client<CR>
         map! <buffer> <F10>   <Esc> :!./bin/Release/client<CR>
         map  <buffer> <S-F9>        :make clean<CR>
         map! <buffer> <S-F9>  <Esc> :make clean<CR>
+
     else
+
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=g++\ -Wall\ -Wextra\ -std=c++11\ -o\ %<\ %
         map  <buffer> <F10>         :!./$nomFichier<CR>
         map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
+
     endif
+
     map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
     map  <buffer> <S-F11>       :!doxygen<CR>
@@ -372,24 +409,29 @@ function! MacrosCPP()
     " Ajoute de tags pour l'omnicompletion
     " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
     setlocal tags+=~/.vim/tags/cpp
+
 endfunction
 
 "Configuration des nouveaux fichiers en java
 function! ConfigurationNouveauFichierJAVA()
+
     0r ~/.vim/CodeBasique/codeBasique.java
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?
     :1substitute?package truc?\= "package ".expand( '%:p:.:h' )?
     :1substitute?/?\.?ge
     " Permet d'utiliser gf sur les fichiers java.
     set includeexpr=substitute( v:fname,'\\.','/','g' )
+
 endfunction
 
 " Fonction pour exécuter les fichiers java compilé selon l'existence ou non d'un makefile
 " La première lettre du nom de dossier java est en minuscule pour exécuter le
 " fichier java on convertit la première lettre du dossier en majuscule
 function! ExistConfigurationJava()
+
     " Si il existe un fichier d'automatisation dans le dossier courant.
     if filereadable( 'build.xml' )
+
         let $chemin = './'
         setlocal makeprg=ant\ compile
         map  <buffer> <S-F8>        :!ant test<CR>
@@ -400,23 +442,29 @@ function! ExistConfigurationJava()
         map! <buffer> <F10>   <Esc> :!ant run<CR>
         map  <buffer> <S-F11>       :!ant javadoc<CR>
         map! <buffer> <S-F11> <Esc> :!ant javadoc<CR>
+
     else
+
         " Il n'y a pas de fichier d'automatisation, compilation du fichier à la main.
         map  <buffer> <F10>         :!java %<<CR>
         map! <buffer> <F10>   <Esc> :!java %<<CR>
         map  <buffer> <S-F11>       :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
         map! <buffer> <S-F11> <Esc> :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
+
     endif
+
     map  <buffer> <s-F5>        :make<CR>
     map! <buffer> <s-F5>  <Esc> :make<CR>
     iabbrev <buffer> sopl System.out.println( "" )<Esc>hhi
     iabbrev <buffer> sopf System.out.printf( "" )<Esc>hhi
     iabbrev <buffer> sepl System.err.println( "" )<Esc>hhi
     iabbrev <buffer> sepf System.err.printf( "" )<Esc>hhi
+
 endfunction
 
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
 function! MacrosLatexSpecifique()
+
     NoMatchParen
     map  <buffer> <S-F8>        :!makeindex %<.idx<CR>
     map! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<CR>
@@ -426,11 +474,13 @@ function! MacrosLatexSpecifique()
     map! <buffer> <F10>   <Esc> :!evince %<.pdf &<CR>
     map  <buffer> <S-F10>       :!zathura %<.pdf &<CR>
     map! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<CR>
+
     if filereadable( 'bibliographie.bib' )
         map  <buffer> <S-F11>       :!bibtex %< <CR>
         map! <buffer> <S-F11> <Esc> :!bibtex %< <CR>
     endif
     iabbrev <buffer> begin \begin{}<CR>\end{}<Esc>k$i
+
 endfunction
 
 " Macros pour l'affichage formaté des fichiers groff
@@ -439,6 +489,7 @@ endfunction
 " La touche F12 ouvre le lecteur pdf
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
 function! AffichageGroff()
+
     map  <buffer> <s-F5>       :!groff -Kutf8 -me  -Tutf8 % <CR>
     map! <buffer> <s-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <CR>
     map  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <CR>
@@ -451,18 +502,22 @@ function! AffichageGroff()
     map! <buffer> <F12>   <Esc>:!zathura %<.pdf & <CR>
     map  <buffer> <S-F12>      :!zathura %.pdf  & <CR>
     map! <buffer> <S-F12> <Esc>:!zathura %.pdf  & <CR>
+
 endfunction
 
 " Macros pour les fichiers bash
 function! ScriptBash()
+
     iabbrev <buffer> if if [[ ]]; then<CR>fi<esc>k0EEa
     iabbrev <buffer> elif elif [[ ]]; then<esc>BBhi
     iabbrev <buffer> while while [[ ]]<CR>do<CR>done<esc>kk0EEa
     iabbrev <buffer> case case in<CR>cas)<CR>;;<CR>esac<esc>kkk0Ea
+
 endfunction
 
 " Macros pour le codage en html/css
 function! PagesInternet()
+
     " Paragraphe html
     iabbrev <buffer> <p> <p><CR></p><esc>k$a
     " Élément d'une liste
@@ -483,20 +538,25 @@ function! PagesInternet()
     iabbrev <buffer> <td> <td></td><esc>bba
     " Commentaire
     iabbrev <buffer> <!-- <!-- --><esc>bhi
+
 endfunction
 
 " Raccourcis pour les fichiers antlr compile et lance les tests
 function! ConfigAntlr()
+
     map  <buffer> <s-F5>       :!./runAntlr.sh %< <CR>
     map! <buffer> <s-F5> <Esc> :!./runAntlr.sh %< <CR>
     map  <buffer> <F10>        :!./runAntlr.sh %< test.code <CR>
     map! <buffer> <F10>  <Esc> :!./runAntlr.sh %< test.code <CR>
+
 endfunction
 
 " Macros pour le php
 function! ProgEnPHP()
+
     imap <buffer>,, =>
     imap <buffer>t $this->
+
 endfunction
 
 " ----------------------
@@ -505,6 +565,7 @@ endfunction
 
 " Pour activer cscope dans vim pour les sources qui peuvent en tirer parti.
 if has( 'cscope' )
+
     set   cscopeprg=/usr/bin/cscope
     set   cscopetagorder=0
     set   cscopetag
@@ -517,6 +578,7 @@ if has( 'cscope' )
         cs add $CSCOPE_DB
     endif
     set   cscopeverbose
+
 endif
 
 " Pour l'ada permet de voir si on dépasse la colonne des 80 caractères
@@ -925,6 +987,16 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_default_mapping = 1
+
+" -----------------------
+" Réglage du plugin pour ada
+" -----------------------
+let g:ada_standard_types = 1
+let g:ada_with_gnat_project_files = 1
+let g:ada_omni_with_keywords = 1
+let g:ada_extended_completion = 1
+let g:ada_gnat_extensions = 1
+let g:ada_default_compiler = 'gnat'
 
 " -----------------------
 " Réglage pour mon thème de couleurs.
