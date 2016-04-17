@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-# vim: foldmethod=indent:
 
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
@@ -24,7 +23,7 @@ class PremiereClasse( object ):
 
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
-if __name__=="__main__":
+if __name__ == "__main__" :
     print( 155*"#" + "\n" + 70*"#" + "Début des tests" + 70*"#" + "\n" + 155*"#" )
     objet = PremiereClasse( "Hello World" )
     print( objet )
