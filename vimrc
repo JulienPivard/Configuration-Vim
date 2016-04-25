@@ -18,6 +18,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edsono/vim-matchit'
+Plugin 'godlygeek/tabular'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'gregsexton/gitv'
 Plugin 'hdima/python-syntax'
@@ -72,7 +73,7 @@ set   backup                            " Conserve une copie de tout les fichier
 set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup, sauvegarde le fichier avant de le modifier
 set   breakindent                       " La ligne ne commence plus collée à gauche
 set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr
-set   colorcolumn=0                     " Affiche une colonne avec une couleur de fond
+set   colorcolumn=81,151                " Affiche une colonne avec une couleur de fond
 set   completeopt=menuone,longest       " Options pour le menu de l'omnicompletion
 set   concealcursor=c                   " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                    " Change les combinaison de caractère en leur équivalent utf-8
@@ -169,10 +170,10 @@ function! MaLigneStatus()
         else
             let fugitLigne = '%6*%{ fugitive#head() }:%0*'
         endif
-        let etatDepot = '%3*%{ StatAjout() }%0*' . '%4*%{ StatSuppression() }%0*' . '%5*%{ StatModifications() }%0*'
+        let etatDepot      = '%3*%{ StatAjout() }%0*' . '%4*%{ StatSuppression() }%0*' . '%5*%{ StatModifications() }%0*'
     else
-        let fugitLigne = ''
-        let etatDepot = ''
+        let fugitLigne     = ''
+        let etatDepot      = ''
     endif
 
     if exists( '*SyntasticStatuslineFlag()' )
@@ -181,24 +182,24 @@ function! MaLigneStatus()
         let etatCheckCompil = ''
     endif
 
-    let nomFichier = '%f'
-    let flagStatutLigne = ' %h%1*%m%0*%r%w '
-    let posiCurseur = '%-10.(%P, %3l/%L, C%02c%)'
-    let buffInfos = '%y buf:%n%a'
-    let hexaCara = '0x%02B'
-    let encodageCara = '%{ strlen( &fileencoding )? &fileencoding : &enc }'
-    let typeFinLigne = '%{ &fileformat }'
-    let carSepaPGauche = '  '
-    let carSepaPDroit = '  '
-    "let carSepaPDroit = '│'
+    let nomFichier          = '%f'
+    let flagStatutLigne     = ' %h%1*%m%0*%r%w '
+    let posiCurseur         = '%-10.(%P, %3l/%L, C%02c%)'
+    let buffInfos           = '%y buf:%n%a'
+    let hexaCara            = '0x%02B'
+    let encodageCara        = '%{ strlen( &fileencoding )? &fileencoding : &enc }'
+    let typeFinLigne        = '%{ &fileformat }'
+    let carSepaPGauche      = '  '
+    let carSepaPDroit       = '  '
+    "let carSepaPDroit      = '│'
 
-    let ficEtBranche = fugitLigne . nomFichier
-    let ficFormat = typeFinLigne . carSepaPGauche . encodageCara
-    let gauche = '%<' . ficEtBranche . carSepaPGauche . ficFormat . flagStatutLigne
+    let ficEtBranche        = fugitLigne . nomFichier
+    let ficFormat           = typeFinLigne . carSepaPGauche . encodageCara
+    let gauche              = '%<' . ficEtBranche . carSepaPGauche . ficFormat . flagStatutLigne
 
-    let posDansFic = carSepaPDroit . posiCurseur
-    let resumeErreur = etatCheckCompil . ' ' . etatDepot
-    let droite = resumeErreur . posDansFic . carSepaPDroit . buffInfos . carSepaPDroit . hexaCara
+    let posDansFic          = carSepaPDroit . posiCurseur
+    let resumeErreur        = etatCheckCompil . ' ' . etatDepot
+    let droite              = resumeErreur . posDansFic . carSepaPDroit . buffInfos . carSepaPDroit . hexaCara
 
     return gauche . '%=' . droite
 
@@ -515,32 +516,6 @@ function! ScriptBash()
 
 endfunction
 
-" Macros pour le codage en html/css
-function! PagesInternet()
-
-    " Paragraphe html
-    iabbrev <buffer> <p> <p><CR></p><esc>k$a
-    " Élément d'une liste
-    iabbrev <buffer> <li> <li></li><esc>bba
-    " Liste ordonnée html
-    iabbrev <buffer> <ol> <ol><CR><li></li><CR></ol><esc>k$bba
-    " Liste non ordonneé
-    iabbrev <buffer> <ul> <ul><CR><li></li><CR></ul><esc>k$bba
-    " Image
-    iabbrev <buffer> <img> <img src=""/><esc>hhi
-    " Lien
-    iabbrev <buffer> <a> <a href=""></a><esc>bbla
-    " Tableau tr pour les lignes
-    iabbrev <buffer> <table> <table><CR><thead><CR><tr><CR><th></th><CR></tr><CR></thead><CR><tbody><CR><tr><CR><td></td><CR></tr><CR><tbody><CR></table><esc>kkkkkkkk$bba
-    " Ligne de tableau
-    iabbrev <buffer> <tr> <tr><CR><td></td><CR></tr><esc>k$bba
-    " Colonne de tableau
-    iabbrev <buffer> <td> <td></td><esc>bba
-    " Commentaire
-    iabbrev <buffer> <!-- <!-- --><esc>bhi
-
-endfunction
-
 " Raccourcis pour les fichiers antlr compile et lance les tests
 function! ConfigAntlr()
 
@@ -557,6 +532,18 @@ function! ProgEnPHP()
     imap <buffer>,, =>
     imap <buffer>t $this->
 
+endfunction
+
+" Fonction pour aligner automatiquement les lignes avec le caractère |
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists( ':Tabularize' ) && getline( '.' ) =~# '^\s*|' && ( getline( line( '.' )-1 ) =~# p || getline( line( '.' )+1 ) =~# p )
+        let column = strlen( substitute( getline( '.' )[0:col( '.' )], '[^|]', '', 'g' ) )
+        let position = strlen( matchstr( getline( '.' )[0:col( '.' )], '.*|\s*\zs.*' ) )
+        Tabularize/|/l1
+        normal! 0
+        call search( repeat( '[^|]*|', column ).'\s\{-\}'.repeat( '.', position ), 'ce', line( '.' ) )
+    endif
 endfunction
 
 " ----------------------
@@ -581,11 +568,16 @@ if has( 'cscope' )
 
 endif
 
+" Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
+augroup fichierQuickfix
+    autocmd!
+    autocmd Filetype qf setlocal colorcolumn=0
+augroup END
+
 " Pour l'ada permet de voir si on dépasse la colonne des 80 caractères
 augroup codeSourceAda
     autocmd!
-    autocmd Filetype ada setlocal textwidth=80
-    autocmd Filetype ada setlocal colorcolumn=80
+    autocmd Filetype ada setlocal textwidth=150
 augroup END
 
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
@@ -711,7 +703,6 @@ augroup fonctionsConfiguration
     autocmd!
     autocmd FileType java,ant               call ExistConfigurationJava()
     autocmd FileType tex                    call MacrosLatexSpecifique()
-    autocmd FileType html,java,xml,ant,php  call PagesInternet()
     autocmd FileType php                    call ProgEnPHP()
     autocmd FileType sh                     call ScriptBash()
     autocmd FileType nroff,groff            call AffichageGroff()
@@ -769,7 +760,8 @@ map! <C-F12>  <Esc> :call MontrerGroupeSyntax()<CR>
 iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
 
-imap <buffer>!! ->
+imap     <buffer>!! ->
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
@@ -799,7 +791,7 @@ nmap <silent> <Leader>ffk :FSSplitAbove<cr>
 nmap <silent> <Leader>fj :FSBelow<cr>
 nmap <silent> <Leader>ffj :FSSplitBelow<cr>
 
-nmap <leader>o :copen 20<CR>
+nmap <leader>o :copen<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>n :cnext<CR>
 nmap <leader>p :cprevious<CR>
@@ -815,6 +807,13 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
+
+if exists( ':Tabularize' )
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -997,6 +996,11 @@ let g:ada_omni_with_keywords = 1
 let g:ada_extended_completion = 1
 let g:ada_gnat_extensions = 1
 let g:ada_default_compiler = 'gnat'
+
+" -----------------------
+" Réglages pour tabular
+" -----------------------
+"let g:tabular_loaded = 1
 
 " -----------------------
 " Réglage pour mon thème de couleurs.
