@@ -1,0 +1,26 @@
+project Build is
+
+for Object_Dir  use "obj";
+for Exec_Dir    use "bin";
+for Source_Dirs use ( "src/**" );
+
+for Main        use ( "principale.adb" );
+
+package Compiler is
+
+    --  Pour avoir les warning en cas de non utilisation d'une variable
+    --  non initialisé avec .e.
+    --  Le gnatef est la pour afficher le chemin complet des fichiers dans les
+    --  messages d'erreurs et d'avertissements.
+    --  gnatU : Permet de marquer les messages d'erreurs avec le tag error:
+    for Default_Switches( "Ada" ) use ( "-gnata",
+        "-gnatef",
+        "-gnatU",
+        "-gnat2012",
+        "-gnatyanp",
+        "-gnatw.e",
+        "-O3" );
+
+end Compiler;
+
+end Build;

@@ -23,95 +23,75 @@ trap 'nettoyage' 2 3 15
 #      Définition des couleurs     #
 ####################################
 
-# Reset
-Color_Off='\e[0m'       # Text Reset
+# Couleurs normale
+noir='\e[0;30m'         # Noir
+rouge='\e[0;31m'        # Rouge
+vert='\e[0;32m'         # Vert
+jaune='\e[0;33m'        # Jaune
+bleu='\e[0;34m'         # Bleu
+violet='\e[0;35m'       # Violet
+cyan='\e[0;36m'         # Cyan
+blanc='\e[0;37m'        # Blanc
 
-# Regular Colors
-Black='\e[0;30m'        # Black
-Red='\e[0;31m'          # Red
-Green='\e[0;32m'        # Green
-Yellow='\e[0;33m'       # Yellow
-Blue='\e[0;34m'         # Blue
-Purple='\e[0;35m'       # Purple
-Cyan='\e[0;36m'         # Cyan
-White='\e[0;37m'        # White
+# Gras
+gnoir='\e[1;30m'        # Noir
+grouge='\e[1;31m'       # Rouge
+gvert='\e[1;32m'        # Vert
+gjaune='\e[1;33m'       # Jaune
+gbleu='\e[1;34m'        # Bleu
+gviolet='\e[1;35m'      # Violet
+gcyan='\e[1;36m'        # Cyan
+gblanc='\e[1;37m'       # Blanc
 
-# Bold
-BBlack='\e[1;30m'       # Black
-BRed='\e[1;31m'         # Red
-BGreen='\e[1;32m'       # Green
-BYellow='\e[1;33m'      # Yellow
-BBlue='\e[1;34m'        # Blue
-BPurple='\e[1;35m'      # Purple
-BCyan='\e[1;36m'        # Cyan
-BWhite='\e[1;37m'       # White
+# souligné
+snoir='\e[4;30m'        # Noir
+srouge='\e[4;31m'       # Rouge
+svert='\e[4;32m'        # Vert
+sjaune='\e[4;33m'       # Jaune
+sbleu='\e[4;34m'        # Bleu
+sviolet='\e[4;35m'      # Violet
+scyan='\e[4;36m'        # Cyan
+sblanc='\e[4;37m'       # Blanc
 
-# Underline
-UBlack='\e[4;30m'       # Black
-URed='\e[4;31m'         # Red
-UGreen='\e[4;32m'       # Green
-UYellow='\e[4;33m'      # Yellow
-UBlue='\e[4;34m'        # Blue
-UPurple='\e[4;35m'      # Purple
-UCyan='\e[4;36m'        # Cyan
-UWhite='\e[4;37m'       # White
+# Couleur de fond
+sur_noir='\e[40m'       # Noir
+sur_rouge='\e[41m'      # Rouge
+sur_vert='\e[42m'       # Vert
+sur_jaune='\e[43m'      # Jaune
+sur_bleu='\e[44m'       # Bleu
+sur_violet='\e[45m'     # Violet
+sur_cyan='\e[46m'       # Cyan
+sur_blanc='\e[47m'      # Blanc
 
-# Background
-On_Black='\e[40m'       # Black
-On_Red='\e[41m'         # Red
-On_Green='\e[42m'       # Green
-On_Yellow='\e[43m'      # Yellow
-On_Blue='\e[44m'        # Blue
-On_Purple='\e[45m'      # Purple
-On_Cyan='\e[46m'        # Cyan
-On_White='\e[47m'       # White
+# Haute intensité
+inoir='\e[0;90m'        # Noir
+irouge='\e[0;91m'       # Rouge
+ivert='\e[0;92m'        # Vert
+ijaune='\e[0;93m'       # Jaune
+ibleu='\e[0;94m'        # Bleu
+iviolet='\e[0;95m'      # Violet
+icyan='\e[0;96m'        # Cyan
+iblanc='\e[0;97m'       # Blanc
 
-# High Intensity
-IBlack='\e[0;90m'       # Black
-IRed='\e[0;91m'         # Red
-IGreen='\e[0;92m'       # Green
-IYellow='\e[0;93m'      # Yellow
-IBlue='\e[0;94m'        # Blue
-IPurple='\e[0;95m'      # Purple
-ICyan='\e[0;96m'        # Cyan
-IWhite='\e[0;97m'       # White
+# Gras haute intensité
+ginoir='\e[1;90m'       # Noir
+girouge='\e[1;91m'      # Rouge
+givert='\e[1;92m'       # Vert
+gijaune='\e[1;93m'      # Jaune
+gibleu='\e[1;94m'       # Bleu
+giviolet='\e[1;95m'     # Violet
+gicyan='\e[1;96m'       # Cyan
+giblanc='\e[1;97m'      # Blanc
 
-# Bold High Intensity
-BIBlack='\e[1;90m'      # Black
-BIRed='\e[1;91m'        # Red
-BIGreen='\e[1;92m'      # Green
-BIYellow='\e[1;93m'     # Yellow
-BIBlue='\e[1;94m'       # Blue
-BIPurple='\e[1;95m'     # Purple
-BICyan='\e[1;96m'       # Cyan
-BIWhite='\e[1;97m'      # White
-
-# High Intensity backgrounds
-On_IBlack='\e[0;100m'   # Black
-On_IRed='\e[0;101m'     # Red
-On_IGreen='\e[0;102m'   # Green
-On_IYellow='\e[0;103m'  # Yellow
-On_IBlue='\e[0;104m'    # Blue
-On_IPurple='\e[0;105m'  # Purple
-On_ICyan='\e[0;106m'    # Cyan
-On_IWhite='\e[0;107m'   # White
-
-noir='\e[0;30m'
-gris='\e[1;30m'
-rouge='\e[0;31m'
-rose='\e[1;31m'
-vert='\e[0;32m'
-vertclair='\e[1;32m'
-orange='\e[0;33m'
-jaune='\e[1;33m'
-bleu='\e[0;34m'
-bleuclair='\e[1;34m'
-violet='\e[0;35m'
-magenta='\e[1;35m'
-cyan='\e[0;36m'
-cyanclair='\e[1;36m'
-grisclair='\e[0;37m'
-blanc='\e[1;37m'
+# Couleur de fond haute intensité
+sur_inoir='\e[0;100m'   # Noir
+sur_irouge='\e[0;101m'  # Rouge
+sur_ivert='\e[0;102m'   # Vert
+sur_ijaune='\e[0;103m'  # Jaune
+sur_ibleu='\e[0;104m'   # Bleu
+sur_iviolet='\e[0;105m' # Violet
+sur_icyan='\e[0;106m'   # Cyan
+sur_iblanc='\e[0;107m'  # Blanc
 
 neutre='\e[0;m'
 
@@ -149,11 +129,11 @@ do
             echo "$OPTARG"
             ;;
         :)
-            echo -e "${rouge}L'option [ ${magenta} $OPTARG ${rouge} ] nécessite un argument.${neutre}" >&2
+            echo -e "${rouge}L'option [ ${violet} $OPTARG ${rouge} ] nécessite un argument.${neutre}" >&2
             exit 101
             ;;
         ?)
-            echo -e "${rouge}L'option [ ${magenta} $OPTARG ${rouge} ] n'existe pas.${neutre}" >&2
+            echo -e "${rouge}L'option [ ${violet} $OPTARG ${rouge} ] n'existe pas.${neutre}" >&2
             exit 102
             ;;
     esac
