@@ -297,7 +297,7 @@ exe 'highlight PmenuThumb'      . s:forme                               . s:text
 
 exe 'highlight Question'        . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
 exe 'highlight Repeat'          . s:forme . s:bold                      . s:texte . s:jaune             . s:fond . s:none
-exe 'highlight Search'          . s:forme . s:bold                      . s:texte . s:noir              . s:fond . s:jauneclair
+exe 'highlight Search'          . s:forme . s:bold . s:reverse          . s:texte . s:none              . s:fond . s:none
 exe 'highlight SignColumn'      . s:forme                               . s:texte . s:none              . s:fond . s:grissombre
 exe 'highlight SpecialComment'  . s:forme . s:bold                      . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight SpecialKey'      . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
@@ -403,6 +403,14 @@ highlight link doxygenBOther doxygenParam
 
 highlight link javaDocComment SpecialComment
 highlight link javaCommentStar SpecialComment
+
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
+" Coloration pour la documentation ada "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+exe 'highlight adaStorageClass'         . s:forme . s:underline                 . s:texte . s:jaune             . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " )))

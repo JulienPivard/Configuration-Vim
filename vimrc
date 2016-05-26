@@ -346,8 +346,8 @@ function! ExistBuildAda()
 
         setlocal makeprg=gnatmake\ -P\ ./build.gpr
         call g:gnat.Set_Project_File( './build.gpr' )
-        map  <buffer> <F10>         :!./bin/%:t:r<CR>
-        map! <buffer> <F10>   <Esc> :!./bin/%:t:r<CR>
+        map  <buffer> <F10>         :!./bin/principale<CR>
+        map! <buffer> <F10>   <Esc> :!./bin/principale<CR>
         map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<CR>
         map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<CR>
 
@@ -535,7 +535,7 @@ function! ProgEnPHP()
 endfunction
 
 " Fonction pour aligner automatiquement les lignes avec le caractère |
-function! s:align()
+function! s:alignTabulation()
     let p = '^\s*|\s.*\s|\s*$'
     if exists( ':Tabularize' ) && getline( '.' ) =~# '^\s*|' && ( getline( line( '.' )-1 ) =~# p || getline( line( '.' )+1 ) =~# p )
         let column = strlen( substitute( getline( '.' )[0:col( '.' )], '[^|]', '', 'g' ) )
@@ -628,6 +628,7 @@ augroup squelette
     autocmd BufNewFile *.cpp                call ConfigurationNouveauFichierCPP()
     autocmd BufNewFile *.hpp                call ConfigurationNouveauFichierHPP()
     autocmd BufNewFile build.xml            0r ~/.vim/CodeBasique/build.xml
+    autocmd BufNewFile build.gpr            0r ~/.vim/CodeBasique/build.gpr
     autocmd BufNewFile bibliographie.bib    0r ~/.vim/CodeBasique/bibliographie.bib
     autocmd BufNewFile makefile             0r ~/.vim/CodeBasique/makefileBasique
     autocmd BufNewFile CMakeLists.txt       0r ~/.vim/CodeBasique/CMakeLists.txt
@@ -761,7 +762,7 @@ iabbrev /** /**<CR>*/<Esc>ka
 iabbrev /* /*<CR>*/<Esc>ka
 
 imap     <buffer>!! ->
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<CR>a
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
@@ -953,6 +954,18 @@ augroup fichierCppCode
     autocmd!
     autocmd BufEnter *.cpp let b:fswitchdst  = 'hpp'
     autocmd BufEnter *.cpp let b:fswitchlocs = 'reg:|src|src/include|'
+augroup END
+" Réglage de FSwitch pour les adb
+augroup fichierCorpAda
+    autocmd!
+    autocmd BufEnter *.adb let b:fswitchdst  = 'ads'
+    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:.'
+augroup END
+" Réglage de FSwitch pour les ads
+augroup fichierSpecAda
+    autocmd!
+    autocmd BufEnter *.ads let b:fswitchdst  = 'adb'
+    autocmd BufEnter *.ads let b:fswitchlocs = 'rel:.'
 augroup END
 " -----------------------
 
