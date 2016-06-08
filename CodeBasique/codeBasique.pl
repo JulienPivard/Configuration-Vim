@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 # Pour avoir un meilleur contrôle des règles du langage avant exécution.
+# Dernière modification : mercredi 08 juin[06] 2016
 use strict;
 use warnings;
 use utf8;

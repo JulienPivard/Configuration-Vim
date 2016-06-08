@@ -1,6 +1,9 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
+# Auteur : PIVARD Julien
+# Dernière modification : mercredi 08 juin[06] 2016
+
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
 class PremiereClasse( object ):
@@ -27,5 +30,3 @@ if __name__ == "__main__" :
     print( 155*"#" + "\n" + 70*"#" + "Début des tests" + 70*"#" + "\n" + 155*"#" )
     objet = PremiereClasse( "Hello World" )
     print( objet )
-
-#Pivard Julien

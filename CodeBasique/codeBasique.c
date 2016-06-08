@@ -1,4 +1,5 @@
-//Pivard Julien
+// Auteur : Pivard Julien
+// Dernière modification : mercredi 08 juin[06] 2016
 
 #include <stdio.h>
 
@@ -12,5 +13,3 @@ int main( int argc, char **argv )
     printf( "Hello world\n" );
     return 0;
 }
-
-//Pivard Julien
