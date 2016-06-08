@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : samedi 09 avril[04] 2016
+" Dernière modification : mercredi 08 juin[06] 2016
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -79,7 +79,7 @@ set   colorcolumn=81,151                " Affiche une colonne avec une couleur d
 set   completeopt=menuone,longest       " Options pour le menu de l'omnicompletion
 set   concealcursor=c                   " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                    " Change les combinaison de caractère en leur équivalent utf-8
-set   confirm                           " Affiche une ligne de dialogue pour choisir une action
+set noconfirm                           " Affiche une ligne de dialogue pour choisir une action
 set   copyindent                        " Adapte l'indentation des lignes collées
 set   cryptmethod=blowfish              " Change l'algorithme de cryptage
 set nocursorcolumn                      " Surligne la colonne ou se situe le curseur
@@ -861,7 +861,7 @@ let g:syntastic_tex_checkers = ['lacheck']      " Pour ne pas avoir le checker d
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
-let g:syntastic_stl_format = '[%E{Err ligne: %fe #%e}%B{, }%W{Warn ligne: %fw #%w}]'
+let g:syntastic_stl_format = '[%E{Err l: %fe #%e}%B{, }%W{Warn l: %fw #%w}]'
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 " Les fichiers doivent être de la forme -Ichemin/du/dossier
 
