@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  mercredi 08 juin[06] 2016
+" Last Change:  jeudi 09 juin[06] 2016
 " Created:      1er janvier 2016
 "
 " Inspiré par le thème icansee de : David Schweikert <dws@ee.ethz.ch>
@@ -223,7 +223,7 @@ exe 'highlight Statement'       . s:forme . s:bold                      . s:text
 " Keyword       Tous les autres mots clefs
 " Exception     try, catch, throw
 
-exe 'highlight PreProc'         . s:forme                               . s:texte . s:violetsombre      . s:fond . s:none
+exe 'highlight PreProc'         . s:forme . s:bold                      . s:texte . s:violetsombre      . s:fond . s:none
 " Preproc       Les instructions de préprocesseur
 " Include       #include
 " Define        #define
@@ -288,7 +288,7 @@ exe 'highlight LineNr'          . s:forme                               . s:text
 exe 'highlight MatchParen'      . s:forme . s:bold                      . s:texte . s:blanc             . s:fond . s:bleusombre
 exe 'highlight ModeMsg'         . s:forme . s:bold                      . s:texte . s:rouge             . s:fond . s:none
 exe 'highlight MoreMsg'         . s:forme . s:bold                      . s:texte . s:vertsombre        . s:fond . s:none
-exe 'highlight NonText'         . s:forme . s:bold                      . s:texte . s:violetsombre      . s:fond . s:none
+exe 'highlight NonText'         . s:forme                               . s:texte . s:violetsombre      . s:fond . s:none
 
 exe 'highlight Operator'        . s:forme                               . s:texte . s:orangesombre      . s:fond . s:none
 exe 'highlight Pmenu'           . s:forme                               . s:texte . s:noir              . s:fond . s:violetsombre
@@ -424,6 +424,8 @@ highlight link javaCommentStar SpecialComment
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight adaStorageClass'         . s:forme . s:underline                 . s:texte . s:jaune             . s:fond . s:none
+exe 'highlight adaTypedef'              . s:forme                               . s:texte . s:vertclair         . s:fond . s:none
+exe 'highlight adaStructure'            . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " )))
