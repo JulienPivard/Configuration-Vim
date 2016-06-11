@@ -203,7 +203,6 @@ let s:forme = ' ' . s:vmode . '=NONE'
 
 exe 'highlight Normal'          . s:forme                               . s:texte . s:blanc             . s:fond . s:couleurfond
 exe 'highlight Comment'         . s:forme                               . s:texte . s:gris              . s:fond . s:none
-"exe 'highlight Comment'         . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
 exe 'highlight Constant'        . s:forme                               . s:texte . s:rougesombre       . s:fond . s:none
 " String        Une chaine de caractères
 " Character     Un caractère
@@ -282,6 +281,7 @@ exe 'highlight Exception'       . s:forme . s:bold                      . s:text
 exe 'highlight FoldColumn'      . s:forme                               . s:texte . s:gris              . s:fond . s:grissombre
 exe 'highlight Folded'          . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:grissombre
 exe 'highlight IncSearch'       . s:forme                               . s:texte . s:jaune             . s:fond . s:violet
+exe 'highlight Keyword'         . s:forme . s:bold . s:underline        . s:texte . s:bleusombre        . s:fond . s:none
 
 exe 'highlight Label'           . s:forme                               . s:texte . s:jaune             . s:fond . s:none
 exe 'highlight LineNr'          . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:grissombre
@@ -400,7 +400,7 @@ exe 'highlight cppStructure'                . s:forme . s:underline             
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight doxygenErrorComment'         . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
-exe 'highlight doxygenParam'                . s:forme                               . s:texte . s:bleu              . s:fond . s:none
+exe 'highlight doxygenParam'                . s:forme                               . s:texte . s:cyansombre        . s:fond . s:none
 exe 'highlight doxygenSpecial'              . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight doxygenBrief'                . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 exe 'highlight doxygenSpecialOnelineDesc'   . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
