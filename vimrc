@@ -348,8 +348,8 @@ function! ExistBuildAda()
 
         setlocal makeprg=gnatmake\ -P\ ./build.gpr
         call g:gnat.Set_Project_File( './build.gpr' )
-        map  <buffer> <F10>         :!./bin/principale<CR>
-        map! <buffer> <F10>   <Esc> :!./bin/principale<CR>
+        map  <buffer> <F10>         :!./bin/client<CR>
+        map! <buffer> <F10>   <Esc> :!./bin/client<CR>
         map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<CR>
         map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<CR>
 
