@@ -71,7 +71,7 @@ set   background=dark                   " Fixe la valeur du fond en sombre pour 
 set   backspace=indent,eol,start        " Fixe le comportement de la touche backspace
 set   backup                            " Conserve une copie de tout les fichiers édité
 set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup, sauvegarde le fichier avant de le modifier
-if has( 'linebreak' )
+if has( 'breakindent' )
     set   breakindent                       " La ligne ne commence plus collée à gauche
     set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr
 endif
