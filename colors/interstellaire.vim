@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  jeudi 09 juin[06] 2016
+" Last Change:  lundi 20 juin[06] 2016
 " Created:      1er janvier 2016
 "
 " Inspiré par le thème icansee de : David Schweikert <dws@ee.ethz.ch>
@@ -332,6 +332,15 @@ exe 'highlight lCursor'             . s:forme                               . s:
 " Coloration pour TagBar    "(((
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+highlight link shFunction               Function
+
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
+
+" Coloration pour TagBar    "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 exe 'highlight TagbarSignature'     . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -421,7 +430,7 @@ highlight link javaCommentStar              SpecialComment
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " )))
 
-" Coloration pour la documentation ada "(((
+" Coloration pour ada "(((
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight adaStorageClass'     . s:forme . s:underline                 . s:texte . s:jaune             . s:fond . s:none
@@ -447,6 +456,15 @@ exe 'highlight SyntasticWarningSign'. s:forme                               . s:
 exe 'highlight SignifySignAdd'      . s:forme                               . s:texte . s:vertsombre        . s:fond . s:grissombre
 exe 'highlight SignifySignDelete'   . s:forme                               . s:texte . s:rougesombre       . s:fond . s:grissombre
 exe 'highlight SignifySignChange'   . s:forme                               . s:texte . s:violetsombre      . s:fond . s:grissombre
+
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
+
+" Coloration pour git "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+exe 'highlight gitcommitSummary'    . s:forme                               . s:texte . s:cyan              . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " )))

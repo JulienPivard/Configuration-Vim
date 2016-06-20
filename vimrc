@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : mercredi 08 juin[06] 2016
+" Dernière modification : lundi 20 juin[06] 2016
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.O=)(=O.o=)(=o.o=)(=-.-=)(=@.@=)(=~.~=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -71,7 +71,7 @@ set   background=dark                   " Fixe la valeur du fond en sombre pour 
 set   backspace=indent,eol,start        " Fixe le comportement de la touche backspace
 set   backup                            " Conserve une copie de tout les fichiers édité
 set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup, sauvegarde le fichier avant de le modifier
-if has( 'breakindent' )
+if exists( '+breakindent' )
     set   breakindent                       " La ligne ne commence plus collée à gauche
     set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr
 endif
@@ -785,10 +785,10 @@ nmap <leader>us :UpdateAndSpellCheck<CR>
 nmap <leader>sy :SyntasticToggleMode<CR>
 
 nmap <silent> <Leader>fff :FSHere<cr>
-nmap <silent> <Leader>fg :FSLeft<cr>
-nmap <silent> <Leader>ffg :FSSplitLeft<cr>
-nmap <silent> <Leader>fr :FSRight<cr>
-nmap <silent> <Leader>ffr :FSSplitRight<cr>
+nmap <silent> <Leader>fh :FSLeft<cr>
+nmap <silent> <Leader>ffh :FSSplitLeft<cr>
+nmap <silent> <Leader>fl :FSRight<cr>
+nmap <silent> <Leader>ffl :FSSplitRight<cr>
 nmap <silent> <Leader>fk :FSAbove<cr>
 nmap <silent> <Leader>ffk :FSSplitAbove<cr>
 nmap <silent> <Leader>fj :FSBelow<cr>
