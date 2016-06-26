@@ -870,7 +870,7 @@ let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 " -----------------------
 let g:undotree_WindowLayout = 2
 let g:undotree_SplitWidth = 45
-let g:undotree_DiffpanelHeight = 15
+let g:undotree_DiffpanelHeight = 10
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 

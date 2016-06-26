@@ -280,7 +280,7 @@ exe 'highlight ErrorMsg'            . s:forme                               . s:
 exe 'highlight Exception'           . s:forme . s:bold                      . s:texte . s:rougeclair        . s:fond . s:none
 exe 'highlight FoldColumn'          . s:forme                               . s:texte . s:gris              . s:fond . s:grissombre
 exe 'highlight Folded'              . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:grissombre
-exe 'highlight IncSearch'           . s:forme                               . s:texte . s:jaune             . s:fond . s:violet
+exe 'highlight IncSearch'           . s:forme . s:reverse                   . s:texte . s:jaune             . s:fond . s:violet
 exe 'highlight Keyword'             . s:forme . s:bold . s:underline        . s:texte . s:bleusombre        . s:fond . s:none
 
 exe 'highlight Label'               . s:forme                               . s:texte . s:jaune             . s:fond . s:none
