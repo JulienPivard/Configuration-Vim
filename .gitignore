@@ -8,8 +8,6 @@ doc/
 log.txt
 tags
 .zcache/
-undodir/*
-backup/*
 bundle/*
 bundleOld/
 shada
