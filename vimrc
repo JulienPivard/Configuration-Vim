@@ -746,6 +746,8 @@ map  <F7>           :TagbarToggle<CR>
 map! <F7>     <Esc> :TagbarToggle<CR>
 map  <S-F7>         :nohls<CR>
 map! <S-F7>   <Esc> :nohls<CR>
+map  <C-F7>         :setlocal paste!<CR>:setlocal paste?<CR>
+map! <C-F7>   <Esc> :setlocal paste!<CR>:setlocal paste?<CR>
 map  <F8>           :FufBuffer<CR>
 map! <F8>     <Esc> :FufBuffer<CR>
 map  <C-F8>         :YcmGenerateConfig -f<CR>
