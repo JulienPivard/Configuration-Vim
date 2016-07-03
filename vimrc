@@ -501,10 +501,10 @@ function! AffichageGroff()
     map! <buffer> <F10>   <Esc>:!groff -Kutf8 -man -Tutf8 % <CR>
     map  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <CR>
     map! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <CR>
-    map  <buffer> <F12>        :!zathura %<.pdf & <CR>
-    map! <buffer> <F12>   <Esc>:!zathura %<.pdf & <CR>
-    map  <buffer> <S-F12>      :!zathura %.pdf  & <CR>
-    map! <buffer> <S-F12> <Esc>:!zathura %.pdf  & <CR>
+    map  <buffer> <F12>        :!evince %<.pdf & <CR>
+    map! <buffer> <F12>   <Esc>:!evince %<.pdf & <CR>
+    map  <buffer> <S-F12>      :!evince %.pdf  & <CR>
+    map! <buffer> <S-F12> <Esc>:!evince %.pdf  & <CR>
 
 endfunction
 
