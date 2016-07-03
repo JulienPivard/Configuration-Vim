@@ -1014,6 +1014,8 @@ let g:ada_with_gnat_project_files = 1
 let g:ada_omni_with_keywords = 1
 let g:ada_extended_completion = 1
 let g:ada_gnat_extensions = 1
+let g:ada_space_errors = 1
+let g:ada_all_tab_usage = 1
 let g:ada_default_compiler = 'gnat'
 
 " -----------------------
