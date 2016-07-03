@@ -574,6 +574,7 @@ endif
 augroup fichierQuickfix
     autocmd!
     autocmd Filetype qf setlocal colorcolumn=0
+    autocmd Filetype qf setlocal nospell
 augroup END
 
 " Pour l'ada permet de voir si on dépasse la colonne des 80 caractères
