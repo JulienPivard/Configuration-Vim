@@ -338,16 +338,16 @@ function! ExistMakeFileC()
 
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=make
-        map  <buffer> <S-F9>        :make clean<CR>
-        map! <buffer> <S-F9>  <Esc> :make clean<CR>
-        map  <buffer> <F10>         :!./$nomFichier<CR>
-        map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
+        map  <buffer> <S-F9>        :make clean<Return>
+        map! <buffer> <S-F9>  <Esc> :make clean<Return>
+        map  <buffer> <F10>         :!./$nomFichier<Return>
+        map! <buffer> <F10>   <Esc> :!./$nomFichier<Return>
 
     else
 
         setlocal makeprg=gcc\ -Wall\ -o\ %<\ %<.c
-        map  <buffer> <F10>         :!./%<<CR>
-        map! <buffer> <F10>   <Esc> :!./%<<CR>
+        map  <buffer> <F10>         :!./%<<Return>
+        map! <buffer> <F10>   <Esc> :!./%<<Return>
 
     endif
 
@@ -360,16 +360,16 @@ function! ExistBuildAda()
 
         setlocal makeprg=gnatmake\ -P\ ./build.gpr
         call g:gnat.Set_Project_File( './build.gpr' )
-        map  <buffer> <F10>         :!./bin/client<CR>
-        map! <buffer> <F10>   <Esc> :!./bin/client<CR>
-        map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<CR>
-        map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<CR>
+        map  <buffer> <F10>         :!./bin/client<Return>
+        map! <buffer> <F10>   <Esc> :!./bin/client<Return>
+        map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<Return>
+        map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<Return>
 
     else
 
         setlocal makeprg=gnatmake\ %
-        map  <buffer> <F10>         :!./%<<CR>
-        map! <buffer> <F10>   <Esc> :!./%<<CR>
+        map  <buffer> <F10>         :!./%<<Return>
+        map! <buffer> <F10>   <Esc> :!./%<<Return>
 
     endif
 
@@ -401,24 +401,24 @@ function! MacrosCPP()
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
-        map  <buffer> <F10>         :!./bin/Release/client<CR>
-        map! <buffer> <F10>   <Esc> :!./bin/Release/client<CR>
-        map  <buffer> <S-F9>        :make clean<CR>
-        map! <buffer> <S-F9>  <Esc> :make clean<CR>
+        map  <buffer> <F10>         :!./bin/Release/client<Return>
+        map! <buffer> <F10>   <Esc> :!./bin/Release/client<Return>
+        map  <buffer> <S-F9>        :make clean<Return>
+        map! <buffer> <S-F9>  <Esc> :make clean<Return>
 
     else
 
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=g++\ -Wall\ -Wextra\ -std=c++11\ -o\ %<\ %
-        map  <buffer> <F10>         :!./$nomFichier<CR>
-        map! <buffer> <F10>   <Esc> :!./$nomFichier<CR>
+        map  <buffer> <F10>         :!./$nomFichier<Return>
+        map! <buffer> <F10>   <Esc> :!./$nomFichier<Return>
 
     endif
 
-    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
-    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<CR>
-    map  <buffer> <S-F11>       :!doxygen<CR>
-    map! <buffer> <S-F11> <Esc> :!doxygen<CR>
+    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<Return>
+    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<Return>
+    map  <buffer> <S-F11>       :!doxygen<Return>
+    map! <buffer> <S-F11> <Esc> :!doxygen<Return>
     let g:load_doxygen_syntax = 1
     setlocal syntax=cpp.doxygen
     " Ajoute de tags pour l'omnicompletion
@@ -449,27 +449,27 @@ function! ExistConfigurationJava()
 
         let $chemin = './'
         setlocal makeprg=ant\ compile
-        map  <buffer> <S-F8>        :!ant test<CR>
-        map! <buffer> <S-F8>  <Esc> :!ant test<CR>
-        map  <buffer> <S-F9>        :!ant clean<CR>
-        map! <buffer> <S-F9>  <Esc> :!ant clean<CR>
-        map  <buffer> <F10>         :!ant run<CR>
-        map! <buffer> <F10>   <Esc> :!ant run<CR>
-        map  <buffer> <S-F11>       :!ant javadoc<CR>
-        map! <buffer> <S-F11> <Esc> :!ant javadoc<CR>
+        map  <buffer> <S-F8>        :!ant test<Return>
+        map! <buffer> <S-F8>  <Esc> :!ant test<Return>
+        map  <buffer> <S-F9>        :!ant clean<Return>
+        map! <buffer> <S-F9>  <Esc> :!ant clean<Return>
+        map  <buffer> <F10>         :!ant run<Return>
+        map! <buffer> <F10>   <Esc> :!ant run<Return>
+        map  <buffer> <S-F11>       :!ant javadoc<Return>
+        map! <buffer> <S-F11> <Esc> :!ant javadoc<Return>
 
     else
 
         " Il n'y a pas de fichier d'automatisation, compilation du fichier à la main.
-        map  <buffer> <F10>         :!java %<<CR>
-        map! <buffer> <F10>   <Esc> :!java %<<CR>
-        map  <buffer> <S-F11>       :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
-        map! <buffer> <S-F11> <Esc> :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<CR>
+        map  <buffer> <F10>         :!java %<<Return>
+        map! <buffer> <F10>   <Esc> :!java %<<Return>
+        map  <buffer> <S-F11>       :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<Return>
+        map! <buffer> <S-F11> <Esc> :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<Return>
 
     endif
 
-    map  <buffer> <s-F5>        :make<CR>
-    map! <buffer> <s-F5>  <Esc> :make<CR>
+    map  <buffer> <S-F5>        :make<Return>
+    map! <buffer> <S-F5>  <Esc> :make<Return>
     iabbrev <buffer> sopl System.out.println( "" )<Esc>hhi
     iabbrev <buffer> sopf System.out.printf( "" )<Esc>hhi
     iabbrev <buffer> sepl System.err.println( "" )<Esc>hhi
@@ -481,20 +481,20 @@ endfunction
 function! MacrosLatexSpecifique()
 
     NoMatchParen
-    map  <buffer> <S-F8>        :!makeindex %<.idx<CR>
-    map! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<CR>
-    map  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<CR>
-    map! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<CR>
-    map  <buffer> <F10>         :!evince %<.pdf &<CR>
-    map! <buffer> <F10>   <Esc> :!evince %<.pdf &<CR>
-    map  <buffer> <S-F10>       :!zathura %<.pdf &<CR>
-    map! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<CR>
+    map  <buffer> <S-F8>        :!makeindex %<.idx<Return>
+    map! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
+    map  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
+    map! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
+    map  <buffer> <F10>         :!evince %<.pdf &<Return>
+    map! <buffer> <F10>   <Esc> :!evince %<.pdf &<Return>
+    map  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
+    map! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
 
     if filereadable( 'bibliographie.bib' )
-        map  <buffer> <S-F11>       :!bibtex %< <CR>
-        map! <buffer> <S-F11> <Esc> :!bibtex %< <CR>
+        map  <buffer> <S-F11>       :!bibtex %< <Return>
+        map! <buffer> <S-F11> <Esc> :!bibtex %< <Return>
     endif
-    iabbrev <buffer> begin \begin{}<CR>\end{}<Esc>k$i
+    iabbrev <buffer> begin \begin{}<Return>\end{}<Esc>k$i
 
 endfunction
 
@@ -505,38 +505,38 @@ endfunction
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
 function! AffichageGroff()
 
-    map  <buffer> <s-F5>       :!groff -Kutf8 -me  -Tutf8 % <CR>
-    map! <buffer> <s-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <CR>
-    map  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <CR>
-    map! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <CR>
-    map  <buffer> <F10>        :!groff -Kutf8 -man -Tutf8 % <CR>
-    map! <buffer> <F10>   <Esc>:!groff -Kutf8 -man -Tutf8 % <CR>
-    map  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <CR>
-    map! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <CR>
-    map  <buffer> <F12>        :!evince %<.pdf & <CR>
-    map! <buffer> <F12>   <Esc>:!evince %<.pdf & <CR>
-    map  <buffer> <S-F12>      :!evince %.pdf  & <CR>
-    map! <buffer> <S-F12> <Esc>:!evince %.pdf  & <CR>
+    map  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
+    map! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
+    map  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
+    map! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
+    map  <buffer> <F10>        :!groff -Kutf8 -man -Tutf8 % <Return>
+    map! <buffer> <F10>   <Esc>:!groff -Kutf8 -man -Tutf8 % <Return>
+    map  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
+    map! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
+    map  <buffer> <F12>        :!evince %<.pdf & <Return>
+    map! <buffer> <F12>   <Esc>:!evince %<.pdf & <Return>
+    map  <buffer> <S-F12>      :!evince %.pdf  & <Return>
+    map! <buffer> <S-F12> <Esc>:!evince %.pdf  & <Return>
 
 endfunction
 
 " Macros pour les fichiers bash
 function! ScriptBash()
 
-    iabbrev <buffer> if if [[ ]]; then<CR>fi<esc>k0EEa
-    iabbrev <buffer> elif elif [[ ]]; then<esc>BBhi
-    iabbrev <buffer> while while [[ ]]<CR>do<CR>done<esc>kk0EEa
-    iabbrev <buffer> case case in<CR>cas)<CR>;;<CR>esac<esc>kkk0Ea
+    iabbrev <buffer> if if [[ ]]; then<Return>fi<Esc>k0EEa
+    iabbrev <buffer> elif elif [[ ]]; then<Esc>BBhi
+    iabbrev <buffer> while while [[ ]]<Return>do<Return>done<Esc>kk0EEa
+    iabbrev <buffer> case case in<Return>cas)<Return>;;<Return>esac<Esc>kkk0Ea
 
 endfunction
 
 " Raccourcis pour les fichiers antlr compile et lance les tests
 function! ConfigAntlr()
 
-    map  <buffer> <s-F5>       :!./runAntlr.sh %< <CR>
-    map! <buffer> <s-F5> <Esc> :!./runAntlr.sh %< <CR>
-    map  <buffer> <F10>        :!./runAntlr.sh %< test.code <CR>
-    map! <buffer> <F10>  <Esc> :!./runAntlr.sh %< test.code <CR>
+    map  <buffer> <S-F5>       :!./runAntlr.sh %< <Return>
+    map! <buffer> <S-F5> <Esc> :!./runAntlr.sh %< <Return>
+    map  <buffer> <F10>        :!./runAntlr.sh %< test.code <Return>
+    map! <buffer> <F10>  <Esc> :!./runAntlr.sh %< test.code <Return>
 
 endfunction
 
@@ -673,10 +673,10 @@ augroup END
 " pour des raisons de vitesse de retour à l'édition
 augroup compilation
     autocmd!
-    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    map  <buffer> <s-F5>       :make <CR>
-    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    map! <buffer> <s-F5>  <Esc>:make <CR>
-    autocmd Filetype perl,sh,python                         map  <buffer> <s-F5>       :!./% <CR>
-    autocmd Filetype perl,sh,python                         map! <buffer> <s-F5>  <Esc>:!./% <CR>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    map  <buffer> <S-F5>       :make <Return>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    map! <buffer> <S-F5>  <Esc>:make <Return>
+    autocmd Filetype perl,sh,python                         map  <buffer> <F10>        :!./% <Return>
+    autocmd Filetype perl,sh,python                         map! <buffer> <F10>   <Esc>:!./% <Return>
 augroup END
 
 " Définition de la coloration syntaxique pour les fichier antlr
@@ -707,18 +707,11 @@ augroup commandesLocale
     autocmd FileType python,sh,perl,vim setlocal foldmethod=indent
 augroup END
 
-" Mappage des touches en fonctions du type de fichier
-augroup web
-    autocmd!
-    autocmd FileType html,css,php,javascript    map  <buffer> <F10>      :!firefox % &<CR>
-    autocmd FileType html,css,php,javascript    map! <buffer> <F10> <Esc>:!firefox % &<CR>
-augroup END
-
 " Recharge le vimrc quand utilise F5
 augroup vimSource
     autocmd!
-    autocmd FileType vim    map  <buffer> <s-F5>       :source ~/.vim/vimrc<CR>
-    autocmd FileType vim    map! <buffer> <s-F5>  <Esc>:source ~/.vim/vimrc<CR>
+    autocmd FileType vim    map  <buffer> <S-F5>       :source ~/.vim/vimrc<Return>
+    autocmd FileType vim    map! <buffer> <S-F5>  <Esc>:source ~/.vim/vimrc<Return>
 augroup END
 
 " Mappage selon la présence de makefile
@@ -758,76 +751,76 @@ augroup END
 " FufBuffer permet de visualiser tout les buffers ouvert et d'y accéder
 " FufBufferTagAll permet de chercher parmi tout les tags des fichiers ouvert
 
-map  <F2>           :setlocal number!<CR>:setlocal number?<CR>
-map! <F2>     <Esc> :setlocal number!<CR>:setlocal number?<CR>
-map  <F3>           :setlocal spell!<CR>:setlocal spell?<CR>
-map! <F3>     <Esc> :setlocal spell!<CR>:setlocal spell?<CR>
-map  <F4>           :GundoToggle<CR>
-map! <F4>     <Esc> :GundoToggle<CR>
-map  <F5>           :w<CR>
-map! <F5>     <Esc> :w<CR>
-map  <F6>           :NERDTreeToggle<CR>
-map! <F6>     <Esc> :NERDTreeToggle<CR>
-map  <S-F6>         :UndotreeToggle<CR>
-map! <S-F6>   <Esc> :UndotreeToggle<CR>
-map  <F7>           :TagbarToggle<CR>
-map! <F7>     <Esc> :TagbarToggle<CR>
-map  <S-F7>         :nohls<CR>
-map! <S-F7>   <Esc> :nohls<CR>
-map  <C-F7>         :setlocal paste!<CR>:setlocal paste?<CR>
-map! <C-F7>   <Esc> :setlocal paste!<CR>:setlocal paste?<CR>
-map  <F8>           :FufBuffer<CR>
-map! <F8>     <Esc> :FufBuffer<CR>
-map  <C-F8>         :YcmGenerateConfig -f<CR>
-map! <C-F8>   <Esc> :YcmGenerateConfig -f<CR>
-map  <F9>           :FufBufferTagAll<CR>
-map! <F9>     <Esc> :FufBufferTagAll<CR>
-map  <S-F11>        :call DerniereModification()<CR>
-map! <S-F11>  <Esc> :call DerniereModification()<CR>
-map  <S-F12>        :vsp ~/.vim/vimrc<CR>
-map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<CR>
-map  <C-F12> 	  	:call MontrerGroupeSyntax()<CR>
-map! <C-F12>  <Esc> :call MontrerGroupeSyntax()<CR>
+map  <F2>           :setlocal number!<Return>:setlocal number?<Return>
+map! <F2>     <Esc> :setlocal number!<Return>:setlocal number?<Return>
+map  <F3>           :setlocal spell!<Return>:setlocal spell?<Return>
+map! <F3>     <Esc> :setlocal spell!<Return>:setlocal spell?<Return>
+map  <F4>           :GundoToggle<Return>
+map! <F4>     <Esc> :GundoToggle<Return>
+map  <F5>           :w<Return>
+map! <F5>     <Esc> :w<Return>
+map  <F6>           :NERDTreeToggle<Return>
+map! <F6>     <Esc> :NERDTreeToggle<Return>
+map  <S-F6>         :UndotreeToggle<Return>
+map! <S-F6>   <Esc> :UndotreeToggle<Return>
+map  <F7>           :TagbarToggle<Return>
+map! <F7>     <Esc> :TagbarToggle<Return>
+map  <S-F7>         :nohls<Return>
+map! <S-F7>   <Esc> :nohls<Return>
+map  <C-F7>         :setlocal paste!<Return>:setlocal paste?<Return>
+map! <C-F7>   <Esc> :setlocal paste!<Return>:setlocal paste?<Return>
+map  <F8>           :FufBuffer<Return>
+map! <F8>     <Esc> :FufBuffer<Return>
+map  <C-F8>         :YcmGenerateConfig -f<Return>
+map! <C-F8>   <Esc> :YcmGenerateConfig -f<Return>
+map  <F9>           :FufBufferTagAll<Return>
+map! <F9>     <Esc> :FufBufferTagAll<Return>
+map  <S-F11>        :call DerniereModification()<Return>
+map! <S-F11>  <Esc> :call DerniereModification()<Return>
+map  <S-F12>        :vsp ~/.vim/vimrc<Return>
+map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
+map  <C-F12> 	  	:call MontrerGroupeSyntax()<Return>
+map! <C-F12>  <Esc> :call MontrerGroupeSyntax()<Return>
 
-"iabbrev { {<CR>}<Esc>k$a
-iabbrev /** /**<CR>*/<Esc>ka
-iabbrev /* /*<CR>*/<Esc>ka
+"iabbrev { {<Return>}<Esc>k$a
+iabbrev /** /**<Return>*/<Esc>ka
+iabbrev /* /*<Return>*/<Esc>ka
 
 imap     <buffer>!! ->
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<CR>a
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gd :Gdiff<CR>
-nmap <leader>gv :Gitv<CR>
+nmap <leader>gs :Gstatus<Return>
+nmap <leader>gd :Gdiff<Return>
+nmap <leader>gv :Gitv<Return>
 
-nmap <leader>bs :buffers<CR>
-nmap <leader>bb :bnext<CR>
+nmap <leader>bs :buffers<Return>
+nmap <leader>bb :bnext<Return>
 
-nmap <leader>sh :SignifyToggleHighlight<CR>
-nmap <leader>sr :SignifyRefresh<CR>
+nmap <leader>sh :SignifyToggleHighlight<Return>
+nmap <leader>sr :SignifyRefresh<Return>
 nmap <leader>sj <plug>(signify-next-hunk)
 nmap <leader>sk <plug>(signify-prev-hunk)
 
-nmap <leader>us :UpdateAndSpellCheck<CR>
+nmap <leader>us :UpdateAndSpellCheck<Return>
 
-nmap <leader>sy :SyntasticToggleMode<CR>
+nmap <leader>sy :SyntasticToggleMode<Return>
 
-nmap <silent> <Leader>fff :FSHere<cr>
-nmap <silent> <Leader>fh :FSLeft<cr>
-nmap <silent> <Leader>ffh :FSSplitLeft<cr>
-nmap <silent> <Leader>fl :FSRight<cr>
-nmap <silent> <Leader>ffl :FSSplitRight<cr>
-nmap <silent> <Leader>fk :FSAbove<cr>
-nmap <silent> <Leader>ffk :FSSplitAbove<cr>
-nmap <silent> <Leader>fj :FSBelow<cr>
-nmap <silent> <Leader>ffj :FSSplitBelow<cr>
+nmap <silent> <Leader>fff :FSHere<Return>
+nmap <silent> <Leader>fh :FSLeft<Return>
+nmap <silent> <Leader>ffh :FSSplitLeft<Return>
+nmap <silent> <Leader>fl :FSRight<Return>
+nmap <silent> <Leader>ffl :FSSplitRight<Return>
+nmap <silent> <Leader>fk :FSAbove<Return>
+nmap <silent> <Leader>ffk :FSSplitAbove<Return>
+nmap <silent> <Leader>fj :FSBelow<Return>
+nmap <silent> <Leader>ffj :FSSplitBelow<Return>
 
-nmap <leader>o :copen<CR>
-nmap <leader>c :cclose<CR>
-nmap <leader>n :cnext<CR>
-nmap <leader>p :cprevious<CR>
+nmap <leader>o :copen<Return>
+nmap <leader>c :cclose<Return>
+nmap <leader>n :cnext<Return>
+nmap <leader>p :cprevious<Return>
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -842,10 +835,10 @@ nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
 if exists( ':Tabularize' )
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>a= :Tabularize /=<Return>
+    vmap <Leader>a= :Tabularize /=<Return>
+    nmap <Leader>a: :Tabularize /:\zs<Return>
+    vmap <Leader>a: :Tabularize /:\zs<Return>
 endif
 
 " -------------------------------------------------------------------------------------------------- "
