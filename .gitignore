@@ -1,14 +1,7 @@
 *.swp
-CMakeFiles/
-CMakeCache.txt
-Makefile
-bin/
-cmake_install.cmake
 doc/
 log.txt
 tags
 .zcache/
-bundle/*
-bundleOld/
 shada
 .netrwhist
