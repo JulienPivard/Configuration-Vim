@@ -1014,14 +1014,19 @@ let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 " -----------------------
 " Réglage pour airline
 " -----------------------
+let g:airline_skip_empty_sections = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'newDark'
+
 let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_skip_empty_sections = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'newDark'
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = '····'
+let g:airline#extensions#branch#displayed_head_limit = 10
 
 " -----------------------
 " Réglages pour indent guides
