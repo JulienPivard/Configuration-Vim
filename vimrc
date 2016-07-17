@@ -707,6 +707,7 @@ augroup commandesLocale
     autocmd FileType tex                setlocal nocursorline nocursorcolumn
     " Active les replis en se basant sur l'indentation
     autocmd FileType python,sh,perl,vim setlocal foldmethod=indent
+    autocmd FileType gitcommit          setlocal cursorline nocursorcolumn
 augroup END
 
 " Recharge le vimrc quand utilise F5
