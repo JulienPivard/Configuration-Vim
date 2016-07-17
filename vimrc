@@ -992,13 +992,13 @@ augroup END
 augroup fichierCorpAda
     autocmd!
     autocmd BufEnter *.adb let b:fswitchdst  = 'ads'
-    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:.'
+    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:./spec/'
 augroup END
 " Réglage de FSwitch pour les ads
 augroup fichierSpecAda
     autocmd!
     autocmd BufEnter *.ads let b:fswitchdst  = 'adb'
-    autocmd BufEnter *.ads let b:fswitchlocs = 'rel:.'
+    autocmd BufEnter *.ads let b:fswitchlocs = 'rel:./../'
 augroup END
 " -----------------------
 
