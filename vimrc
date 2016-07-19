@@ -930,7 +930,11 @@ let g:tagbar_systemenc = 'utf-8'
 " -----------------------
 " Réglages pour UltiSnips
 " -----------------------
-let g:UltiSnipsUsePythonVersion = 2
+if has( 'python3' )
+    let g:UltiSnipsUsePythonVersion = 3
+else
+    let g:UltiSnipsUsePythonVersion = 2
+endif
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-h>'
