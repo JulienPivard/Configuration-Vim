@@ -332,16 +332,9 @@ exe 'highlight lCursor'             . s:forme                               . s:
 " Coloration pour TagBar    "(((
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-highlight link shFunction               Function
-
-" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-" )))
-
-
-" Coloration pour TagBar    "(((
-" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 exe 'highlight TagbarSignature'     . s:forme                               . s:texte . s:jaunesombre       . s:fond . s:none
+
+highlight link shFunction               Function
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " )))
@@ -465,6 +458,14 @@ exe 'highlight SignifySignChange'   . s:forme                               . s:
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight gitcommitSummary'    . s:forme                               . s:texte . s:cyan              . s:fond . s:none
+
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+" )))
+
+" Coloration pour le latex "(((
+" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+exe 'highlight texZone'             . s:forme                               . s:texte . s:violetsombre      . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " )))
