@@ -697,6 +697,7 @@ augroup END
 augroup manuel
     autocmd!
     autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand( '%:t:r' )?
+    autocmd BufNewFile *.1      :exe '%substitute/DATE/' . strftime( '%d %B %Y' ) . '/e'
 augroup END
 
 augroup commandesLocale
