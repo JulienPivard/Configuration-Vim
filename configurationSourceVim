@@ -1,13 +1,97 @@
+#! /bin/bash
+
+####################################
+#      Définition des couleurs     #
+####################################
+
+# Couleurs normale
+noir='\e[0;30m'         # Noir
+rouge='\e[0;31m'        # Rouge
+vert='\e[0;32m'         # Vert
+jaune='\e[0;33m'        # Jaune
+bleu='\e[0;34m'         # Bleu
+violet='\e[0;35m'       # Violet
+cyan='\e[0;36m'         # Cyan
+blanc='\e[0;37m'        # Blanc
+
+# Gras
+gnoir='\e[1;30m'        # Noir
+grouge='\e[1;31m'       # Rouge
+gvert='\e[1;32m'        # Vert
+gjaune='\e[1;33m'       # Jaune
+gbleu='\e[1;34m'        # Bleu
+gviolet='\e[1;35m'      # Violet
+gcyan='\e[1;36m'        # Cyan
+gblanc='\e[1;37m'       # Blanc
+
+# souligné
+snoir='\e[4;30m'        # Noir
+srouge='\e[4;31m'       # Rouge
+svert='\e[4;32m'        # Vert
+sjaune='\e[4;33m'       # Jaune
+sbleu='\e[4;34m'        # Bleu
+sviolet='\e[4;35m'      # Violet
+scyan='\e[4;36m'        # Cyan
+sblanc='\e[4;37m'       # Blanc
+
+# Couleur de fond
+sur_noir='\e[40m'       # Noir
+sur_rouge='\e[41m'      # Rouge
+sur_vert='\e[42m'       # Vert
+sur_jaune='\e[43m'      # Jaune
+sur_bleu='\e[44m'       # Bleu
+sur_violet='\e[45m'     # Violet
+sur_cyan='\e[46m'       # Cyan
+sur_blanc='\e[47m'      # Blanc
+
+# Haute intensité
+inoir='\e[0;90m'        # Noir
+irouge='\e[0;91m'       # Rouge
+ivert='\e[0;92m'        # Vert
+ijaune='\e[0;93m'       # Jaune
+ibleu='\e[0;94m'        # Bleu
+iviolet='\e[0;95m'      # Violet
+icyan='\e[0;96m'        # Cyan
+iblanc='\e[0;97m'       # Blanc
+
+# Gras haute intensité
+ginoir='\e[1;90m'       # Noir
+girouge='\e[1;91m'      # Rouge
+givert='\e[1;92m'       # Vert
+gijaune='\e[1;93m'      # Jaune
+gibleu='\e[1;94m'       # Bleu
+giviolet='\e[1;95m'     # Violet
+gicyan='\e[1;96m'       # Cyan
+giblanc='\e[1;97m'      # Blanc
+
+# Couleur de fond haute intensité
+sur_inoir='\e[0;100m'   # Noir
+sur_irouge='\e[0;101m'  # Rouge
+sur_ivert='\e[0;102m'   # Vert
+sur_ijaune='\e[0;103m'  # Jaune
+sur_ibleu='\e[0;104m'   # Bleu
+sur_iviolet='\e[0;105m' # Violet
+sur_icyan='\e[0;106m'   # Cyan
+sur_iblanc='\e[0;107m'  # Blanc
+
+neutre='\e[0;m'
+
+#echo "Pour installer avec le support de clipboard installer xorg-dev"
+
+if [[ -e "./src/vim" ]]; then
+    printf "${ijaune}Nettoyage de la compilation précédente.${neutre}\n"
+    make distclean
+fi
+
+printf "${ivert}Configuration et compilation de vim${neutre}\n"
+
 ./configure --with-features=huge \
+            --with-compiledby=Asmodee \
             --enable-multibyte \
             --enable-rubyinterp \
-            --enable-pythoninterp=yes \
-            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
             --enable-perlinterp \
-            --enable-luainterp \
-            --enable-cscope \
-            --enable-gui=gtk3 \
-            --with-x --prefix=/usr \
-            --with-lua-prefix=/usr/include/lua5.2 \
-            --with-python-config-dir=/usr/lib/ \
-            --enable-fail-if-missing; make
+            --enable-pythoninterp=yes \
+            --enable-luainterp --with-lua-prefix=/usr/include/lua5.2 \
+            --enable-cscope --disable-netbeans \
+            --enable-gui=auto --with-x --prefix=/usr \
+            --enable-fail-if-missing && make
