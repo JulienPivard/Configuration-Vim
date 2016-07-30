@@ -103,7 +103,7 @@ neutre='\e[0;m'
 
 nettoyage()
 {
-    echo -e "\n${rouge}Le script à subi une interruption.${neutre}" >&2
+    printf "\n${rouge}Le script à subi une interruption.${neutre}" >&2
     exit $?
 }
 
@@ -131,11 +131,11 @@ do
             echo "$OPTARG"
             ;;
         :)
-            echo -e "${rouge}L'option [ ${violet} $OPTARG ${rouge} ] nécessite un argument.${neutre}" >&2
+            printf "${rouge}L'option [ ${violet} $OPTARG ${rouge} ] nécessite un argument.${neutre}" >&2
             exit 101
             ;;
         ?)
-            echo -e "${rouge}L'option [ ${violet} $OPTARG ${rouge} ] n'existe pas.${neutre}" >&2
+            printf "${rouge}L'option [ ${violet} $OPTARG ${rouge} ] n'existe pas.${neutre}" >&2
             exit 102
             ;;
     esac
