@@ -796,7 +796,6 @@ map! <C-F12>  <Esc> :call MontrerGroupeSyntax()<Return>
 iabbrev /** /**<Return>*/<Esc>ka
 iabbrev /* /*<Return>*/<Esc>ka
 
-imap     <buffer>!! ->
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
 " Change le caractère pour déclencher le mapping en mode commande.
