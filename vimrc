@@ -374,6 +374,9 @@ function! ExistBuildAda()
 
     endif
 
+    map  <buffer> <S-F8>        :!ctags -R --languages=ada --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+    map! <buffer> <S-F8>  <Esc> :!ctags -R --languages=ada --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+
 endfunction
 
 " Configuration des nouveaux fichiers cpp
@@ -416,14 +419,17 @@ function! MacrosCPP()
 
     endif
 
-    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<Return>
-    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ ./src/<Return>
+    map  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+    map! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
     map  <buffer> <S-F11>       :!doxygen<Return>
     map! <buffer> <S-F11> <Esc> :!doxygen<Return>
     let g:load_doxygen_syntax = 1
     setlocal syntax=cpp.doxygen
     " Ajoute de tags pour l'omnicompletion
-    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -f cpp cpp_src
+    " git clone https://github.com/universal-ctags/ctags.git
+    " Compiler ctags avec utf-8 support
+    " ./configure --enable-iconv
+    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --input-encoding=utf-8 --output-encoding=utf-8 --language-force=C++ -f cpp cpp_src
     setlocal tags+=~/.vim/tags/cpp
 
 endfunction
@@ -927,6 +933,31 @@ let g:tagbar_autoshowtag = 0
 let g:tagbar_width = 50
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
+let g:tagbar_type_ada = {
+    \ 'ctagstype': 'ada',
+    \ 'kinds' : [
+        \'P:package specs',
+        \'p:packages',
+        \'t:type',
+        \'u:subtypes',
+        \'c:record type components',
+        \'l:enum type literals',
+        \'v:variables',
+        \'f:formal parameters',
+        \'n:constants',
+        \'x:exceptions',
+        \'R:subprogram specs',
+        \'r:subprograms',
+        \'K:task specs',
+        \'k:tasks',
+        \'O:protected data specs',
+        \'o:protected data',
+        \'e:entries',
+        \'b:labels',
+        \'i:identifiers'
+    \]
+    \}
 
 " -----------------------
 " Réglages pour UltiSnips
