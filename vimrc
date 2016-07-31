@@ -1093,6 +1093,24 @@ let g:ada_default_compiler = 'gnat'
 "let g:tabular_loaded = 1
 
 " -----------------------
+" Réglages pour vim-pencil
+" -----------------------
+let g:pencil#autoformat_config = {
+            \ 'markdown': {
+            \     'black' : [
+            \         'htmlH[0-9]',
+            \         'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
+            \         'markdown(FencedCodeBlock|InlineCode)',
+            \         'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
+            \         'mmdTable[A-Za-z0-9]*',
+            \         ],
+            \     'white': [
+            \         'markdown(Code|Link)',
+            \         ],
+            \     },
+            \ }
+
+" -----------------------
 " Réglage pour mon thème de couleurs.
 " -----------------------
 let g:interstellaire_termcolors = 256
