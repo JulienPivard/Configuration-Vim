@@ -11,6 +11,7 @@ filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim       " Ajoute le chemin pour initialiser Vundle au démarrage.
 call vundle#begin( '~/.vim/bundle/' )
 
+" Pour retrouver le dépôt git exact ajouter au début https://github.com
 " Pour se maintenir à jours.
 Plugin 'VundleVim/Vundle.vim'
 
@@ -22,6 +23,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'gregsexton/gitv'
 Plugin 'hdima/python-syntax'
+Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 'mbbill/undotree'
