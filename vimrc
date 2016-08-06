@@ -889,6 +889,8 @@ let g:syntastic_auto_loc_list = 2               " ne pas ouvrir automatiquement 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_jump = 2                   " Saute à la première erreur trouvée à la sauvegarde.
+let g:syntastic_stl_format = '[%E{Err l: %fe #%e}%B{, }%W{Warn l: %fw #%w}]'
+let g:syntastic_ignore_files = ['build.gpr']
 " php
 let g:syntastic_php_checkers = ['php']          " Pour ne pas avoir le checker de style et d'indentation.
 " perl
@@ -902,7 +904,6 @@ let g:syntastic_tex_checkers = ['lacheck']      " Pour ne pas avoir le checker d
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
-let g:syntastic_stl_format = '[%E{Err l: %fe #%e}%B{, }%W{Warn l: %fw #%w}]'
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 " Les fichiers doivent être de la forme -Ichemin/du/dossier
 
