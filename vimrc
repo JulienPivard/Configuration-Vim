@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : lundi 11 juillet[07] 2016
+" Dernière modification : dimanche 07 août[08] 2016
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -631,7 +631,7 @@ augroup END
 " Permet de changer la date de dernière modification si elle existe
 augroup datecreation
     autocmd!
-    autocmd BufNewFile *    call DerniereModification()
+    autocmd BufWritePre *       call DerniereModification()
 augroup END
 
 " Avoir squelette de base à la création d'un fichier
