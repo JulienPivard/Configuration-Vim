@@ -482,10 +482,6 @@ function! ExistConfigurationJava()
 
     map  <buffer> <S-F5>        :make<Return>
     map! <buffer> <S-F5>  <Esc> :make<Return>
-    iabbrev <buffer> sopl System.out.println( "" )<Esc>hhi
-    iabbrev <buffer> sopf System.out.printf( "" )<Esc>hhi
-    iabbrev <buffer> sepl System.err.println( "" )<Esc>hhi
-    iabbrev <buffer> sepf System.err.printf( "" )<Esc>hhi
 
 endfunction
 
@@ -506,7 +502,6 @@ function! MacrosLatexSpecifique()
         map  <buffer> <S-F11>       :!bibtex %< <Return>
         map! <buffer> <S-F11> <Esc> :!bibtex %< <Return>
     endif
-    iabbrev <buffer> begin \begin{}<Return>\end{}<Esc>k$i
 
 endfunction
 
@@ -529,16 +524,6 @@ function! AffichageGroff()
     map! <buffer> <F12>   <Esc>:!evince %<.pdf & <Return>
     map  <buffer> <S-F12>      :!evince %.pdf  & <Return>
     map! <buffer> <S-F12> <Esc>:!evince %.pdf  & <Return>
-
-endfunction
-
-" Macros pour les fichiers bash
-function! ScriptBash()
-
-    iabbrev <buffer> if if [[ ]]; then<Return>fi<Esc>k0EEa
-    iabbrev <buffer> elif elif [[ ]]; then<Esc>BBhi
-    iabbrev <buffer> while while [[ ]]<Return>do<Return>done<Esc>kk0EEa
-    iabbrev <buffer> case case in<Return>cas)<Return>;;<Return>esac<Esc>kkk0Ea
 
 endfunction
 
@@ -794,10 +779,6 @@ map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
 map  gy             :YcmGenerateConfig -f<Return>
 map  gh      	  	:call MontrerGroupeSyntax()<Return>
 map  gp             :setlocal paste!<Return>:setlocal paste?<Return>
-
-"iabbrev { {<Return>}<Esc>k$a
-iabbrev /** /**<Return>*/<Esc>ka
-iabbrev /* /*<Return>*/<Esc>ka
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
