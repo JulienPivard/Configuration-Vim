@@ -29,11 +29,6 @@ project Build is
     for Object_Dir  use "obj/" & mode;
     for Exec_Dir    use "bin/" & mode;
 
-    --  Pour lier le nom dans le code et le nom du fichier de spec qui le contient
-    --for Spec ("MyPack.MyChild") use "mypack.mychild.spec";
-    --  Même chose mais pour le corps.
-    --for Body ("MyPack.MyChild") use "mypack.mychild.body";
-
     --  gnatef est la pour afficher le chemin complet des fichiers dans les
     --  messages erreurs et avertissements.
     --  gnatU : Permet de marquer les messages erreurs avec le tag error:
@@ -65,6 +60,15 @@ project Build is
             );
 
     --  Pour un bon tuto https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug.html
+    package Naming is   --<<<  Pour changer les noms
+
+    --  Pour lier le nom dans le code et le nom du fichier de spec qui le contient
+    --for Spec ("MyPack.MyChild") use "mypack.mychild.spec";
+    --  Même chose mais pour le corps.
+    --for Body ("MyPack.MyChild") use "mypack.mychild.body";
+
+    end Naming;
+
     package Builder is  --<<<  pour gprbuild
 
         --  Pour changer le nom de l'exécutable de client à client après le use.
