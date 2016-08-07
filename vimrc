@@ -726,7 +726,6 @@ augroup fonctionsConfiguration
     autocmd FileType java,ant               call ExistConfigurationJava()
     autocmd FileType tex                    call MacrosLatexSpecifique()
     autocmd FileType php                    call ProgEnPHP()
-    autocmd FileType sh                     call ScriptBash()
     autocmd FileType nroff,groff            call AffichageGroff()
     autocmd Filetype antlr                  call ConfigAntlr()
     autocmd FileType cpp                    call MacrosCPP()
