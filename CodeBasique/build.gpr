@@ -1,28 +1,100 @@
---  Dernière modification : mercredi 08 juin[06] 2016
+--  Dernière modification : dimanche 07 août[08] 2016
+--  auteur : PIVARD Julien
 
 project Build is
 
-for Object_Dir  use "obj";
-for Exec_Dir    use "bin";
-for Source_Dirs use ( "src/**" );
+    --  Les énumérations sont des types accepté.
+    type Style_Type is ( "deb", "rel" );
+    type Mode_Choisis is ( "debug", "release" );
+    --  Le premier paramètre est le nom de la variable.
+    --  Le second paramètre est la valeur par défaut.
+    --  A utiliser avec
+    --  gprbuild -Pbuild.gpr -Xmode=release
+    style : Style_Type := external( "mode", "deb" );
+    mode : Mode_Choisis := "debug";
 
-for Main        use ( "principale.adb" );
+    case style is
+        when "deb" => mode := "debug";
+        when "rel" => mode := "release";
+    end case;
 
-package Compiler is
+    --  Le nom du fichier qui contient la procédure principale.
+    for Main        use ( "client" );
 
-    --  Pour avoir les warning en cas de non utilisation d'une variable
-    --  non initialisé avec .e.
-    --  Le gnatef est la pour afficher le chemin complet des fichiers dans les
-    --  messages d'erreurs et d'avertissements.
-    --  gnatU : Permet de marquer les messages d'erreurs avec le tag error:
-    for Default_Switches( "Ada" ) use ( "-gnata",
-        "-gnatef",
-        "-gnatU",
-        "-gnat2012",
-        "-gnatyanp",
-        "-gnatw.e",
-        "-O3" );
+    --  Pour ignorer des fichiers sources de la compilation
+    for Ignore_Source_Sub_Dirs use ( ".git" );
+    --  Le ** permet d'inclure tous les sous répertoire.
+    for Source_Dirs use ( "src/**" );
 
-end Compiler;
+    for Object_Dir  use "obj/" & mode;
+    for Exec_Dir    use "bin/" & mode;
+
+    --  Pour lier le nom dans le code et le nom du fichier de spec qui le contient
+    --for Spec ("MyPack.MyChild") use "mypack.mychild.spec";
+    --  Même chose mais pour le corps.
+    --for Body ("MyPack.MyChild") use "mypack.mychild.body";
+
+    --  gnatef est la pour afficher le chemin complet des fichiers dans les
+    --  messages erreurs et avertissements.
+    --  gnatU : Permet de marquer les messages erreurs avec le tag error:
+    --  gnatw.Y désactive le message qui dit pourquoi la spec nécessite un corps.
+    --  gnatw.e active les avertissements pour les variables non utilisé.
+    --  gnatif pour pouvoir utiliser les accents dans les noms de variables.
+    --  gnatW8 pour avoir les caractères utf8 dans les chaines de caractères wide.
+    --  gnaty a : vérifie la casse; b : aucuns espaces en fin de ligne;
+    --  4 : taille indentation.
+    --  c : style des commentaires avec deux espaces;
+    --  d : Pas de fin de ligne windows; e : vérifie le nom des blocs et exit;
+    --  f : Pas de tabulation verticale;
+    --  h : pas de caractères tabulation; i : vérifie la position du then du if;
+    --  k : vérifie la casse des mots réservé qui doivent être en minuscule;
+    --  l : Vérifie la position de certains mots clef les uns par rapport aux autres;
+    --  r : Vérifie que la casse des identificateurs est cohérente tout le long.
+    --  s : Vérifie que tout corps possède une partie spécification séparée.
+    --  n : vérifie la casse des entités standard; p : vérifie la casse des pragma;
+    --  u : vérifie les lignes vide; x : vérifie les parenthèses inutile;
+    Options := ( "-gnata",
+            "-gnatef",
+            "-gnatU",
+            "-gnat2012",
+            "-gnaty4abcdefhiklnprsux",
+            "-gnatw.e",
+            "-gnatw.Y",
+            "-gnatW8",
+            "-gnatif"
+            );
+
+    --  Pour un bon tuto https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug.html
+    package Builder is  --<<<  pour gprbuild
+
+        --  Pour changer le nom de l'exécutable de client à client après le use.
+        case style is
+            when "deb" =>
+                for Executable( "client" ) use "client";
+            when "rel" =>
+                for Executable( "client" ) use "client";
+        end case;
+
+    end Builder;
+
+    package Compiler is --<<<  pour le compiler
+
+        case style is
+            when "deb" =>
+                for Default_Switches( "Ada" ) use Options & ( "-g" );
+            when "rel" =>
+                for Default_Switches( "Ada" ) use Options& ( "-O3" );
+        end case;
+
+    end Compiler;
+
+    --  Uniquement pour ada.
+    --  Vas créer des fichiers « sources » pour élaborer les interruptions
+    --  initialiser les variables globales ...
+    package Binder is   --<<<  pour le binder
+    end Binder;
+
+    package Linker is   --<<<  pour le linker
+    end Linker;
 
 end Build;
