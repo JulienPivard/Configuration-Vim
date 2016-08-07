@@ -364,8 +364,10 @@ function! ExistBuildAda()
 
         setlocal makeprg=gnatmake\ -P\ ./build.gpr
         call g:gnat.Set_Project_File( './build.gpr' )
-        map  <buffer> <F10>         :!./bin/client<Return>
-        map! <buffer> <F10>   <Esc> :!./bin/client<Return>
+        map  <buffer> <F10>         :!./bin/debug/client<Return>
+        map! <buffer> <F10>   <Esc> :!./bin/debug/client<Return>
+        map  <buffer> <S-F10>       :!./bin/release/client<Return>
+        map! <buffer> <S-F10> <Esc> :!./bin/release/client<Return>
         map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<Return>
         map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<Return>
 
@@ -780,20 +782,18 @@ map  <F7>           :TagbarToggle<Return>
 map! <F7>     <Esc> :TagbarToggle<Return>
 map  <S-F7>         :nohls<Return>
 map! <S-F7>   <Esc> :nohls<Return>
-map  <C-F7>         :setlocal paste!<Return>:setlocal paste?<Return>
-map! <C-F7>   <Esc> :setlocal paste!<Return>:setlocal paste?<Return>
 map  <F8>           :FufBuffer<Return>
 map! <F8>     <Esc> :FufBuffer<Return>
-map  <C-F8>         :YcmGenerateConfig -f<Return>
-map! <C-F8>   <Esc> :YcmGenerateConfig -f<Return>
 map  <F9>           :FufBufferTagAll<Return>
 map! <F9>     <Esc> :FufBufferTagAll<Return>
 map  <S-F11>        :call DerniereModification()<Return>
 map! <S-F11>  <Esc> :call DerniereModification()<Return>
 map  <S-F12>        :vsp ~/.vim/vimrc<Return>
 map! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
-map  <C-F12> 	  	:call MontrerGroupeSyntax()<Return>
-map! <C-F12>  <Esc> :call MontrerGroupeSyntax()<Return>
+
+map  gy             :YcmGenerateConfig -f<Return>
+map  gh      	  	:call MontrerGroupeSyntax()<Return>
+map  gp             :setlocal paste!<Return>:setlocal paste?<Return>
 
 "iabbrev { {<Return>}<Esc>k$a
 iabbrev /** /**<Return>*/<Esc>ka
