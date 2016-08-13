@@ -362,14 +362,12 @@ function! ExistBuildAda()
 
     if filereadable( './build.gpr' )
 
-        setlocal makeprg=gnatmake\ -P\ ./build.gpr
+        setlocal makeprg=gprbuild\ -d\ -Xmode=deb
         call g:gnat.Set_Project_File( './build.gpr' )
         map  <buffer> <F10>         :!./bin/debug/client<Return>
         map! <buffer> <F10>   <Esc> :!./bin/debug/client<Return>
-        map  <buffer> <S-F10>       :!./bin/release/client<Return>
-        map! <buffer> <S-F10> <Esc> :!./bin/release/client<Return>
-        map  <buffer> <S-F9>        :!gnatclean -P ./build.gpr<Return>
-        map! <buffer> <S-F9>  <Esc> :!gnatclean -P ./build.gpr<Return>
+        map  <buffer> <S-F9>        :!gprclean<Return>
+        map! <buffer> <S-F9>  <Esc> :!gprclean<Return>
 
     else
 
