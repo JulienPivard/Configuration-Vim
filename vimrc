@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : dimanche 07 août[08] 2016
+" Dernière modification : Samedi 13 août[08] 2016
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -115,7 +115,7 @@ set   modeline                          " Options spécifiques à vim dans les p
 set   modelines=3                       " Nombres de lignes vérifiées à l'ouverture
 set   nrformats=alpha,octal,hex         " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
 set   number                            " Affiche les numéros de ligne
-set   printencoding=utf8                " Fixe l'encodage pour l'impression
+set   printencoding=utf-8               " Fixe l'encodage pour l'impression
 set   printoptions=paper:A4             " Permet de régler plusieurs options dont la taille du papier
 set norelativenumber                    " Affiche le nombre de ligne relatif à la position
 set   report=0                          " Affiche toujours le nombre de lignes modifié
@@ -920,7 +920,7 @@ let g:tagbar_autoshowtag = 0
 let g:tagbar_width = 50
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
-let g:tagbar_ctags_bin = '/usr/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_type_ada = {
     \ 'ctagstype': 'ada',
     \ 'kinds' : [
