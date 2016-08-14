@@ -750,24 +750,24 @@ augroup END
 " FufBuffer permet de visualiser tout les buffers ouvert et d'y accéder
 " FufBufferTagAll permet de chercher parmi tout les tags des fichiers ouvert
 
-noremap  <F2>           :setlocal number!<Return>:setlocal number?<Return>
-noremap! <F2>     <Esc> :setlocal number!<Return>:setlocal number?<Return>
-noremap  <F3>           :setlocal spell!<Return>:setlocal spell?<Return>
-noremap! <F3>     <Esc> :setlocal spell!<Return>:setlocal spell?<Return>
+noremap  <F2>           :setlocal number! number?<Return>
+noremap! <F2>     <Esc> :setlocal number! number?<Return>
+noremap  <F3>           :setlocal spell!  spell? <Return>
+noremap! <F3>     <Esc> :setlocal spell!  spell? <Return>
 noremap  <F4>           :GundoToggle<Return>
 noremap! <F4>     <Esc> :GundoToggle<Return>
 noremap  <F5>           :w<Return>
 noremap! <F5>     <Esc> :w<Return>
-noremap  <F6>           :NERDTreeToggle<Return>
-noremap! <F6>     <Esc> :NERDTreeToggle<Return>
-noremap  <S-F6>         :UndotreeToggle<Return>
-noremap! <S-F6>   <Esc> :UndotreeToggle<Return>
-noremap  <F7>           :TagbarToggle<Return>
-noremap! <F7>     <Esc> :TagbarToggle<Return>
-noremap  <S-F7>         :nohlsearch<Return>
-noremap! <S-F7>   <Esc> :nohlsearch<Return>
-noremap  <F8>           :FufBuffer<Return>
-noremap! <F8>     <Esc> :FufBuffer<Return>
+noremap  <F6>           :NERDTreeToggle <Return>
+noremap! <F6>     <Esc> :NERDTreeToggle <Return>
+noremap  <S-F6>         :UndotreeToggle <Return>
+noremap! <S-F6>   <Esc> :UndotreeToggle <Return>
+noremap  <F7>           :TagbarToggle   <Return>
+noremap! <F7>     <Esc> :TagbarToggle   <Return>
+noremap  <S-F7>         :nohlsearch     <Return>
+noremap! <S-F7>   <Esc> :nohlsearch     <Return>
+noremap  <F8>           :FufBuffer      <Return>
+noremap! <F8>     <Esc> :FufBuffer      <Return>
 noremap  <F9>           :FufBufferTagAll<Return>
 noremap! <F9>     <Esc> :FufBufferTagAll<Return>
 noremap  <S-F11>        :call DerniereModification()<Return>
@@ -777,7 +777,7 @@ noremap! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
 
 nnoremap gy :YcmGenerateConfig -f<Return>
 nnoremap gh :call MontrerGroupeSyntax()<Return>
-nnoremap gp :setlocal paste!<Return>:setlocal paste?<Return>
+nnoremap gp :setlocal paste! paste?<Return>
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
@@ -790,11 +790,11 @@ vnoremap <leader>br <esc>`<i[<esc>`>a]<esc>
 vnoremap <leader>(  <esc>`<i(<esc>`>a)<esc>
 
 nnoremap <leader>gs :Gstatus<Return>
-nnoremap <leader>gd :Gdiff<Return>
-nnoremap <leader>gv :Gitv<Return>
+nnoremap <leader>gd :Gdiff  <Return>
+nnoremap <leader>gv :Gitv   <Return>
 
 nnoremap <leader>bs :buffers<Return>
-nnoremap <leader>bb :bnext<Return>
+nnoremap <leader>bb :bnext  <Return>
 
 nnoremap <leader>sh :SignifyToggleHighlight<Return>
 nnoremap <leader>sr :SignifyRefresh<Return>
@@ -807,7 +807,7 @@ nnoremap <leader>us :UpdateAndSpellCheck<Return>
 nnoremap <leader>sy :SyntasticToggleMode<Return>
 
 nnoremap <silent> <Leader>fff :FSHere<Return>
-nnoremap <silent> <Leader>fh :FSLeft<Return>
+nnoremap <silent> <Leader>fh :FSLeft <Return>
 nnoremap <silent> <Leader>ffh :FSSplitLeft<Return>
 nnoremap <silent> <Leader>fl :FSRight<Return>
 nnoremap <silent> <Leader>ffl :FSSplitRight<Return>
@@ -816,22 +816,22 @@ nnoremap <silent> <Leader>ffk :FSSplitAbove<Return>
 nnoremap <silent> <Leader>fj :FSBelow<Return>
 nnoremap <silent> <Leader>ffj :FSSplitBelow<Return>
 
-nnoremap <leader>o :copen<Return>
-nnoremap <leader>c :cclose<Return>
-nnoremap <leader>n :cnext<Return>
+nnoremap <leader>o :copen    <Return>
+nnoremap <leader>c :cclose   <Return>
+nnoremap <leader>n :cnext    <Return>
 nnoremap <leader>p :cprevious<Return>
 
-nnoremap <leader>1 <Plug>AirlineSelectTab1
-nnoremap <leader>2 <Plug>AirlineSelectTab2
-nnoremap <leader>3 <Plug>AirlineSelectTab3
-nnoremap <leader>4 <Plug>AirlineSelectTab4
-nnoremap <leader>5 <Plug>AirlineSelectTab5
-nnoremap <leader>6 <Plug>AirlineSelectTab6
-nnoremap <leader>7 <Plug>AirlineSelectTab7
-nnoremap <leader>8 <Plug>AirlineSelectTab8
-nnoremap <leader>9 <Plug>AirlineSelectTab9
-nnoremap <leader>- <Plug>AirlineSelectPrevTab
-nnoremap <leader>+ <Plug>AirlineSelectNextTab
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader><leader>- <Plug>AirlineSelectPrevTab
+nmap <leader><leader>+ <Plug>AirlineSelectNextTab
 
 if exists( ':Tabularize' )
     nnoremap <Leader>a= :Tabularize /=<Return>
