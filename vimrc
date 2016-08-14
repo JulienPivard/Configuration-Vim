@@ -1,6 +1,8 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Samedi 13 août[08] 2016
+" Dernière modification : Dimanche 14 août[08] 2016
+" Voir : http://learnvimscriptthehardway.stevelosh.com/
+" Pour apprendre à écrire des scripts vim.
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -762,8 +764,8 @@ noremap  <S-F6>         :UndotreeToggle<Return>
 noremap! <S-F6>   <Esc> :UndotreeToggle<Return>
 noremap  <F7>           :TagbarToggle<Return>
 noremap! <F7>     <Esc> :TagbarToggle<Return>
-noremap  <S-F7>         :nohls<Return>
-noremap! <S-F7>   <Esc> :nohls<Return>
+noremap  <S-F7>         :nohlsearch<Return>
+noremap! <S-F7>   <Esc> :nohlsearch<Return>
 noremap  <F8>           :FufBuffer<Return>
 noremap! <F8>     <Esc> :FufBuffer<Return>
 noremap  <F9>           :FufBufferTagAll<Return>
