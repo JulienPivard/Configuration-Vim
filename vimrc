@@ -783,11 +783,11 @@ inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
-vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
-vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
+vnoremap <leader>"  <esc>`<i"<esc>`>a"<esc>
+vnoremap <leader>'  <esc>`<i'<esc>`>a'<esc>
 vnoremap <leader>ac <esc>`<i{<esc>`>a}<esc>
 vnoremap <leader>br <esc>`<i[<esc>`>a]<esc>
-vnoremap <leader>th <esc>`<i(<esc>`>a)<esc>
+vnoremap <leader>(  <esc>`<i(<esc>`>a)<esc>
 
 nnoremap <leader>gs :Gstatus<Return>
 nnoremap <leader>gd :Gdiff<Return>
