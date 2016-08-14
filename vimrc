@@ -626,12 +626,6 @@ augroup configmake
     autocmd FileType make setlocal softtabstop=8        " Taille des tabulation en édition
 augroup END
 
-" Permet de changer la date de dernière modification si elle existe
-augroup datecreation
-    autocmd!
-    autocmd BufWritePre *       call DerniereModification()
-augroup END
-
 " Avoir squelette de base à la création d'un fichier
 augroup squelette
     autocmd!
