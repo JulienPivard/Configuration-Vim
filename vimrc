@@ -304,7 +304,7 @@ function! Nettoyage()
     let curcol = col( '.' )
     let curline = line( '.' )
     " Effectue la suppression des espaces en trop en fin de ligne.
-    :%substitute/\s\+$//e
+    execute "normal! " . ':%s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
     " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
     " On retire les variables.
@@ -710,8 +710,8 @@ augroup END
 " Recharge le vimrc quand utilise F5
 augroup vimSource
     autocmd!
-    autocmd FileType vim    noremap  <buffer> <S-F5>       :source ~/.vim/vimrc<Return>
-    autocmd FileType vim    noremap! <buffer> <S-F5>  <Esc>:source ~/.vim/vimrc<Return>
+    autocmd FileType vim    noremap  <buffer> <S-F5>       :source %<Return>
+    autocmd FileType vim    noremap! <buffer> <S-F5>  <Esc>:source %<Return>
 augroup END
 
 " Mappage selon la présence de makefile
