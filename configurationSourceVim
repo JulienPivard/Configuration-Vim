@@ -83,7 +83,7 @@ if [[ -e "./src/vim" ]]; then
     make distclean
 fi
 
-printf "${sur_vert}Configuration et compilation de vim${neutre}\n"
+printf "${sur_vert}Configuration de vim${neutre}\n"
 
 ./configure --with-features=huge \
             --with-compiledby=Asmodee \
@@ -91,7 +91,12 @@ printf "${sur_vert}Configuration et compilation de vim${neutre}\n"
             --enable-rubyinterp \
             --enable-perlinterp \
             --enable-pythoninterp=yes \
-            --enable-luainterp --with-lua-prefix=/usr/include/lua5.2 \
             --enable-cscope --disable-netbeans \
             --enable-gui=auto --with-x --prefix=/usr \
-            --enable-fail-if-missing && make
+            --enable-fail-if-missing
+erreur=$?
+
+if [[ $erreur -eq 0 ]]; then
+    printf "${sur_vert}Compilation de vim${neutre}\n"
+    make
+fi
