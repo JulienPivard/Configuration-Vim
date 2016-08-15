@@ -271,16 +271,16 @@ endfunction
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()
 
-    let nblignes = v:foldend - v:foldstart + 1
-    let niveau = printf( '+%-5s', v:folddashes )
-    let premiere = printf( '%5s', v:foldstart )
-    let derniere = printf( '%-5s', v:foldend )
-    let nblignes = printf( '%5s', nblignes )
-    let nblignes = printf( '%-20s', nblignes . ' lignes : ' )
+    let nblignes     = v:foldend - v:foldstart + 1
+    let niveau       = printf( '+%-5s', v:folddashes )
+    let premiere     = printf( '%5s', v:foldstart )
+    let derniere     = printf( '%-5s', v:foldend )
+    let nblignes     = printf( '%5s', nblignes )
+    let nblignes     = printf( '%-20s', nblignes . ' lignes : ' )
 
-    let partiegauche = niveau . ' | ' . premiere . '-' . derniere . ' | ' . nblignes
+    let partiegauche = niveau . ' │ ' . premiere . '-' . derniere . ' │ ' . nblignes
 
-    let subfold = substitute( getline( v:foldstart ), '^\s*\|{{{\=', '', 'g' )
+    let subfold      = substitute( getline( v:foldstart ), '^\s*\|{{{\=', '', 'g' )
 
     let partiedroite = subfold
 
@@ -814,15 +814,15 @@ nnoremap <leader>us :UpdateAndSpellCheck<Return>
 
 nnoremap <leader>sy :SyntasticToggleMode<Return>
 
-nnoremap <silent> <Leader>fff :FSHere<Return>
-nnoremap <silent> <Leader>fh :FSLeft <Return>
-nnoremap <silent> <Leader>ffh :FSSplitLeft<Return>
-nnoremap <silent> <Leader>fl :FSRight<Return>
-nnoremap <silent> <Leader>ffl :FSSplitRight<Return>
-nnoremap <silent> <Leader>fk :FSAbove<Return>
-nnoremap <silent> <Leader>ffk :FSSplitAbove<Return>
-nnoremap <silent> <Leader>fj :FSBelow<Return>
-nnoremap <silent> <Leader>ffj :FSSplitBelow<Return>
+nnoremap <silent> <leader>fff :FSHere<Return>
+nnoremap <silent> <leader>fh :FSLeft <Return>
+nnoremap <silent> <leader>ffh :FSSplitLeft<Return>
+nnoremap <silent> <leader>fl :FSRight<Return>
+nnoremap <silent> <leader>ffl :FSSplitRight<Return>
+nnoremap <silent> <leader>fk :FSAbove<Return>
+nnoremap <silent> <leader>ffk :FSSplitAbove<Return>
+nnoremap <silent> <leader>fj :FSBelow<Return>
+nnoremap <silent> <leader>ffj :FSSplitBelow<Return>
 
 nnoremap <leader>o :copen    <Return>
 nnoremap <leader>c :cclose   <Return>
@@ -840,13 +840,6 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
-
-if exists( ':Tabularize' )
-    nnoremap <Leader>a= :Tabularize /=<Return>
-    vnoremap <Leader>a= :Tabularize /=<Return>
-    nnoremap <Leader>a: :Tabularize /:\zs<Return>
-    vnoremap <Leader>a: :Tabularize /:\zs<Return>
-endif
 
 " ----------------------------------------------------------------------------- "
 "                    Fin des réglages des mappages de touches                   "
