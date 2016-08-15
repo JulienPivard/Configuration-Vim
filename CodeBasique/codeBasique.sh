@@ -56,14 +56,14 @@ declare -r scyan='\e[4;36m'        # Cyan
 declare -r sblanc='\e[4;37m'       # Blanc
 
 # Couleur de fond
-declare -r sur_noir='\e[40m'       # Noir
-declare -r sur_rouge='\e[41m'      # Rouge
-declare -r sur_vert='\e[42m'       # Vert
-declare -r sur_jaune='\e[43m'      # Jaune
-declare -r sur_bleu='\e[44m'       # Bleu
-declare -r sur_violet='\e[45m'     # Violet
-declare -r sur_cyan='\e[46m'       # Cyan
-declare -r sur_blanc='\e[47m'      # Blanc
+declare -r sur_noir='\e[30;40m'       # Noir
+declare -r sur_rouge='\e[30;41m'      # Rouge
+declare -r sur_vert='\e[30;42m'       # Vert
+declare -r sur_jaune='\e[30;43m'      # Jaune
+declare -r sur_bleu='\e[30;44m'       # Bleu
+declare -r sur_violet='\e[30;45m'     # Violet
+declare -r sur_cyan='\e[30;46m'       # Cyan
+declare -r sur_blanc='\e[30;47m'      # Blanc
 
 # Haute intensité
 declare -r inoir='\e[0;90m'        # Noir
@@ -86,14 +86,14 @@ declare -r gicyan='\e[1;96m'       # Cyan
 declare -r giblanc='\e[1;97m'      # Blanc
 
 # Couleur de fond haute intensité
-declare -r sur_inoir='\e[0;100m'   # Noir
-declare -r sur_irouge='\e[0;101m'  # Rouge
-declare -r sur_ivert='\e[0;102m'   # Vert
-declare -r sur_ijaune='\e[0;103m'  # Jaune
-declare -r sur_ibleu='\e[0;104m'   # Bleu
-declare -r sur_iviolet='\e[0;105m' # Violet
-declare -r sur_icyan='\e[0;106m'   # Cyan
-declare -r sur_iblanc='\e[0;107m'  # Blanc
+declare -r sur_inoir='\e[30;100m'   # Noir
+declare -r sur_irouge='\e[30;101m'  # Rouge
+declare -r sur_ivert='\e[30;102m'   # Vert
+declare -r sur_ijaune='\e[30;103m'  # Jaune
+declare -r sur_ibleu='\e[30;104m'   # Bleu
+declare -r sur_iviolet='\e[30;105m' # Violet
+declare -r sur_icyan='\e[30;106m'   # Cyan
+declare -r sur_iblanc='\e[30;107m'  # Blanc
 
 declare -r neutre='\e[0;m'
 
