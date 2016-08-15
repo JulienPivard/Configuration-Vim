@@ -100,7 +100,7 @@ set   foldcolumn=1                      " Taille de la colonne qui indique les m
 set   foldenable                        " Activer les replis
 set   foldlevel=1                       " Ferme tout les replis de niveau supérieur
 set   foldmethod=syntax                 " Génère des replis automatiquement selon le type de fichier
-set   foldmarker=(((,)))                " Si on utilise des marqueurs utilisent ce codage
+set   foldmarker={{{,}}}                " Si on utilise des marqueurs utilisent ce codage
 set   foldtext=MonFoldText()            " Redéfinir le texte de la ligne de repli
 set   fileencoding=utf-8                " Force l'encodage des fichiers en utf-8
 set   fileformat=unix                   " Force l'encodage des fin de lignes en unix
@@ -271,12 +271,20 @@ endfunction
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()
 
-    let line = getline( v:foldstart )
-    let lignes = v:foldend - v:foldstart + 1
-    let subFold = substitute( line, '^\s*\|(((\=', '', 'g' )
-    let debut = '+' . v:folddashes . ' | ' . v:foldstart . '-' . v:foldend . ' |  '
-    let nbLignes = printf( '%12s', lignes . ' lignes : ' )
-    return  debut . nbLignes . subFold
+    let nblignes = v:foldend - v:foldstart + 1
+    let niveau = printf( '+%-5s', v:folddashes )
+    let premiere = printf( '%5s', v:foldstart )
+    let derniere = printf( '%-5s', v:foldend )
+    let nblignes = printf( '%5s', nblignes )
+    let nblignes = printf( '%-20s', nblignes . ' lignes : ' )
+
+    let partiegauche = niveau . ' | ' . premiere . '-' . derniere . ' | ' . nblignes
+
+    let subfold = substitute( getline( v:foldstart ), '^\s*\|{{{\=', '', 'g' )
+
+    let partiedroite = subfold
+
+    return  partiegauche . ' ' . partiedroite
 
 endfunction
 

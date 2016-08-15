@@ -15,27 +15,27 @@
 %                                  Options                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Options LaTeX et XeTeX %(((
+% Options LaTeX et XeTeX %{{{
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Faciliter l'utilisation par d'autres  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour ne pas avoir à changer manuellement                  %(((
+% Pour ne pas avoir à changer manuellement                  %{{{
 % entre xetex et luatex et pdftex
 \usepackage{ifxetex,ifluatex}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Si on utilise la commande latex normal %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\usepackage[T1]{fontenc}                                   %(((
+%\usepackage[T1]{fontenc}                                   %{{{
 %\usepackage[utf8]{inputenc}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Si on utilise la commande XeTeX/LuaTeX %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour changer localement la police                         %(((
+% Pour changer localement la police                         %{{{
 % La commande {\fontspec{police}texte}
 % Pour changer dans tout le document
 %\setmainfont{police}
@@ -46,32 +46,32 @@
 \ifluatex{}
     \usepackage{luatextra}
 \fi
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Paquets de mise en forme        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[francais]{babel}                                %(((
+\usepackage[francais]{babel}                                %{{{
 \usepackage[normalem]{ulem}     % normalem pour ne pas redéfinir emph
 \usepackage{microtype}          % Pour un meilleurs gris typographique
 %\usepackage{setspace}           % Pour utiliser les commandes onehalfspace
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %            Couleur en latex            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Mettre du texte en couleur \textcolor{couleur}{blabla}    %(((
+% Mettre du texte en couleur \textcolor{couleur}{blabla}    %{{{
 % Mettre du texte dans une boite colorée \colorbox{couleur}{blabla}
 %\usepackage{xcolor}
 %\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 %\definecolor{codegray}{rgb}{0.5,0.5,0.5}
 %\definecolor{codepurple}{rgb}{0.58,0,0.82}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Encadrer de code source         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour créer un environnement d'affichage de code.          %(((
+% Pour créer un environnement d'affichage de code.          %{{{
 %  dans lstlisting
 %\usepackage{listings}
 %\lstdefinestyle{mystyle}{%
@@ -93,42 +93,42 @@
 %    tabsize=2
 %}
 %\lstset{language=sh, style=mystyle}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Pour ajouter des caractères avec ding  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Utiliser \ding{nombre} ou \dingfill{nombre}               %(((
+% Utiliser \ding{nombre} ou \dingfill{nombre}               %{{{
 %\usepackage{pifont}
-    %=)))
+    %=}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Pour formater les nombres correctement %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour formater automatiquement les nombres \numprint{}     %(((
+% Pour formater automatiquement les nombres \numprint{}     %{{{
 % Ou \nombre{}
 %\usepackage{numprint}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Pour avoir des lettrines        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Utiliser \lettrine[lines=2]{lettre}{reste du mot}         %(((
+% Utiliser \lettrine[lines=2]{lettre}{reste du mot}         %{{{
 %\usepackage{lettrine}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %          Faire des tableaux            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Utiliser \toprule \midrule \bottomrule pour les lignes    %(((
+% Utiliser \toprule \midrule \bottomrule pour les lignes    %{{{
 % environnement tabular
 %\usepackage{booktabs}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Entête et pied de pages personnalisée  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\usepackage{fancyhdr}                                      %(((
+%\usepackage{fancyhdr}                                      %{{{
 %                                        %
 %      Pour créer un style de page       %
 %                                        %
@@ -154,41 +154,41 @@
 %    \renewcommand{\footrulewidth}{0.5pt}
 %}
 %\pagestyle{plain}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Pour changer les marges         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour avoir des marges à l'échelle 0.65 par défaut         %(((
+% Pour avoir des marges à l'échelle 0.65 par défaut         %{{{
 %\usepackage[xetex, scale=0.65]{geometry}
 %\usepackage[xetex, top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %          Pour faire un index           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ajouter \printindex à la où on veut afficher l'index.     %(((
+% Ajouter \printindex à la où on veut afficher l'index.     %{{{
 % Utiliser \index{marque} dans le texte
 %\usepackage{makeidx}
 %\makeindex
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Pour faire des colonnes multiples    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour avoir un environnement avec plusieurs colonnes.      %(((
+% Pour avoir un environnement avec plusieurs colonnes.      %{{{
 % Utiliser l'environnement multicols avec le nombre de colonne.
 % Le nombre de colonne est entre {} facile.
 % En option on peut ajouter le titre de la section sur une colonne.
 % Pour ajouter une ligne entre les deux colonnes de texte :
 % Mettre \setlength{\columnseprule}{0.5pt}
 %\usepackage{multicol}
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Pour avoir des liens cliquable     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ce package doit toujours être chargé en dernier           %(((
+% Ce package doit toujours être chargé en dernier           %{{{
 % hidelinks pour ne pas avoir la box rouge ni la couleur des liens
 % colorlinks active les couleurs des liens et retire l'encadrement
 \usepackage[unicode,pdfencoding=auto]{hyperref}
@@ -200,12 +200,12 @@
     pdfsubject={Squelette},
     pdfkeywords={Hyp,PDF,XeLaTeX,LaTeX,TeX}
 }
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Macro défini par l'utilisateur     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Quand la forme se répète utilisez une macro.              %(((
+% Quand la forme se répète utilisez une macro.              %{{{
 % La/les valeurs par défaut s'applique toujours aux premiers arguments.
 % Une nouvelle commande : \newcommand{\nomcommande}[nbarg][valdefaut]{definition}
 \newcommand{\titre}{Titre}
@@ -215,18 +215,18 @@
 {%Pour avoir un autre affichage des nombres
     {\fontspec[Numbers={Proportional,OldStyle}]{TeX Gyre Adventor}#1}
 }
-    %)))
+    %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %      Pour faire une page de titre      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Mettre \maketitle la où on veut mettre la page de titre   %(((
+% Mettre \maketitle la où on veut mettre la page de titre   %{{{
 \title{\titre}
 \author{\auteur}
 \date{\today}
-    %)))
+    %}}}
 
-%)))
+%}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                 Document                                     %
