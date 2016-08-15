@@ -789,6 +789,8 @@ nnoremap gp :setlocal paste! paste?<Return>
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
+inoremap kj <esc>
+
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
 vnoremap <leader>"  <esc>`<i"<esc>`>a"<esc>
@@ -796,6 +798,20 @@ vnoremap <leader>'  <esc>`<i'<esc>`>a'<esc>
 vnoremap <leader>ac <esc>`<i{<esc>`>a}<esc>
 vnoremap <leader>br <esc>`<i[<esc>`>a]<esc>
 vnoremap <leader>(  <esc>`<i(<esc>`>a)<esc>
+
+nnoremap <leader>w :match Error /\v +$/<Return>
+nnoremap <leader>; :execute "normal! mqA;\e`q"<Return>
+nnoremap / /\v
+
+nnoremap - :call ColonneGaucheToggle()<Return>
+
+function! ColonneGaucheToggle()
+    if &signcolumn ==# "auto" && &foldcolumn && &number
+        setlocal signcolumn=no   foldcolumn=0 nonumber
+    else
+        setlocal signcolumn=auto foldcolumn=1   number
+    endif
+endfunction
 
 nnoremap <leader>gs :Gstatus<Return>
 nnoremap <leader>gd :Gdiff  <Return>
