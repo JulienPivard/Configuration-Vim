@@ -293,7 +293,7 @@ function! MontrerGroupeSyntax()
         return
     endif
     echo map( synstack( line('.'), col('.') ), 'synIDattr( v:val, "name" )' )
-endfunc
+endfunction
 
 " Suppression automatique des espaces superflus
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
@@ -334,7 +334,7 @@ function! DerniereModification()
     unlet curcol
     unlet curline
 
-endfun
+endfunction
 
 " Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
 " sinon c'est le nom du fichier sans majuscule
@@ -390,7 +390,7 @@ function! ConfigurationNouveauFichierCPP()
     0r ~/.vim/CodeBasique/codeBasique.cpp
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?g
 
-endfunc
+endfunction
 
 " Configure les nouveaux fichiers cpp
 function! ConfigurationNouveauFichierHPP()
@@ -830,8 +830,8 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader><leader>- <Plug>AirlineSelectPrevTab
-nmap <leader><leader>+ <Plug>AirlineSelectNextTab
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
 
 if exists( ':Tabularize' )
     nnoremap <Leader>a= :Tabularize /=<Return>
