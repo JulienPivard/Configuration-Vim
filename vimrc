@@ -6,7 +6,7 @@ set nocompatible                        " Casser compatible avec vielle version
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-"                          Début des réglages de Vundle                         "
+" {{{                      Début des réglages de Vundle                         "
 " ----------------------------------------------------------------------------- "
 
 filetype off
@@ -60,10 +60,11 @@ filetype plugin indent on
 " :PluginClean      - Supprime les extensions inutilisée
 
 " ----------------------------------------------------------------------------- "
-"                           Fin des réglages de Vundle                          "
+" }}}                       Fin des réglages de Vundle                          "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
+" {{{                       Les options générales de vim                        "
 
 syntax on
 
@@ -167,10 +168,11 @@ endif
 " Pour gvim
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
+" }}}
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-"                    Début des réglages de la ligne de statut                   "
+" {{{                Début des réglages de la ligne de statut                   "
 " ----------------------------------------------------------------------------- "
 
 " Couper si la ligne est trop longue %<
@@ -189,7 +191,7 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 " ouverts en même temps %a.
 " Le code hexadécimal du caractère sous le curseur %B.
 " La position dans le fichier en pourcentage %P
-function! MaLigneStatus()
+function! MaLigneStatus()                                                   "{{{
 
     if exists( '*fugitive#head()' )
         if fugitive#head() == ''
@@ -232,9 +234,11 @@ function! MaLigneStatus()
 
 endfunction
 
+"}}}
+
 " Affiche les statistiques de modification du fichier courante par rapport à
 " la version précédente du fichier.
-function! StatWrapperGit()
+function! StatWrapperGit()                                                  "{{{
     if exists( '*sy#repo#get_stats()' )
         return sy#repo#get_stats()
     else
@@ -242,8 +246,10 @@ function! StatWrapperGit()
     endif
 endfunction
 
+"}}}
+
 " Pour connaitre le nombre de lignes ajoutées au fichier courant [git]
-function! StatAjout()
+function! StatAjout()                                                       "{{{
     let [added, modified, removed] = StatWrapperGit()
     if added > 0
         return '[' . printf( '+%s', added ) . ']'
@@ -252,8 +258,10 @@ function! StatAjout()
     endif
 endfunction
 
+"}}}
+
 " Pour connaitre le nombre de lignes supprimées au fichier courant [git]
-function! StatSuppression()
+function! StatSuppression()                                                 "{{{
     let [added, modified, removed] = StatWrapperGit()
     if removed > 0
         return '[' . printf( '-%s', removed ) . ']'
@@ -262,8 +270,10 @@ function! StatSuppression()
     endif
 endfunction
 
+"}}}
+
 " Pour connaitre le nombre de lignes modifiées au fichier courant [git]
-function! StatModifications()
+function! StatModifications()                                               "{{{
     let [added, modified, removed] = StatWrapperGit()
     if modified > 0
         return '[' . printf( '~%s', modified ) . ']'
@@ -272,18 +282,20 @@ function! StatModifications()
     endif
 endfunction
 
+"}}}
+
 " ----------------------------------------------------------------------------- "
-"                     Fin des réglages de la ligne de statut                    "
+" }}}                 Fin des réglages de la ligne de statut                    "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-"                              Début des fonctions                              "
+" {{{                          Début des fonctions                              "
 " ----------------------------------------------------------------------------- "
 
 " Définie l'affichage de la ligne de repli.
-function! MonFoldText()
+function! MonFoldText()                                                     "{{{
 
     let nblignes     = v:foldend - v:foldstart + 1
     let niveau       = printf( '+%-5s', v:folddashes )
@@ -294,7 +306,7 @@ function! MonFoldText()
 
     let partiegauche = niveau . ' │ ' . premiere . '-' . derniere . ' │ ' . nblignes
 
-    let subfold      = substitute( getline( v:foldstart ), '^\s*\|{{{\=', '', 'g' )
+    let subfold      = substitute( getline( v:foldstart ), '\v^\s*|\{\{\{=', '', 'g' )
 
     let partiedroite = subfold
 
@@ -302,25 +314,31 @@ function! MonFoldText()
 
 endfunction
 
+"}}}
+
 " Permet de changer les droits d'un fichier pour le rendre exécutable
-function! ModeChange()
+function! ModeChange()                                                      "{{{
     if getline( 1 ) =~ '^#!.*/bin/'
         silent !chmod u+x <afile>
     endif
 endfunction
 
+"}}}
+
 " Pour connaitre le groupe de coloration de la zone sous le curseur.
-function! MontrerGroupeSyntax()
+function! MontrerGroupeSyntax()                                             "{{{
     if !exists( '*synstack' )
         return
     endif
     echo map( synstack( line('.'), col('.') ), 'synIDattr( v:val, "name" )' )
 endfunction
 
+"}}}
+
 " Suppression automatique des espaces superflus
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
 " /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
-function! Nettoyage()
+function! Nettoyage()                                                       "{{{
 
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
@@ -335,8 +353,10 @@ function! Nettoyage()
 
 endfunction
 
+"}}}
+
 " Pour pouvoir ajouter ou modifier la date courante au début du fichier
-function! DerniereModification()
+function! DerniereModification()                                            "{{{
 
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
@@ -358,9 +378,11 @@ function! DerniereModification()
 
 endfunction
 
+"}}}
+
 " Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
 " sinon c'est le nom du fichier sans majuscule
-function! ExistMakeFileC()
+function! ExistMakeFileC()                                                  "{{{
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
@@ -381,8 +403,10 @@ function! ExistMakeFileC()
 
 endfunction
 
+"}}}
+
 " Configuration des raccourcis pour compiler en ada.
-function! ExistBuildAda()
+function! ExistBuildAda()                                                   "{{{
 
     if filereadable( './build.gpr' )
 
@@ -406,16 +430,20 @@ function! ExistBuildAda()
 
 endfunction
 
+"}}}
+
 " Configuration des nouveaux fichiers cpp
-function! ConfigurationNouveauFichierCPP()
+function! ConfigurationNouveauFichierCPP()                                  "{{{
 
     0r ~/.vim/CodeBasique/codeBasique.cpp
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?g
 
 endfunction
 
+"}}}
+
 " Configure les nouveaux fichiers cpp
-function! ConfigurationNouveauFichierHPP()
+function! ConfigurationNouveauFichierHPP()                                  "{{{
 
     0r ~/.vim/CodeBasique/codeBasique.hpp
     :%substitute?MANOUVELLECLASSE?\=expand( '%:t:r' )?g
@@ -423,12 +451,14 @@ function! ConfigurationNouveauFichierHPP()
 
 endfunction
 
+"}}}
+
 " Maccros pour le cpp
 " Compilation via makeprg
 " Exécution via F10 du binaire
 " Création des tags et compilation de la documentation.
 " Pour trouver la classe correspondante taper :tag nomclasse.cpp
-function! MacrosCPP()
+function! MacrosCPP()                                                       "{{{
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
@@ -461,8 +491,10 @@ function! MacrosCPP()
 
 endfunction
 
+"}}}
+
 "Configuration des nouveaux fichiers en java
-function! ConfigurationNouveauFichierJAVA()
+function! ConfigurationNouveauFichierJAVA()                                 "{{{
 
     0r ~/.vim/CodeBasique/codeBasique.java
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?
@@ -473,10 +505,12 @@ function! ConfigurationNouveauFichierJAVA()
 
 endfunction
 
+"}}}
+
 " Fonction pour exécuter les fichiers java compilé selon l'existence ou non d'un makefile
 " La première lettre du nom de dossier java est en minuscule pour exécuter le
 " fichier java on convertit la première lettre du dossier en majuscule
-function! ExistConfigurationJava()
+function! ExistConfigurationJava()                                          "{{{
 
     " Si il existe un fichier d'automatisation dans le dossier courant.
     if filereadable( 'build.xml' )
@@ -507,8 +541,10 @@ function! ExistConfigurationJava()
 
 endfunction
 
+"}}}
+
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
-function! MacrosLatexSpecifique()
+function! MacrosLatexSpecifique()                                           "{{{
 
     NoMatchParen
     noremap  <buffer> <S-F8>        :!makeindex %<.idx<Return>
@@ -527,12 +563,14 @@ function! MacrosLatexSpecifique()
 
 endfunction
 
+"}}}
+
 " Macros pour l'affichage formaté des fichiers groff
 " La touche F5 affiche un aperçus dans le terminal pour les me
 " La touche F10 affiche un aperçus dans le terminal pour les man
 " La touche F12 ouvre le lecteur pdf
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
-function! AffichageGroff()
+function! AffichageGroff()                                                  "{{{
 
     noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
     noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
@@ -549,8 +587,10 @@ function! AffichageGroff()
 
 endfunction
 
+"}}}
+
 " Raccourcis pour les fichiers antlr compile et lance les tests
-function! ConfigAntlr()
+function! ConfigAntlr()                                                     "{{{
 
     noremap  <buffer> <S-F5>       :!./runAntlr.sh %< <Return>
     noremap! <buffer> <S-F5> <Esc> :!./runAntlr.sh %< <Return>
@@ -559,16 +599,20 @@ function! ConfigAntlr()
 
 endfunction
 
+"}}}
+
 " Macros pour le php
-function! ProgEnPHP()
+function! ProgEnPHP()                                                       "{{{
 
     inoremap <buffer>,, =>
     inoremap <buffer>t $this->
 
 endfunction
 
+"}}}
+
 " Fonction pour aligner automatiquement les lignes avec le caractère |
-function! s:alignTabulation()
+function! s:alignTabulation()                                               "{{{
     let p = '^\s*|\s.*\s|\s*$'
     if exists( ':Tabularize' ) && getline( '.' ) =~# '^\s*|' && ( getline( line( '.' )-1 ) =~# p || getline( line( '.' )+1 ) =~# p )
         let column = strlen( substitute( getline( '.' )[0:col( '.' )], '[^|]', '', 'g' ) )
@@ -579,8 +623,10 @@ function! s:alignTabulation()
     endif
 endfunction
 
+"}}}
+
 " Fonction pour désactiver les colonnes à gauche
-function! ColonneGaucheToggle()
+function! ColonneGaucheToggle()                                             "{{{
     if &signcolumn ==# "auto" && &foldcolumn && &number
         setlocal signcolumn=no   foldcolumn=0 nonumber
     else
@@ -588,49 +634,61 @@ function! ColonneGaucheToggle()
     endif
 endfunction
 
+"}}}
+
 " ----------------------------------------------------------------------------- "
-"                               Fin des fonctions                               "
+" }}}                           Fin des fonctions                               "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-"                    Début des réglages des groupes d'actions                   "
+" {{{                Début des réglages des groupes d'actions                   "
 " ----------------------------------------------------------------------------- "
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
-augroup fichierQuickfix
+augroup fichierQuickfix                                                     "{{{
     autocmd!
     autocmd Filetype qf setlocal colorcolumn=0
     autocmd Filetype qf setlocal nospell
 augroup END
 
+"}}}
+
 " Pour l'ada permet de voir si on dépasse la colonne des 80 caractères
-augroup codeSourceAda
+augroup codeSourceAda                                                       "{{{
     autocmd!
     autocmd Filetype ada setlocal textwidth=150
 augroup END
 
+"}}}
+
 " Pour que vim se souvienne de la position du curseur à la fermeture pour la prochaine ouverture
-augroup recuperationEtatSessionsPrecedente
+augroup recuperationEtatSessionsPrecedente                                  "{{{
     autocmd!
     autocmd BufReadPost * if line( "'\"" ) > 1 && line( "'\"" ) <= line( '$' ) | exe "normal! g'\"" | endif
 augroup END
 
+"}}}
+
 " Pour supprimer les espaces en fin de ligne.
-augroup nettoyage
+augroup nettoyage                                                           "{{{
     autocmd!
     autocmd BufWritePre * call Nettoyage()
 augroup END
 
+"}}}
+
 " Active la vérification orthographique pour certains type de fichier seulement
-augroup langue
+augroup langue                                                              "{{{
     autocmd!
     autocmd FileType haskell,fuf,gundo,diff,vundle,cmake,gitconfig,ant,tags,bib,conf,vundlelog,git,gitv setlocal nospell
 augroup END
 
+"}}}
+
 " Voir les espaces en fin de lignes
-augroup configmake
+augroup configmake                                                          "{{{
     autocmd!
     autocmd Filetype make setlocal listchars=nbsp:¤,tab:>-,trail:¤
     autocmd FileType make setlocal list                 " Affiche les caractères non imprimable
@@ -639,8 +697,10 @@ augroup configmake
     autocmd FileType make setlocal softtabstop=8        " Taille des tabulation en édition
 augroup END
 
+"}}}
+
 " Avoir squelette de base à la création d'un fichier
-augroup squelette
+augroup squelette                                                           "{{{
     autocmd!
     autocmd BufNewFile *.sh                 0r ~/.vim/CodeBasique/codeBasique.sh
     autocmd BufNewFile *.c                  0r ~/.vim/CodeBasique/codeBasique.c
@@ -666,8 +726,10 @@ augroup squelette
     autocmd BufNewFile Doxyfile             0r ~/.vim/CodeBasique/Doxyfile.base
 augroup END
 
+"}}}
+
 " Pour configurer automatiquement le make de vim selon le type de fichier
-augroup reglageMake
+augroup reglageMake                                                         "{{{
     autocmd!
     autocmd FileType haskell    setlocal makeprg=ghci\ %
     autocmd FileType ocaml      setlocal makeprg=ocaml\ -init\ %
@@ -677,10 +739,12 @@ augroup reglageMake
     autocmd Filetype php        setlocal makeprg=php\ -l\ %
 augroup END
 
+"}}}
+
 " Mappage de la touche de compilation
 " Les scripts n'utilisent pas ce raccourci de compilation
 " pour des raisons de vitesse de retour à l'édition
-augroup compilation
+augroup compilation                                                         "{{{
     autocmd!
     autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :make <Return>
     autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:make <Return>
@@ -688,45 +752,58 @@ augroup compilation
     autocmd Filetype perl,sh,python                         noremap! <buffer> <F10>   <Esc>:!./% <Return>
 augroup END
 
+"}}}
+
 " Définition de la coloration syntaxique pour les fichier antlr
-augroup ficherAntlr
+augroup ficherAntlr                                                         "{{{
     autocmd!
     autocmd BufRead *.g4        setlocal filetype=antlr
 augroup END
 
+"}}}
+
 " Rend le fichier courant exécutable à l'enregistrement si c'est pertinent
-augroup rendreExecuable
+augroup rendreExecuable                                                     "{{{
     autocmd!
     autocmd BufWritePost *      call ModeChange()
 augroup END
 
+"}}}
+
 " Création d'une page de manuel avec ajout du nom automatiquement
-augroup manuel
+augroup manuel                                                              "{{{
     autocmd!
     autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand( '%:t:r' )?
     autocmd BufNewFile *.1      :exe '%substitute/DATE/' . strftime( '%d %B %Y' ) . '/e'
 augroup END
 
-augroup commandesLocale
+"}}}
+
+augroup commandesLocale                                                     "{{{
     autocmd!
     " Redéfinition de la commande d'aide utilisée avec K
     autocmd FileType tex                setlocal keywordprg=texdoc
     " Pour éviter les ralentissement dans les fichiers latex et plugin gundo
     autocmd FileType tex                setlocal nocursorline nocursorcolumn
     " Active les replis en se basant sur l'indentation
-    autocmd FileType python,sh,perl,vim setlocal foldmethod=indent
+    autocmd FileType python,sh,perl     setlocal foldmethod=indent
     autocmd FileType gitcommit          setlocal cursorline nocursorcolumn
 augroup END
 
+"}}}
+
 " Recharge le vimrc quand utilise F5
-augroup vimSource
+augroup vimSource                                                           "{{{
     autocmd!
     autocmd FileType vim    noremap  <buffer> <S-F5>       :source %<Return>
     autocmd FileType vim    noremap! <buffer> <S-F5>  <Esc>:source %<Return>
+    autocmd Filetype vim    setlocal foldmethod=marker
 augroup END
 
+"}}}
+
 " Mappage selon la présence de makefile
-augroup fonctionsConfiguration
+augroup fonctionsConfiguration                                              "{{{
     autocmd!
     autocmd FileType java,ant               call ExistConfigurationJava()
     autocmd FileType tex                    call MacrosLatexSpecifique()
@@ -738,20 +815,24 @@ augroup fonctionsConfiguration
     autocmd Filetype ada                    call ExistBuildAda()
 augroup END
 
-augroup pencil
+"}}}
+
+augroup pencil                                                              "{{{
     autocmd!
     autocmd FileType markdown,mkd call pencil#init()
 "    autocmd FileType text         call pencil#init()
 augroup END
 
+"}}}
+
 " ----------------------------------------------------------------------------- "
-"                    Fin des réglages des groupes d'actions                     "
+" }}}                Fin des réglages des groupes d'actions                     "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-"                   Début des réglages des mappages de touches                  "
+" {{{               Début des réglages des mappages de touches                  "
 " ----------------------------------------------------------------------------- "
 
 " Mappage des touches utiles
@@ -760,6 +841,7 @@ augroup END
 " FufBuffer permet de visualiser tout les buffers ouvert et d'y accéder
 " FufBufferTagAll permet de chercher parmi tout les tags des fichiers ouvert
 
+" Les réglages des touches fonctions                                        "{{{
 noremap  <F2>           :setlocal number! number?<Return>
 noremap! <F2>     <Esc> :setlocal number! number?<Return>
 noremap  <F3>           :setlocal spell!  spell? <Return>
@@ -785,6 +867,8 @@ noremap! <S-F11>  <Esc> :call DerniereModification()<Return>
 noremap  <S-F12>        :vsp ~/.vim/vimrc<Return>
 noremap! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
 
+"}}}
+
 nnoremap gy :YcmGenerateConfig -f<Return>
 nnoremap gh :call MontrerGroupeSyntax()<Return>
 nnoremap gp :setlocal paste! paste?<Return>
@@ -795,11 +879,14 @@ inoremap kj <esc>
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
+" Pour changer les caractères autour de la selection                        "{{{
 vnoremap <leader>"  <esc>`<i"<esc>`>a"<esc>
 vnoremap <leader>'  <esc>`<i'<esc>`>a'<esc>
 vnoremap <leader>ac <esc>`<i{<esc>`>a}<esc>
 vnoremap <leader>br <esc>`<i[<esc>`>a]<esc>
 vnoremap <leader>(  <esc>`<i(<esc>`>a)<esc>
+
+"}}}
 
 nnoremap <leader>w :match Error /\v +$/<Return>
 nnoremap <leader>; :execute "normal! mqA;\e`q"<Return>
@@ -807,23 +894,30 @@ nnoremap / /\v
 
 nnoremap - :call ColonneGaucheToggle()<Return>
 
+" Pour fugitive                                                             "{{{
 nnoremap <leader>gs :Gstatus<Return>
 nnoremap <leader>gd :Gdiff  <Return>
 nnoremap <leader>gv :Gitv   <Return>
 
+"}}}
+
 nnoremap <leader>bs :buffers<Return>
 nnoremap <leader>bb :bnext  <Return>
 
+" Pour sygnify                                                              "{{{
 nnoremap <leader>sh :SignifyToggleHighlight<Return>
 nnoremap <leader>sr :SignifyRefresh<Return>
 " Ne pas mettre noremap sinon le mappage ne fonctionne pas.
 nmap <leader>sj <plug>(signify-next-hunk)
 nmap <leader>sk <plug>(signify-prev-hunk)
 
+"}}}
+
 nnoremap <leader>us :UpdateAndSpellCheck<Return>
 
 nnoremap <leader>sy :SyntasticToggleMode<Return>
 
+" Pour file switch                                                          "{{{
 nnoremap <silent> <leader>fff :FSHere<Return>
 nnoremap <silent> <leader>fh :FSLeft <Return>
 nnoremap <silent> <leader>ffh :FSSplitLeft<Return>
@@ -834,11 +928,17 @@ nnoremap <silent> <leader>ffk :FSSplitAbove<Return>
 nnoremap <silent> <leader>fj :FSBelow<Return>
 nnoremap <silent> <leader>ffj :FSSplitBelow<Return>
 
+"}}}
+
+" Pour la gestion de quickfix                                               "{{{
 nnoremap <leader>o :copen    <Return>
 nnoremap <leader>c :cclose   <Return>
 nnoremap <leader>n :cnext    <Return>
 nnoremap <leader>p :cprevious<Return>
 
+"}}}
+
+" Pour les tab de airline                                                   "{{{
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -851,20 +951,22 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
+"}}}
+
 " ----------------------------------------------------------------------------- "
-"                    Fin des réglages des mappages de touches                   "
+" }}}                Fin des réglages des mappages de touches                   "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-"                    Début des réglages des extensions de Vim                   "
+" {{{                Début des réglages des extensions de Vim                   "
 " ----------------------------------------------------------------------------- "
 
 scriptencoding utf-8
 
 " -----------------------
-" Réglages pour Gundo
+" Réglages pour Gundo                                                       "{{{
 " -----------------------
 let g:gundo_width = 45              " Largeur de la fenêtre d'aperçus.
 let g:gundo_preview_height = 15     " Hauteur de la fenêtre d'aperçus.
@@ -876,8 +978,10 @@ let g:gundo_prefer_python3 = 0
 let g:gundo_tree_statusline = '%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline = '%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
+"}}}
+
 " -----------------------
-" Réglages pour syntastic
+" Réglages pour syntastic                                                   "{{{
 " -----------------------
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0                 " N'effectue pas de vérification à la fermeture du fichier.
@@ -904,8 +1008,10 @@ let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 " Les fichiers doivent être de la forme -Ichemin/du/dossier
 
+"}}}
+
 " -----------------------
-" Réglage pour undotree
+" Réglage pour undotree                                                     "{{{
 " -----------------------
 let g:undotree_WindowLayout = 2
 let g:undotree_SplitWidth = 45
@@ -913,16 +1019,20 @@ let g:undotree_DiffpanelHeight = 10
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 
+"}}}
+
 " -----------------------
-" Réglages pour NERDTree
+" Réglages pour NERDTree                                                    "{{{
 " -----------------------
 let NERDTreeShowHidden = 1          " Pour afficher les fichiers caché.
 let NERDTreeWinSize = 40
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1          " Ferme automatiquement NERDTree quand on ouvre un fichier.
 
+"}}}
+
 " -----------------------
-" Réglages pour tagbar
+" Réglages pour tagbar                                                      "{{{
 " -----------------------
 " Installer exuberant-ctags
 let g:tagbar_autoclose = 1          " Ferme automatiquement tagbar
@@ -959,8 +1069,10 @@ let g:tagbar_type_ada = {
     \]
     \}
 
+"}}}
+
 " -----------------------
-" Réglages pour UltiSnips
+" Réglages pour UltiSnips                                                   "{{{
 " -----------------------
 if has( 'python3' )
     let g:UltiSnipsUsePythonVersion = 3
@@ -972,8 +1084,10 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-h>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-l>'
 
+"}}}
+
 " -----------------------
-" Réglage pour YouCompleteMe
+" Réglage pour YouCompleteMe                                                "{{{
 " -----------------------
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_enable_diagnostic_highlighting = 0
@@ -987,8 +1101,10 @@ let g:ycm_confirm_extra_conf = 0            " À changer dés que possible.
 let g:ycm_allow_changing_updatetime = 0
 let g:ycm_extra_conf_globlist = []
 
+"}}}
+
 " -----------------------
-" Réglages pour signify
+" Réglages pour signify                                                     "{{{
 " -----------------------
 let g:signify_disable_by_default     = 0
 let g:signify_cursorhold_insert      = 0
@@ -998,19 +1114,25 @@ let g:signify_update_on_focusgained  = 1
 let g:signify_sign_delete            = '↓'
 let g:signify_sign_delete_first_line = '↑'
 
+"}}}
+
 " -----------------------
-" Réglages pour SpellCheck
+" Réglages pour SpellCheck                                                  "{{{
 " -----------------------
 let g:SpellCheck_DefineQuickfixMappings = 1
 
+"}}}
+
 " -----------------------
-" Réglages pour gitv
+" Réglages pour gitv                                                        "{{{
 " -----------------------
 let g:Gitv_OpenHorizontal = 0
 let g:Gitv_DoNotMapCtrlKey = 1
 
+"}}}
+
 " -----------------------
-" Réglages pour FSwitch
+" Réglages pour FSwitch                                                     "{{{
 " -----------------------
 let g:fsnonewfiles = 1
 " Réglages de FSwitch pour les hpp
@@ -1039,8 +1161,10 @@ augroup fichierSpecAda
 augroup END
 " -----------------------
 
+" }}}
+
 " -----------------------
-" Réglage pour OmniCppComplete
+" Réglage pour OmniCppComplete                                              "{{{
 " -----------------------
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
@@ -1050,8 +1174,10 @@ let OmniCpp_MayCompleteDot = 1      " auto complète après .
 let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
 let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 
+"}}}
+
 " -----------------------
-" Réglage pour airline
+" Réglage pour airline                                                      "{{{
 " -----------------------
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
@@ -1067,8 +1193,10 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = '····'
 let g:airline#extensions#branch#displayed_head_limit = 10
 
+"}}}
+
 " -----------------------
-" Réglages pour indent guides
+" Réglages pour indent guides                                               "{{{
 " -----------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -1076,8 +1204,10 @@ let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_default_mapping = 1
 
+"}}}
+
 " -----------------------
-" Réglage du plugin pour ada
+" Réglage du plugin pour ada                                                "{{{
 " -----------------------
 let g:ada_standard_types = 1
 let g:ada_with_gnat_project_files = 1
@@ -1088,13 +1218,17 @@ let g:ada_space_errors = 1
 let g:ada_all_tab_usage = 1
 let g:ada_default_compiler = 'gnat'
 
+"}}}
+
 " -----------------------
-" Réglages pour tabular
+" Réglages pour tabular                                                     "{{{
 " -----------------------
 "let g:tabular_loaded = 1
 
+"}}}
+
 " -----------------------
-" Réglages pour vim-pencil
+" Réglages pour vim-pencil                                                  "{{{
 " -----------------------
 let g:pencil#autoformat_config = {
             \ 'markdown': {
@@ -1111,13 +1245,17 @@ let g:pencil#autoformat_config = {
             \     },
             \ }
 
+"}}}
+
 " -----------------------
-" Réglage pour mon thème de couleurs.
+" Réglage pour mon thème de couleurs.                                       "{{{
 " -----------------------
 let g:interstellaire_termcolors = 256
 
+"}}}
+
 " ----------------------------------------------------------------------------- "
-"                     Fin des réglages des extensions de Vim                    "
+" }}}                 Fin des réglages des extensions de Vim                    "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
