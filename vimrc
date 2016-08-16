@@ -312,7 +312,7 @@ function! Nettoyage()
     let curcol = col( '.' )
     let curline = line( '.' )
     " Effectue la suppression des espaces en trop en fin de ligne.
-    execute "normal! " . ':%s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
+    silent execute "normal! " . ':%s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
     " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
     " On retire les variables.
