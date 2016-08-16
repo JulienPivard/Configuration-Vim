@@ -6,58 +6,56 @@ set nocompatible                        " Casser compatible avec vielle version
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-" {{{                      Début des réglages de Vundle                         "
+" {{{                      Début des réglages de Vim-Plug                       "
 " ----------------------------------------------------------------------------- "
 
-filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim       " Ajoute le chemin pour initialiser Vundle au démarrage.
-call vundle#begin( '~/.vim/bundle/' )
+" La mise à jour de vim-plug se fait
+" par la commande :PlugUpgrade
+call plug#begin( '~/.vim/bundle/' )
 
-" Pour retrouver le dépôt git exact ajouter au début https://github.com
-" Pour se maintenir à jours.
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'edsono/vim-matchit'
-Plugin 'godlygeek/tabular'
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'gregsexton/gitv'
-Plugin 'hdima/python-syntax'
-Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'majutsushi/tagbar'
-Plugin 'mbbill/undotree'
-Plugin 'mhinz/vim-signify'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'phongnh/vim-antlr'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'reedes/vim-pencil'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-scripts/FSwitch'
-Plugin 'vim-scripts/FuzzyFinder'
-Plugin 'vim-scripts/L9'
-Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'vim-scripts/SpellCheck'
-Plugin 'vim-scripts/ingo-library'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
+Plug 'easymotion/vim-easymotion'
+Plug 'edsono/vim-matchit'
+Plug 'godlygeek/tabular'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'gregsexton/gitv'
+Plug 'hdima/python-syntax'
+Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
+Plug 'mhinz/vim-signify'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'phongnh/vim-antlr', { 'for' : 'antlr' }
+Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
+Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
+Plug 'scrooloose/nerdtree', { 'on' :  'NERDTreeToggle'  }
+Plug 'scrooloose/syntastic'
+Plug 'sjl/gundo.vim', { 'on' : 'GundoToggle' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/FSwitch', { 'for' : ['ada', 'cpp', 'hpp'] }
+Plug 'vim-scripts/FuzzyFinder'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/OmniCppComplete', { 'for' : ['cpp', 'hpp'] }
+Plug 'vim-scripts/SpellCheck'
+Plug 'vim-scripts/ingo-library'
 
 " Plugin pour gvim.
-Plugin 'vim-scripts/hexHighlight.vim'
+Plug 'vim-scripts/hexHighlight.vim'
 
-call vundle#end()
+" Charger un plugin depuis l'extérieur
+"Plug '~/Programmation/VimScript/potion'
+
+call plug#end()
 filetype plugin indent on
 " Pense bête
-" :PluginList       - Liste les extensions configuré
-" :PluginInstall    - Installer
-" :PluginUpdate     - Mettre à jours
-" :PluginSearch foo - Cherche foo
-" :PluginClean      - Supprime les extensions inutilisée
+" :PlugList       - Liste les extensions configuré
+" :PlugInstall    - Installer
+" :PlugUpdate     - Mettre à jours
+" :PlugSearch foo - Cherche foo
+" :PlugClean      - Supprime les extensions inutilisée
 
 " ----------------------------------------------------------------------------- "
 " }}}                       Fin des réglages de Vundle                          "
