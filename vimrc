@@ -20,7 +20,7 @@ Plug 'edsono/vim-matchit'
 Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'gregsexton/gitv'
-Plug 'hdima/python-syntax'
+Plug 'hdima/python-syntax', { 'for' : 'python' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
