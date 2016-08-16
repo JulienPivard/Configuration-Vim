@@ -579,6 +579,15 @@ function! s:alignTabulation()
     endif
 endfunction
 
+" Fonction pour désactiver les colonnes à gauche
+function! ColonneGaucheToggle()
+    if &signcolumn ==# "auto" && &foldcolumn && &number
+        setlocal signcolumn=no   foldcolumn=0 nonumber
+    else
+        setlocal signcolumn=auto foldcolumn=1   number
+    endif
+endfunction
+
 " ----------------------------------------------------------------------------- "
 "                               Fin des fonctions                               "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -797,14 +806,6 @@ nnoremap <leader>; :execute "normal! mqA;\e`q"<Return>
 nnoremap / /\v
 
 nnoremap - :call ColonneGaucheToggle()<Return>
-
-function! ColonneGaucheToggle()
-    if &signcolumn ==# "auto" && &foldcolumn && &number
-        setlocal signcolumn=no   foldcolumn=0 nonumber
-    else
-        setlocal signcolumn=auto foldcolumn=1   number
-    endif
-endfunction
 
 nnoremap <leader>gs :Gstatus<Return>
 nnoremap <leader>gd :Gdiff  <Return>
