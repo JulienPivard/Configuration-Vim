@@ -148,6 +148,22 @@ set   wildmode=longest:full,full        " Complète d'abord avec la correspondan
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
+" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti.
+if has( 'cscope' )
+    set   cscopeprg=/usr/bin/cscope
+    set   cscopetagorder=0
+    set   cscopetag
+    set nocscopeverbose
+    " Ajoute la base de donnée cscope qui se trouve dans le dossier courant.
+    if filereadable( 'cscope.out' )
+        cscope add cscope.out
+    " sinon pointe la base définie par une variable d'environnement.
+    elseif $CSCOPE_DB != ""
+        cscope add $CSCOPE_DB
+    endif
+    set   cscopeverbose
+endif
+
 " Pour gvim
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
@@ -260,8 +276,6 @@ endfunction
 "                     Fin des réglages de la ligne de statut                    "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
-
-
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -570,30 +584,10 @@ endfunction
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
-
-
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 "                    Début des réglages des groupes d'actions                   "
 " ----------------------------------------------------------------------------- "
-
-" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti.
-if has( 'cscope' )
-
-    set   cscopeprg=/usr/bin/cscope
-    set   cscopetagorder=0
-    set   cscopetag
-    set nocscopeverbose
-    " Ajoute la base de donnée cscope qui se trouve dans le dossier courant.
-    if filereadable( 'cscope.out' )
-        cs add cscope.out
-    " sinon pointe la base définie par une variable d'environnement.
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-    set   cscopeverbose
-
-endif
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix
@@ -746,7 +740,6 @@ augroup END
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
-
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 "                   Début des réglages des mappages de touches                  "
@@ -861,7 +854,6 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 "                    Fin des réglages des mappages de touches                   "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
-
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
