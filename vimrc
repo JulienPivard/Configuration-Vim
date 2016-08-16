@@ -1179,9 +1179,10 @@ let OmniCpp_MayCompleteScope = 1    " auto complète après ::
 " -----------------------
 " Réglage pour airline                                                      "{{{
 " -----------------------
+let g:airline#extensions#whitespace#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'newDark'
+let g:airline_theme = 'forest'
 
 let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -1258,6 +1259,7 @@ let g:interstellaire_termcolors = 256
 " }}}                 Fin des réglages des extensions de Vim                    "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
+"
 
 " Définition du colorsheme
 colorscheme interstellaire
