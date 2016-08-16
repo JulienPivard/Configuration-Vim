@@ -629,7 +629,7 @@ augroup END
 " Voir les espaces en fin de lignes
 augroup configmake
     autocmd!
-    autocmd Filetype make set listchars=nbsp:¤,tab:>-,trail:¤
+    autocmd Filetype make setlocal listchars=nbsp:¤,tab:>-,trail:¤
     autocmd FileType make setlocal list                 " Affiche les caractères non imprimable
     autocmd FileType make setlocal tabstop=8            " Taille des tabulations avec tab
     autocmd FileType make setlocal shiftwidth=8         " Taille des tabulations avec >> ou <<
