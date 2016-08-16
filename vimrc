@@ -842,8 +842,8 @@ augroup END
 " FufBufferTagAll permet de chercher parmi tout les tags des fichiers ouvert
 
 " Les réglages des touches fonctions                                        "{{{
-noremap  <F2>           :setlocal number! number?<Return>
-noremap! <F2>     <Esc> :setlocal number! number?<Return>
+noremap  <F2>           :call ColonneGaucheToggle()<Return>
+noremap! <F2>     <Esc> :call ColonneGaucheToggle()<Return>
 noremap  <F3>           :setlocal spell!  spell? <Return>
 noremap! <F3>     <Esc> :setlocal spell!  spell? <Return>
 noremap  <F4>           :GundoToggle<Return>
@@ -891,8 +891,6 @@ vnoremap <leader>(  <esc>`<i(<esc>`>a)<esc>
 nnoremap <leader>w :match Error /\v +$/<Return>
 nnoremap <leader>; :execute "normal! mqA;\e`q"<Return>
 nnoremap / /\v
-
-nnoremap - :call ColonneGaucheToggle()<Return>
 
 " Pour fugitive                                                             "{{{
 nnoremap <leader>gs :Gstatus<Return>
@@ -1218,13 +1216,6 @@ let g:ada_gnat_extensions = 1
 let g:ada_space_errors = 1
 let g:ada_all_tab_usage = 1
 let g:ada_default_compiler = 'gnat'
-
-"}}}
-
-" -----------------------
-" Réglages pour tabular                                                     "{{{
-" -----------------------
-"let g:tabular_loaded = 1
 
 "}}}
 
