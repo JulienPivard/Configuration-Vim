@@ -1192,7 +1192,7 @@ let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = '····'
-let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline#extensions#branch#displayed_head_limit = 20
 
 "}}}
 
