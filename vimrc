@@ -42,6 +42,8 @@ Plug 'vim-scripts/OmniCppComplete', { 'for' : ['cpp', 'hpp'] }
 Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
 
+Plug 'terryma/vim-multiple-cursors'
+
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
 
