@@ -1240,6 +1240,13 @@ let g:pencil#autoformat_config = {
 "}}}
 
 " -----------------------
+" Réglage pour les curseurs multiples                                       "{{{
+" -----------------------
+let g:multi_cursor_start_key = '-'
+
+"}}}
+
+" -----------------------
 " Réglage pour mon thème de couleurs.                                       "{{{
 " -----------------------
 let g:interstellaire_termcolors = 256
