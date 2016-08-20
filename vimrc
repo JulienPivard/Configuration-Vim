@@ -1261,3 +1261,5 @@ let g:interstellaire_termcolors = 256
 
 " Définition du colorsheme
 colorscheme interstellaire
+
+" vim:foldlevel=0:foldmethod=marker
