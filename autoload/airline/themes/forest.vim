@@ -29,11 +29,11 @@ let g:airline#themes#forest#palette = {}
 " [ guifg, guibg, ctermfg, ctermbg, opts ]. See "help attr-list" for valid
 " values for the "opt" value.
 let s:N1   = [ '#00005f' , '#00dd00' , 17  , 34  , 'bold' ]
-let s:N2   = [ '#ffffff' , '#333333' , 255 , 236 , '' ]
-let s:N3   = [ '#9cffd3' , '#005500' , 85  , 22  , '' ]
+let s:N2   = [ '#ffffff' , '#333333' , 255 , 236 , 'NONE' ]
+let s:N3   = [ '#9cffd3' , '#005500' , 85  , 22  , 'NONE' ]
 let g:airline#themes#forest#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 
-let s:NM1  = [ '#ffffff' , '#cc0000' , 255 , 160 , '' ]
+let s:NM1  = [ '#ffffff' , '#cc0000' , 255 , 160 , 'NONE' ]
 let g:airline#themes#forest#palette.normal_modified = {
       \ 'airline_b': s:NM1 ,
       \ 'airline_c': [ '#ccaa00' , '#005500' , 184 , 22  , 'bold' ] ,
@@ -42,8 +42,8 @@ let g:airline#themes#forest#palette.normal_modified = {
 
 
 let s:I1 = [ '#00005f' , '#ffff00' , 17  , 190 , 'bold' ]
-let s:I2 = [ '#ffffff' , '#333333' , 255 , 236 , '' ]
-let s:I3 = [ '#9cffd3' , '#888800' , 19  , 142 , '' ]
+let s:I2 = [ '#ffffff' , '#333333' , 255 , 236 , 'NONE' ]
+let s:I3 = [ '#9cffd3' , '#888800' , 19  , 142 , 'NONE' ]
 let g:airline#themes#forest#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
 let g:airline#themes#forest#palette.insert_modified = {
       \ 'airline_b': s:NM1 ,
@@ -51,19 +51,19 @@ let g:airline#themes#forest#palette.insert_modified = {
       \ 'airline_y': s:NM1 ,
       \ }
 let g:airline#themes#forest#palette.insert_paste = {
-      \ 'airline_a': [ s:I1[0]   , '#d78700' , s:I1[2] , 208     , ''     ] ,
-      \ 'airline_z': [ s:I1[0]   , '#d78700' , s:I1[2] , 208     , ''     ] ,
+      \ 'airline_a': [ s:I1[0]   , '#d78700' , s:I1[2] , 208     , 'NONE' ] ,
+      \ 'airline_z': [ s:I1[0]   , '#d78700' , s:I1[2] , 208     , 'NONE' ] ,
       \ }
 
 
 let g:airline#themes#forest#palette.replace = copy(g:airline#themes#forest#palette.insert)
-let g:airline#themes#forest#palette.replace.airline_a = [ s:I2[0]   , '#990099' , s:I2[2] , 90      , ''     ]
+let g:airline#themes#forest#palette.replace.airline_a = [ s:I2[0]   , '#990099' , s:I2[2] , 90      , 'NONE' ]
 let g:airline#themes#forest#palette.replace_modified = g:airline#themes#forest#palette.insert_modified
 
 
 let s:V1 = [ '#00005f' , '#00aaff' , 17  , 36  , 'bold' ]
-let s:V2 = [ '#ffffff' , '#333333' , 255 , 236 , '' ]
-let s:V3 = [ '#9cffd3' , '#0066aa' , 85  , 25  , '' ]
+let s:V2 = [ '#ffffff' , '#333333' , 255 , 236 , 'NONE' ]
+let s:V3 = [ '#9cffd3' , '#0066aa' , 85  , 25  , 'NONE' ]
 let g:airline#themes#forest#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
 let g:airline#themes#forest#palette.visual_modified = {
       \ 'airline_b': s:NM1 ,
@@ -73,8 +73,8 @@ let g:airline#themes#forest#palette.visual_modified = {
 
 
 let s:IA1 = [ '#9e9e9e' , '#0f0f0f' , 246 , 232 , 'bold' ]
-let s:IA2 = [ '#9e9e9e' , '#1c1c1c' , 246 , 233 , '' ]
-let s:IA3 = [ '#9e9e9e' , '#2a2a2a' , 246 , 234 , '' ]
+let s:IA2 = [ '#9e9e9e' , '#1c1c1c' , 246 , 233 , 'NONE' ]
+let s:IA3 = [ '#9e9e9e' , '#2a2a2a' , 246 , 234 , 'NONE' ]
 let g:airline#themes#forest#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
 let g:airline#themes#forest#palette.inactive_modified = {
       \ 'airline_c': [ '#ccaa00' , '#9e9e9e' , 184 , 240 , 'bold' ] ,
@@ -82,13 +82,13 @@ let g:airline#themes#forest#palette.inactive_modified = {
 
 " Pour la ligne de buffers en haut.
 let g:airline#themes#forest#palette.tabline = {
-      \ 'airline_tab':          ['#c8c8c8' , '#005500' , 188 , 22  , '' ],
+      \ 'airline_tab':          ['#c8c8c8' , '#005500' , 188 , 22  , 'NONE' ],
       \ 'airline_tabsel':       ['#00005f' , '#00cc00' , 17  , 34  , 'bold' ],
       \ 'airline_tabtype':      ['#00005f' , '#00aaff' , 17  , 25  , 'bold' ],
-      \ 'airline_tabfill':      ['#c8c8c8' , '#1e1e1e' , 188 , 234 , '' ],
+      \ 'airline_tabfill':      ['#c8c8c8' , '#1e1e1e' , 188 , 234 , 'NONE' ],
       \ 'airline_tabmod':       ['#1e1e1e' , '#dddd00' , 235 , 220 , 'bold' ],
-      \ 'airline_tabhid':       ['#ffffff' , '#444444' , 255 , 238 , '' ],
-      \ 'airline_tabmod_unsel': ['#1e1e1e' , '#eeee00' , 235 , 221 , '' ],
+      \ 'airline_tabhid':       ['#ffffff' , '#444444' , 255 , 238 , 'NONE' ],
+      \ 'airline_tabmod_unsel': ['#1e1e1e' , '#eeee00' , 235 , 221 , 'NONE' ],
       \ }
 
 " Accents are used to give parts within a section a slightly different look or
@@ -99,7 +99,7 @@ let g:airline#themes#forest#palette.tabline = {
 " will be red instead of the section's foreground color. You can also have
 " multiple parts with accents within a section.
 let g:airline#themes#forest#palette.accents = {
-      \ 'red': [ '#ff0000' , '' , 160 , ''  ]
+      \ 'red': [ '#ff0000' , '' , 160 , 'NONE'  ]
       \ }
 
 
@@ -111,6 +111,6 @@ if !get(g:, 'loaded_ctrlp', 0)
   finish
 endif
 let g:airline#themes#forest#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
-      \ [ '#d7d7ff' , '#5f00af' , 189 , 55  , ''     ],
-      \ [ '#ffffff' , '#875fd7' , 231 , 98  , ''     ],
+      \ [ '#d7d7ff' , '#5f00af' , 189 , 55  , 'NONE'     ],
+      \ [ '#ffffff' , '#875fd7' , 231 , 98  , 'NONE'     ],
       \ [ '#5f00af' , '#ffffff' , 55  , 231 , 'bold' ])
