@@ -433,8 +433,8 @@ function! ExistBuildAda()                                                   "{{{
 
     endif
 
-    noremap  <buffer> <S-F8>        :call CreationTags( 'ada' )<Return>
-    noremap! <buffer> <S-F8>  <Esc> :call CreationTags( 'ada' )<Return>
+    noremap  <silent> <buffer> <S-F8>        :call CreationTags( 'ada' )<Return>
+    noremap! <silent> <buffer> <S-F8>  <Esc> :call CreationTags( 'ada' )<Return>
 
 endfunction
 
@@ -462,23 +462,31 @@ endfunction
 "}}}
 
 " Configuration de la création des tags.
+" ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/
 function! CreationTags( type )                                              "{{{
 
     let l:encodage = "--input-encoding=utf-8 --output-encoding=utf-8 "
-    let l:source = "./src/ "
+    let l:source = "./src/"
 
     if a:type ==? 'cpp'
-        let l:langage = "--languages=c++ "
+        let l:lang = "c++"
         let l:options = "-R --c++-kinds=+pl --fields=+iaS --extra=+fq "
     endif
 
     if a:type ==? 'ada'
-        let l:langage = "--languages=ada "
+        let l:lang = "ada"
         let l:options = "-R "
     endif
 
-    let g:creation_tags = "ctags " . l:options . l:langage . l:encodage . l:source
-    let retour = system( g:creation_tags )
+    let l:langage = "--languages=" . l:lang . ' '
+
+    let l:r = system( "ctags " . l:options . l:langage . l:encodage . l:source )
+    if l:r == ''
+        echom "Création des tags réussi."
+    else
+        echom "Erreur lors de la création des tags."
+        echom l:r
+    endif
 
 endfunction
 
@@ -507,8 +515,8 @@ function! MacrosCPP()                                                       "{{{
 
     endif
 
-    noremap  <buffer> <S-F8>        :call CreationTags( 'cpp' )<Return>
-    noremap! <buffer> <S-F8>  <Esc> :call CreationTags( 'cpp' )<Return>
+    noremap  <silent> <buffer> <S-F8>        :call CreationTags( 'cpp' )<Return>
+    noremap! <silent> <buffer> <S-F8>  <Esc> :call CreationTags( 'cpp' )<Return>
     noremap  <buffer> <S-F11>       :!doxygen<Return>
     noremap! <buffer> <S-F11> <Esc> :!doxygen<Return>
     let g:load_doxygen_syntax = 1
