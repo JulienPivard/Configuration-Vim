@@ -380,6 +380,14 @@ endfunction
 
 "}}}
 
+" Execution du make
+function! CompilationMacro()                                                "{{{
+    silent !clear
+    make
+endfunction
+
+"}}}
+
 " Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
 " sinon c'est le nom du fichier sans majuscule
 function! ExistMakeFileC()                                                  "{{{
@@ -462,8 +470,8 @@ function! MacrosCPP()                                                       "{{{
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
-        noremap  <buffer> <F10>         :!./bin/Release/client<Return>
-        noremap! <buffer> <F10>   <Esc> :!./bin/Release/client<Return>
+        noremap  <buffer> <F10>         :!./bin/client<Return>
+        noremap! <buffer> <F10>   <Esc> :!./bin/client<Return>
         noremap  <buffer> <S-F9>        :make clean<Return>
         noremap! <buffer> <S-F9>  <Esc> :make clean<Return>
 
@@ -746,8 +754,8 @@ augroup END
 " pour des raisons de vitesse de retour à l'édition
 augroup compilation                                                         "{{{
     autocmd!
-    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :make <Return>
-    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:make <Return>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :call CompilationMacro()<Return>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:call CompilationMacro()<Return>
     autocmd Filetype perl,sh,python                         noremap  <buffer> <F10>        :!./% <Return>
     autocmd Filetype perl,sh,python                         noremap! <buffer> <F10>   <Esc>:!./% <Return>
 augroup END
