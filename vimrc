@@ -433,8 +433,8 @@ function! ExistBuildAda()                                                   "{{{
 
     endif
 
-    noremap  <buffer> <S-F8>        :!ctags -R --languages=ada --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
-    noremap! <buffer> <S-F8>  <Esc> :!ctags -R --languages=ada --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+    noremap  <buffer> <S-F8>        :call CreationTags( 'ada' )<Return>
+    noremap! <buffer> <S-F8>  <Esc> :call CreationTags( 'ada' )<Return>
 
 endfunction
 
@@ -456,6 +456,29 @@ function! ConfigurationNouveauFichierHPP()                                  "{{{
     0r ~/.vim/CodeBasique/codeBasique.hpp
     :%substitute?MANOUVELLECLASSE?\=expand( '%:t:r' )?g
     :%substitute@VARIABLE_A_CHANGER@\=expand( '%:t:r' ) . '_hpp'@
+
+endfunction
+
+"}}}
+
+" Configuration de la création des tags.
+function! CreationTags( type )                                              "{{{
+
+    let l:encodage = "--input-encoding=utf-8 --output-encoding=utf-8 "
+    let l:source = "./src/ "
+
+    if a:type ==? 'cpp'
+        let l:langage = "--languages=c++ "
+        let l:options = "-R --c++-kinds=+pl --fields=+iaS --extra=+fq "
+    endif
+
+    if a:type ==? 'ada'
+        let l:langage = "--languages=ada "
+        let l:options = "-R "
+    endif
+
+    let g:creation_tags = "ctags " . l:options . l:langage . l:encodage . l:source
+    let retour = system( g:creation_tags )
 
 endfunction
 
@@ -484,8 +507,8 @@ function! MacrosCPP()                                                       "{{{
 
     endif
 
-    noremap  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
-    noremap! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+    noremap  <buffer> <S-F8>        :call CreationTags( 'cpp' )<Return>
+    noremap! <buffer> <S-F8>  <Esc> :call CreationTags( 'cpp' )<Return>
     noremap  <buffer> <S-F11>       :!doxygen<Return>
     noremap! <buffer> <S-F11> <Esc> :!doxygen<Return>
     let g:load_doxygen_syntax = 1
@@ -494,7 +517,8 @@ function! MacrosCPP()                                                       "{{{
     " git clone https://github.com/universal-ctags/ctags.git
     " Compiler ctags avec utf-8 support
     " ./configure --enable-iconv
-    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --input-encoding=utf-8 --output-encoding=utf-8 --language-force=C++ -f cpp cpp_src
+    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q
+    " --input-encoding=utf-8 --output-encoding=utf-8 --language-force=C++ -f cpp cpp_src
     setlocal tags+=~/.vim/tags/cpp
 
 endfunction
@@ -580,16 +604,22 @@ endfunction
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
 function! AffichageGroff()                                                  "{{{
 
+    " Compilation pour avoir un aperçus dans un terminal
     noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
     noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
+    " Compilation pour faire un pdf
     noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
     noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
+    " Compilation pour afficher avec l'utilitaire man
     noremap  <buffer> <F10>        :!groff -Kutf8 -man -Tutf8 % <Return>
     noremap! <buffer> <F10>   <Esc>:!groff -Kutf8 -man -Tutf8 % <Return>
+    " Compilation du man en pdf
     noremap  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     noremap! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
+    " Affichage du pdf compilé au format me
     noremap  <buffer> <F12>        :!evince %<.pdf & <Return>
     noremap! <buffer> <F12>   <Esc>:!evince %<.pdf & <Return>
+    " Affichage du pdf compilé au format man
     noremap  <buffer> <S-F12>      :!evince %.pdf  & <Return>
     noremap! <buffer> <S-F12> <Esc>:!evince %.pdf  & <Return>
 
