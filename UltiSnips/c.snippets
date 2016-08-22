@@ -1,0 +1,118 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+priority -45
+
+snippet main "main() (main)"
+int main( int argc, char *argv[] )
+{
+	${VISUAL}${0}
+	return 0;
+}
+endsnippet
+
+snippet mainn "main(void) (main)"
+int main( void )
+{
+	${VISUAL}${0}
+	return 0;
+}
+endsnippet
+
+snippet for "for loop (for)"
+for( ${2:i} = 0; $2 < ${1:count}; ${3:++$2} )
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet fori "for int loop (fori)"
+for( ${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2} )
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet if "if simple"
+if( ${1:/* condition */} )
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet ife "if else"
+if( ${1:/* condition */} )
+{
+	${2:/* Actions */}
+}
+else
+{
+	${3:/* Actions */}
+}
+endsnippet
+
+snippet el "else simple"
+else
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet switch
+	switch( ${1:/* variable */} )
+	{
+		case ${2:/* variable case */}:
+			${3:// Actions}
+			${4:break;}${5}
+		default:
+			${6:// Actions}
+	}
+endsnippet
+
+snippet switchndef
+	switch( ${1:/* variable */} )
+	{
+		case ${2:/* variable case */}:
+			${3:// Actions}
+			${4:break;}${5}
+	}
+endsnippet
+
+snippet wh
+	while( ${1:/* condition */} )
+	{
+		${2:// Actions}
+	}
+endsnippet
+
+snippet do
+	do
+	{
+		${2: //Actions}
+	} while( ${1:/* condition */} );
+endsnippet
+
+snippet fprintf "fprintf ..."
+fprintf( ${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\); )/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet eli "else if .. (eli)"
+else if( ${1:/* condition */} )
+{
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet printf "printf .. (printf)"
+printf( "${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\); )/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet st "struct"
+struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`}
+{
+	${0:/* data */}
+};
+endsnippet
+
+# vim:ft=snippets:
