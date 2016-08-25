@@ -32,6 +32,7 @@ Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
 Plug 'scrooloose/nerdtree', { 'on' :  'NERDTreeToggle'  }
 Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim', { 'on' : 'GundoToggle' }
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -41,8 +42,6 @@ Plug 'vim-scripts/L9'
 Plug 'vim-scripts/OmniCppComplete', { 'for' : ['cpp', 'hpp'] }
 Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
-
-Plug 'terryma/vim-multiple-cursors'
 
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
@@ -1088,30 +1087,6 @@ let g:tagbar_width = 50
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_type_ada = {
-    \ 'ctagstype': 'ada',
-    \ 'kinds' : [
-        \'P:package specs',
-        \'p:packages',
-        \'t:type',
-        \'u:subtypes',
-        \'c:record type components',
-        \'l:enum type literals',
-        \'v:variables',
-        \'f:formal parameters',
-        \'n:constants',
-        \'x:exceptions',
-        \'R:subprogram specs',
-        \'r:subprograms',
-        \'K:task specs',
-        \'k:tasks',
-        \'O:protected data specs',
-        \'o:protected data',
-        \'e:entries',
-        \'b:labels',
-        \'i:identifiers'
-    \]
-    \}
 
 "}}}
 
