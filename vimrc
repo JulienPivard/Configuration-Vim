@@ -587,6 +587,22 @@ endfunction
 
 "}}}
 
+" Fonction pour définir le logiciel à ouvrir selon le système d'exploitation
+" utilisé
+" Définition de variable global pour ouvrir un pdf                      "{{{
+function! NomLecteurPDF()
+    let l:systeme_en_cours_dutilisation = system( "uname" )
+    if l:systeme_en_cours_dutilisation =~? "darwin"
+        let l:logiciel_pour_voir_pdf = "open"
+    else
+        let l:logiciel_pour_voir_pdf = "evince"
+    endif
+    return l:logiciel_pour_voir_pdf
+endfunction
+
+" }}}
+
+
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
 function! MacrosLatexSpecifique()                                           "{{{
 
@@ -595,8 +611,8 @@ function! MacrosLatexSpecifique()                                           "{{{
     noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
     noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
     noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
-    noremap  <buffer> <F10>         :!evince %<.pdf &<Return>
-    noremap! <buffer> <F10>   <Esc> :!evince %<.pdf &<Return>
+    noremap  <buffer> <F10>         :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
+    noremap! <buffer> <F10>   <Esc> :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
     noremap  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
     noremap! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
 
@@ -629,11 +645,11 @@ function! AffichageGroff()                                                  "{{{
     noremap  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     noremap! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     " Affichage du pdf compilé au format me
-    noremap  <buffer> <F12>        :!evince %<.pdf & <Return>
-    noremap! <buffer> <F12>   <Esc>:!evince %<.pdf & <Return>
+    noremap  <buffer> <F12>         :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
+    noremap! <buffer> <F12>   <Esc> :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
     " Affichage du pdf compilé au format man
-    noremap  <buffer> <S-F12>      :!evince %.pdf  & <Return>
-    noremap! <buffer> <S-F12> <Esc>:!evince %.pdf  & <Return>
+    noremap  <buffer> <S-F12>      :execute '!' . NomLecteurPDF() . " " . expand( '%' ) . '.pdf'<Return>:redraw!<Return>
+    noremap! <buffer> <S-F12> <Esc>:execute '!' . NomLecteurPDF() . " " . expand( '%' ) . '.pdf'<Return>:redraw!<Return>
 
 endfunction
 
