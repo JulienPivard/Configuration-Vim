@@ -67,6 +67,7 @@ filetype plugin indent on
 
 syntax on
 
+" Option globales de vim                                                    "{{{
 set noautochdir                         " Pour ne pas se changer automatiquement de répertoire
 set   autoindent                        " Adapte l'indentation automatiquement
 set   autoread                          " Permet de relire les fichiers modifié à l'extérieur
@@ -145,10 +146,12 @@ set   undolevels=500                    " Fixe le nombre de changements conserv�
 set   wildmenu                          " Affiche le menu de complétion pour les commandes dans la barre de statut
 set   wildmode=longest:full,full        " Complète d'abord avec la correspondance la plus longue sans ambigüité
 
+" }}}
+
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
-" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti.
+" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti. " {{{
 if has( 'cscope' )
     set   cscopeprg=/usr/bin/cscope
     set   cscopetagorder=0
@@ -163,6 +166,8 @@ if has( 'cscope' )
     endif
     set   cscopeverbose
 endif
+
+" }}}
 
 " Pour gvim
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
