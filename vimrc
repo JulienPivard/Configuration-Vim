@@ -387,7 +387,8 @@ endfunction
 " Execution du make
 function! CompilationMacro()                                                "{{{
     silent !clear
-    make
+    silent make
+    redraw!
 endfunction
 
 "}}}
