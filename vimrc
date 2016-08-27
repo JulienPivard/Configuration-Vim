@@ -612,8 +612,8 @@ function! MacrosLatexSpecifique()                                           "{{{
     noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
     noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
     noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
-    noremap  <buffer> <F10>         :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
-    noremap! <buffer> <F10>   <Esc> :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
+    noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
     noremap  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
     noremap! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
 
@@ -646,11 +646,11 @@ function! AffichageGroff()                                                  "{{{
     noremap  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     noremap! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     " Affichage du pdf compilé au format me
-    noremap  <buffer> <F12>         :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
-    noremap! <buffer> <F12>   <Esc> :silent execute '!' . NomLecteurPDF() . " " . expand( '%<' ) . '.pdf'<Return>:redraw!<Return>
+    noremap  <buffer> <F12>        :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    noremap! <buffer> <F12>   <Esc>:call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
     " Affichage du pdf compilé au format man
-    noremap  <buffer> <S-F12>      :execute '!' . NomLecteurPDF() . " " . expand( '%' ) . '.pdf'<Return>:redraw!<Return>
-    noremap! <buffer> <S-F12> <Esc>:execute '!' . NomLecteurPDF() . " " . expand( '%' ) . '.pdf'<Return>:redraw!<Return>
+    noremap  <buffer> <S-F12>      :call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf' )<Return>
+    noremap! <buffer> <S-F12> <Esc>:call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf' )<Return>
 
 endfunction
 
