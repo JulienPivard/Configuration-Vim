@@ -149,7 +149,7 @@ set   wildmode=longest:full,full        " Complète d'abord avec la correspondan
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
-" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti. " {{{
+" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti. "{{{
 if has( 'cscope' )
     set   cscopeprg=/usr/bin/cscope
     set   cscopetagorder=0
@@ -165,7 +165,7 @@ if has( 'cscope' )
     set   cscopeverbose
 endif
 
-" }}}
+"}}}
 
 " Pour gvim
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
@@ -1288,6 +1288,13 @@ let g:multi_cursor_start_key = '-'
 "}}}
 
 " -----------------------
+" Réglage pour auto pairs pas de documentation                              "{{{
+" -----------------------
+let b:AutoPairs = {'«' : '»'}
+
+"}}}
+
+" -----------------------
 " Réglage pour mon thème de couleurs.                                       "{{{
 " -----------------------
 let g:interstellaire_termcolors = 256
@@ -1298,7 +1305,7 @@ let g:interstellaire_termcolors = 256
 " }}}                 Fin des réglages des extensions de Vim                    "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
-"
+
 
 " Définition du colorsheme
 colorscheme interstellaire
