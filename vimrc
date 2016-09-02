@@ -20,7 +20,6 @@ Plug 'edsono/vim-matchit'
 Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'gregsexton/gitv'
-Plug 'hdima/python-syntax', { 'for' : 'python' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
@@ -39,7 +38,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/FSwitch', { 'for' : ['ada', 'cpp', 'hpp'] }
 Plug 'vim-scripts/FuzzyFinder'
 Plug 'vim-scripts/L9'
-Plug 'vim-scripts/OmniCppComplete', { 'for' : ['cpp', 'hpp'] }
 Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
 
