@@ -6,58 +6,55 @@ set nocompatible                        " Casser compatible avec vielle version
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
-" {{{                      Début des réglages de Vundle                         "
+" {{{                      Début des réglages de Vim-Plug                       "
 " ----------------------------------------------------------------------------- "
 
-filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim       " Ajoute le chemin pour initialiser Vundle au démarrage.
-call vundle#begin( '~/.vim/bundle/' )
+" La mise à jour de vim-plug se fait
+" par la commande :PlugUpgrade
+call plug#begin( '~/.vim/bundle/' )
 
-" Pour retrouver le dépôt git exact ajouter au début https://github.com
-" Pour se maintenir à jours.
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'edsono/vim-matchit'
-Plugin 'godlygeek/tabular'
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'gregsexton/gitv'
-Plugin 'hdima/python-syntax'
-Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'majutsushi/tagbar'
-Plugin 'mbbill/undotree'
-Plugin 'mhinz/vim-signify'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'phongnh/vim-antlr'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'reedes/vim-pencil'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-scripts/FSwitch'
-Plugin 'vim-scripts/FuzzyFinder'
-Plugin 'vim-scripts/L9'
-Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'vim-scripts/SpellCheck'
-Plugin 'vim-scripts/ingo-library'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
+Plug 'easymotion/vim-easymotion'
+Plug 'edsono/vim-matchit'
+Plug 'godlygeek/tabular'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'gregsexton/gitv'
+Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
+Plug 'mhinz/vim-signify'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'phongnh/vim-antlr', { 'for' : 'antlr' }
+Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
+Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
+Plug 'scrooloose/nerdtree', { 'on' :  'NERDTreeToggle'  }
+Plug 'scrooloose/syntastic'
+Plug 'sjl/gundo.vim', { 'on' : 'GundoToggle' }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/FSwitch', { 'for' : ['ada', 'cpp', 'hpp'] }
+Plug 'vim-scripts/FuzzyFinder'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/SpellCheck'
+Plug 'vim-scripts/ingo-library'
 
 " Plugin pour gvim.
-Plugin 'vim-scripts/hexHighlight.vim'
+Plug 'vim-scripts/hexHighlight.vim'
 
-call vundle#end()
+" Charger un plugin depuis l'extérieur
+"Plug '~/Programmation/VimScript/potion'
+
+call plug#end()
 filetype plugin indent on
 " Pense bête
-" :PluginList       - Liste les extensions configuré
-" :PluginInstall    - Installer
-" :PluginUpdate     - Mettre à jours
-" :PluginSearch foo - Cherche foo
-" :PluginClean      - Supprime les extensions inutilisée
+" :PlugList       - Liste les extensions configuré
+" :PlugInstall    - Installer
+" :PlugUpdate     - Mettre à jours
+" :PlugSearch foo - Cherche foo
+" :PlugClean      - Supprime les extensions inutilisée
 
 " ----------------------------------------------------------------------------- "
 " }}}                       Fin des réglages de Vundle                          "
@@ -68,6 +65,7 @@ filetype plugin indent on
 
 syntax on
 
+" Option globales de vim                                                    "{{{
 set noautochdir                         " Pour ne pas se changer automatiquement de répertoire
 set   autoindent                        " Adapte l'indentation automatiquement
 set   autoread                          " Permet de relire les fichiers modifié à l'extérieur
@@ -146,10 +144,12 @@ set   undolevels=500                    " Fixe le nombre de changements conserv�
 set   wildmenu                          " Affiche le menu de complétion pour les commandes dans la barre de statut
 set   wildmode=longest:full,full        " Complète d'abord avec la correspondance la plus longue sans ambigüité
 
+" }}}
+
 " Thésaurus de synonyme français
 set thesaurus+=~/.vim/spell/Thesaurus/thesaurus_fr_FR.txt
 
-" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti.
+" Pour activer cscope dans vim pour les sources qui peuvent en tirer parti. " {{{
 if has( 'cscope' )
     set   cscopeprg=/usr/bin/cscope
     set   cscopetagorder=0
@@ -164,6 +164,8 @@ if has( 'cscope' )
     endif
     set   cscopeverbose
 endif
+
+" }}}
 
 " Pour gvim
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
@@ -380,6 +382,15 @@ endfunction
 
 "}}}
 
+" Execution du make
+function! CompilationMacro()                                                "{{{
+    silent !clear
+    silent make
+    redraw!
+endfunction
+
+"}}}
+
 " Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
 " sinon c'est le nom du fichier sans majuscule
 function! ExistMakeFileC()                                                  "{{{
@@ -425,8 +436,8 @@ function! ExistBuildAda()                                                   "{{{
 
     endif
 
-    noremap  <buffer> <S-F8>        :!ctags -R --languages=ada --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
-    noremap! <buffer> <S-F8>  <Esc> :!ctags -R --languages=ada --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+    noremap  <silent> <buffer> <S-F8>        :call CreationTags( 'ada' )<Return>
+    noremap! <silent> <buffer> <S-F8>  <Esc> :call CreationTags( 'ada' )<Return>
 
 endfunction
 
@@ -453,6 +464,37 @@ endfunction
 
 "}}}
 
+" Configuration de la création des tags.
+" ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/
+function! CreationTags( type )                                              "{{{
+
+    let l:encodage = "--input-encoding=utf-8 --output-encoding=utf-8 "
+    let l:source = "./src/"
+
+    if a:type ==? 'cpp'
+        let l:lang = "c++"
+        let l:options = "-R --c++-kinds=+pl --fields=+iaS --extra=+fq "
+    endif
+
+    if a:type ==? 'ada'
+        let l:lang = "ada"
+        let l:options = "-R "
+    endif
+
+    let l:langage = "--languages=" . l:lang . ' '
+
+    let l:r = system( "ctags " . l:options . l:langage . l:encodage . l:source )
+    if l:r == ''
+        echom "Création des tags réussi."
+    else
+        echom "Erreur lors de la création des tags."
+        echom l:r
+    endif
+
+endfunction
+
+"}}}
+
 " Maccros pour le cpp
 " Compilation via makeprg
 " Exécution via F10 du binaire
@@ -462,8 +504,8 @@ function! MacrosCPP()                                                       "{{{
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
-        noremap  <buffer> <F10>         :!./bin/Release/client<Return>
-        noremap! <buffer> <F10>   <Esc> :!./bin/Release/client<Return>
+        noremap  <buffer> <F10>         :!./bin/client<Return>
+        noremap! <buffer> <F10>   <Esc> :!./bin/client<Return>
         noremap  <buffer> <S-F9>        :make clean<Return>
         noremap! <buffer> <S-F9>  <Esc> :make clean<Return>
 
@@ -476,8 +518,8 @@ function! MacrosCPP()                                                       "{{{
 
     endif
 
-    noremap  <buffer> <S-F8>        :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
-    noremap! <buffer> <S-F8>  <Esc> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/<Return>
+    noremap  <silent> <buffer> <S-F8>        :call CreationTags( 'cpp' )<Return>
+    noremap! <silent> <buffer> <S-F8>  <Esc> :call CreationTags( 'cpp' )<Return>
     noremap  <buffer> <S-F11>       :!doxygen<Return>
     noremap! <buffer> <S-F11> <Esc> :!doxygen<Return>
     let g:load_doxygen_syntax = 1
@@ -486,7 +528,8 @@ function! MacrosCPP()                                                       "{{{
     " git clone https://github.com/universal-ctags/ctags.git
     " Compiler ctags avec utf-8 support
     " ./configure --enable-iconv
-    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q --input-encoding=utf-8 --output-encoding=utf-8 --language-force=C++ -f cpp cpp_src
+    " ctags -R --sort=1 --c++-kinds=+p --fields=+iaS --extra=+q
+    " --input-encoding=utf-8 --output-encoding=utf-8 --language-force=C++ -f cpp cpp_src
     setlocal tags+=~/.vim/tags/cpp
 
 endfunction
@@ -543,6 +586,22 @@ endfunction
 
 "}}}
 
+" Fonction pour définir le logiciel à ouvrir selon le système d'exploitation
+" utilisé
+" Définition de variable global pour ouvrir un pdf                      "{{{
+function! NomLecteurPDF()
+    let l:systeme_en_cours_dutilisation = system( "uname" )
+    if l:systeme_en_cours_dutilisation =~? "darwin"
+        let l:logiciel_pour_voir_pdf = "open"
+    else
+        let l:logiciel_pour_voir_pdf = "evince"
+    endif
+    return l:logiciel_pour_voir_pdf
+endfunction
+
+" }}}
+
+
 " Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
 function! MacrosLatexSpecifique()                                           "{{{
 
@@ -551,8 +610,8 @@ function! MacrosLatexSpecifique()                                           "{{{
     noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
     noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
     noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
-    noremap  <buffer> <F10>         :!evince %<.pdf &<Return>
-    noremap! <buffer> <F10>   <Esc> :!evince %<.pdf &<Return>
+    noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
     noremap  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
     noremap! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
 
@@ -572,18 +631,24 @@ endfunction
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
 function! AffichageGroff()                                                  "{{{
 
+    " Compilation pour avoir un aperçus dans un terminal
     noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
     noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
+    " Compilation pour faire un pdf
     noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
     noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
+    " Compilation pour afficher avec l'utilitaire man
     noremap  <buffer> <F10>        :!groff -Kutf8 -man -Tutf8 % <Return>
     noremap! <buffer> <F10>   <Esc>:!groff -Kutf8 -man -Tutf8 % <Return>
+    " Compilation du man en pdf
     noremap  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     noremap! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
-    noremap  <buffer> <F12>        :!evince %<.pdf & <Return>
-    noremap! <buffer> <F12>   <Esc>:!evince %<.pdf & <Return>
-    noremap  <buffer> <S-F12>      :!evince %.pdf  & <Return>
-    noremap! <buffer> <S-F12> <Esc>:!evince %.pdf  & <Return>
+    " Affichage du pdf compilé au format me
+    noremap  <buffer> <F12>        :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    noremap! <buffer> <F12>   <Esc>:call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    " Affichage du pdf compilé au format man
+    noremap  <buffer> <S-F12>      :call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf' )<Return>
+    noremap! <buffer> <S-F12> <Esc>:call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf' )<Return>
 
 endfunction
 
@@ -746,8 +811,8 @@ augroup END
 " pour des raisons de vitesse de retour à l'édition
 augroup compilation                                                         "{{{
     autocmd!
-    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :make <Return>
-    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:make <Return>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :call CompilationMacro()<Return>
+    autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:call CompilationMacro()<Return>
     autocmd Filetype perl,sh,python                         noremap  <buffer> <F10>        :!./% <Return>
     autocmd Filetype perl,sh,python                         noremap! <buffer> <F10>   <Esc>:!./% <Return>
 augroup END
@@ -1042,30 +1107,6 @@ let g:tagbar_width = 50
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_type_ada = {
-    \ 'ctagstype': 'ada',
-    \ 'kinds' : [
-        \'P:package specs',
-        \'p:packages',
-        \'t:type',
-        \'u:subtypes',
-        \'c:record type components',
-        \'l:enum type literals',
-        \'v:variables',
-        \'f:formal parameters',
-        \'n:constants',
-        \'x:exceptions',
-        \'R:subprogram specs',
-        \'r:subprograms',
-        \'K:task specs',
-        \'k:tasks',
-        \'O:protected data specs',
-        \'o:protected data',
-        \'e:entries',
-        \'b:labels',
-        \'i:identifiers'
-    \]
-    \}
 
 "}}}
 
@@ -1240,6 +1281,13 @@ let g:pencil#autoformat_config = {
 "}}}
 
 " -----------------------
+" Réglage pour les curseurs multiples                                       "{{{
+" -----------------------
+let g:multi_cursor_start_key = '-'
+
+"}}}
+
+" -----------------------
 " Réglage pour mon thème de couleurs.                                       "{{{
 " -----------------------
 let g:interstellaire_termcolors = 256
@@ -1254,3 +1302,5 @@ let g:interstellaire_termcolors = 256
 
 " Définition du colorsheme
 colorscheme interstellaire
+
+" vim:foldlevel=0:foldmethod=marker
