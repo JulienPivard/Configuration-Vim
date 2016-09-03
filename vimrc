@@ -610,8 +610,8 @@ function! MacrosLatexSpecifique()                                           "{{{
     noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
     noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
     noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
-    noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
-    noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
+    noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
     noremap  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
     noremap! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
 
