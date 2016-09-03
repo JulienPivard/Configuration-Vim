@@ -489,4 +489,4 @@ exe 'highlight User6'               . s:forme                               . s:
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " }}}
 
-" vim:foldmethod=marker
+" vim:foldmethod=marker:foldlevel=0
