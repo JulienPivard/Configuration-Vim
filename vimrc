@@ -332,7 +332,7 @@ function! MontrerGroupeSyntax()                                             "{{{
     if !exists( '*synstack' )
         return
     endif
-    echo map( synstack( line('.'), col('.') ), 'synIDattr( v:val, "name" )' )
+    echo map( synstack( line( '.' ), col( '.' ) ), 'synIDattr( v:val, "name" )' )
 endfunction
 
 "}}}
@@ -468,22 +468,22 @@ endfunction
 " ctags -R --c++-kinds=+pl --fields=+iaS --extra=+fq --languages=c++ --input-encoding=utf-8 --output-encoding=utf-8 ./src/
 function! CreationTags( type )                                              "{{{
 
-    let l:encodage = "--input-encoding=utf-8 --output-encoding=utf-8 "
-    let l:source = "./src/"
+    let l:encodage = '--input-encoding=utf-8 --output-encoding=utf-8 '
+    let l:source = './src/'
 
     if a:type ==? 'cpp'
-        let l:lang = "c++"
-        let l:options = "-R --c++-kinds=+pl --fields=+iaS --extra=+fq "
+        let l:lang = 'c++'
+        let l:options = '-R --c++-kinds=+pl --fields=+iaS --extra=+fq '
     endif
 
     if a:type ==? 'ada'
-        let l:lang = "ada"
-        let l:options = "-R "
+        let l:lang = 'ada'
+        let l:options = '-R '
     endif
 
-    let l:langage = "--languages=" . l:lang . ' '
+    let l:langage = '--languages=' . l:lang . ' '
 
-    let l:r = system( "ctags " . l:options . l:langage . l:encodage . l:source )
+    let l:r = system( 'ctags ' . l:options . l:langage . l:encodage . l:source )
     if l:r == ''
         echom "Création des tags réussi."
     else
@@ -541,7 +541,7 @@ function! ConfigurationNouveauFichierJAVA()                                 "{{{
 
     0r ~/.vim/CodeBasique/codeBasique.java
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?
-    :1substitute?package truc?\= "package ".expand( '%:p:.:h' )?
+    :1substitute?package truc?\= 'package ' . expand( '%:p:.:h' )?
     :1substitute?/?\.?ge
     " Permet d'utiliser gf sur les fichiers java.
     set includeexpr=substitute( v:fname,'\\.','/','g' )
@@ -590,11 +590,11 @@ endfunction
 " utilisé
 " Définition de variable global pour ouvrir un pdf                      "{{{
 function! NomLecteurPDF()
-    let l:systeme_en_cours_dutilisation = system( "uname" )
-    if l:systeme_en_cours_dutilisation =~? "darwin"
-        let l:logiciel_pour_voir_pdf = "open"
+    let l:systeme_en_cours_dutilisation = system( 'uname' )
+    if l:systeme_en_cours_dutilisation =~? 'darwin'
+        let l:logiciel_pour_voir_pdf = 'open'
     else
-        let l:logiciel_pour_voir_pdf = "evince"
+        let l:logiciel_pour_voir_pdf = 'evince'
     endif
     return l:logiciel_pour_voir_pdf
 endfunction
