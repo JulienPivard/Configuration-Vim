@@ -401,14 +401,14 @@ function! ExistMakeFileC()                                                  "{{{
         setlocal makeprg=make
         noremap  <buffer> <S-F9>        :make clean<Return>
         noremap! <buffer> <S-F9>  <Esc> :make clean<Return>
-        noremap  <buffer> <F10>         :!./$nomFichier<Return>
-        noremap! <buffer> <F10>   <Esc> :!./$nomFichier<Return>
+        noremap  <buffer> <F10>         :!./$nomFichier<Space>
+        noremap! <buffer> <F10>   <Esc> :!./$nomFichier<Space>
 
     else
 
         setlocal makeprg=gcc\ -Wall\ -o\ %<\ %<.c
-        noremap  <buffer> <F10>         :!./%<<Return>
-        noremap! <buffer> <F10>   <Esc> :!./%<<Return>
+        noremap  <buffer> <F10>         :!./%<<Space>
+        noremap! <buffer> <F10>   <Esc> :!./%<<Space>
 
     endif
 
@@ -423,16 +423,16 @@ function! ExistBuildAda()                                                   "{{{
 
         setlocal makeprg=gprbuild\ -d\ -Xmode=deb
         call g:gnat.Set_Project_File( './build.gpr' )
-        noremap  <buffer> <F10>         :!./bin/debug/client<Return>
-        noremap! <buffer> <F10>   <Esc> :!./bin/debug/client<Return>
+        noremap  <buffer> <F10>         :!./bin/debug/client<Space>
+        noremap! <buffer> <F10>   <Esc> :!./bin/debug/client<Space>
         noremap  <buffer> <S-F9>        :!gprclean<Return>
         noremap! <buffer> <S-F9>  <Esc> :!gprclean<Return>
 
     else
 
         setlocal makeprg=gnatmake\ %
-        noremap  <buffer> <F10>         :!./%<<Return>
-        noremap! <buffer> <F10>   <Esc> :!./%<<Return>
+        noremap  <buffer> <F10>         :!./%<<Space>
+        noremap! <buffer> <F10>   <Esc> :!./%<<Space>
 
     endif
 
@@ -504,8 +504,8 @@ function! MacrosCPP()                                                       "{{{
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
-        noremap  <buffer> <F10>         :!./bin/client<Return>
-        noremap! <buffer> <F10>   <Esc> :!./bin/client<Return>
+        noremap  <buffer> <F10>         :!./bin/client<Space>
+        noremap! <buffer> <F10>   <Esc> :!./bin/client<Space>
         noremap  <buffer> <S-F9>        :make clean<Return>
         noremap! <buffer> <S-F9>  <Esc> :make clean<Return>
 
@@ -513,8 +513,8 @@ function! MacrosCPP()                                                       "{{{
 
         let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=g++\ -Wall\ -Wextra\ -std=c++11\ -o\ %<\ %
-        noremap  <buffer> <F10>         :!./$nomFichier<Return>
-        noremap! <buffer> <F10>   <Esc> :!./$nomFichier<Return>
+        noremap  <buffer> <F10>         :!./$nomFichier<Space>
+        noremap! <buffer> <F10>   <Esc> :!./$nomFichier<Space>
 
     endif
 
@@ -541,8 +541,8 @@ function! ConfigurationNouveauFichierJAVA()                                 "{{{
 
     0r ~/.vim/CodeBasique/codeBasique.java
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?
-    :1substitute?package truc?\= 'package ' . expand( '%:p:.:h' )?
-    :1substitute?/?\.?ge
+    :4substitute?package truc?\= 'package ' . expand( '%:p:.:h' )?
+    :4substitute?/?\.?ge
     " Permet d'utiliser gf sur les fichiers java.
     set includeexpr=substitute( v:fname,'\\.','/','g' )
 
@@ -572,8 +572,8 @@ function! ExistConfigurationJava()                                          "{{{
     else
 
         " Il n'y a pas de fichier d'automatisation, compilation du fichier à la main.
-        noremap  <buffer> <F10>         :!java %<<Return>
-        noremap! <buffer> <F10>   <Esc> :!java %<<Return>
+        noremap  <buffer> <F10>         :!java %<<Space>
+        noremap! <buffer> <F10>   <Esc> :!java %<<Space>
         noremap  <buffer> <S-F11>       :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<Return>
         noremap! <buffer> <S-F11> <Esc> :!javadoc -encoding utf8 -docencoding utf8 -charset utf8 % && firefox %<.html &<Return>
 
@@ -813,8 +813,8 @@ augroup compilation                                                         "{{{
     autocmd!
     autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :call CompilationMacro()<Return>
     autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:call CompilationMacro()<Return>
-    autocmd Filetype perl,sh,python                         noremap  <buffer> <F10>        :!./% <Return>
-    autocmd Filetype perl,sh,python                         noremap! <buffer> <F10>   <Esc>:!./% <Return>
+    autocmd Filetype perl,sh,python                         noremap  <buffer> <F10>        :!./%<Space>
+    autocmd Filetype perl,sh,python                         noremap! <buffer> <F10>   <Esc>:!./%<Space>
 augroup END
 
 "}}}
@@ -1290,7 +1290,7 @@ let g:multi_cursor_start_key = '-'
 " -----------------------
 " Réglage pour auto pairs pas de documentation                              "{{{
 " -----------------------
-let b:AutoPairs = {'«' : '»'}
+"let b:AutoPairs = {'«': '»'}
 
 "}}}
 
