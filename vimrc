@@ -385,8 +385,7 @@ endfunction
 " Execution du make
 function! CompilationMacro()                                                "{{{
     silent !clear
-    silent make
-    redraw!
+    make
 endfunction
 
 "}}}
@@ -1088,7 +1087,7 @@ let g:undotree_SetFocusWhenToggle = 1
 " Réglages pour NERDTree                                                    "{{{
 " -----------------------
 let NERDTreeShowHidden = 1          " Pour afficher les fichiers caché.
-let NERDTreeWinSize = 40
+let NERDTreeWinSize = 55
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1          " Ferme automatiquement NERDTree quand on ouvre un fichier.
 
@@ -1103,7 +1102,7 @@ let g:tagbar_autofocus = 1          " Place le curseur dans la fenêtre tagbar
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_autopreview = 0
 let g:tagbar_autoshowtag = 0
-let g:tagbar_width = 50
+let g:tagbar_width = 55
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
