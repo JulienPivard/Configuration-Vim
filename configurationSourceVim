@@ -1,7 +1,8 @@
 #! /bin/bash
+# vim:foldmethod=marker:foldlevel=0
 
 ####################################
-#      Définition des couleurs     #
+# {{{  Définition des couleurs     #
 ####################################
 
 # Couleurs normale
@@ -76,14 +77,16 @@ declare -r sur_iblanc='\e[30;107m'  # Blanc
 
 declare -r neutre='\e[0;m'
 
+# }}}
+
 #echo "Pour installer avec le support de clipboard installer xorg-dev"
 
 if [[ -e "./src/vim" ]]; then
-    printf "${sur_jaune}Nettoyage de la compilation précédente.${neutre}\n"
+    printf "${sur_jaune}    Nettoyage de la compilation précédente.    ${neutre}\n"
     make distclean
 fi
 
-printf "${sur_vert}Configuration de vim${neutre}\n"
+printf "${sur_vert}    Configuration de vim    ${neutre}\n"
 
 ./configure --with-features=huge \
             --with-compiledby=Asmodee \
@@ -97,6 +100,6 @@ printf "${sur_vert}Configuration de vim${neutre}\n"
 erreur=$?
 
 if [[ $erreur -eq 0 ]]; then
-    printf "${sur_vert}Compilation de vim${neutre}\n"
+    printf "${sur_vert}    Compilation de vim    ${neutre}\n"
     make
 fi
