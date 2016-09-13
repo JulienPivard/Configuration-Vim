@@ -1,4 +1,5 @@
 #! /bin/bash
+# vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
@@ -7,7 +8,7 @@
 #                                   #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
-# Dernière modification : mercredi 08 juin[06] 2016
+# Dernière modification : Mardi 13 septembre[09] 2016
 
 #########################
 #       Debogage        #
@@ -22,7 +23,7 @@
 trap 'nettoyage' 2 3 15
 
 ####################################
-#      Définition des couleurs     #
+# {{{  Définition des couleurs     #
 ####################################
 
 # Couleurs normale
@@ -97,8 +98,10 @@ declare -r sur_iblanc='\e[30;107m'  # Blanc
 
 declare -r neutre='\e[0;m'
 
+# }}}
+
 #####################################
-#  Fonction de gestion des signaux  #
+#  Fonction de gestion des signaux  # {{{
 #####################################
 
 nettoyage()
@@ -107,16 +110,20 @@ nettoyage()
     exit $?
 }
 
+# }}}
+
 # Retirer l'extension %.* un % par extension à retirer.
 # Ne garder que l'extension avec #*. Voila.
 ####################################################
-#                       Code                       #
+# {{{                   Code                       #
 ####################################################
 
 
 
+# }}}
+
 ####################################################
-#                Gestion des options               #
+# {{{            Gestion des options               #
 ####################################################
 
 # option o ne nécessite pas d'arguments en plus u si.
@@ -140,6 +147,8 @@ do
             ;;
     esac
 done
+
+# }}}
 
 ###################################################
 #                   Exécution                     #
