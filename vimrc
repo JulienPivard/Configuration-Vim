@@ -812,8 +812,8 @@ augroup compilation                                                         "{{{
     autocmd!
     autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap  <buffer> <S-F5>       :call CompilationMacro()<Return>
     autocmd FileType tex,haskell,ocaml,sql,php,c,cpp,ada    noremap! <buffer> <S-F5>  <Esc>:call CompilationMacro()<Return>
-    autocmd Filetype perl,sh,python                         noremap  <buffer> <F10>        :!./%<Space>
-    autocmd Filetype perl,sh,python                         noremap! <buffer> <F10>   <Esc>:!./%<Space>
+    autocmd Filetype perl,sh,python,zsh                     noremap  <buffer> <F10>        :!./%<Space>
+    autocmd Filetype perl,sh,python,zsh                     noremap! <buffer> <F10>   <Esc>:!./%<Space>
 augroup END
 
 "}}}
