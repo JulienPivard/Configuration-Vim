@@ -1068,7 +1068,11 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra'
 let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
-" Les fichiers doivent être de la forme -Ichemin/du/dossier
+" Un exemple de fichier : avec le -I au début
+" -Isrc/include/
+" -Isrc/include/modele/
+" -Isrc/include/builders/
+" -Isrc/include/builders/lorraine
 
 "}}}
 
