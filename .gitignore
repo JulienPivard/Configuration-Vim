@@ -1,8 +1,4 @@
-*.swp
 doc/
 log.txt
-tags
-.zcache/
 shada
-.netrwhist
 plug.vim.old
