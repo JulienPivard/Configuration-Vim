@@ -418,7 +418,15 @@ endfunction
 " Configuration des raccourcis pour compiler en ada.
 function! ExistBuildAda()                                                   "{{{
 
-    if filereadable( './build.gpr' )
+    if filereadable( glob( './[Mm]akefile' ) )
+
+        setlocal makeprg=make
+        noremap  <buffer> <F10>         :!make run<Return>
+        noremap! <buffer> <F10>   <Esc> :!make run<Return>
+        noremap  <buffer> <S-F9>        :!make clean<Return>
+        noremap! <buffer> <S-F9>  <Esc> :!make clean<Return>
+
+    elseif filereadable( './build.gpr' )
 
         setlocal makeprg=gprbuild\ -d\ -Xmode=deb
         call g:gnat.Set_Project_File( './build.gpr' )
@@ -1053,7 +1061,7 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_jump = 2                   " Saute à la première erreur trouvée à la sauvegarde.
 let g:syntastic_stl_format = '[%E{Err l: %fe #%e}%B{, }%W{Warn l: %fw #%w}]'
-let g:syntastic_ignore_files = ['build.gpr']
+let g:syntastic_ignore_files = ['\.*.gpr']
 " php
 let g:syntastic_php_checkers = ['php']          " Pour ne pas avoir le checker de style et d'indentation.
 " perl
@@ -1286,7 +1294,7 @@ let g:pencil#autoformat_config = {
 " -----------------------
 " Réglage pour les curseurs multiples                                       "{{{
 " -----------------------
-let g:multi_cursor_start_key = '-'
+"let g:multi_cursor_start_key = '-'
 
 "}}}
 
