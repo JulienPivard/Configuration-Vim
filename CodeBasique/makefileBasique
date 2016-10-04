@@ -12,6 +12,8 @@
 # $+ Même chose que $^ mais supprime les doublons
 # $? Représente les dépendances qui ont été modifiés
 
+.PHONY: all clean
+
 # Ne pas mettre d'extension
 NOMFICHIEREXECUTABLE = truc
 FICHIER1 = bidule
@@ -33,7 +35,7 @@ $(FICHIER1).o : $(FICHIER1).c $(FICHIER1).h
 	$(CC) $(DEBUG) -c $<
 
 #Pour supprimer tout les fichiers créée
+# Le - est la pour dire de ne pas tenir compte des erreurs de la commande.
 clean :
-	rm -f *.o $(NOMFICHIEREXECUTABLE)
+	-rm -f *.o $(NOMFICHIEREXECUTABLE)
 
-#Pivard Julien
