@@ -1,33 +1,29 @@
---  Dernière modification : dimanche 07 août[08] 2016
+--  Dernière modification : Lundi 03 octobre[10] 2016
 --  auteur : PIVARD Julien
 
 project Build is
 
     --  Les énumérations sont des types accepté.
-    type Style_Type is ( "deb", "rel" );
-    type Mode_Choisis is ( "debug", "release" );
+    type Style_Type     is ( "debug", "release" );
+
     --  Le premier paramètre est le nom de la variable.
     --  Le second paramètre est la valeur par défaut.
     --  A utiliser avec
-    --  gprbuild -Pbuild.gpr -Xmode=release
-    style : Style_Type := external( "mode", "deb" );
-    mode : Mode_Choisis := "debug";
-
-    case style is
-        when "deb" => mode := "debug";
-        when "rel" => mode := "release";
-    end case;
+    --  -d pour afficher la progression et -p pour créer les dossier
+    --  gprbuild -d -p -Pbuild.gpr -Xmode=release
+    style   : Style_Type        := external( "mode", "debug" );
+    exe     := "client";
 
     --  Le nom du fichier qui contient la procédure principale.
-    for Main        use ( "client" );
+    for Main        use ( exe );
 
     --  Pour ignorer des fichiers sources de la compilation
     for Ignore_Source_Sub_Dirs use ( ".git" );
     --  Le ** permet d'inclure tous les sous répertoire.
     for Source_Dirs use ( "src/**" );
 
-    for Object_Dir  use "obj/" & mode;
-    for Exec_Dir    use "bin/" & mode;
+    for Object_Dir  use "obj/" & style;
+    for Exec_Dir    use "bin/" & style;
 
     --  gnatef est la pour afficher le chemin complet des fichiers dans les
     --  messages erreurs et avertissements.
@@ -60,44 +56,70 @@ project Build is
             );
 
     --  Pour un bon tuto https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug.html
+    ----------------------------------------------------------------------------
     package Naming is   --<<<  Pour changer les noms
 
-    --  Pour lier le nom dans le code et le nom du fichier de spec qui le contient
-    --for Spec ("MyPack.MyChild") use "mypack.mychild.spec";
-    --  Même chose mais pour le corps.
-    --for Body ("MyPack.MyChild") use "mypack.mychild.body";
+        --  Pour lier le nom dans le code et le nom du fichier de spec qui le contient
+        --for Spec( "MyPack.MyChild" ) use "mypack.mychild.spec";
+        --  Même chose mais pour le corps.
+        --for Body( "MyPack.MyChild" ) use "mypack.mychild.body";
 
     end Naming;
 
+    --  package Binder          for command BIND (invoking gnatbind)
+    --  package Check           for command CHECK (invoking gnatcheck)
+    --  package Compiler        for command COMP or COMPILE (invoking the compiler)
+    --  package Cross_Reference for command XREF (invoking gnatxref)
+    --  package Eliminate       for command ELIM (invoking gnatelim)
+    --  package Finder          for command FIND (invoking gnatfind)
+    --  package Gnatls          for command LS or LIST (invoking gnatls)
+    --  package Gnatstub        for command STUB (invoking gnatstub)
+    --  package Linker          for command LINK (invoking gnatlink)
+    --  package Check           for command CHECK (invoking gnatcheck)
+    --  package Metrics         for command METRIC (invoking gnatmetric)
+    --  package Pretty_Printer  for command PP or PRETTY (invoking gnatpp)
+    ----------------------------------------------------------------------------
     package Builder is  --<<<  pour gprbuild
 
         --  Pour changer le nom de l'exécutable de client à client après le use.
         case style is
-            when "deb" =>
-                for Executable( "client" ) use "client";
-            when "rel" =>
-                for Executable( "client" ) use "client";
+            when "debug" | "release" =>
+                for Executable( "Client" ) use exe;
         end case;
 
     end Builder;
 
+    ----------------------------------------------------------------------------
     package Compiler is --<<<  pour le compiler
 
         case style is
-            when "deb" =>
+            when "debug" =>
                 for Default_Switches( "Ada" ) use Options & ( "-g" );
-            when "rel" =>
-                for Default_Switches( "Ada" ) use Options& ( "-O3" );
+            when "release" =>
+                for Default_Switches( "Ada" ) use Options & ( "-O3" );
         end case;
 
     end Compiler;
 
+    ----------------------------------------------------------------------------
+    package Cross_Reference is  --<<<  Pour gnatxref
+
+        for Default_Switches( "Ada" ) use ( "-f",
+            "-v",
+            "-u",
+            "-d"
+            );
+
+    end Cross_Reference;
+
     --  Uniquement pour ada.
     --  Vas créer des fichiers « sources » pour élaborer les interruptions
     --  initialiser les variables globales ...
+    ----------------------------------------------------------------------------
     package Binder is   --<<<  pour le binder
     end Binder;
 
+    ----------------------------------------------------------------------------
     package Linker is   --<<<  pour le linker
     end Linker;
 
