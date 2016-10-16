@@ -57,7 +57,7 @@ filetype plugin indent on
 " :PlugClean      - Supprime les extensions inutilisée
 
 " ----------------------------------------------------------------------------- "
-" }}}                       Fin des réglages de Vundle                          "
+" }}}                       Fin des réglages de Vim-Plug                        "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 
@@ -721,8 +721,8 @@ endfunction
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
     autocmd!
-    autocmd Filetype qf setlocal colorcolumn=0
-    autocmd Filetype qf setlocal nospell
+    autocmd Filetype qf,vim-plug    setlocal colorcolumn=0
+    autocmd Filetype qf,vim-plug    setlocal nospell
 augroup END
 
 "}}}
