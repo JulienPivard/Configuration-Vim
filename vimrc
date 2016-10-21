@@ -347,6 +347,10 @@ function! Nettoyage()                                                       "{{{
     let curline = line( '.' )
     " Effectue la suppression des espaces en trop en fin de ligne.
     silent execute "normal! " . ':%s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
+    " On efface les lignes blanches inutiles en fin de fichier.
+    if prevnonblank( line( '$' ) ) < line( '$' )
+        silent execute "normal! :" . prevnonblank( line( '$' ) ) . '+s/\v^\n\n+//e' . "\<Return>" . ":nohlsearch\<Return>"
+    endif
     " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
     " On retire les variables.
