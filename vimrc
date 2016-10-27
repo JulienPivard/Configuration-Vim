@@ -1137,6 +1137,7 @@ let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-h>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-l>'
+let g:ultisnips_java_brace_style = 'nl'
 
 "}}}
 
