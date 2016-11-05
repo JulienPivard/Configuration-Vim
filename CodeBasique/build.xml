@@ -1,10 +1,11 @@
-<project name="usine" default="compile" basedir=".">
+<?xml version="1.0" ?>
+<project name="NOMAPPLICATION" default="compile" basedir=".">
 
-    <property name="appname"       value="usine"/>
+    <property name="appname"       value="NOMAPPLICATION"/>
+    <property name="docshome"      value="${basedir}/docs"/>
     <property name="buildhome"     value="${basedir}/build"/>
     <property name="buildtest"     value="${basedir}/buildTest"/>
     <property name="disthome"      value="${basedir}/dist"/>
-    <property name="docshome"      value="${basedir}/docs"/>
     <property name="libhome"       value="${basedir}/lib"/>
     <property name="srchome"       value="${basedir}/src"/>
     <property name="srctest"       value="${basedir}/test"/>
