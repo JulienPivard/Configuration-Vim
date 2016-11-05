@@ -16,12 +16,12 @@ call plug#begin( '~/.vim/bundle/' )
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
 Plug 'easymotion/vim-easymotion'
-Plug 'edsono/vim-matchit'
 Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'gregsexton/gitv'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
+Plug 'matchit.zip'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
