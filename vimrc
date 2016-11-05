@@ -881,7 +881,7 @@ augroup END
 " Mappage selon la présence de makefile
 augroup fonctionsConfiguration                                              "{{{
     autocmd!
-    autocmd FileType java,ant               call ExistConfigurationJava()
+    autocmd FileType java,ant,jsp           call ExistConfigurationJava()
     autocmd FileType tex                    call MacrosLatexSpecifique()
     autocmd FileType php                    call ProgEnPHP()
     autocmd FileType nroff,groff            call AffichageGroff()
