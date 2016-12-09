@@ -681,7 +681,7 @@ endfunction
 function! ProgEnPHP()                                                       "{{{
 
     inoremap <buffer>,, =>
-    inoremap <buffer>t $this->
+    inoremap <buffer>$$ $this->
 
 endfunction
 
