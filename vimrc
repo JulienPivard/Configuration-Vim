@@ -603,7 +603,7 @@ endfunction
 function! NomLecteurPDF()
     let l:systeme_en_cours_dutilisation = system( 'uname' )
     if l:systeme_en_cours_dutilisation =~? 'darwin'
-        let l:logiciel_pour_voir_pdf = 'open'
+        let l:logiciel_pour_voir_pdf = 'open -n'
     else
         let l:logiciel_pour_voir_pdf = 'evince'
     endif
