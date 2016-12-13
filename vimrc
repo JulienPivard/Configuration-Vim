@@ -613,18 +613,30 @@ endfunction
 " }}}
 
 
-" Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex avec zathura
+" Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex
 function! MacrosLatexSpecifique()                                           "{{{
 
     NoMatchParen
-    noremap  <buffer> <S-F8>        :!makeindex %<.idx<Return>
-    noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
-    noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
-    noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
+    if filereadable( 'makefile' ) || filereadable( 'Makefile' )
+
+        setlocal makeprg=make
+        noremap  <buffer> <S-F8>        :!make index<Return>
+        noremap! <buffer> <S-F8>  <Esc> :!make index<Return>
+        noremap  <buffer> <S-F9>        :!make clean<Return>
+        noremap! <buffer> <S-F9>  <Esc> :!make clean<Return>
+
+    else
+
+        setlocal makeprg=xelatex\ %
+        noremap  <buffer> <S-F8>        :!makeindex %<.idx<Return>
+        noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
+        noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
+        noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
+
+    endif
+
     noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
     noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
-    noremap  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
-    noremap! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
 
     if filereadable( 'bibliographie.bib' )
         noremap  <buffer> <S-F11>       :!bibtex %< <Return>
@@ -811,7 +823,6 @@ augroup reglageMake                                                         "{{{
     autocmd FileType ocaml      setlocal makeprg=ocaml\ -init\ %
     autocmd FileType java       setlocal makeprg=javac\ -g\ %
     autocmd FileType sql        setlocal makeprg=mysql\ --password\ <\ %
-    autocmd FileType tex        setlocal makeprg=xelatex\ %
     autocmd Filetype php        setlocal makeprg=php\ -l\ %
 augroup END
 

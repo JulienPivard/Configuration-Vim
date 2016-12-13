@@ -53,6 +53,11 @@ let g:neocomplete#max_list = 15
 
 
 
+        noremap  <buffer> <S-F10>       :!zathura %<.pdf &<Return>
+        noremap! <buffer> <S-F10> <Esc> :!zathura %<.pdf &<Return>
+
+
+
 Plugin 'Yggdroot/indentLine'
 
 " -----------------------
