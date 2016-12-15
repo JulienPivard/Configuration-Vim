@@ -79,7 +79,7 @@ if exists( '+breakindent' )
     set   breakindent                       " La ligne ne commence plus collée à gauche
     set   breakindentopt=min:55,shift:0     " Pour afficher les caractères de showbreak collé à gauche ajoutez sbr
 endif
-set   colorcolumn=81,151                " Affiche une colonne avec une couleur de fond
+set   colorcolumn=80,150                " Affiche une colonne avec une couleur de fond
 set   completeopt=menuone,longest       " Options pour le menu de l'omnicompletion
 set   concealcursor=c                   " Quand le curseur est sur un caractère conceal il reste en conceal
 set   conceallevel=2                    " Change les combinaison de caractère en leur équivalent utf-8
@@ -746,7 +746,8 @@ augroup END
 " Pour l'ada permet de voir si on dépasse la colonne des 80 caractères
 augroup codeSourceAda                                                       "{{{
     autocmd!
-    autocmd Filetype ada setlocal textwidth=150
+    autocmd Filetype ada setlocal textwidth=79
+    autocmd Filetype ada setlocal colorcolumn=80
 augroup END
 
 "}}}
