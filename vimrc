@@ -809,6 +809,7 @@ augroup squelette                                                           "{{{
     autocmd BufNewFile *.hpp                call ConfigurationNouveauFichierHPP()
     autocmd BufNewFile build.xml            0r ~/.vim/CodeBasique/build.xml
     autocmd BufNewFile build.gpr            0r ~/.vim/CodeBasique/build.gpr
+    autocmd BufNewFile Dockerfile           0r ~/.vim/CodeBasique/Dockerfile
     autocmd BufNewFile bibliographie.bib    0r ~/.vim/CodeBasique/bibliographie.bib
     autocmd BufNewFile makefile             0r ~/.vim/CodeBasique/makefileBasique
     autocmd BufNewFile CMakeLists.txt       0r ~/.vim/CodeBasique/CMakeLists.txt
