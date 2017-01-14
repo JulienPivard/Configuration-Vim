@@ -11,8 +11,18 @@ WORKDIR /
 # du système docker
 ADD ./chemin/host /chemin/dans/docker
 
+# Pour ouvrir un port vers l'exterieur de docker
+EXPOSE 8080
+
 # Permet d'exécuter une suite de commande shell
-RUN commande
+#RUN commande
+#RUN ["commande", "arguments"]
+
+# Permet d'exécuter une commande à chaque lancement
+# quelque soit la manière dont il est lancé
+#ENTRYPOINT commande
+#ENTRYPOINT ["commande", "arguments"]
 
 # Une commande exécuté au lancement du container
-CMD commande
+#CMD ["commande", "arguments"]
+#CMD commande
