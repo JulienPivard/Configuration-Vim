@@ -655,8 +655,8 @@ endfunction
 function! AffichageGroff()                                                  "{{{
 
     " Compilation pour avoir un aperçus dans un terminal
-    noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
-    noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
+    noremap  <buffer> <F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
+    noremap! <buffer> <F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
     " Compilation pour faire un pdf
     noremap  <buffer> <S-F5>       :!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
     noremap! <buffer> <S-F5>  <Esc>:!groff -Kutf8 -me  -Tpdf  % &> %<.pdf <Return>
@@ -667,11 +667,11 @@ function! AffichageGroff()                                                  "{{{
     noremap  <buffer> <S-F10>      :!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     noremap! <buffer> <S-F10> <Esc>:!groff -Kutf8 -man -Tpdf  % &> %.pdf <Return>
     " Affichage du pdf compilé au format me
-    noremap  <buffer> <F12>        :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
-    noremap! <buffer> <F12>   <Esc>:call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf' )<Return>
+    noremap  <buffer> <F12>        :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
+    noremap! <buffer> <F12>   <Esc>:call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
     " Affichage du pdf compilé au format man
-    noremap  <buffer> <S-F12>      :call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf' )<Return>
-    noremap! <buffer> <S-F12> <Esc>:call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf' )<Return>
+    noremap  <buffer> <S-F12>      :call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf &' )<Return>
+    noremap! <buffer> <S-F12> <Esc>:call system( NomLecteurPDF() . " " . expand( '%'  ) . '.pdf &' )<Return>
 
 endfunction
 
