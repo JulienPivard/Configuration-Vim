@@ -88,6 +88,7 @@ set   copyindent                        " Adapte l'indentation des lignes collé
 set   cryptmethod=blowfish              " Change l'algorithme de cryptage
 set nocursorcolumn                      " Surligne la colonne ou se situe le curseur
 set nocursorline                        " Surligne la ligne ou se situe le curseur
+set   diffopt+=vertical                 " Permet d'ouvrir les fichiers de diff à la vertical
 set nodigraph                           " seul i_ctl-k suivit de deux lettres permet d'écrire des caractères spéciaux
 set   display=lastline,uhex             " Les lignes trop longues ne sont plus remplacées par @
 set   encoding=utf-8                    " Encodage des fichiers en utf-8
