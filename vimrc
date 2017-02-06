@@ -20,6 +20,7 @@ Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'gregsexton/gitv'
 Plug 'jiangmiao/auto-pairs'
+Plug 'kana/vim-arpeggio'
 Plug 'majutsushi/tagbar'
 Plug 'matchit.zip'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
@@ -965,8 +966,6 @@ nnoremap gp :setlocal paste! paste?<Return>
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
-inoremap kj <esc>
-
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
 " Pour changer les caractères autour de la selection                        "{{{
@@ -1321,6 +1320,18 @@ let g:pencil#autoformat_config = {
 " Réglage pour auto pairs pas de documentation                              "{{{
 " -----------------------
 "let b:AutoPairs = {'«': '»'}
+
+"}}}
+
+" -----------------------
+" Réglages pour arpeggio                                                    "{{{
+" -----------------------
+try
+    call arpeggio#load()
+    Arpeggio noremap  jk <Esc>
+    Arpeggio noremap! jk <Esc>
+catch
+endtry
 
 "}}}
 
