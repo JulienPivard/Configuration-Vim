@@ -15,6 +15,7 @@ call plug#begin( '~/.vim/bundle/' )
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
@@ -1320,6 +1321,18 @@ let g:pencil#autoformat_config = {
 " Réglage pour auto pairs pas de documentation                              "{{{
 " -----------------------
 "let b:AutoPairs = {'«': '»'}
+
+"}}}
+
+" -----------------------
+" Réglage pour ctrlP                                                        "{{{
+" -----------------------
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+\ 'file': '\v\.(exe|so|dll)$',
+\ }
+let g:ctrlp_extensions = [ 'autoignore' ]
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 "}}}
 
