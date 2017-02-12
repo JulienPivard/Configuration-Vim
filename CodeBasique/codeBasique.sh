@@ -140,13 +140,19 @@ nettoyage()
 # {{{            Gestion des options               #
 ####################################################
 
+#  Affiche l'aide si aucun arguments de donné
+if [[ $# -eq 0 ]] ; then
+    printf "${sur_jaune} Afficher l'aide ${neutre}"
+    exit 0
+fi
+
 # option o ne nécessite pas d'arguments en plus u si.
 # Le premier : permet de gérer manuellement les erreurs
 while getopts ":ou:" option
 do
     case $option in
         o)
-            echo "option o"
+            echo "Option o"
             ;;
         u)
             echo "$OPTARG"
@@ -161,6 +167,13 @@ do
             ;;
     esac
 done
+
+#  Vérifie que toutes les options ont été traitées
+shift $((OPTIND-1))
+if [[ $# -ne 0 ]] ; then
+    printf "${rouge}Les arguments suivant ne sont pas valide : ${gviolet} $* ${neutre}" >&2
+    exit 103
+fi
 
 # }}}
 
