@@ -148,14 +148,37 @@ fi
 
 # option o ne nécessite pas d'arguments en plus u si.
 # Le premier : permet de gérer manuellement les erreurs
-while getopts ":ou:" option
+while getopts ":ou:-:" option
 do
     case $option in
         o)
             echo "Option o"
             ;;
         u)
-            echo "$OPTARG"
+            echo "Option u = $OPTARG"
+            ;;
+        -)
+            LONG_OPTARG="${OPTARG#*=}"
+            case $OPTARG in
+                orc )
+                    echo "Option orc"
+                    ;;
+                umbra=?* )
+                    echo "Option umbra = $LONG_OPTARG"
+                    ;;
+                orc* )
+                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} ne prend pas d'arguments${neutre}" >&2
+                    exit 104
+                    ;;
+                umbra* )
+                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} necessite un argument${neutre}" >&2
+                    exit 105
+                    ;;
+                *)
+                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} n'existe pas !${neutre}" >&2
+                    exit 106
+                    ;;
+            esac
             ;;
         :)
             printf "${rouge}L'option [ ${gviolet} $OPTARG ${rouge} ] nécessite un argument.${neutre}\n" >&2
