@@ -1,7 +1,7 @@
 \documentclass[a4paper, 10pt, onecolumn, draft]{article}
 % vim: foldmethod=marker:foldlevel=0:
 
-% Dernière modification : mercredi 08 juin[06] 2016
+% Dernière modification : Samedi 25 février[02] 2017
 
 %\documentclass[a4paper, 10pt, onecolumn, draft]{book}
 %\documentclass[a4paper, 10pt, onecolumn, draft]{report}
@@ -60,8 +60,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       Personnaliser les titres         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour pouvoir changer le style des titre.                  %{{{
-% Les themes différents :
+% Pour pouvoir changer le style des titre de chapitre       %{{{
+% Les différents themes :
 % Sonny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
 %\usepackage[Lenny]{fncychap}
 
@@ -84,9 +84,12 @@
 % Mettre du texte en couleur \textcolor{couleur}{blabla}    %{{{
 % Mettre du texte dans une boite colorée \colorbox{couleur}{blabla}
 %\usepackage{xcolor}
-%\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-%\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-%\definecolor{codepurple}{rgb}{0.58,0,0.82}
+%\definecolor{vertString}{HTML}{009900}
+%\definecolor{grisCode}{HTML}{666666}
+%\definecolor{bleuCode}{HTML}{2222CC}
+%\definecolor{cyanCode}{HTML}{009999}
+%\definecolor{rougeCode}{HTML}{990000}
+%\definecolor{couleurFond}{HTML}{E1E1DD}
     %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,27 +98,37 @@
 % Pour créer un environnement d'affichage de code.          %{{{
 %  dans lstlisting
 % Pour ajouter du code depuis un fichier source
-%\lstinputlisting[language=C, firstline=37, lastline=45]{source.c}
+% \lstinputlisting[language=C, firstline=37, lastline=45]{source.c}
+% Dans un environnement listing
+% \begin{lstlisting}[float,caption=Un exemple flottant, label=lst:HelloWorld]
 %\usepackage{listings}
-%\lstdefinestyle{mystyle}{%
-%    backgroundcolor=\color{backcolour},
-%    commentstyle=\color{blue},
-%    keywordstyle=\color{magenta},
-%    numberstyle=\tiny\color{codegray},
-%    stringstyle=\color{codepurple},
-%    basicstyle=\footnotesize,
-%    breakatwhitespace=false,
-%    breaklines=true,
+%\lstdefinestyle{ashildr}{%
+%    frame=lines ,
+%    framexleftmargin=4pt,
+%    backgroundcolor=\color{couleurFond},
+%    commentstyle=\color{grisCode},
+%    keywordstyle=\color{bleuCode}\textbf,
+%    stringstyle=\color{vertString},
+%    identifierstyle=\color{cyanCode},
+%    breakatwhitespace=true,
+%    breaklines=true,        % Couper les lignes trop longue.
+%    breakindent=1.5em,      % Indente les lignes coupé
 %    captionpos=b,
 %    keepspaces=true,
 %    numbers=left,
 %    numbersep=5pt,
-%    showspaces=false,
+%    showspaces=false,       % Montrer les espaces.
 %    showstringspaces=false,
 %    showtabs=false,
+%    upquote=true,
+%    columns=flexible,
+%    basicstyle=\ttfamily,
+%    numberstyle=\footnotesize,
 %    tabsize=2
 %}
-%\lstset{language=sh, style=mystyle}
+% Les styles de polices possible :
+% \footnotesize , \small , \itshape , \ttfamily
+%\lstset{language=sh, style=ashildr}
     %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -251,6 +264,8 @@
 
 %}}}
 
+% Pour changer le nom d'une traduction d'un menu
+%\addto{\captionsfrench}{\renewcommand{\abstractname}{Consignes}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                 Document                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,6 +275,8 @@
 %\tableofcontents    % Si on veut une table des matières
 %\listoftables       % Si on veut une liste des tableaux
 %\listoffigures      % Si on veut une liste des images
+%\renewcommand{\lstlistlistingname}{Table des exemples}
+%\lstlistoflistings  % Si on veut une liste des listings avec des labels
 
 \hfill{}À remplir comme les petites filles!\hfill{}
 
