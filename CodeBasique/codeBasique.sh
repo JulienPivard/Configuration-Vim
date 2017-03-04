@@ -142,7 +142,7 @@ nettoyage()
 
 #  Affiche l'aide si aucun arguments de donné
 if [[ $# -eq 0 ]] ; then
-    printf "${sur_jaune} Afficher l'aide ${neutre}"
+    printf "${sur_jaune} Afficher l'aide ${neutre}\n"
     exit 0
 fi
 
@@ -167,15 +167,15 @@ do
                     echo "Option umbra = $LONG_OPTARG"
                     ;;
                 orc* )
-                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} ne prend pas d'arguments${neutre}" >&2
+                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} ne prend pas d'arguments${neutre}\n" >&2
                     exit 104
                     ;;
                 umbra* )
-                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} necessite un argument${neutre}" >&2
+                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} necessite un argument${neutre}\n" >&2
                     exit 105
                     ;;
                 *)
-                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} n'existe pas !${neutre}" >&2
+                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} n'existe pas !${neutre}\n" >&2
                     exit 106
                     ;;
             esac
@@ -194,7 +194,7 @@ done
 #  Vérifie que toutes les options ont été traitées
 shift $((OPTIND-1))
 if [[ $# -ne 0 ]] ; then
-    printf "${rouge}Les arguments suivant ne sont pas valide : ${gviolet} $* ${neutre}" >&2
+    printf "${rouge}Les arguments suivant ne sont pas valide : ${gviolet} $* ${neutre}\n" >&2
     exit 103
 fi
 
