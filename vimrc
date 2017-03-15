@@ -555,10 +555,10 @@ function! ConfigurationNouveauFichierJAVA()                                 "{{{
 
     0r ~/.vim/CodeBasique/codeBasique.java
     :%substitute?NOMFICHIER?\=expand( '%:t:r' )?
-    :4substitute?package truc?\= 'package ' . expand( '%:p:.:h' )?
+    :4substitute?package truc?\= 'package ' . expand( '%:p:.:h' )?e
     :4substitute?/?\.?ge
     " Permet d'utiliser gf sur les fichiers java.
-    set includeexpr=substitute( v:fname,'\\.','/','g' )
+    "set includeexpr=substitute( v:fname,'\\.','/','g' )
 
 endfunction
 
