@@ -392,6 +392,7 @@ endfunction
 " Execution du make
 function! CompilationMacro()                                                "{{{
     silent !clear
+    redraw
     make
 endfunction
 
