@@ -1183,6 +1183,7 @@ let g:signify_update_on_focusgained  = 0
 let g:signify_line_highlight         = 0
 let g:signify_sign_delete            = '↓'
 let g:signify_sign_delete_first_line = '↑'
+let g:signify_vcs_list               = [ 'git' ]
 
 "}}}
 
