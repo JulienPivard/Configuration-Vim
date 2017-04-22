@@ -1169,6 +1169,8 @@ let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_confirm_extra_conf = 0            " À changer dés que possible.
 let g:ycm_allow_changing_updatetime = 0
 let g:ycm_extra_conf_globlist = []
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 "}}}
 
