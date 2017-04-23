@@ -894,6 +894,15 @@ augroup END
 
 "}}}
 
+" Désactive la correction orthographique en mode diff                       "{{{
+
+augroup diffMode
+    autocmd!
+    autocmd BufEnter,BufNew * if &diff | set nospell | endif
+augroup END
+
+"}}}
+
 " Mappage selon la présence de makefile
 augroup fonctionsConfiguration                                              "{{{
     autocmd!
