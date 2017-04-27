@@ -692,16 +692,6 @@ endfunction
 
 "}}}
 
-" Macros pour le php
-function! ProgEnPHP()                                                       "{{{
-
-    inoremap <buffer>,, =>
-    inoremap <buffer>$$ $this->
-
-endfunction
-
-"}}}
-
 " Fonction pour aligner automatiquement les lignes avec le caractère |
 function! s:alignTabulation()                                               "{{{
     let p = '^\s*|\s.*\s|\s*$'
