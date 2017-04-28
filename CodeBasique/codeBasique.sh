@@ -20,7 +20,10 @@
 #  Gestion des signaux  #
 #########################
 
-trap 'nettoyage' 2 3 15
+trap 'nettoyage' INT QUIT TERM
+
+# Gestion du redimensionnement de la fenêtre
+trap 'maj_taille' WINCH
 
 ####################################
 # {{{  Définition des couleurs     #
@@ -117,6 +120,12 @@ declare -r neutre='\e[0;m'
 #####################################
 #  Fonction de gestion des signaux  # {{{
 #####################################
+
+maj_taille()
+{
+    NB_LIGNES=`tput lines`
+    NB_COLONE=`tput cols`
+}
 
 nettoyage()
 {
