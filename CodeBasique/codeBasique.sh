@@ -2,13 +2,24 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
-#                                   #
-#     AUTEUR : PIVARD Julien        #
-#                                   #
-#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
+# Dernière modification : Vendredi 28 avril[04] 2017
 
-# Dernière modification : Mardi 13 septembre[09] 2016
+#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
+#                                 nomscript.sh                                #
+#                          écrit par : PIVARD Julien                          #
+#                                date création                                #
+#                                                                             #
+#                               resumé vite fait                              #
+#(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
+
+#┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
+#┃                                                                           ┃#
+#┃           Explication sur le fonctionnement du script et son but          ┃#
+#┃                    liste de paramètres de l'application                   ┃#
+#┃                                                                           ┃#
+#┃          Explication des codes d'erreurs et de leur signification         ┃#
+#┃                                                                           ┃#
+#┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
 
 #########################
 #       Debogage        #
@@ -114,11 +125,11 @@ afficher_erreur()
 {
     [[ -n $1 ]] && local AFFICHAGE=$1 || exit 115
     if [[ -n $2 ]]; then
-        AFFICHAGE=${AFFICHAGE}" [ "${C_VIOLET}${M_GRAS}
-        AFFICHAGE=${AFFICHAGE}"$2"
-        AFFICHAGE=${AFFICHAGE}${NEUTRE}${C__ROUGE}" ] "
+        AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
+        AFFICHAGE="${AFFICHAGE}$2"
+        AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ -n $3 ]] && AFFICHAGE=${AFFICHAGE}$3
+    [[ -n $3 ]] && AFFICHAGE="${AFFICHAGE}$3"
     printf "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n" >&2
 }
 
