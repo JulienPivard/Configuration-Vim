@@ -13,7 +13,6 @@
 #########################
 #       Debogage        #
 #########################
-# Dit tout : bash -V
 # Vérifie la syntaxe : bash -n
 
 #########################
@@ -29,91 +28,101 @@ trap 'maj_taille' WINCH
 # {{{  Définition des couleurs     #
 ####################################
 
-# Couleurs normale                  #{{{
-declare -r noir='\e[0;30m'          # Noir
-declare -r rouge='\e[0;31m'         # Rouge
-declare -r vert='\e[0;32m'          # Vert
-declare -r jaune='\e[0;33m'         # Jaune
-declare -r bleu='\e[0;34m'          # Bleu
-declare -r violet='\e[0;35m'        # Violet
-declare -r cyan='\e[0;36m'          # Cyan
-declare -r blanc='\e[0;37m'         # Blanc
+declare -r NEUTRE=`tput sgr0`
+
+declare -r M_GRAS=`tput bold`
+
+declare -r D_SOUL=`tput smul`
+declare -r F_SOUL=`tput rmul`
+
+declare -r INVERS=`tput rev`
+
+# Active la coloration du texte en premier ou en arrière plan
+couleur_back_et_front()
+{
+    [[ -n $1 ]] || exit 111
+    [[ -n $2 ]] || exit 112
+
+    [[ $1 =~ ([0-9]+) && $1 -lt 256 ]] && local -r NUM_COULEUR=$1 || exit 113
+    [[ $2 == 'b' || $2 == 'f' ]] && local -r PLAN_COULEUR=$2 || exit 114
+
+    declare -r D_COUL='tput seta'
+
+    printf `${D_COUL}${PLAN_COULEUR} $NUM_COULEUR`
+}
+
+declare -a COULEURS=()
+
+POSITION=0
+for i in f b; do
+    for j in `seq 0 15`; do
+        COULEURS[$((j + POSITION))]="$(couleur_back_et_front $j $i)"
+    done
+    POSITION=$((POSITION + 16))
+done
+
+# Couleurs normale                          #{{{
+declare -r C___NOIR="${COULEURS[0]}"        # Noir
+declare -r C__ROUGE="${COULEURS[1]}"        # Rouge
+declare -r C___VERT="${COULEURS[2]}"        # Vert
+declare -r C__JAUNE="${COULEURS[3]}"        # Jaune
+declare -r C___BLEU="${COULEURS[4]}"        # Bleu
+declare -r C_VIOLET="${COULEURS[5]}"        # Violet
+declare -r C___CYAN="${COULEURS[6]}"        # Cyan
+declare -r C__BLANC="${COULEURS[7]}"        # Blanc
 
 #}}}
 
-# Gras                              #{{{
-declare -r gnoir='\e[1;30m'         # Noir
-declare -r grouge='\e[1;31m'        # Rouge
-declare -r gvert='\e[1;32m'         # Vert
-declare -r gjaune='\e[1;33m'        # Jaune
-declare -r gbleu='\e[1;34m'         # Bleu
-declare -r gviolet='\e[1;35m'       # Violet
-declare -r gcyan='\e[1;36m'         # Cyan
-declare -r gblanc='\e[1;37m'        # Blanc
+# Haute intensité                           #{{{
+declare -r C___INOIR="${COULEURS[8]}"       # Noir
+declare -r C__IROUGE="${COULEURS[9]}"       # Rouge
+declare -r C___IVERT="${COULEURS[10]}"      # Vert
+declare -r C__IJAUNE="${COULEURS[11]}"      # Jaune
+declare -r C___IBLEU="${COULEURS[12]}"      # Bleu
+declare -r C_IVIOLET="${COULEURS[13]}"      # Violet
+declare -r C___ICYAN="${COULEURS[14]}"      # Cyan
+declare -r C__IBLANC="${COULEURS[15]}"      # Blanc
 
 #}}}
 
-# souligné                          #{{{
-declare -r snoir='\e[4;30m'         # Noir
-declare -r srouge='\e[4;31m'        # Rouge
-declare -r svert='\e[4;32m'         # Vert
-declare -r sjaune='\e[4;33m'        # Jaune
-declare -r sbleu='\e[4;34m'         # Bleu
-declare -r sviolet='\e[4;35m'       # Violet
-declare -r scyan='\e[4;36m'         # Cyan
-declare -r sblanc='\e[4;37m'        # Blanc
+# Couleur de fond                           #{{{
+declare -r C_SUR___NOIR="${COULEURS[16]}"   # Noir
+declare -r C_SUR__ROUGE="${COULEURS[17]}"   # Rouge
+declare -r C_SUR___VERT="${COULEURS[18]}"   # Vert
+declare -r C_SUR__JAUNE="${COULEURS[19]}"   # Jaune
+declare -r C_SUR___BLEU="${COULEURS[20]}"   # Bleu
+declare -r C_SUR_VIOLET="${COULEURS[21]}"   # Violet
+declare -r C_SUR___CYAN="${COULEURS[22]}"   # Cyan
+declare -r C_SUR__BLANC="${COULEURS[23]}"   # Blanc
 
 #}}}
 
-# Couleur de fond                   #{{{
-declare -r sur_noir='\e[30;40m'     # Noir
-declare -r sur_rouge='\e[30;41m'    # Rouge
-declare -r sur_vert='\e[30;42m'     # Vert
-declare -r sur_jaune='\e[30;43m'    # Jaune
-declare -r sur_bleu='\e[30;44m'     # Bleu
-declare -r sur_violet='\e[30;45m'   # Violet
-declare -r sur_cyan='\e[30;46m'     # Cyan
-declare -r sur_blanc='\e[30;47m'    # Blanc
+# Couleur de fond haute intensité           #{{{
+declare -r C_SUR___INOIR="${COULEURS[24]}"  # Noir
+declare -r C_SUR__IROUGE="${COULEURS[25]}"  # Rouge
+declare -r C_SUR___IVERT="${COULEURS[26]}"  # Vert
+declare -r C_SUR__IJAUNE="${COULEURS[27]}"  # Jaune
+declare -r C_SUR___IBLEU="${COULEURS[28]}"  # Bleu
+declare -r C_SUR_IVIOLET="${COULEURS[29]}"  # Violet
+declare -r C_SUR___ICYAN="${COULEURS[30]}"  # Cyan
+declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 
 #}}}
 
-# Haute intensité                   #{{{
-declare -r inoir='\e[0;90m'         # Noir
-declare -r irouge='\e[0;91m'        # Rouge
-declare -r ivert='\e[0;92m'         # Vert
-declare -r ijaune='\e[0;93m'        # Jaune
-declare -r ibleu='\e[0;94m'         # Bleu
-declare -r iviolet='\e[0;95m'       # Violet
-declare -r icyan='\e[0;96m'         # Cyan
-declare -r iblanc='\e[0;97m'        # Blanc
+# Affichage simplifié des erreurs           #{{{
+afficher_erreur()
+{
+    [[ -n $1 ]] && local AFFICHAGE=$1 || exit 115
+    if [[ -n $2 ]]; then
+        AFFICHAGE=${AFFICHAGE}" [ "${C_VIOLET}${M_GRAS}
+        AFFICHAGE=${AFFICHAGE}"$2"
+        AFFICHAGE=${AFFICHAGE}${NEUTRE}${C__ROUGE}" ] "
+    fi
+    [[ -n $3 ]] && AFFICHAGE=${AFFICHAGE}$3
+    printf "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n" >&2
+}
 
 #}}}
-
-# Gras haute intensité              #{{{
-declare -r ginoir='\e[1;90m'        # Noir
-declare -r girouge='\e[1;91m'       # Rouge
-declare -r givert='\e[1;92m'        # Vert
-declare -r gijaune='\e[1;93m'       # Jaune
-declare -r gibleu='\e[1;94m'        # Bleu
-declare -r giviolet='\e[1;95m'      # Violet
-declare -r gicyan='\e[1;96m'        # Cyan
-declare -r giblanc='\e[1;97m'       # Blanc
-
-#}}}
-
-# Couleur de fond haute intensité   #{{{
-declare -r sur_inoir='\e[30;100m'   # Noir
-declare -r sur_irouge='\e[30;101m'  # Rouge
-declare -r sur_ivert='\e[30;102m'   # Vert
-declare -r sur_ijaune='\e[30;103m'  # Jaune
-declare -r sur_ibleu='\e[30;104m'   # Bleu
-declare -r sur_iviolet='\e[30;105m' # Violet
-declare -r sur_icyan='\e[30;106m'   # Cyan
-declare -r sur_iblanc='\e[30;107m'  # Blanc
-
-#}}}
-
-declare -r neutre='\e[0;m'
 
 # }}}
 
@@ -121,16 +130,16 @@ declare -r neutre='\e[0;m'
 #  Fonction de gestion des signaux  # {{{
 #####################################
 
+nettoyage()
+{
+    afficher_erreur "Le script à subi une interruption."
+    exit $?
+}
+
 maj_taille()
 {
     NB_LIGNES=`tput lines`
     NB_COLONE=`tput cols`
-}
-
-nettoyage()
-{
-    printf "\n${rouge}Le script à subi une interruption.${neutre}\n" >&2
-    exit $?
 }
 
 # }}}
@@ -151,7 +160,7 @@ nettoyage()
 
 #  Affiche l'aide si aucun arguments de donné
 if [[ $# -eq 0 ]] ; then
-    printf "${sur_jaune} Afficher l'aide ${neutre}\n"
+    printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     exit 0
 fi
 
@@ -176,25 +185,25 @@ do
                     echo "Option umbra = $LONG_OPTARG"
                     ;;
                 orc* )
-                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} ne prend pas d'arguments${neutre}\n" >&2
+                    afficher_erreur "L'option longue" "--$OPTARG" "ne prend pas d'arguments."
                     exit 104
                     ;;
                 umbra* )
-                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} necessite un argument${neutre}\n" >&2
+                    afficher_erreur "L'option longue" "--$OPTARG" "nécessite un argument."
                     exit 105
                     ;;
                 *)
-                    printf "${rouge}L'option longue ${gviolet} --$OPTARG ${rouge} n'existe pas !${neutre}\n" >&2
+                    afficher_erreur "L'option longue" "--$OPTARG" "n'existe pas !"
                     exit 106
                     ;;
             esac
             ;;
         :)
-            printf "${rouge}L'option [ ${gviolet} $OPTARG ${rouge} ] nécessite un argument.${neutre}\n" >&2
+            afficher_erreur "L'option" "$OPTARG" "nécessite un argument."
             exit 101
             ;;
         ?)
-            printf "${rouge}L'option [ ${gviolet} $OPTARG ${rouge} ] n'existe pas.${neutre}\n" >&2
+            afficher_erreur "L'option" "$OPTARG" "n'existe pas."
             exit 102
             ;;
     esac
@@ -203,7 +212,7 @@ done
 #  Vérifie que toutes les options ont été traitées
 shift $((OPTIND-1))
 if [[ $# -ne 0 ]] ; then
-    printf "${rouge}Les arguments suivant ne sont pas valide : ${gviolet} $* ${neutre}\n" >&2
+    afficher_erreur "Les arguments suivant ne sont pas valide :" "$*"
     exit 103
 fi
 
