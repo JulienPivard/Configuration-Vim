@@ -162,6 +162,10 @@ maj_taille()
 ####################################################
 
 
+afficherAide()
+{
+    printf "Liste des commandes et des exemples\n"
+}
 
 # }}}
 
@@ -172,7 +176,8 @@ maj_taille()
 #  Affiche l'aide si aucun arguments de donné
 if [[ $# -eq 0 ]] ; then
     printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
-    exit 0
+    afficherAide
+    exit 0;
 fi
 
 # option o ne nécessite pas d'arguments en plus u si.
@@ -197,24 +202,29 @@ do
                     ;;
                 orc* )
                     afficher_erreur "L'option longue" "--$OPTARG" "ne prend pas d'arguments."
+                    afficherAide
                     exit 104
                     ;;
                 umbra* )
                     afficher_erreur "L'option longue" "--$OPTARG" "nécessite un argument."
+                    afficherAide
                     exit 105
                     ;;
                 *)
                     afficher_erreur "L'option longue" "--$OPTARG" "n'existe pas !"
+                    afficherAide
                     exit 106
                     ;;
             esac
             ;;
         :)
             afficher_erreur "L'option" "$OPTARG" "nécessite un argument."
+            afficherAide
             exit 101
             ;;
         ?)
             afficher_erreur "L'option" "$OPTARG" "n'existe pas."
+            afficherAide
             exit 102
             ;;
     esac
@@ -224,6 +234,7 @@ done
 shift $((OPTIND-1))
 if [[ $# -ne 0 ]] ; then
     afficher_erreur "Les arguments suivant ne sont pas valide :" "$*"
+    afficherAide
     exit 103
 fi
 
