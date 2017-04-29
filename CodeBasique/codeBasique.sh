@@ -9,7 +9,7 @@
 #                          écrit par : PIVARD Julien                          #
 #                                date création                                #
 #                                                                             #
-#                               resumé vite fait                              #
+#                               résumé vite fait                              #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
 #┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
@@ -17,7 +17,13 @@
 #┃           Explication sur le fonctionnement du script et son but          ┃#
 #┃                    liste de paramètres de l'application                   ┃#
 #┃                                                                           ┃#
-#┃          Explication des codes d'erreurs et de leur signification         ┃#
+#┃ Codes d'erreurs : 101 l'option nécessite un argument                      ┃#
+#┃                   102 l'option n'existe pas                               ┃#
+#┃                   103 des options qui invalides ont été donnée            ┃#
+#┃                   104 pas d'argument pour l'option longue                 ┃#
+#┃                   105 l'option longue nécessite un argument               ┃#
+#┃                   106 l'option longue n'existe pas                        ┃#
+#┃                   107 Erreur d'utilisation de afficher_erreur             ┃#
 #┃                                                                           ┃#
 #┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
 
@@ -123,7 +129,7 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 # Affichage simplifié des erreurs           #{{{
 afficher_erreur()
 {
-    [[ -n $1 ]] && local AFFICHAGE=$1 || exit 115
+    [[ -n $1 ]] && local AFFICHAGE=$1 || exit 107
     if [[ -n $2 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}$2"
