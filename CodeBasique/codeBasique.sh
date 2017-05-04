@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Vendredi 28 avril[04] 2017
+# Dernière modification : Jeudi 04 mai[05] 2017
 
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 #                                 nomscript.sh                                #
@@ -17,13 +17,18 @@
 #┃           Explication sur le fonctionnement du script et son but          ┃#
 #┃                    liste de paramètres de l'application                   ┃#
 #┃                                                                           ┃#
-#┃ Codes d'erreurs : 101 l'option nécessite un argument                      ┃#
-#┃                   102 l'option n'existe pas                               ┃#
-#┃                   103 des options qui invalides ont été donnée            ┃#
-#┃                   104 pas d'argument pour l'option longue                 ┃#
-#┃                   105 l'option longue nécessite un argument               ┃#
-#┃                   106 l'option longue n'existe pas                        ┃#
-#┃                   107 Erreur d'utilisation de afficher_erreur             ┃#
+#┃ Codes d'erreurs :                                                         ┃#
+#┃     - 80 Oubli argument 1 de la fonction couleur_back_et_front            ┃#
+#┃     - 81 Oubli argument 2 de la fonction couleur_back_et_front            ┃#
+#┃     - 82 La valeur de l'argument 1 n'est pas entre 0 et 255 inclus        ┃#
+#┃     - 83 La valeur de l'argument 2 n'est pas f ou b                       ┃#
+#┃     - 84  Erreur afficher_erreur nécessite au moins un argument           ┃#
+#┃     - 85  pas d'argument pour l'option longue                             ┃#
+#┃     - 86  l'option longue nécessite un argument                           ┃#
+#┃     - 87  l'option longue n'existe pas                                    ┃#
+#┃     - 88  l'option nécessite un argument                                  ┃#
+#┃     - 89  l'option n'existe pas                                           ┃#
+#┃     - 90  des options qui sont invalides ont été donnée                   ┃#
 #┃                                                                           ┃#
 #┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
 
@@ -36,6 +41,7 @@
 #  Gestion des signaux  #
 #########################
 
+# Gestion des signaux de fin de programme
 trap 'nettoyage' INT QUIT TERM
 
 # Gestion du redimensionnement de la fenêtre
@@ -57,11 +63,11 @@ declare -r INVERS=`tput rev`
 # Active la coloration du texte en premier ou en arrière plan
 couleur_back_et_front()
 {
-    [[ -n $1 ]] || exit 111
-    [[ -n $2 ]] || exit 112
+    [[ -n "$1" ]] || exit 80
+    [[ -n "$2" ]] || exit 81
 
-    [[ $1 =~ ([0-9]+) && $1 -lt 256 ]] && local -r NUM_COULEUR=$1 || exit 113
-    [[ $2 == 'b' || $2 == 'f' ]] && local -r PLAN_COULEUR=$2 || exit 114
+    [[ "$1" =~ ([0-9]+) && "$1" -lt 256 && "$1" -ge 0 ]] && local -r NUM_COULEUR="$1" || exit 82
+    [[ "$2" == 'b' || "$2" == 'f' ]] && local -r PLAN_COULEUR="$2" || exit 83
 
     declare -r D_COUL='tput seta'
 
@@ -70,6 +76,7 @@ couleur_back_et_front()
 
 declare -a COULEURS=()
 
+# Création des couleurs du front et du back
 POSITION=0
 for i in f b; do
     for j in `seq 0 15`; do
@@ -127,15 +134,18 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 #}}}
 
 # Affichage simplifié des erreurs           #{{{
+# L'argument 1 affiche le texte en rouge
+# L'argument 2 est fait pour afficher le contenu d'une variable
+# L'argument 3 affiche le texte en rouge à la suite de l'argument 2
 afficher_erreur()
 {
-    [[ -n $1 ]] && local AFFICHAGE=$1 || exit 107
-    if [[ -n $2 ]]; then
+    [[ -n "$1" ]] && local AFFICHAGE="$1" || exit 84
+    if [[ -n "$2" ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}$2"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ -n $3 ]] && AFFICHAGE="${AFFICHAGE}$3"
+    [[ -n "$3" ]] && AFFICHAGE="${AFFICHAGE}$3"
     printf "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n" >&2
 }
 
@@ -209,39 +219,40 @@ do
                 orc* )
                     afficher_erreur "L'option longue" "--$OPTARG" "ne prend pas d'arguments."
                     afficherAide
-                    exit 104
+                    exit 85
                     ;;
                 umbra* )
                     afficher_erreur "L'option longue" "--$OPTARG" "nécessite un argument."
                     afficherAide
-                    exit 105
+                    exit 86
                     ;;
                 *)
                     afficher_erreur "L'option longue" "--$OPTARG" "n'existe pas !"
                     afficherAide
-                    exit 106
+                    exit 87
                     ;;
             esac
             ;;
         :)
             afficher_erreur "L'option" "$OPTARG" "nécessite un argument."
             afficherAide
-            exit 101
+            exit 88
             ;;
         ?)
             afficher_erreur "L'option" "$OPTARG" "n'existe pas."
             afficherAide
-            exit 102
+            exit 89
             ;;
     esac
 done
 
 #  Vérifie que toutes les options ont été traitées
 shift $((OPTIND-1))
+# Si toutes les options n'ont pas été traitée on affiche une erreur
 if [[ $# -ne 0 ]] ; then
     afficher_erreur "Les arguments suivant ne sont pas valide :" "$*"
     afficherAide
-    exit 103
+    exit 90
 fi
 
 # }}}
