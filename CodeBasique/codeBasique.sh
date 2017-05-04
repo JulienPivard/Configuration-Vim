@@ -182,6 +182,17 @@ afficherAide()
     printf "Liste des commandes et des exemples\n"
 }
 
+traitement_option_o()
+{
+    echo "Option o"
+}
+
+traitement_option_u()
+{
+    local ARGUMENT="$1"
+    echo "Option u = $ARGUMENT"
+}
+
 # }}}
 
 ####################################################
@@ -201,19 +212,19 @@ while getopts ":ou:-:" option
 do
     case $option in
         o)
-            echo "Option o"
+            traitement_option_o
             ;;
         u)
-            echo "Option u = $OPTARG"
+            traitement_option_u "$OPTARG"
             ;;
         -)
             LONG_OPTARG="${OPTARG#*=}"
             case $OPTARG in
                 orc )
-                    echo "Option orc"
+                    traitement_option_o
                     ;;
                 umbra=?* )
-                    echo "Option umbra = $LONG_OPTARG"
+                    traitement_option_u "$LONG_OPTARG"
                     ;;
                 orc* )
                     afficher_erreur "L'option longue" "--$OPTARG" "ne prend pas d'arguments."
