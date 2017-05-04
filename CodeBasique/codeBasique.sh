@@ -78,9 +78,9 @@ declare -a COULEURS=()
 
 # Création des couleurs du front et du back
 POSITION=0
-for i in f b; do
+for i in 'f' 'b'; do
     for j in `seq 0 15`; do
-        COULEURS[$((j + POSITION))]="$(couleur_back_et_front $j $i)"
+        COULEURS[$((j + POSITION))]=`couleur_back_et_front $j $i`
     done
     POSITION=$((POSITION + 16))
 done
@@ -177,7 +177,6 @@ maj_taille()
 # {{{                   Code                       #
 ####################################################
 
-
 afficherAide()
 {
     printf "Liste des commandes et des exemples\n"
@@ -189,8 +188,8 @@ afficherAide()
 # {{{            Gestion des options               #
 ####################################################
 
-#  Affiche l'aide si aucun arguments de donné
-if [[ $# -eq 0 ]] ; then
+#  Affiche l'aide si aucun arguments n'est donné
+if [[ $# -eq 0 ]]; then
     printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     afficherAide
     exit 0;
