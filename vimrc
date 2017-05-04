@@ -75,7 +75,7 @@ set   autowrite                         " Sauvegarde automatiquement le document
 set noautowriteall                      " Sauvegarde automatiquement le document dans plus de cas
 set   background=dark                   " Fixe la valeur du fond en sombre pour les thèmes
 set   backspace=indent,eol,start        " Fixe le comportement de la touche backspace
-set   backup                            " Conserve une copie de tout les fichiers édité
+set   backup                            " Conserve une copie de tous les fichiers édités
 set   backupdir=$HOME/.vim/backup       " Définit le dossier de backup, sauvegarde le fichier avant de le modifier
 if exists( '+breakindent' )
     set   breakindent                       " La ligne ne commence plus collée à gauche
@@ -100,7 +100,7 @@ set noerrorbells                        " Pas de beep lors des erreurs
 set   foldclose=all                     " Ferme le replis si le curseur en sort et level>foldlevel
 set   foldcolumn=1                      " Taille de la colonne qui indique les marques
 set   foldenable                        " Activer les replis
-set   foldlevel=1                       " Ferme tout les replis de niveau supérieur
+set   foldlevel=1                       " Ferme tous les replis de niveau supérieur
 set   foldmethod=syntax                 " Génère des replis automatiquement selon le type de fichier
 set   foldmarker={{{,}}}                " Si on utilise des marqueurs utilisent ce codage
 set   foldtext=MonFoldText()            " Redéfinir le texte de la ligne de repli
@@ -123,7 +123,7 @@ set   printencoding=utf-8               " Fixe l'encodage pour l'impression
 set   printoptions=paper:A4             " Permet de régler plusieurs options dont la taille du papier
 set norelativenumber                    " Affiche le nombre de ligne relatif à la position
 set   report=0                          " Affiche toujours le nombre de lignes modifié
-set   scrolloff=7                       " Affiche au minimum les 3 lignes autour du curseur
+set   scrolloff=7                       " Affiche au minimum les 7 lignes autour du curseur
 set   shell=/bin/bash                   " Règle le shell à utiliser pour exécuter des commandes
 set   shiftround                        " Indentation arrondie à un multiple de shiftwidth
 set   shiftwidth=4                      " Taille des tabulations avec >> ou <<
