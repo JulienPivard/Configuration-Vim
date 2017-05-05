@@ -18,17 +18,21 @@
 #┃                    liste de paramètres de l'application                   ┃#
 #┃                                                                           ┃#
 #┃ Codes d'erreurs :                                                         ┃#
+#┃          Erreur de la fonction « couleur_back_et_front »                  ┃#
 #┃     - 80 Oubli argument 1 de la fonction couleur_back_et_front            ┃#
 #┃     - 81 Oubli argument 2 de la fonction couleur_back_et_front            ┃#
 #┃     - 82 La valeur de l'argument 1 n'est pas entre 0 et 255 inclus        ┃#
 #┃     - 83 La valeur de l'argument 2 n'est pas f ou b                       ┃#
+#┃          Fin des erreurs de la fonction                                   ┃#
 #┃     - 84  Erreur afficher_erreur nécessite au moins un argument           ┃#
+#┃          Erreurs dans les options de la ligne de commande                 ┃#
 #┃     - 85  pas d'argument pour l'option longue                             ┃#
 #┃     - 86  l'option longue nécessite un argument                           ┃#
 #┃     - 87  l'option longue n'existe pas                                    ┃#
 #┃     - 88  l'option nécessite un argument                                  ┃#
 #┃     - 89  l'option n'existe pas                                           ┃#
 #┃     - 90  des options qui sont invalides ont été donnée                   ┃#
+#┃          Erreurs lors de l'exécution du code                              ┃#
 #┃                                                                           ┃#
 #┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
 
