@@ -180,6 +180,12 @@ afficher_erreur()
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
     [[ -n "$3" ]] && AFFICHAGE="${AFFICHAGE}$3"
+    if [[ -n "$4" ]]; then
+        AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
+        AFFICHAGE="${AFFICHAGE}$4"
+        AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
+    fi
+    [[ -n "$5" ]] && AFFICHAGE="${AFFICHAGE}$5"
     printf "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n" >&2
 }
 
