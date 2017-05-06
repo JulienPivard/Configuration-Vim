@@ -4,6 +4,11 @@
 
 # Dernière modification : Samedi 06 mai[05] 2017
 
+# Arrête le script si une variable non initialisé est utilisée
+set -u
+# Arrête le script si une erreur est levée
+set -e errexit
+
 ###############################################################################
 #                   ___                             __                        #
 #                  /   |  _________ ___  ____  ____/ /__  ___                 #
