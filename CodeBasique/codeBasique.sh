@@ -52,6 +52,25 @@
 #########################
 # Vérifie la syntaxe : bash -n
 
+#######################
+# Constante de sortie #
+#######################
+declare -r EXIT_SUCCES=0
+declare -r E_ARG1_MANQUANT=80
+declare -r E_ARG2_MANQUANT=81
+declare -r E_ARG1_INTERVAL=82
+declare -r E_ARG2_INTERVAL=83
+
+declare -r E_ARG_AFF_ERR_M=84
+
+declare -r E_ARG_MANQUANT__OPT_LONGUE=85
+declare -r E_OPT_LONGUE_NECESSITE_ARG=86
+declare -r E_OPT_LONGUE_INCONNUE=87
+declare -r E_OPT_NECESSITE_ARG=88
+declare -r E_OPT_INCONNUE=89
+declare -r E_OPT_NON_TRAITEE=90
+
+
 #########################
 #  Gestion des signaux  #
 #########################
@@ -78,11 +97,11 @@ declare -r INVERS=`tput rev`
 # Active la coloration du texte en premier ou en arrière plan
 couleur_back_et_front()
 {
-    [[ -n "$1" ]] || exit 80
-    [[ -n "$2" ]] || exit 81
+    [[ -n "$1" ]] || exit "$E_ARG1_MANQUANT"
+    [[ -n "$2" ]] || exit "$E_ARG2_MANQUANT"
 
-    [[ "$1" =~ ([0-9]+) && "$1" -lt 256 && "$1" -ge 0 ]] && local -r NUM_COULEUR="$1" || exit 82
-    [[ "$2" == 'b' || "$2" == 'f' ]] && local -r PLAN_COULEUR="$2" || exit 83
+    [[ "$1" =~ ([0-9]+) && "$1" -lt 256 && "$1" -ge 0 ]] && local -r NUM_COULEUR="$1" || exit "$E_ARG1_INTERVAL"
+    [[ "$2" == 'b' || "$2" == 'f' ]] && local -r PLAN_COULEUR="$2" || exit "$E_ARG2_INTERVAL"
 
     declare -r D_COUL='tput seta'
 
@@ -154,7 +173,7 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 # L'argument 3 affiche le texte en rouge à la suite de l'argument 2
 afficher_erreur()
 {
-    [[ -n "$1" ]] && local AFFICHAGE="$1" || exit 84
+    [[ -n "$1" ]] && local AFFICHAGE="$1" || exit "$E_ARG_AFF_ERR_M"
     if [[ -n "$2" ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}$2"
@@ -218,7 +237,7 @@ traitement_option_u()
 if [[ $# -eq 0 ]]; then
     printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     afficherAide
-    exit 0;
+    exit "$EXIT_SUCCES";
 fi
 
 # option o ne nécessite pas d'arguments en plus u si.
@@ -244,40 +263,40 @@ do
                 orc* )
                     afficher_erreur "L'option longue" "--$OPTARG" "ne prend pas d'arguments."
                     afficherAide
-                    exit 85
+                    exit "$E_ARG_MANQUANT__OPT_LONGUE"
                     ;;
                 umbra* )
                     afficher_erreur "L'option longue" "--$OPTARG" "nécessite un argument."
                     afficherAide
-                    exit 86
+                    exit "$E_OPT_LONGUE_NECESSITE_ARG"
                     ;;
                 *)
                     afficher_erreur "L'option longue" "--$OPTARG" "n'existe pas !"
                     afficherAide
-                    exit 87
+                    exit "$E_OPT_LONGUE_INCONNUE"
                     ;;
             esac
             ;;
         :)
             afficher_erreur "L'option" "$OPTARG" "nécessite un argument."
             afficherAide
-            exit 88
+            exit "$E_OPT_NECESSITE_ARG"
             ;;
         ?)
             afficher_erreur "L'option" "$OPTARG" "n'existe pas."
             afficherAide
-            exit 89
+            exit "$E_OPT_INCONNUE"
             ;;
     esac
 done
 
-#  Vérifie que toutes les options ont été traitées
+# Vérifie que toutes les options ont été traitées
 shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
 if [[ $# -ne 0 ]] ; then
     afficher_erreur "Les arguments suivant ne sont pas valide :" "$*"
     afficherAide
-    exit 90
+    exit "$E_OPT_NON_TRAITEE"
 fi
 
 # }}}
@@ -287,4 +306,4 @@ fi
 ###################################################
 
 
-exit 0;
+exit "$EXIT_SUCCES";
