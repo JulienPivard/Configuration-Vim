@@ -6,8 +6,6 @@
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
-# Arrête le script si une erreur est levée
-set -e errexit
 
 ###############################################################################
 #                   ___                             __                        #
@@ -57,9 +55,9 @@ set -e errexit
 #########################
 # Vérifie la syntaxe : bash -n
 
-#######################
-# Constante de sortie #
-#######################
+###################################
+# Constante de sortie et d'erreur #
+###################################
 declare -r EXIT_SUCCES=0
 declare -r E_ARG1_MANQUANT=80
 declare -r E_ARG2_MANQUANT=81
@@ -302,6 +300,7 @@ do
 done
 
 # Vérifie que toutes les options ont été traitées
+# OPTIND indique la position de l'argument suivant à traiter par getopt
 shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
 if [[ $# -ne 0 ]] ; then
