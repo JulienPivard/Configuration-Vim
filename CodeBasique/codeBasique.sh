@@ -74,15 +74,29 @@ declare -r E_OPT_INCONNUE=89
 declare -r E_OPT_NON_TRAITEE=90
 
 
-#########################
-#  Gestion des signaux  #
-#########################
+###########################
+# {{{ Attrape erreurs     #
+###########################
 
-# Gestion des signaux de fin de programme
-trap 'nettoyage' INT QUIT TERM
+# Gestion des interruption CTRL-C
+trap 'interruption' INT
+
+# Gestion de la fermeture du terminal
+trap 'fermeture_terminal' HUP
+
+# Gestion des autres signaux de fin
+trap 'fin' QUIT TERM
+
+# Gestion des erreurs
+trap 'ERREUR=$?; gestion_erreurs $ERREUR' ERR
+
+# Sera toujours exécuté quand une instruction exit est rencontré
+trap 'nettoyage_fin_script' EXIT
 
 # Gestion du redimensionnement de la fenêtre
 trap 'maj_taille' WINCH
+
+# }}}
 
 ####################################
 # {{{  Définition des couleurs     #
@@ -200,10 +214,35 @@ afficher_erreur()
 #  Fonction de gestion des signaux  # {{{
 #####################################
 
-nettoyage()
+# Réception d'un signal pour quitter l'app normalement
+fin()
 {
-    afficher_erreur "Le script à subi une interruption."
-    exit $?
+    exit
+}
+
+# Le script à été interrompu par l'utilisateur
+interruption()
+{
+    exit
+}
+
+# Une erreur c'est produit durant l'exécution
+gestion_erreurs()
+{
+    afficher_erreur "Le script à subis une erreur" "$1"
+    exit "$1"
+}
+
+# On ferme le script. Cette fonction sera exécutée en dernière
+nettoyage_fin_script()
+{
+    exit
+}
+
+# Le terminal qui a lancé le processus à été fermé
+fermeture_terminal()
+{
+    exit
 }
 
 maj_taille()
