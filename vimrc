@@ -23,7 +23,6 @@ Plug 'gregsexton/gitv'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-arpeggio'
 Plug 'majutsushi/tagbar'
-Plug 'matchit.zip'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -42,6 +41,7 @@ Plug 'vim-scripts/FuzzyFinder'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
+Plug 'vim-scripts/matchit.zip'
 
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
