@@ -30,6 +30,17 @@ set -u
 #┃                                                                           ┃#
 #┃           Explication sur le fonctionnement du script et son but          ┃#
 #┃                    liste de paramètres de l'application                   ┃#
+#┃       Option minimal                                                      ┃#
+#┃  -    --------------------------------------------------                  ┃#
+#┃       Options                                                             ┃#
+#┃       -o une option sans arguments                                        ┃#
+#┃       --orc                                                               ┃#
+#┃       -u une option avec un argument                                      ┃#
+#┃       --umbra                                                             ┃#
+#┃  -    --------------------------------------------------                  ┃#
+#┃       Exemples d'utilisation :                                            ┃#
+#┃           script -o                                                       ┃#
+#┃           script --umbra=truc                                             ┃#
 #┃                                                                           ┃#
 #┃ Codes d'erreurs :                                                         ┃#
 #┃          Erreur de la fonction « couleur_back_et_front »                  ┃#
