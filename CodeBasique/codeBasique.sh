@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Samedi 06 mai[05] 2017
+# Dernière modification : Vendredi 12 mai[05] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -40,7 +40,7 @@ set -u
 #┃          Fin des erreurs de la fonction                                   ┃#
 #┃     - 84  Erreur afficher_erreur nécessite au moins un argument           ┃#
 #┃          Erreurs dans les options de la ligne de commande                 ┃#
-#┃     - 85  pas d'argument pour l'option longue                             ┃#
+#┃     - 85  l'option longue ne prend PAS d'argument                         ┃#
 #┃     - 86  l'option longue nécessite un argument                           ┃#
 #┃     - 87  l'option longue n'existe pas                                    ┃#
 #┃     - 88  l'option nécessite un argument                                  ┃#
