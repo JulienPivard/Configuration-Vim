@@ -191,18 +191,18 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 afficher_erreur()
 {
     [[ -n "$1" ]] && local AFFICHAGE="$1" || exit "$E_ARG_AFF_ERR_M"
-    if [[ -n "$2" ]]; then
+    if [[ $# -ge 2 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}$2"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ -n "$3" ]] && AFFICHAGE="${AFFICHAGE}$3"
-    if [[ -n "$4" ]]; then
+    [[ $# -ge 3 ]] && AFFICHAGE="${AFFICHAGE}$3"
+    if [[ $# -ge 4 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}$4"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ -n "$5" ]] && AFFICHAGE="${AFFICHAGE}$5"
+    [[ $# -ge 5 ]] && AFFICHAGE="${AFFICHAGE}$5"
     printf "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n" >&2
 }
 
