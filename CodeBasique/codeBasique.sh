@@ -104,7 +104,7 @@ trap 'fermeture_terminal' HUP
 trap 'fin' QUIT TERM
 
 # Gestion des erreurs
-trap 'ERREUR=$?; gestion_erreurs; exit $ERREUR' ERR
+trap 'ERREUR=$?; gestion_erreurs $LINENO; exit $ERREUR' ERR
 
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
@@ -245,7 +245,7 @@ interruption()
 # Une erreur c'est produit durant l'exécution
 gestion_erreurs()
 {
-    afficher_erreur "Le script à subis une erreur"
+    afficher_erreur "Le script à subis une erreur ligne" "$1"
 }
 
 # On ferme le script. Cette fonction sera exécutée en dernière
