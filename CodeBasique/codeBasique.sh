@@ -2,10 +2,13 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Vendredi 12 mai[05] 2017
+# Dernière modification : Samedi 13 mai[05] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
+# Équivalent à set -o errtrace pour s'assurer que les trap sont bien
+# hérité dans les sous shell
+set -E
 
 ###############################################################################
 #                   ___                             __                        #
@@ -99,7 +102,7 @@ trap 'fermeture_terminal' HUP
 trap 'fin' QUIT TERM
 
 # Gestion des erreurs
-trap 'ERREUR=$?; gestion_erreurs $ERREUR' ERR
+trap 'ERREUR=$?; gestion_erreurs; exit $ERREUR' ERR
 
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
@@ -240,8 +243,7 @@ interruption()
 # Une erreur c'est produit durant l'exécution
 gestion_erreurs()
 {
-    afficher_erreur "Le script à subis une erreur" "$1"
-    exit "$1"
+    afficher_erreur "Le script à subis une erreur"
 }
 
 # On ferme le script. Cette fonction sera exécutée en dernière
