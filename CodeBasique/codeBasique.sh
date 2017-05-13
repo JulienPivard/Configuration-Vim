@@ -9,6 +9,8 @@ set -u
 # Équivalent à set -o errtrace pour s'assurer que les trap sont bien
 # hérité dans les sous shell
 set -E
+# Permet de traiter les erreurs dans les pipeline avec la trap ERR
+set -o pipefail
 
 ###############################################################################
 #                   ___                             __                        #
