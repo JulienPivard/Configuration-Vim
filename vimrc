@@ -852,6 +852,17 @@ augroup END
 
 "}}}
 
+" Désactive l'historique d'annulation persistant pour les fichiers temporaires
+augroup gestionUndofie                                                      "{{{
+    autocmd!
+    autocmd BufWritePre /tmp/* setlocal noundofile
+    autocmd BufWritePre /private/tmp/* setlocal noundofile
+    autocmd BufWritePre /private/var/folders/* setlocal noundofile
+    autocmd BufWritePre /private/var/tmp/* setlocal noundofile
+augroup END
+
+"}}}
+
 " Création d'une page de manuel avec ajout du nom automatiquement
 augroup manuel                                                              "{{{
     autocmd!
