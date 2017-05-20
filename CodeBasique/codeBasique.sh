@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Samedi 13 mai[05] 2017
+# Dernière modification : Samedi 20 mai[05] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -21,7 +21,6 @@ set -o pipefail
 #                                                                             #
 ###############################################################################
 
-
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 #                                 nomscript.sh                                #
 #                          écrit par : PIVARD Julien                          #
@@ -31,6 +30,7 @@ set -o pipefail
 #                               résumé vite fait                              #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
+# Documentation                     #{{{
 #┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
 #┃                                                                           ┃#
 #┃           Explication sur le fonctionnement du script et son but          ┃#
@@ -66,14 +66,13 @@ set -o pipefail
 #┃                                                                           ┃#
 #┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
 
-#########################
-#       Debogage        #
-#########################
+#}}}
+
 # Vérifie la syntaxe : bash -n
 
-###################################
-# Constante de sortie et d'erreur #
-###################################
+#########################################
+#{{{ Constante de sortie et d'erreur    #
+#########################################
 declare -r EXIT_SUCCES=0
 declare -r E_ARG1_MANQUANT=80
 declare -r E_ARG2_MANQUANT=81
@@ -89,6 +88,8 @@ declare -r E_OPT_NECESSITE_ARG=88
 declare -r E_OPT_INCONNUE=89
 declare -r E_OPT_NON_TRAITEE=90
 
+
+#}}}
 
 ###########################
 # {{{ Attrape erreurs     #
