@@ -81,7 +81,7 @@ declare -r E_ARG2_INTERVAL=83
 
 declare -r E_ARG_AFF_ERR_M=84
 
-declare -r E_ARG_MANQUANT__OPT_LONGUE=85
+declare -r E_ARG_SUPERFLUS_OPT_LONGUE=85
 declare -r E_OPT_LONGUE_NECESSITE_ARG=86
 declare -r E_OPT_LONGUE_INCONNUE=87
 declare -r E_OPT_NECESSITE_ARG=88
@@ -105,7 +105,7 @@ trap 'fermeture_terminal' HUP
 trap 'fin' QUIT TERM
 
 # Gestion des erreurs
-trap 'ERREUR=$?; gestion_erreurs $LINENO; exit $ERREUR' ERR
+trap 'ERREUR=${?}; gestion_erreurs ${LINENO}; exit ${ERREUR}' ERR
 
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
@@ -143,16 +143,16 @@ check_cmd_exist()
 # Active la coloration du texte en premier ou en arrière plan
 couleur_back_et_front()
 {
-    [[ -n "$1" ]] || exit "$E_ARG1_MANQUANT"
-    [[ -n "$2" ]] || exit "$E_ARG2_MANQUANT"
+    [[ -n "${1}" ]] || exit "${E_ARG1_MANQUANT}"
+    [[ -n "${2}" ]] || exit "${E_ARG2_MANQUANT}"
 
-    [[ "$1" =~ ([0-9]+) && "$1" -ge 0 ]] && local -r NUM_COULEUR="$1" || exit "$E_ARG1_INTERVAL"
-    [[ "$2" == 'b' || "$2" == 'f' ]] && local -r PLAN_COULEUR="$2" || exit "$E_ARG2_INTERVAL"
+    [[ "${1}" =~ ([0-9]+) && "${1}" -ge 0 ]] && local -r NUM_COULEUR="${1}" || exit "${E_ARG1_INTERVAL}"
+    [[ "${2}" == 'b' || "${2}" == 'f' ]] && local -r PLAN_COULEUR="${2}" || exit "${E_ARG2_INTERVAL}"
 
     declare -r D_COUL='tput seta'
 
-    if [[ "$1" -lt "$NB_COULEURS" ]]; then
-        printf "`${D_COUL}${PLAN_COULEUR} $NUM_COULEUR`"
+    if [[ "${1}" -lt "${NB_COULEURS}" ]]; then
+        printf "`${D_COUL}${PLAN_COULEUR} ${NUM_COULEUR}`"
     else
         printf ""
     fi
@@ -246,19 +246,19 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 # L'argument 3 affiche le texte en rouge à la suite de l'argument 2
 afficher_erreur()
 {
-    [[ -n "$1" ]] && local AFFICHAGE="$1" || exit "$E_ARG_AFF_ERR_M"
-    if [[ $# -ge 2 ]]; then
+    [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
+    if [[ ${#} -ge 2 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
-        AFFICHAGE="${AFFICHAGE}$2"
+        AFFICHAGE="${AFFICHAGE}${2}"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ $# -ge 3 ]] && AFFICHAGE="${AFFICHAGE}$3"
-    if [[ $# -ge 4 ]]; then
+    [[ ${#} -ge 3 ]] && AFFICHAGE="${AFFICHAGE}${3}"
+    if [[ ${#} -ge 4 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
-        AFFICHAGE="${AFFICHAGE}$4"
+        AFFICHAGE="${AFFICHAGE}${4}"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ $# -ge 5 ]] && AFFICHAGE="${AFFICHAGE}$5"
+    [[ ${#} -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
     printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE} ${*}\n"
 }
 
@@ -285,7 +285,7 @@ interruption()
 # Une erreur c'est produit durant l'exécution
 gestion_erreurs()
 {
-    afficher_erreur "Le script à subis une erreur ligne" "$1"
+    afficher_erreur "Le script à subis une erreur ligne" "${1}"
 }
 
 # On ferme le script. Cette fonction sera exécutée en dernière
@@ -319,7 +319,7 @@ maj_taille()
 # {{{                   Code                       #
 ####################################################
 
-afficherAide()
+afficher_aide()
 {
     printf "Liste des commandes et des exemples\n"
 }
@@ -331,8 +331,8 @@ traitement_option_o()
 
 traitement_option_u()
 {
-    local ARGUMENT="$1"
-    echo "Option u = $ARGUMENT"
+    local ARGUMENT="${1}"
+    echo "Option u = ${ARGUMENT}"
 }
 
 # }}}
@@ -342,58 +342,58 @@ traitement_option_u()
 ####################################################
 
 #  Affiche l'aide si aucun arguments n'est donné
-if [[ $# -eq 0 ]]; then
+if [[ ${#} -eq 0 ]]; then
     printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
-    afficherAide
-    exit "$EXIT_SUCCES";
+    afficher_aide
+    exit "${EXIT_SUCCES}";
 fi
 
 # option o ne nécessite pas d'arguments en plus u si.
 # Le premier : permet de gérer manuellement les erreurs
 while getopts ":ou:-:" option
 do
-    case $option in
+    case ${option} in
         o)
             traitement_option_o
             ;;
         u)
-            traitement_option_u "$OPTARG"
+            traitement_option_u "${OPTARG}"
             ;;
         -)
             LONG_OPTARG="${OPTARG#*=}"
-            case $OPTARG in
+            case ${OPTARG} in
                 orc )
                     traitement_option_o
                     ;;
                 umbra=?* )
-                    traitement_option_u "$LONG_OPTARG"
+                    traitement_option_u "${LONG_OPTARG}"
                     ;;
                 orc* )
-                    afficher_erreur "L'option longue" "--$OPTARG" "ne prend pas d'arguments."
-                    afficherAide
-                    exit "$E_ARG_MANQUANT__OPT_LONGUE"
+                    afficher_erreur "L'option longue" "--${OPTARG}" "ne prend pas d'arguments."
+                    afficher_aide
+                    exit "${E_ARG_SUPERFLUS_OPT_LONGUE}"
                     ;;
                 umbra* )
-                    afficher_erreur "L'option longue" "--$OPTARG" "nécessite un argument."
-                    afficherAide
-                    exit "$E_OPT_LONGUE_NECESSITE_ARG"
+                    afficher_erreur "L'option longue" "--${OPTARG}" "nécessite un argument."
+                    afficher_aide
+                    exit "${E_OPT_LONGUE_NECESSITE_ARG}"
                     ;;
                 *)
-                    afficher_erreur "L'option longue" "--$OPTARG" "n'existe pas !"
-                    afficherAide
-                    exit "$E_OPT_LONGUE_INCONNUE"
+                    afficher_erreur "L'option longue" "--${OPTARG}" "n'existe pas !"
+                    afficher_aide
+                    exit "${E_OPT_LONGUE_INCONNUE}"
                     ;;
             esac
             ;;
         :)
-            afficher_erreur "L'option" "$OPTARG" "nécessite un argument."
-            afficherAide
-            exit "$E_OPT_NECESSITE_ARG"
+            afficher_erreur "L'option" "${OPTARG}" "nécessite un argument."
+            afficher_aide
+            exit "${E_OPT_NECESSITE_ARG}"
             ;;
         ?)
-            afficher_erreur "L'option" "$OPTARG" "n'existe pas."
-            afficherAide
-            exit "$E_OPT_INCONNUE"
+            afficher_erreur "L'option" "${OPTARG}" "n'existe pas."
+            afficher_aide
+            exit "${E_OPT_INCONNUE}"
             ;;
     esac
 done
@@ -402,10 +402,10 @@ done
 # OPTIND indique la position de l'argument suivant à traiter par getopt
 shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
-if [[ $# -ne 0 ]] ; then
-    afficher_erreur "Les arguments suivant ne sont pas valide :" "$*"
-    afficherAide
-    exit "$E_OPT_NON_TRAITEE"
+if [[ ${#} -ne 0 ]] ; then
+    afficher_erreur "Les arguments suivant ne sont pas valide :" "${*}"
+    afficher_aide
+    exit "${E_OPT_NON_TRAITEE}"
 fi
 
 # }}}
@@ -415,4 +415,4 @@ fi
 ###################################################
 
 
-exit "$EXIT_SUCCES";
+exit "${EXIT_SUCCES}";
