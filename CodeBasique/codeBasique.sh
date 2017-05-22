@@ -119,14 +119,26 @@ trap 'maj_taille' WINCH
 # {{{  Définition des couleurs     #
 ####################################
 
-declare -r NEUTRE=`tput sgr0`
+NEUTRE=""
+M_GRAS=""
+D_SOUL=""
+F_SOUL=""
+INVERS=""
+M__DIM=""
 
-declare -r M_GRAS=`tput bold`
+declare -i NB_COULEURS=0
+declare -i NB_COLONE=0
+declare -i NB_LIGNES=0
 
-declare -r D_SOUL=`tput smul`
-declare -r F_SOUL=`tput rmul`
+which_cmd()
+{
+    which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
+}
 
-declare -r INVERS=`tput rev`
+check_cmd_exist()
+{
+    which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
+}
 
 # Active la coloration du texte en premier ou en arrière plan
 couleur_back_et_front()
@@ -134,21 +146,48 @@ couleur_back_et_front()
     [[ -n "$1" ]] || exit "$E_ARG1_MANQUANT"
     [[ -n "$2" ]] || exit "$E_ARG2_MANQUANT"
 
-    [[ "$1" =~ ([0-9]+) && "$1" -lt 256 && "$1" -ge 0 ]] && local -r NUM_COULEUR="$1" || exit "$E_ARG1_INTERVAL"
+    [[ "$1" =~ ([0-9]+) && "$1" -ge 0 ]] && local -r NUM_COULEUR="$1" || exit "$E_ARG1_INTERVAL"
     [[ "$2" == 'b' || "$2" == 'f' ]] && local -r PLAN_COULEUR="$2" || exit "$E_ARG2_INTERVAL"
 
     declare -r D_COUL='tput seta'
 
-    printf `${D_COUL}${PLAN_COULEUR} $NUM_COULEUR`
+    if [[ "$1" -lt "$NB_COULEURS" ]]; then
+        printf "`${D_COUL}${PLAN_COULEUR} $NUM_COULEUR`"
+    else
+        printf ""
+    fi
 }
 
-declare -a COULEURS=()
+# Vérification de l'existence de la commande tput           #{{{
+if check_cmd_exist tput; then
+
+    if [[ `tput colors 2>/dev/null` -ge 8 ]]; then
+        declare -r NB_COULEURS=`tput colors`
+    else
+        declare -r NB_COULEURS=0
+    fi
+
+    declare -r NEUTRE="`tput sgr 0`"
+
+    declare -r M_GRAS="`tput bold`"
+
+    declare -r D_SOUL="`tput smul`"
+    declare -r F_SOUL="`tput rmul`"
+
+    declare -r INVERS="`tput rev`"
+
+    declare -r M__DIM="`tput dim`"
+
+fi
+
+#}}}
 
 # Création des couleurs du front et du back
-POSITION=0
+declare -i POSITION=0
+declare -a COULEURS=()
 for i in 'f' 'b'; do
     for j in `seq 0 15`; do
-        COULEURS[$((j + POSITION))]=`couleur_back_et_front $j $i`
+        COULEURS[$((j + POSITION))]="`couleur_back_et_front $j $i`"
     done
     POSITION=$((POSITION + 16))
 done
@@ -220,7 +259,7 @@ afficher_erreur()
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
     [[ $# -ge 5 ]] && AFFICHAGE="${AFFICHAGE}$5"
-    printf "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n" >&2
+    printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE} ${*}\n"
 }
 
 #}}}
@@ -263,8 +302,13 @@ fermeture_terminal()
 
 maj_taille()
 {
-    NB_LIGNES=`tput lines`
-    NB_COLONE=`tput cols`
+    if check_cmd_exist tput; then
+        NB_LIGNES=`tput lines`
+        NB_COLONE=`tput cols`
+    else
+        NB_LIGNES=-1
+        NB_COLONE=-1
+    fi
 }
 
 # }}}
