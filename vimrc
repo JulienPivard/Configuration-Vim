@@ -1126,7 +1126,7 @@ let g:undotree_SetFocusWhenToggle = 1
 " -----------------------
 " Réglages pour NERDTree                                                    "{{{
 " -----------------------
-let NERDTreeShowHidden = 1          " Pour afficher les fichiers caché.
+let NERDTreeShowHidden = 0          " Pour afficher les fichiers caché.
 let NERDTreeWinSize = 55
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1          " Ferme automatiquement NERDTree quand on ouvre un fichier.
