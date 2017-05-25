@@ -110,8 +110,41 @@ trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}"' ERR
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
 
-# Gestion du redimensionnement de la fenêtre
-trap 'maj_taille' WINCH
+# }}}
+
+#####################################
+#  Fonction de gestion des signaux  # {{{
+#####################################
+
+# Réception d'un signal pour quitter l'app normalement
+fin()
+{
+    exit
+}
+
+# Le script à été interrompu par l'utilisateur
+interruption()
+{
+    exit
+}
+
+# Une erreur c'est produit durant l'exécution
+gestion_erreurs()
+{
+    printf >&2 "Le script à subis une erreur ligne [ ${1} ]\n"
+}
+
+# On ferme le script. Cette fonction sera exécutée en dernière
+nettoyage_fin_script()
+{
+    exit
+}
+
+# Le terminal qui a lancé le processus à été fermé
+fermeture_terminal()
+{
+    exit
+}
 
 # }}}
 
@@ -132,6 +165,24 @@ test_cmd_exist()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0
     return 1
+}
+
+#}}}
+
+######################################################
+# {{{ Gestion du redimensionnement de la fenêtre     #
+######################################################
+trap 'maj_taille' WINCH
+
+maj_taille()
+{
+    if test_cmd_exist tput; then
+        NB_LIGNES=`tput lines`
+        NB_COLONE=`tput cols`
+    else
+        NB_LIGNES=-1
+        NB_COLONE=-1
+    fi
 }
 
 #}}}
@@ -270,53 +321,6 @@ afficher_erreur()
 }
 
 #}}}
-
-# }}}
-
-#####################################
-#  Fonction de gestion des signaux  # {{{
-#####################################
-
-# Réception d'un signal pour quitter l'app normalement
-fin()
-{
-    exit
-}
-
-# Le script à été interrompu par l'utilisateur
-interruption()
-{
-    exit
-}
-
-# Une erreur c'est produit durant l'exécution
-gestion_erreurs()
-{
-    afficher_erreur "Le script à subis une erreur ligne" "${1}"
-}
-
-# On ferme le script. Cette fonction sera exécutée en dernière
-nettoyage_fin_script()
-{
-    exit
-}
-
-# Le terminal qui a lancé le processus à été fermé
-fermeture_terminal()
-{
-    exit
-}
-
-maj_taille()
-{
-    if test_cmd_exist tput; then
-        NB_LIGNES=`tput lines`
-        NB_COLONE=`tput cols`
-    else
-        NB_LIGNES=-1
-        NB_COLONE=-1
-    fi
-}
 
 # }}}
 
