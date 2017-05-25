@@ -247,18 +247,18 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 afficher_erreur()
 {
     [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
-    if [[ ${#} -ge 2 ]]; then
+    if [[ "${#}" -ge 2 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}${2}"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ ${#} -ge 3 ]] && AFFICHAGE="${AFFICHAGE}${3}"
-    if [[ ${#} -ge 4 ]]; then
+    [[ "${#}" -ge 3 ]] && AFFICHAGE="${AFFICHAGE}${3}"
+    if [[ "${#}" -ge 4 ]]; then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}${4}"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
-    [[ ${#} -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
+    [[ "${#}" -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
     printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE} ${*}\n"
 }
 
@@ -342,7 +342,7 @@ traitement_option_u()
 ####################################################
 
 #  Affiche l'aide si aucun arguments n'est donné
-if [[ ${#} -eq 0 ]]; then
+if [[ "${#}" -eq 0 ]]; then
     printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     afficher_aide
     exit "${EXIT_SUCCES}";
@@ -402,7 +402,7 @@ done
 # OPTIND indique la position de l'argument suivant à traiter par getopt
 shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
-if [[ ${#} -ne 0 ]] ; then
+if [[ "${#}" -ne 0 ]] ; then
     afficher_erreur "Les arguments suivant ne sont pas valide :" "${*}"
     afficher_aide
     exit "${E_OPT_NON_TRAITEE}"
