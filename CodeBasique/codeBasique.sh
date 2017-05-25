@@ -115,16 +115,9 @@ trap 'maj_taille' WINCH
 
 # }}}
 
-####################################
-# {{{  Définition des couleurs     #
-####################################
-
-NEUTRE=""
-M_GRAS=""
-D_SOUL=""
-F_SOUL=""
-INVERS=""
-M__DIM=""
+#############################################
+# {{{ Fonctions de gestions généraliste     #
+#############################################
 
 declare -i NB_COULEURS=0
 declare -i NB_COLONE=0
@@ -137,8 +130,22 @@ which_cmd()
 
 test_cmd_exist()
 {
-    which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
+    which_cmd "${1}" >/dev/null 2>&1 && return 0
+    return 1
 }
+
+#}}}
+
+####################################
+# {{{  Définition des couleurs     #
+####################################
+
+NEUTRE=""
+M_GRAS=""
+D_SOUL=""
+F_SOUL=""
+INVERS=""
+M__DIM=""
 
 # Active la coloration du texte en premier ou en arrière plan
 couleur_back_et_front()
