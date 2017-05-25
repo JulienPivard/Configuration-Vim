@@ -105,7 +105,7 @@ trap 'fermeture_terminal' HUP
 trap 'fin' QUIT TERM
 
 # Gestion des erreurs
-trap 'ERREUR=${?}; gestion_erreurs ${LINENO}; exit ${ERREUR}' ERR
+trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}"' ERR
 
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
