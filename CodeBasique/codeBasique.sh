@@ -135,7 +135,7 @@ which_cmd()
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
-check_cmd_exist()
+test_cmd_exist()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
 }
@@ -159,7 +159,7 @@ couleur_back_et_front()
 }
 
 # Vérification de l'existence de la commande tput           #{{{
-if check_cmd_exist tput; then
+if test_cmd_exist tput; then
 
     if [[ `tput colors 2>/dev/null` -ge 8 ]]; then
         declare -r NB_COULEURS=`tput colors`
@@ -302,7 +302,7 @@ fermeture_terminal()
 
 maj_taille()
 {
-    if check_cmd_exist tput; then
+    if test_cmd_exist tput; then
         NB_LIGNES=`tput lines`
         NB_COLONE=`tput cols`
     else
