@@ -1125,10 +1125,15 @@ let g:undotree_SetFocusWhenToggle = 1
 " -----------------------
 " Réglages pour NERDTree                                                    "{{{
 " -----------------------
+let NERDTreeCaseSensitiveSort = 0   " Le tri ne tient pas compte de la casse
+let NERDTreeWinPos = 'left'         " Positionne la fenêtre à gauche
+let NERDTreeCascadeSingleChildDir = 1
+let NERDTreeCascadeOpenSingleChildDir = 1
 let NERDTreeShowHidden = 0          " Pour afficher les fichiers caché.
+let NERDTreeSortHiddenFirst = 1
 let NERDTreeWinSize = 55
 let NERDTreeChDirMode = 2
-let NERDTreeQuitOnOpen = 1          " Ferme automatiquement NERDTree quand on ouvre un fichier.
+let NERDTreeQuitOnOpen = 0          " Ferme automatiquement NERDTree quand on ouvre un fichier.
 
 "}}}
 
