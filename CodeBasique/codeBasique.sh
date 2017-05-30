@@ -48,20 +48,14 @@ set -o pipefail
 #┃           script --umbra=truc                                             ┃#
 #┃                                                                           ┃#
 #┃ Codes d'erreurs :                                                         ┃#
-#┃          Erreur de la fonction « couleur_back_et_front »                  ┃#
-#┃     - 80 Oubli argument 1 de la fonction couleur_back_et_front            ┃#
-#┃     - 81 Oubli argument 2 de la fonction couleur_back_et_front            ┃#
-#┃     - 82 La valeur de l'argument 1 n'est pas entre 0 et 255 inclus        ┃#
-#┃     - 83 La valeur de l'argument 2 n'est pas f ou b                       ┃#
-#┃          Fin des erreurs de la fonction                                   ┃#
-#┃     - 84  Erreur afficher_erreur nécessite au moins un argument           ┃#
+#┃     - 80  Erreur afficher_erreur nécessite au moins un argument           ┃#
 #┃          Erreurs dans les options de la ligne de commande                 ┃#
-#┃     - 85  l'option longue ne prend PAS d'argument                         ┃#
-#┃     - 86  l'option longue nécessite un argument                           ┃#
-#┃     - 87  l'option longue n'existe pas                                    ┃#
-#┃     - 88  l'option nécessite un argument                                  ┃#
-#┃     - 89  l'option n'existe pas                                           ┃#
-#┃     - 90  des options qui sont invalides ont été donnée                   ┃#
+#┃     - 81  l'option longue ne prend PAS d'argument                         ┃#
+#┃     - 82  l'option longue nécessite un argument                           ┃#
+#┃     - 83  l'option longue n'existe pas                                    ┃#
+#┃     - 84  l'option nécessite un argument                                  ┃#
+#┃     - 85  l'option n'existe pas                                           ┃#
+#┃     - 86  des options qui sont invalides ont été donnée                   ┃#
 #┃          Erreurs lors de l'exécution du code                              ┃#
 #┃                                                                           ┃#
 #┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
@@ -74,19 +68,15 @@ set -o pipefail
 #{{{ Constante de sortie et d'erreur    #
 #########################################
 declare -r EXIT_SUCCES=0
-declare -r E_ARG1_MANQUANT=80
-declare -r E_ARG2_MANQUANT=81
-declare -r E_ARG1_INTERVAL=82
-declare -r E_ARG2_INTERVAL=83
 
-declare -r E_ARG_AFF_ERR_M=84
+declare -r E_ARG_AFF_ERR_M=80
 
-declare -r E_ARG_SUPERFLUS_OPT_LONGUE=85
-declare -r E_OPT_LONGUE_NECESSITE_ARG=86
-declare -r E_OPT_LONGUE_INCONNUE=87
-declare -r E_OPT_NECESSITE_ARG=88
-declare -r E_OPT_INCONNUE=89
-declare -r E_OPT_NON_TRAITEE=90
+declare -r E_ARG_SUPERFLUS_OPT_LONGUE=81
+declare -r E_OPT_LONGUE_NECESSITE_ARG=82
+declare -r E_OPT_LONGUE_INCONNUE=83
+declare -r E_OPT_NECESSITE_ARG=84
+declare -r E_OPT_INCONNUE=85
+declare -r E_OPT_NON_TRAITEE=86
 
 
 #}}}
@@ -176,7 +166,8 @@ trap 'maj_taille' WINCH
 
 maj_taille()
 {
-    if test_cmd_exist tput; then
+    if test_cmd_exist tput
+    then
         NB_LIGNES=`tput lines`
         NB_COLONE=`tput cols`
     else
@@ -198,28 +189,14 @@ F_SOUL=""
 INVERS=""
 M__DIM=""
 
-# Active la coloration du texte en premier ou en arrière plan
-couleur_back_et_front()
-{
-    [[ -n "${1}" ]] || exit "${E_ARG1_MANQUANT}"
-    [[ -n "${2}" ]] || exit "${E_ARG2_MANQUANT}"
-
-    [[ "${1}" =~ ([0-9]+) && "${1}" -ge 0 ]] && local -r NUM_COULEUR="${1}" || exit "${E_ARG1_INTERVAL}"
-    [[ "${2}" == 'b' || "${2}" == 'f' ]] && local -r PLAN_COULEUR="${2}" || exit "${E_ARG2_INTERVAL}"
-
-    declare -r D_COUL='tput seta'
-
-    if [[ "${1}" -lt "${NB_COULEURS}" ]]; then
-        printf "`${D_COUL}${PLAN_COULEUR} ${NUM_COULEUR}`"
-    else
-        printf ""
-    fi
-}
-
+# Création des couleurs du front et du back
+declare -a COULEURS=()
 # Vérification de l'existence de la commande tput           #{{{
-if test_cmd_exist tput; then
+if test_cmd_exist tput
+then
 
-    if [[ `tput colors 2>/dev/null` -ge 8 ]]; then
+    if [[ `tput colors 2>/dev/null` -ge 8 ]]
+    then
         declare -r NB_COULEURS=`tput colors`
     else
         declare -r NB_COULEURS=0
@@ -236,19 +213,27 @@ if test_cmd_exist tput; then
 
     declare -r M__DIM="`tput dim`"
 
+    declare -i POSITION=0
+    for i in 'f' 'b'
+    do
+        COMM="tput seta${i}"
+        for j in `seq 0 15`
+        do
+            COULEURS[$((j + POSITION))]="`${COMM} ${j}`"
+        done
+        POSITION=$((POSITION + 16))
+    done
+
+else
+
+    for i in `seq 0 31`
+    do
+        COULEURS[${i}]=""
+    done
+
 fi
 
 #}}}
-
-# Création des couleurs du front et du back
-declare -i POSITION=0
-declare -a COULEURS=()
-for i in 'f' 'b'; do
-    for j in `seq 0 15`; do
-        COULEURS[$((j + POSITION))]="`couleur_back_et_front $j $i`"
-    done
-    POSITION=$((POSITION + 16))
-done
 
 # Couleurs normale                          #{{{
 declare -r C___NOIR="${COULEURS[0]}"        # Noir
@@ -305,13 +290,15 @@ declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
 afficher_erreur()
 {
     [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
-    if [[ "${#}" -ge 2 ]]; then
+    if [[ "${#}" -ge 2 ]]
+    then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}${2}"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
     [[ "${#}" -ge 3 ]] && AFFICHAGE="${AFFICHAGE}${3}"
-    if [[ "${#}" -ge 4 ]]; then
+    if [[ "${#}" -ge 4 ]]
+    then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
         AFFICHAGE="${AFFICHAGE}${4}"
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
@@ -353,7 +340,8 @@ traitement_option_u()
 ####################################################
 
 #  Affiche l'aide si aucun arguments n'est donné
-if [[ "${#}" -eq 0 ]]; then
+if [[ "${#}" -eq 0 ]]
+then
     printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     afficher_aide
     exit "${EXIT_SUCCES}";
@@ -413,7 +401,8 @@ done
 # OPTIND indique la position de l'argument suivant à traiter par getopt
 shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
-if [[ "${#}" -ne 0 ]] ; then
+if [[ "${#}" -ne 0 ]]
+then
     afficher_erreur "Les arguments suivant ne sont pas valide :" "${*}"
     afficher_aide
     exit "${E_OPT_NON_TRAITEE}"
