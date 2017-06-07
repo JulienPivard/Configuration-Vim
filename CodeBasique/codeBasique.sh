@@ -308,7 +308,7 @@ afficher_erreur()
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
     [[ "${#}" -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
-    printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE} ${*}\n"
+    printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n"
 }
 
 #}}}
