@@ -11,6 +11,8 @@ set -u
 set -E
 # Permet de traiter les erreurs dans les pipeline avec la trap ERR
 set -o pipefail
+# Gestion des erreurs
+trap 'ERREUR="${?}"; echo "Erreur dans les définitions préliminaire ligne : ${LINENO}"; exit "${ERREUR}"' ERR
 
 ###############################################################################
 #                   ___                             __                        #
@@ -94,6 +96,8 @@ trap 'fermeture_terminal' HUP
 # Gestion des autres signaux de fin
 trap 'fin' QUIT TERM
 
+# Permet de reste le signal d'erreur
+trap ERR
 # Gestion des erreurs
 trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}"' ERR
 
