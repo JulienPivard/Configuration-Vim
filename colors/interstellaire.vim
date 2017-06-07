@@ -312,7 +312,7 @@ exe 'highlight Question'            . s:forme . s:bold                      . s:
 exe 'highlight Repeat'              . s:forme . s:bold                      . s:texte . s:jaune             . s:fond . s:none
 exe 'highlight Search'              . s:forme                               . s:texte . s:jaune             . s:fond . s:violet
 exe 'highlight SignColumn'          . s:forme                               . s:texte . s:none              . s:fond . s:grissombre
-exe 'highlight SpecialComment'      . s:forme . s:bold                      . s:texte . s:bleuclair         . s:fond . s:none
+exe 'highlight SpecialComment'      . s:forme . s:bold                      . s:texte . s:gris              . s:fond . s:none
 exe 'highlight SpecialKey'          . s:forme                               . s:texte . s:bleusombre        . s:fond . s:none
 
 exe 'highlight SpellBad'            . s:forme . s:ucurl . s:italic          . s:texte . s:none              . s:fond . s:grissombre
@@ -430,6 +430,7 @@ highlight link doxygenBOther                doxygenParam
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 highlight link javaDocComment               SpecialComment
+highlight link javaCommentTitle             SpecialComment
 highlight link javaCommentStar              SpecialComment
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
