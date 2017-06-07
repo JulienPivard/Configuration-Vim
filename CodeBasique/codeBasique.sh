@@ -83,29 +83,6 @@ declare -r E_OPT_NON_TRAITEE=86
 
 #}}}
 
-###########################
-# {{{ Attrape erreurs     #
-###########################
-
-# Gestion des interruption CTRL-C
-trap 'interruption' INT
-
-# Gestion de la fermeture du terminal
-trap 'fermeture_terminal' HUP
-
-# Gestion des autres signaux de fin
-trap 'fin' QUIT TERM
-
-# Permet de reste le signal d'erreur
-trap ERR
-# Gestion des erreurs
-trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}"' ERR
-
-# Sera toujours exécuté quand une instruction exit est rencontré
-trap 'nettoyage_fin_script' EXIT
-
-# }}}
-
 #####################################
 #  Fonction de gestion des signaux  # {{{
 #####################################
@@ -139,6 +116,28 @@ fermeture_terminal()
 {
     exit
 }
+
+# }}}
+
+###########################
+# {{{ Attrape erreurs     #
+###########################
+
+# Permet de reste le signal d'erreur
+trap ERR
+trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}"' ERR
+
+# Gestion des interruption CTRL-C
+trap 'interruption' INT
+
+# Gestion de la fermeture du terminal
+trap 'fermeture_terminal' HUP
+
+# Gestion des autres signaux de fin
+trap 'fin' QUIT TERM
+
+# Sera toujours exécuté quand une instruction exit est rencontré
+trap 'nettoyage_fin_script' EXIT
 
 # }}}
 
