@@ -313,6 +313,15 @@ afficher_erreur()
 
 #}}}
 
+# Une erreur c'est produit durant l'exécution
+gestion_err_couleur()
+{
+    afficher_erreur "Le script à subis une erreur ligne" "${1}"
+}
+
+trap ERR
+trap 'ERREUR="${?}"; gestion_err_couleur "${LINENO}"; exit "${ERREUR}"' ERR
+
 # }}}
 
 # Retirer l'extension %.* un % par extension à retirer.
