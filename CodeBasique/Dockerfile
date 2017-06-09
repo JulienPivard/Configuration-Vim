@@ -23,6 +23,9 @@ EXPOSE 8080
 #ENTRYPOINT commande
 #ENTRYPOINT ["commande", "arguments"]
 
+# Pour pouvoir exposer un volume vers l'extérieur.
+#VOLUME ["/chemin/dans/docker"]
+
 # Une commande exécuté au lancement du container
 #CMD ["commande", "arguments"]
 #CMD commande
