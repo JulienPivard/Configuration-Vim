@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Dimanche 14 août[08] 2016
+" Dernière modification : Jeudi 22 juin[06] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -460,8 +460,10 @@ endfunction
 " Configuration des nouveaux fichiers cpp
 function! ConfigurationNouveauFichierCPP()                                  "{{{
 
-    0r ~/.vim/CodeBasique/codeBasique.cpp
-    :%substitute?NOMFICHIER?\=expand( '%:t:r' )?g
+    if expand( '%:t' ) != 'client.cpp'
+        0r ~/.vim/CodeBasique/codeBasique.cpp
+        :%substitute?NOMFICHIER?\=expand( '%:t:r' )?g
+    endif
 
 endfunction
 
