@@ -758,7 +758,8 @@ augroup END
 " Pour supprimer les espaces en fin de ligne.
 augroup nettoyage                                                           "{{{
     autocmd!
-    autocmd BufWritePre * call Nettoyage()
+    autocmd BufWritePre *               call Nettoyage()
+    autocmd BufWritePre,FileWritePre *  call DerniereModification()
 augroup END
 
 "}}}
