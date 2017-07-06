@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Jeudi 22 juin[06] 2017
+" Dernière modification : Jeudi 06 juillet[07] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -368,22 +368,20 @@ endfunction
 function! DerniereModification()                                            "{{{
 
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
-    let curcol = col( '.' )
-    let curline = line( '.' )
+    let l:curcol = col( '.' )
+    let l:curline = line( '.' )
     " On ne prend que les 20 premières lignes.
     if line( '$' ) > 20
-        let l = 20
+        let l:l = 20
     else
-        let l = line( '$' )
+        let l:l = line( '$' )
     endif
     " Met à jours la date dans les 20 premières ligne du fichier si il est
     " présent.
-    exe '1,' . l . 'substitute/Dernière modification : .*/Dernière modification : ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
-    exe '1,' . l . 'substitute/Last Change:  .*/Last Change:  ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
+    exe '1,' . l:l . 'substitute/Dernière modification : .*/Dernière modification : ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
+    exe '1,' . l:l . 'substitute/Last Change:  .*/Last Change:  ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
     " On remet le curseur la ou il était avant la suppression.
-    call cursor( curline, curcol )
-    unlet curcol
-    unlet curline
+    call cursor( l:curline, l:curcol )
 
 endfunction
 
