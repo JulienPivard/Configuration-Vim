@@ -377,6 +377,13 @@ function! DerniereModification()                                            "{{{
     else
         let l:l = line( '$' )
     endif
+
+    " On cherche si la date de dernière modification existe déjà
+    call cursor( 1, 1 )
+    " Penser à échapper les caractères spéciaux présent dans la chaine
+    " recherché
+    let l:lignemodif = search( escape( l:dateactuel, '[]' ), 'nw', l:l )
+
     let en_tete_fr = 'Dernière modification : '
     let en_tete_en = 'Last Change:  '
     let l:modif_fr = l:en_tete_fr . l:dateactuel
@@ -384,8 +391,10 @@ function! DerniereModification()                                            "{{{
 
     " Met à jours la date dans les 20 premières ligne du fichier si il est
     " présent.
-    exe '1,' . l:l . 'substitute/' . l:en_tete_fr . '.*/' . l:modif_fr . '/e'
-    exe '1,' . l:l . 'substitute/' . l:en_tete_en . '.*/' . l:modif_en . '/e'
+    if !l:lignemodif
+        exe '1,' . l:l . 'substitute/' . l:en_tete_fr . '.*/' . l:modif_fr . '/e'
+        exe '1,' . l:l . 'substitute/' . l:en_tete_en . '.*/' . l:modif_en . '/e'
+    endif
     " On remet le curseur la ou il était avant la suppression.
     call cursor( l:curline, l:curcol )
 
