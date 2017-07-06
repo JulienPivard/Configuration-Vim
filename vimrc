@@ -370,16 +370,22 @@ function! DerniereModification()                                            "{{{
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let l:curcol = col( '.' )
     let l:curline = line( '.' )
+    let l:dateactuel = strftime( '%A %d %B[%m] %Y' )
     " On ne prend que les 20 premières lignes.
     if line( '$' ) > 20
         let l:l = 20
     else
         let l:l = line( '$' )
     endif
+    let en_tete_fr = 'Dernière modification : '
+    let en_tete_en = 'Last Change:  '
+    let l:modif_fr = l:en_tete_fr . l:dateactuel
+    let l:modif_en = l:en_tete_en . l:dateactuel
+
     " Met à jours la date dans les 20 premières ligne du fichier si il est
     " présent.
-    exe '1,' . l:l . 'substitute/Dernière modification : .*/Dernière modification : ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
-    exe '1,' . l:l . 'substitute/Last Change:  .*/Last Change:  ' . strftime( '%A %d %B[%m] %Y' ) . '/e'
+    exe '1,' . l:l . 'substitute/' . l:en_tete_fr . '.*/' . l:modif_fr . '/e'
+    exe '1,' . l:l . 'substitute/' . l:en_tete_en . '.*/' . l:modif_en . '/e'
     " On remet le curseur la ou il était avant la suppression.
     call cursor( l:curline, l:curcol )
 
