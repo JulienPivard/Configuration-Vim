@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Samedi 20 mai[05] 2017
+# Dernière modification : Dimanche 09 juillet[07] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -165,8 +165,6 @@ test_cmd_exist()
 ######################################################
 # {{{ Gestion du redimensionnement de la fenêtre     #
 ######################################################
-trap 'maj_taille' WINCH
-
 maj_taille()
 {
     if test_cmd_exist tput
@@ -178,6 +176,10 @@ maj_taille()
         NB_COLONE=-1
     fi
 }
+
+maj_taille
+
+trap 'maj_taille' WINCH
 
 #}}}
 
