@@ -1386,7 +1386,7 @@ endtry
 " -----------------------
 " Réglage pour mon thème de couleurs.                                       "{{{
 " -----------------------
-let g:interstellaire_termcolors = 256
+let g:interstellaire_termcolors = system( 'tput colors' )
 
 "}}}
 
