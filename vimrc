@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Jeudi 06 juillet[07] 2017
+" Dernière modification : Dimanche 09 juillet[07] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -371,6 +371,7 @@ function! DerniereModification()                                            "{{{
     let l:curcol = col( '.' )
     let l:curline = line( '.' )
     let l:dateactuel = strftime( '%A %d %B[%m] %Y' )
+
     " On ne prend que les 20 premières lignes.
     if line( '$' ) > 20
         let l:l = 20
@@ -390,7 +391,7 @@ function! DerniereModification()                                            "{{{
     let l:modif_en = l:en_tete_en . l:dateactuel
 
     " Met à jours la date dans les 20 premières ligne du fichier si il est
-    " présent.
+    " présent. Et si ce n'est pas la date du jour.
     if !l:lignemodif
         exe '1,' . l:l . 'substitute/' . l:en_tete_fr . '.*/' . l:modif_fr . '/e'
         exe '1,' . l:l . 'substitute/' . l:en_tete_en . '.*/' . l:modif_en . '/e'
