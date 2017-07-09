@@ -12,7 +12,7 @@ set -E
 # Permet de traiter les erreurs dans les pipeline avec la trap ERR
 set -o pipefail
 # Gestion des erreurs
-trap 'ERREUR="${?}"; echo "Erreur dans les définitions préliminaire ligne : ${LINENO}"; exit "${ERREUR}"' ERR
+trap 'ERREUR="${?}"; printf "Erreur dans les définitions préliminaire ligne : ${LINENO}\n"; exit "${ERREUR}"' ERR
 
 ###############################################################################
 #                   ___                             __                        #
@@ -338,13 +338,13 @@ afficher_aide()
 
 traitement_option_o()
 {
-    echo "Option o"
+    printf "Option o\n"
 }
 
 traitement_option_u()
 {
     local ARGUMENT="${1}"
-    echo "Option u = ${ARGUMENT}"
+    printf "Option u = ${ARGUMENT}\n"
 }
 
 # }}}
