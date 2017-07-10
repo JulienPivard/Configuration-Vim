@@ -146,7 +146,7 @@ trap 'nettoyage_fin_script' EXIT
 #############################################
 
 declare -i NB_COULEURS=0
-declare -i NB_COLONE=0
+declare -i NB_COLONNES=0
 declare -i NB_LIGNES=0
 
 which_cmd()
@@ -170,10 +170,10 @@ maj_taille()
     if test_cmd_exist tput
     then
         NB_LIGNES=`tput lines`
-        NB_COLONE=`tput cols`
+        NB_COLONNES=`tput cols`
     else
         NB_LIGNES=-1
-        NB_COLONE=-1
+        NB_COLONNES=-1
     fi
 }
 
