@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 09 juillet[07] 2017
+# Dernière modification : Lundi 10 juillet[07] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -363,7 +363,7 @@ fi
 
 # option o ne nécessite pas d'arguments en plus u si.
 # Le premier : permet de gérer manuellement les erreurs
-while getopts ":ou:-:" option
+while getopts ":hou:-:" option
 do
     case ${option} in
         o)
@@ -371,6 +371,10 @@ do
             ;;
         u)
             traitement_option_u "${OPTARG}"
+            ;;
+        h)
+            afficher_aide
+            exit ${EXIT_SUCCES}
             ;;
         -)
             LONG_OPTARG="${OPTARG#*=}"
@@ -381,7 +385,11 @@ do
                 umbra=?* )
                     traitement_option_u "${LONG_OPTARG}"
                     ;;
-                orc* )
+                help )
+                    afficher_aide
+                    exit ${EXIT_SUCCES}
+                    ;;
+                orc* | help* )
                     afficher_erreur "L'option longue" "--${OPTARG}" "ne prend pas d'arguments."
                     afficher_aide
                     exit "${E_ARG_SUPERFLUS_OPT_LONGUE}"
