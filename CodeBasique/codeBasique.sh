@@ -333,7 +333,9 @@ trap 'ERREUR="${?}"; gestion_err_couleur "${LINENO}"; exit "${ERREUR}"' ERR
 
 afficher_aide()
 {
-    printf "Liste des commandes et des exemples\n"
+    declare -r NOM_SCRIPT=`basename "$0"`
+    printf "${NOM_SCRIPT} [-h]\n"
+    printf "    -h --help\n        Affiche l'aide et quitte\n"
 }
 
 traitement_option_o()
