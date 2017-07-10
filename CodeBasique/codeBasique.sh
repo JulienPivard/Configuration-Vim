@@ -12,7 +12,7 @@ set -E
 # Permet de traiter les erreurs dans les pipeline avec la trap ERR
 set -o pipefail
 # Gestion des erreurs
-trap 'ERREUR="${?}"; printf "Erreur dans les définitions préliminaire ligne : ${LINENO}\n"; exit "${ERREUR}"' ERR
+trap 'ERREUR="${?}"; printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n"; exit "${ERREUR}"' ERR
 
 ###############################################################################
 #                   ___                             __                        #
@@ -102,7 +102,7 @@ interruption()
 # Une erreur c'est produit durant l'exécution
 gestion_erreurs()
 {
-    printf >&2 "Le script à subis une erreur ligne [ ${1} ]\n"
+    printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
 }
 
 # On ferme le script. Cette fonction sera exécutée en dernière
@@ -317,7 +317,7 @@ afficher_erreur()
 # Une erreur c'est produit durant l'exécution
 gestion_err_couleur()
 {
-    afficher_erreur "Le script à subis une erreur ligne" "${1}"
+    afficher_erreur "\nLe script à subis une erreur ligne" "${1}"
 }
 
 trap ERR
