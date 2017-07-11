@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Lundi 10 juillet[07] 2017
+# Dernière modification : Mardi 11 juillet[07] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -44,6 +44,8 @@ trap 'ERREUR="${?}"; printf >&2 "\nErreur dans les définitions préliminaire li
 #┃       --orc                                                               ┃#
 #┃       -u une option avec un argument                                      ┃#
 #┃       --umbra                                                             ┃#
+#┃       -h affiche l'aide                                                   ┃#
+#┃       --help                                                              ┃#
 #┃  -    --------------------------------------------------                  ┃#
 #┃       Exemples d'utilisation :                                            ┃#
 #┃           script -o                                                       ┃#
