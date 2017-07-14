@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mardi 11 juillet[07] 2017
+# Dernière modification : Samedi 15 juillet[07] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -52,7 +52,7 @@ trap 'ERREUR="${?}"; printf >&2 "\nErreur dans les définitions préliminaire li
 #┃           script --umbra=truc                                             ┃#
 #┃                                                                           ┃#
 #┃ Codes d'erreurs :                                                         ┃#
-#┃     - 80  Erreur afficher_erreur nécessite au moins un argument           ┃#
+#┃     - 80  Erreur « afficher_erreur » nécessite au moins un argument       ┃#
 #┃          Erreurs dans les options de la ligne de commande                 ┃#
 #┃     - 81  l'option longue ne prend PAS d'argument                         ┃#
 #┃     - 82  l'option longue nécessite un argument                           ┃#
