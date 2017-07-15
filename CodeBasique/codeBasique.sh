@@ -4,6 +4,7 @@
 
 # Dernière modification : Samedi 15 juillet[07] 2017
 
+# Trouver les variables non sécurisé \$[a-zA-Z0-9*#][a-zA-Z0-9*#_]*
 # Arrête le script si une variable non initialisé est utilisée
 set -u
 # Équivalent à set -o errtrace pour s'assurer que les trap sont bien
@@ -335,7 +336,7 @@ trap 'ERREUR="${?}"; gestion_err_couleur "${LINENO}"; exit "${ERREUR}"' ERR
 
 afficher_aide()
 {
-    declare -r NOM_SCRIPT=`basename "$0"`
+    declare -r NOM_SCRIPT=`basename "${0}"`
     printf "${NOM_SCRIPT} [-h]\n"
     printf "    -h --help\n        Affiche l'aide et quitte\n"
 }
