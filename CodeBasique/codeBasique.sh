@@ -4,7 +4,7 @@
 
 # Dernière modification : Samedi 15 juillet[07] 2017
 
-# Trouver les variables non sécurisé \$[a-zA-Z0-9*#][a-zA-Z0-9*#_]*
+# Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9*#][a-zA-Z0-9*#_]*\}?[^"]?
 # Arrête le script si une variable non initialisé est utilisée
 set -u
 # Équivalent à set -o errtrace pour s'assurer que les trap sont bien
@@ -370,7 +370,7 @@ fi
 # Le premier : permet de gérer manuellement les erreurs
 while getopts ":hou:-:" option
 do
-    case ${option} in
+    case "${option}" in
         o)
             traitement_option_o
             ;;
@@ -379,11 +379,11 @@ do
             ;;
         h)
             afficher_aide
-            exit ${EXIT_SUCCES}
+            exit "${EXIT_SUCCES}"
             ;;
         -)
             LONG_OPTARG="${OPTARG#*=}"
-            case ${OPTARG} in
+            case "${OPTARG}" in
                 orc )
                     traitement_option_o
                     ;;
@@ -392,7 +392,7 @@ do
                     ;;
                 help )
                     afficher_aide
-                    exit ${EXIT_SUCCES}
+                    exit "${EXIT_SUCCES}"
                     ;;
                 orc* | help* )
                     afficher_erreur "L'option longue" "--${OPTARG}" "ne prend pas d'arguments."
@@ -430,7 +430,7 @@ shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
 if [[ "${#}" -ne 0 ]]
 then
-    afficher_erreur "Les arguments suivant ne sont pas valide :" "${*}"
+    afficher_erreur "Le ou Les arguments suivant ne sont pas valide :" "${*}"
     afficher_aide
     exit "${E_OPT_NON_TRAITEE}"
 fi
