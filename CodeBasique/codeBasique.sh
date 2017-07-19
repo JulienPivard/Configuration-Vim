@@ -2,9 +2,10 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Samedi 15 juillet[07] 2017
+# Dernière modification : Mercredi 19 juillet[07] 2017
 
-# Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9*#][a-zA-Z0-9*#_]*\}?[^"]?
+# Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
+# Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
 # Arrête le script si une variable non initialisé est utilisée
 set -u
 # Équivalent à set -o errtrace pour s'assurer que les trap sont bien
