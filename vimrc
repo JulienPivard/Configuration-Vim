@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Dimanche 09 juillet[07] 2017
+" Dernière modification : Jeudi 27 juillet[07] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -794,6 +794,8 @@ augroup configmake                                                          "{{{
     autocmd FileType make setlocal tabstop=8            " Taille des tabulations avec tab
     autocmd FileType make setlocal shiftwidth=8         " Taille des tabulations avec >> ou <<
     autocmd FileType make setlocal softtabstop=8        " Taille des tabulation en édition
+    autocmd FileType make noremap  <buffer> <F10>         :!make<Return>
+    autocmd FileType make noremap! <buffer> <F10>   <Esc> :!make<Return>
 augroup END
 
 "}}}
