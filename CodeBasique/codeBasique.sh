@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 19 juillet[07] 2017
+# Dernière modification : Jeudi 27 juillet[07] 2017
 
 # Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
 # Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
@@ -13,6 +13,10 @@ set -u
 set -E
 # Permet de traiter les erreurs dans les pipeline avec la trap ERR
 set -o pipefail
+# Activation du mode verbose affiche la commande qui va être exécuté
+#set -v
+# Activation du mode xtrace affiche le résultat de chaque commande
+#set -x
 # Gestion des erreurs
 trap 'ERREUR="${?}"; printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n"; exit "${ERREUR}"' ERR
 
