@@ -18,7 +18,9 @@ set -o pipefail
 # Activation du mode xtrace affiche le résultat de chaque commande
 #set -x
 # Gestion des erreurs
-trap 'ERREUR="${?}"; printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n"; exit "${ERREUR}"' ERR
+trap 'ERREUR="${?}";
+printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
+exit "${ERREUR}"' ERR
 
 ###############################################################################
 #                   ___                             __                        #
@@ -133,7 +135,9 @@ fermeture_terminal()
 
 # Permet de reste le signal d'erreur
 trap ERR
-trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}"' ERR
+trap 'ERREUR="${?}";
+gestion_erreurs "${LINENO}";
+exit "${ERREUR}"' ERR
 
 # Gestion des interruption CTRL-C
 trap 'interruption' INT
@@ -329,7 +333,10 @@ gestion_err_couleur()
 }
 
 trap ERR
-trap 'ERREUR="${?}"; gestion_err_couleur "${LINENO}"; exit "${ERREUR}"' ERR
+trap 'ERREUR="${?}";
+gestion_err_couleur "${LINENO}";
+exit "${ERREUR}"' ERR
+
 
 # }}}
 
