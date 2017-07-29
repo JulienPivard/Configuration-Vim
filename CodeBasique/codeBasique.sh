@@ -351,16 +351,16 @@ fonc_debogue()
 {
 
     printf "${SJAUNE}Fichier ${BASH_SOURCE}:${VIOLET}${1}${NEUTRE}\n"
-    printf "$INDEN"
+    printf "${INDEN}"
     printf "${SJAUNE}La commande en cours : ${VIOLET} "
     printf "%q" "${BASH_COMMAND}"
     printf "${NEUTRE} \n";
-    printf "$INDEN"
+    printf "${INDEN}"
     printf "${SJAUNE}Niveau de sous-shell : ${VIOLET} ${BASH_SUBSHELL} ${NEUTRE} \n"
 
     if [[ -n "${BASH_REMATCH}" ]]
     then
-        printf "$INDEN"
+        printf "${INDEN}"
         printf "${SJAUNE}Expressions matché [${VIOLET}${BASH_REMATCH}${SJAUNE}]"
         printf "${NEUTRE} \n";
     fi
