@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Jeudi 27 juillet[07] 2017
+# Dernière modification : Samedi 29 juillet[07] 2017
 
 # Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
 # Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
@@ -343,7 +343,7 @@ exit "${ERREUR}"' ERR
 # {{{ Fonction de Debug #
 #########################
 
-declare -r deboguage=1
+declare -r deboguage=0
 declare -r INDEN="                       "
 declare -r SEPAR="┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄───────────────────────────"
 
