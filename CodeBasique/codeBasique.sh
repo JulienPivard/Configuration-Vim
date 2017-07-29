@@ -370,7 +370,10 @@ fonc_debogue()
 
 if [[ "${deboguage}" == 1 ]]
 then
-trap 'ligne="${LINENO}"
+# DEBUG et RETURN ne sont pas hérité par défaut dans les fonctions
+# Active héritage
+    set -T
+    trap 'ligne="${LINENO}"
 printf "${SEPAR}\n${INDEN}"
 set +u
 if [[ -n "${FUNCNAME}" ]];
