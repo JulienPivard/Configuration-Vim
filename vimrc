@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Jeudi 27 juillet[07] 2017
+" Dernière modification : Vendredi 04 août[08] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -42,6 +42,7 @@ Plug 'vim-scripts/L9'
 Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
 Plug 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/nginx.vim'
 
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
