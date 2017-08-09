@@ -1,8 +1,16 @@
 <?php
-// Dernière modification : mercredi 08 juin[06] 2016
+// Dernière modification : Vendredi 11 août[08] 2017
 
 /**
+ * Petite explication du fichier @TODO
  * @author PIVARD Julien
+ * @license GPL-v3
+ * @version 0.1
+ * */
+
+declare( strict_types = 1 );
+
+/**
  * @package TODO
  * */
 class truc
@@ -39,7 +47,7 @@ class truc
      * @return string
      * @TODO
      * */
-    public function __toString()
+    public function __toString() : string
     {
 
         $debogage = "<p>Débogage de Utilisateur</p>";
@@ -51,7 +59,7 @@ class truc
     /**
      * Fonction statique que l'on appelle avec truc::foncStatic
      * */
-    public static function foncStatic()
+    public static function foncStatic() : void
     {
         self::$compteur++;
     }
