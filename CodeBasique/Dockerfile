@@ -2,7 +2,7 @@
 # docker build -t nomcontainer .
 
 FROM alpine:latest
-MAINTAINER PIVARD Julien pivardjulien@gmail.com
+MAINTAINER PIVARD Julien <pivardjulien@gmail.com>
 
 # Similaire à la commande cd
 WORKDIR /
@@ -14,6 +14,9 @@ ADD ./chemin/host /chemin/dans/docker
 # Pour ouvrir un port vers l'exterieur de docker
 EXPOSE 8080
 
+# Pour pouvoir exposer un volume vers l'extérieur.
+#VOLUME ["/chemin/dans/docker"]
+
 # Permet d'exécuter une suite de commande shell
 #RUN commande
 #RUN ["commande", "arguments"]
@@ -22,9 +25,6 @@ EXPOSE 8080
 # quelque soit la manière dont il est lancé
 #ENTRYPOINT commande
 #ENTRYPOINT ["commande", "arguments"]
-
-# Pour pouvoir exposer un volume vers l'extérieur.
-#VOLUME ["/chemin/dans/docker"]
 
 # Une commande exécuté au lancement du container
 #CMD ["commande", "arguments"]
