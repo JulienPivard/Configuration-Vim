@@ -1,8 +1,9 @@
 <?php
-// Dernière modification : Vendredi 11 août[08] 2017
+// Dernière modification : Lundi 14 août[08] 2017
 
 /**
  * Petite explication du fichier @TODO
+ *
  * @author PIVARD Julien
  * @license GPL-v3
  * @version 0.1
@@ -13,7 +14,7 @@ declare( strict_types = 1 );
 /**
  * @package TODO
  * */
-class truc
+class TRUC      // @TODO
 {
 
     /**
@@ -44,8 +45,9 @@ class truc
 
     /**
      * L'affichage pour le debogage.
+     *
      * @return string
-     * @TODO
+     * Toutes les données mise en forme.
      * */
     public function __toString() : string
     {
