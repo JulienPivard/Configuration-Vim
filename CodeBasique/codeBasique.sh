@@ -200,104 +200,58 @@ trap 'maj_taille' WINCH
 # {{{  Définition des couleurs     #
 ####################################
 
-NEUTRE=""
-M_GRAS=""
-D_SOUL=""
-F_SOUL=""
-INVERS=""
-M__DIM=""
+NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
-# Création des couleurs du front et du back
-declare -a COULEURS=()
 # Vérification de l'existence de la commande tput           #{{{
 if test_cmd_exist tput
 then
+    [[ `tput colors 2>/dev/null` -ge 8 ]] &&
+        declare -r NB_COULEURS=`tput colors` || declare -r NB_COULEURS=0
 
-    if [[ `tput colors 2>/dev/null` -ge 8 ]]
-    then
-        declare -r NB_COULEURS=`tput colors`
-    else
-        declare -r NB_COULEURS=0
-    fi
-
-    declare -r NEUTRE="`tput sgr 0`"
-
-    declare -r M_GRAS="`tput bold`"
-
-    declare -r D_SOUL="`tput smul`"
-    declare -r F_SOUL="`tput rmul`"
-
-    declare -r INVERS="`tput rev`"
-
-    declare -r M__DIM="`tput dim`"
-
-    declare -i POSITION=0
-    for i in 'f' 'b'
-    do
-        COMM="tput seta${i}"
-        for j in `seq 0 15`
-        do
-            COULEURS[$((j + POSITION))]="`${COMM} ${j}`"
-        done
-        POSITION=$((POSITION + 16))
-    done
-
+    declare -r NEUTRE="`tput sgr 0`" M_GRAS="`tput bold`" D_SOUL="`tput smul`"
+    declare -r F_SOUL="`tput rmul`"  INVERS="`tput rev`"  M__DIM="`tput dim`"
 else
-
-    for i in `seq 0 31`
-    do
-        COULEURS[${i}]=""
-    done
-
+    declare -r NB_COULEURS=0
 fi
 
 #}}}
 
-# Couleurs normale                          #{{{
-declare -r C___NOIR="${COULEURS[0]}"        # Noir
-declare -r C__ROUGE="${COULEURS[1]}"        # Rouge
-declare -r C___VERT="${COULEURS[2]}"        # Vert
-declare -r C__JAUNE="${COULEURS[3]}"        # Jaune
-declare -r C___BLEU="${COULEURS[4]}"        # Bleu
-declare -r C_VIOLET="${COULEURS[5]}"        # Violet
-declare -r C___CYAN="${COULEURS[6]}"        # Cyan
-declare -r C__BLANC="${COULEURS[7]}"        # Blanc
+# Définition des couleurs                   #{{{
+if [[ "${NB_COULEURS}" -gt 0 ]]
+then
+    declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
+    declare -r C___VERT="`tput setaf 2`" C__JAUNE="`tput setaf 3`"
+    declare -r C___BLEU="`tput setaf 4`" C_VIOLET="`tput setaf 5`"
+    declare -r C___CYAN="`tput setaf 6`" C__BLANC="`tput setaf 7`"
 
-#}}}
+    declare -r C___INOIR="`tput setaf 8`"  C__IROUGE="`tput setaf 9`"
+    declare -r C___IVERT="`tput setaf 10`" C__IJAUNE="`tput setaf 11`"
+    declare -r C___IBLEU="`tput setaf 12`" C_IVIOLET="`tput setaf 13`"
+    declare -r C___ICYAN="`tput setaf 14`" C__IBLANC="`tput setaf 15`"
 
-# Haute intensité                           #{{{
-declare -r C___INOIR="${COULEURS[8]}"       # Noir
-declare -r C__IROUGE="${COULEURS[9]}"       # Rouge
-declare -r C___IVERT="${COULEURS[10]}"      # Vert
-declare -r C__IJAUNE="${COULEURS[11]}"      # Jaune
-declare -r C___IBLEU="${COULEURS[12]}"      # Bleu
-declare -r C_IVIOLET="${COULEURS[13]}"      # Violet
-declare -r C___ICYAN="${COULEURS[14]}"      # Cyan
-declare -r C__IBLANC="${COULEURS[15]}"      # Blanc
+    declare -r C_SUR___NOIR="`tput setab 0`" C_SUR__ROUGE="`tput setab 1`"
+    declare -r C_SUR___VERT="`tput setab 2`" C_SUR__JAUNE="`tput setab 3`"
+    declare -r C_SUR___BLEU="`tput setab 4`" C_SUR_VIOLET="`tput setab 5`"
+    declare -r C_SUR___CYAN="`tput setab 6`" C_SUR__BLANC="`tput setab 7`"
 
-#}}}
+    declare -r C_SUR___INOIR="`tput setab 8`" C_SUR__IROUGE="`tput setab 9`"
+    declare -r C_SUR___IVERT="`tput setab 10`" C_SUR__IJAUNE="`tput setab 11`"
+    declare -r C_SUR___IBLEU="`tput setab 12`" C_SUR_IVIOLET="`tput setab 13`"
+    declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
+else
+    # Les couleurs sont mises à vide si tput n'est pas installé
+    declare -r C___NOIR="" C__ROUGE="" C___VERT="" C__JAUNE=""
+    declare -r C___BLEU="" C_VIOLET="" C___CYAN="" C__BLANC=""
 
-# Couleur de fond                           #{{{
-declare -r C_SUR___NOIR="${COULEURS[16]}"   # Noir
-declare -r C_SUR__ROUGE="${COULEURS[17]}"   # Rouge
-declare -r C_SUR___VERT="${COULEURS[18]}"   # Vert
-declare -r C_SUR__JAUNE="${COULEURS[19]}"   # Jaune
-declare -r C_SUR___BLEU="${COULEURS[20]}"   # Bleu
-declare -r C_SUR_VIOLET="${COULEURS[21]}"   # Violet
-declare -r C_SUR___CYAN="${COULEURS[22]}"   # Cyan
-declare -r C_SUR__BLANC="${COULEURS[23]}"   # Blanc
+    declare -r C___INOIR="" C__IROUGE="" C___IVERT="" C__IJAUNE=""
+    declare -r C___IBLEU="" C_IVIOLET="" C___ICYAN="" C__IBLANC=""
 
-#}}}
+    declare -r C_SUR___NOIR="" C_SUR__ROUGE="" C_SUR___VERT="" C_SUR__JAUNE=""
+    declare -r C_SUR___BLEU="" C_SUR_VIOLET="" C_SUR___CYAN="" C_SUR__BLANC=""
 
-# Couleur de fond haute intensité           #{{{
-declare -r C_SUR___INOIR="${COULEURS[24]}"  # Noir
-declare -r C_SUR__IROUGE="${COULEURS[25]}"  # Rouge
-declare -r C_SUR___IVERT="${COULEURS[26]}"  # Vert
-declare -r C_SUR__IJAUNE="${COULEURS[27]}"  # Jaune
-declare -r C_SUR___IBLEU="${COULEURS[28]}"  # Bleu
-declare -r C_SUR_IVIOLET="${COULEURS[29]}"  # Violet
-declare -r C_SUR___ICYAN="${COULEURS[30]}"  # Cyan
-declare -r C_SUR__IBLANC="${COULEURS[31]}"  # Blanc
+    declare -r C_SUR___INOIR="" C_SUR__IROUGE="" C_SUR___IVERT="" C_SUR__IJAUNE=""
+    declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
+fi
 
 #}}}
 
