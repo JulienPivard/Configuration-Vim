@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Samedi 29 juillet[07] 2017
+# Dernière modification : Mercredi 23 août[08] 2017
 
 # Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
 # Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
@@ -336,59 +336,6 @@ trap ERR
 trap 'ERREUR="${?}";
 gestion_err_couleur "${LINENO}";
 exit "${ERREUR}"' ERR
-
-# }}}
-
-#########################
-# {{{ Fonction de Debug #
-#########################
-
-declare -r deboguage=0
-declare -r INDEN="                       "
-declare -r SEPAR="┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄───────────────────────────"
-
-fonc_debogue()
-{
-
-    printf "${SJAUNE}Fichier ${BASH_SOURCE}:${VIOLET}${1}${NEUTRE}\n"
-    printf "${INDEN}"
-    printf "${SJAUNE}La commande en cours : ${VIOLET} "
-    printf "%q" "${BASH_COMMAND}"
-    printf "${NEUTRE} \n";
-    printf "${INDEN}"
-    printf "${SJAUNE}Niveau de sous-shell : ${VIOLET} ${BASH_SUBSHELL} ${NEUTRE} \n"
-
-    if [[ -n "${BASH_REMATCH}" ]]
-    then
-        printf "${INDEN}"
-        printf "${SJAUNE}Expressions matché [${VIOLET}${BASH_REMATCH}${SJAUNE}]"
-        printf "${NEUTRE} \n";
-    fi
-    printf "${SEPAR}"
-    printf "\n\n"
-}
-
-if [[ "${deboguage}" == 1 ]]
-then
-# DEBUG et RETURN ne sont pas hérité par défaut dans les fonctions
-# Active héritage
-    set -T
-    trap 'ligne="${LINENO}"
-printf "${SEPAR}\n${INDEN}"
-set +u
-if [[ -n "${FUNCNAME}" ]];
-then
-    printf "${SJAUNE}La fonction : "
-    printf "[${VIOLET}${FUNCNAME[0]:+${FUNCNAME[0]}()}${SJAUNE}]${NEUTRE}\n"
-    printf "${INDEN}${SJAUNE}appelée depuis la ligne : "
-    printf "[${VIOLET}${BASH_LINENO}${SJAUNE}] "
-    printf "${NEUTRE} \n${INDEN}";
-fi;
-fonc_debogue "${ligne}"
-set -u' DEBUG
-else
-    trap '' DEBUG
-fi
 
 # }}}
 
