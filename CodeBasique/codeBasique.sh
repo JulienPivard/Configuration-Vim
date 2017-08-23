@@ -135,7 +135,7 @@ fermeture_terminal()
 ###########################
 
 # Permet de reste le signal d'erreur
-trap ERR
+trap '' ERR
 trap 'ERREUR="${?}";
 gestion_erreurs "${LINENO}";
 exit "${ERREUR}"' ERR
@@ -287,7 +287,7 @@ gestion_err_couleur()
     afficher_erreur "\nLe script à subis une erreur ligne" "${1}"
 }
 
-trap ERR
+trap '' ERR
 trap 'ERREUR="${?}";
 gestion_err_couleur "${LINENO}";
 exit "${ERREUR}"' ERR
