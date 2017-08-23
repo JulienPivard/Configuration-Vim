@@ -346,6 +346,47 @@ exit "${ERREUR}"' ERR
 # {{{                   Code                       #
 ####################################################
 
+# fonction générales de fonctionnement      {{{
+separateur_section()
+{
+    echo >&2 "--- ${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
+}
+
+message_ok()
+{
+    printf >&2 "${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE}\n"
+}
+
+message_erreur()
+{
+    printf >&2 "${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
+}
+
+message_attention()
+{
+    printf >&2 "${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
+}
+
+message_avertissement()
+{
+    printf >&2 "${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
+}
+
+demander_utilisateur()
+{
+    printf >&2 "${*} (o/n)\n"
+    while read -r -n 1 -s reponse
+    do
+        [[ "${reponse}" = [OoYy] ]] && return 0
+        [[ "${reponse}" = [Nn] ]] && return 1
+    done
+}
+
+# }}}
+
 # fonction des options                      {{{
 afficher_aide()
 {
