@@ -13,6 +13,7 @@ set -u
 set -E
 # Permet de traiter les erreurs dans les pipeline avec la trap ERR
 set -o pipefail
+set -o posix
 # Activation du mode verbose affiche la commande qui va être exécuté
 #set -v
 # Activation du mode xtrace affiche le résultat de chaque commande
