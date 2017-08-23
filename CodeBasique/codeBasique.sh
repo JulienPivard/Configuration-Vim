@@ -346,11 +346,12 @@ exit "${ERREUR}"' ERR
 # {{{                   Code                       #
 ####################################################
 
+# fonction des options                      {{{
 afficher_aide()
 {
     declare -r NOM_SCRIPT=`basename "${0}"`
-    printf "${NOM_SCRIPT} [-h]\n"
-    printf "    -h --help\n        Affiche l'aide et quitte\n"
+    printf >&2 "${NOM_SCRIPT} [-h]\n"
+    printf >&2 "    -h --help\n        Affiche l'aide et quitte\n"
 }
 
 traitement_option_o()
@@ -366,6 +367,8 @@ traitement_option_u()
 
 # }}}
 
+# }}}
+
 ####################################################
 # {{{            Gestion des options               #
 ####################################################
@@ -373,7 +376,7 @@ traitement_option_u()
 #  Affiche l'aide si aucun arguments n'est donné
 if [[ "${#}" -eq 0 ]]
 then
-    printf "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
+    printf >&2 "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     afficher_aide
     exit "${EXIT_SUCCES}";
 fi
