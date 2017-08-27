@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 23 août[08] 2017
+# Dernière modification : Dimanche 27 août[08] 2017
 
 # Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
 # Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
@@ -158,9 +158,7 @@ trap 'nettoyage_fin_script' EXIT
 # {{{ Fonctions de gestions généraliste     #
 #############################################
 
-declare -i NB_COULEURS=0
-declare -i NB_COLONNES=0
-declare -i NB_LIGNES=0
+declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
 which_cmd()
 {
