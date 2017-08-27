@@ -1,5 +1,5 @@
 <?php
-// Dernière modification : Lundi 14 août[08] 2017
+// Dernière modification : Dimanche 27 août[08] 2017
 
 /**
  * Petite explication du fichier @TODO
@@ -75,5 +75,3 @@ class TRUC      // @TODO
     }
 
 }
-
-?>
