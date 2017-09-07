@@ -1,92 +1,112 @@
 #! /bin/bash
 # vim:foldmethod=marker:foldlevel=0
 
+#############################################
+# {{{ Fonctions de gestions généraliste     #
+#############################################
+
+which_cmd()
+{
+    which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
+}
+
+test_cmd_exist()
+{
+    which_cmd "${1}" >/dev/null 2>&1 && return 0
+    return 1
+}
+
+# }}}
+
 ####################################
 # {{{  Définition des couleurs     #
 ####################################
 
-# Couleurs normale
-declare -r noir='\e[0;30m'         # Noir
-declare -r rouge='\e[0;31m'        # Rouge
-declare -r vert='\e[0;32m'         # Vert
-declare -r jaune='\e[0;33m'        # Jaune
-declare -r bleu='\e[0;34m'         # Bleu
-declare -r violet='\e[0;35m'       # Violet
-declare -r cyan='\e[0;36m'         # Cyan
-declare -r blanc='\e[0;37m'        # Blanc
+NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
-# Gras
-declare -r gnoir='\e[1;30m'        # Noir
-declare -r grouge='\e[1;31m'       # Rouge
-declare -r gvert='\e[1;32m'        # Vert
-declare -r gjaune='\e[1;33m'       # Jaune
-declare -r gbleu='\e[1;34m'        # Bleu
-declare -r gviolet='\e[1;35m'      # Violet
-declare -r gcyan='\e[1;36m'        # Cyan
-declare -r gblanc='\e[1;37m'       # Blanc
+# Vérification de l'existence de la commande tput           #{{{
+if test_cmd_exist tput
+then
+    [[ `tput colors 2>/dev/null` -ge 8 ]] &&
+        declare -r NB_COULEURS=`tput colors` || declare -r NB_COULEURS=0
 
-# souligné
-declare -r snoir='\e[4;30m'        # Noir
-declare -r srouge='\e[4;31m'       # Rouge
-declare -r svert='\e[4;32m'        # Vert
-declare -r sjaune='\e[4;33m'       # Jaune
-declare -r sbleu='\e[4;34m'        # Bleu
-declare -r sviolet='\e[4;35m'      # Violet
-declare -r scyan='\e[4;36m'        # Cyan
-declare -r sblanc='\e[4;37m'       # Blanc
+    declare -r NEUTRE="`tput sgr 0`" M_GRAS="`tput bold`" D_SOUL="`tput smul`"
+    declare -r F_SOUL="`tput rmul`"  INVERS="`tput rev`"  M__DIM="`tput dim`"
+else
+    declare -r NB_COULEURS=0
+fi
 
-# Couleur de fond
-declare -r sur_noir='\e[30;40m'       # Noir
-declare -r sur_rouge='\e[30;41m'      # Rouge
-declare -r sur_vert='\e[30;42m'       # Vert
-declare -r sur_jaune='\e[30;43m'      # Jaune
-declare -r sur_bleu='\e[30;44m'       # Bleu
-declare -r sur_violet='\e[30;45m'     # Violet
-declare -r sur_cyan='\e[30;46m'       # Cyan
-declare -r sur_blanc='\e[30;47m'      # Blanc
+#}}}
 
-# Haute intensité
-declare -r inoir='\e[0;90m'        # Noir
-declare -r irouge='\e[0;91m'       # Rouge
-declare -r ivert='\e[0;92m'        # Vert
-declare -r ijaune='\e[0;93m'       # Jaune
-declare -r ibleu='\e[0;94m'        # Bleu
-declare -r iviolet='\e[0;95m'      # Violet
-declare -r icyan='\e[0;96m'        # Cyan
-declare -r iblanc='\e[0;97m'       # Blanc
+# Définition des couleurs                   #{{{
+if [[ "${NB_COULEURS}" -gt 0 ]]
+then
+    declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
+    declare -r C___VERT="`tput setaf 2`" C__JAUNE="`tput setaf 3`"
+    declare -r C___BLEU="`tput setaf 4`" C_VIOLET="`tput setaf 5`"
+    declare -r C___CYAN="`tput setaf 6`" C__BLANC="`tput setaf 7`"
 
-# Gras haute intensité
-declare -r ginoir='\e[1;90m'       # Noir
-declare -r girouge='\e[1;91m'      # Rouge
-declare -r givert='\e[1;92m'       # Vert
-declare -r gijaune='\e[1;93m'      # Jaune
-declare -r gibleu='\e[1;94m'       # Bleu
-declare -r giviolet='\e[1;95m'     # Violet
-declare -r gicyan='\e[1;96m'       # Cyan
-declare -r giblanc='\e[1;97m'      # Blanc
+    declare -r C___INOIR="`tput setaf 8`"  C__IROUGE="`tput setaf 9`"
+    declare -r C___IVERT="`tput setaf 10`" C__IJAUNE="`tput setaf 11`"
+    declare -r C___IBLEU="`tput setaf 12`" C_IVIOLET="`tput setaf 13`"
+    declare -r C___ICYAN="`tput setaf 14`" C__IBLANC="`tput setaf 15`"
 
-# Couleur de fond haute intensité
-declare -r sur_inoir='\e[30;100m'   # Noir
-declare -r sur_irouge='\e[30;101m'  # Rouge
-declare -r sur_ivert='\e[30;102m'   # Vert
-declare -r sur_ijaune='\e[30;103m'  # Jaune
-declare -r sur_ibleu='\e[30;104m'   # Bleu
-declare -r sur_iviolet='\e[30;105m' # Violet
-declare -r sur_icyan='\e[30;106m'   # Cyan
-declare -r sur_iblanc='\e[30;107m'  # Blanc
+    declare -r C_SUR___NOIR="`tput setab 0`" C_SUR__ROUGE="`tput setab 1`"
+    declare -r C_SUR___VERT="`tput setab 2`" C_SUR__JAUNE="`tput setab 3`"
+    declare -r C_SUR___BLEU="`tput setab 4`" C_SUR_VIOLET="`tput setab 5`"
+    declare -r C_SUR___CYAN="`tput setab 6`" C_SUR__BLANC="`tput setab 7`"
 
-declare -r neutre='\e[0;m'
+    declare -r C_SUR___INOIR="`tput setab 8`" C_SUR__IROUGE="`tput setab 9`"
+    declare -r C_SUR___IVERT="`tput setab 10`" C_SUR__IJAUNE="`tput setab 11`"
+    declare -r C_SUR___IBLEU="`tput setab 12`" C_SUR_IVIOLET="`tput setab 13`"
+    declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
+else
+    # Les couleurs sont mises à vide si tput n'est pas installé
+    declare -r C___NOIR="" C__ROUGE="" C___VERT="" C__JAUNE=""
+    declare -r C___BLEU="" C_VIOLET="" C___CYAN="" C__BLANC=""
+
+    declare -r C___INOIR="" C__IROUGE="" C___IVERT="" C__IJAUNE=""
+    declare -r C___IBLEU="" C_IVIOLET="" C___ICYAN="" C__IBLANC=""
+
+    declare -r C_SUR___NOIR="" C_SUR__ROUGE="" C_SUR___VERT="" C_SUR__JAUNE=""
+    declare -r C_SUR___BLEU="" C_SUR_VIOLET="" C_SUR___CYAN="" C_SUR__BLANC=""
+
+    declare -r C_SUR___INOIR="" C_SUR__IROUGE="" C_SUR___IVERT="" C_SUR__IJAUNE=""
+    declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
+fi
+
+# }}}
 
 # }}}
 
 #echo "Pour installer avec le support de clipboard installer xorg-dev"
 
-if [[ -e "./src/vim" ]]; then
-    printf "${sur_jaune}    Nettoyage de la compilation précédente.    ${neutre}\n"
+# Fonction affiche_section       #{{{
+affiche_section()
+{
+    declare -r COUL="${1}"
+    declare -r t="${2}"
+    declare -i largeur=80
+    declare -i taille_txt="${#t}"
+    largeur=$(( ( largeur - taille_txt ) / 2 ))
+    printf "${COUL}"
+    eval "printf '%.s ' {1..$largeur}"
+    printf "${t}"
+    eval "printf '%.s ' {1..$largeur}"
+    printf "${NEUTRE}\n"
+}
+
+#}}}
+
+printf "\n\n"
+
+if [[ -e "./src/vim" ]]
+then
+    affiche_section "${C_SUR__JAUNE}${C___NOIR}" "Nettoyage de la compilation précédente"
     make distclean
 fi
 
-printf "${sur_vert}    Configuration de vim    ${neutre}\n"
+affiche_section "${C_SUR___VERT}${C___NOIR}" "Configuration de vim"
 
 ./configure --with-features=huge \
             --with-compiledby=Asmodee \
@@ -99,7 +119,8 @@ printf "${sur_vert}    Configuration de vim    ${neutre}\n"
             --enable-fail-if-missing
 erreur=$?
 
-if [[ $erreur -eq 0 ]]; then
-    printf "${sur_vert}    Compilation de vim    ${neutre}\n"
+if [[ "${erreur}" -eq 0 ]]
+then
+    affiche_section "${C_SUR___VERT}${C___NOIR}" "Compilation de vim"
     make
 fi
