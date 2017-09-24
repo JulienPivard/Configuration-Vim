@@ -1,8 +1,21 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : samedi 23 septembre[09] 2017
+" Dernière modification : Dimanche 24 septembre[09] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
+
+" Définie les conditions de compilation de YCM                              "{{{
+" info est un dictionnaire avec 3 champs.
+" - name:   Le nom du plugin
+" - status: 'installed', 'updated', ou 'unchanged'
+" - force:  Mis à vrais si PlugInstall! ou PlugUpdate!
+function! BuildYCM( info )
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer
+  endif
+endfunction
+
+" }}}
 
 " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
@@ -14,7 +27,7 @@ set nocompatible                        " Casser compatible avec vielle version
 call plug#begin( '~/.vim/bundle/' )
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : function( 'BuildYCM' ) }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
