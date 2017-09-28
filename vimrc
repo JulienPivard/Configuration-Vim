@@ -1,6 +1,6 @@
 set nocompatible                        " Casser compatible avec vielle version
 
-" Dernière modification : Dimanche 24 septembre[09] 2017
+" Dernière modification : jeudi 28 septembre[09] 2017
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -1182,7 +1182,9 @@ let g:tagbar_autoshowtag = 0
 let g:tagbar_width = 55
 let g:tagbar_sort = 0
 let g:tagbar_systemenc = 'utf-8'
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+if system( 'uname' ) =~? 'darwin'
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+endif
 
 "}}}
 
