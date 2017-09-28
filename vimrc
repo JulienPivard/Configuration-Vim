@@ -828,7 +828,7 @@ augroup squelette                                                           "{{{
     autocmd BufNewFile *.js                 0r ~/.vim/CodeBasique/codeBasique.js
     autocmd BufNewFile *.php                0r ~/.vim/CodeBasique/codeBasique.php
     autocmd BufNewFile *.me                 0r ~/.vim/CodeBasique/codeBasique.me
-    autocmd BufNewFile *.1                  0r ~/.vim/CodeBasique/codeBasique.1
+    autocmd BufNewFile *.roff               0r ~/.vim/CodeBasique/codeBasique.1
     autocmd BufNewFile *.pl                 0r ~/.vim/CodeBasique/codeBasique.pl
     autocmd BufNewFile client.cpp           0r ~/.vim/CodeBasique/client.cpp
     autocmd BufNewFile *.cpp                call ConfigurationNouveauFichierCPP()
@@ -899,8 +899,8 @@ augroup END
 " Création d'une page de manuel avec ajout du nom automatiquement
 augroup manuel                                                              "{{{
     autocmd!
-    autocmd BufNewFile *.1      :%substitute?NOMCOMMANDE?\=expand( '%:t:r' )?
-    autocmd BufNewFile *.1      :exe '%substitute/DATE/' . strftime( '%d %B %Y' ) . '/e'
+    autocmd BufNewFile *.roff   :%substitute?NOMCOMMANDE?\=expand( '%:t:r' )?
+    autocmd BufNewFile *.roff   :exe '%substitute/DATE/' . strftime( '%d %B %Y' ) . '/e'
 augroup END
 
 "}}}
