@@ -1,6 +1,5 @@
 " Dernière modification : jeudi 28 septembre[09] 2017
-" La mise à jour de vim-plug se fait
-" par la commande :PlugUpgrade
+
 call plug#begin( '~/.vim/bundle/' )
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'

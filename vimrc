@@ -21,6 +21,8 @@ endfunction
 " (=^.^=)(=O.o=)(=o.o=)(=-.-=)(=0.0=)(=~.~=)(=@.@=)(=o.o=)(=o.O=)(=O.O=)(=^.^=) "
 " {{{                      Début des réglages de Vim-Plug                       "
 " ----------------------------------------------------------------------------- "
+" La mise à jour de vim-plug se fait
+" par la commande :PlugUpgrade
 
 source ~/.vim/parties_vimrc/plugins_vim_plug.vim
 
