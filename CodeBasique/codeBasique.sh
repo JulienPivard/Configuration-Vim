@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 27 août[08] 2017
+# Dernière modification : jeudi 28 septembre[09] 2017
 
 # Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
 # Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
@@ -99,31 +99,31 @@ declare -r E_OPT_NON_TRAITEE=86
 #####################################
 
 # Réception d'un signal pour quitter l'app normalement
-fin()
+function fin()
 {
     exit
 }
 
 # Le script à été interrompu par l'utilisateur
-interruption()
+function interruption()
 {
     exit
 }
 
 # Une erreur c'est produit durant l'exécution
-gestion_erreurs()
+function gestion_erreurs()
 {
     printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
 }
 
 # On ferme le script. Cette fonction sera exécutée en dernière
-nettoyage_fin_script()
+function nettoyage_fin_script()
 {
     exit
 }
 
 # Le terminal qui a lancé le processus à été fermé
-fermeture_terminal()
+function fermeture_terminal()
 {
     exit
 }
@@ -160,12 +160,12 @@ trap 'nettoyage_fin_script' EXIT
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
-which_cmd()
+function which_cmd()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
-test_cmd_exist()
+function test_cmd_exist()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0
     return 1
@@ -176,7 +176,7 @@ test_cmd_exist()
 ######################################################
 # {{{ Gestion du redimensionnement de la fenêtre     #
 ######################################################
-maj_taille()
+function maj_taille()
 {
     if test_cmd_exist tput
     then
@@ -257,7 +257,7 @@ fi
 # L'argument 1 affiche le texte en rouge
 # L'argument 2 est fait pour afficher le contenu d'une variable
 # L'argument 3 affiche le texte en rouge à la suite de l'argument 2
-afficher_erreur()
+function afficher_erreur()
 {
     [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
     if [[ "${#}" -ge 2 ]]
@@ -280,7 +280,7 @@ afficher_erreur()
 #}}}
 
 # Une erreur c'est produit durant l'exécution
-gestion_err_couleur()
+function gestion_err_couleur()
 {
     afficher_erreur "\nLe script à subis une erreur ligne" "${1}"
 }
@@ -299,35 +299,35 @@ exit "${ERREUR}"' ERR
 ####################################################
 
 # fonction générales de fonctionnement      {{{
-separateur_section()
+function separateur_section()
 {
     echo >&2 "--- ${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
 }
 
-message_ok()
+function message_ok()
 {
     printf >&2 "${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE}\n"
 }
 
-message_erreur()
+function message_erreur()
 {
     printf >&2 "${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
 }
 
-message_attention()
+function message_attention()
 {
     printf >&2 "${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
 }
 
-message_avertissement()
+function message_avertissement()
 {
     printf >&2 "${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
 }
 
-demander_utilisateur()
+function demander_utilisateur()
 {
     printf >&2 "${*} (o/n)\n"
     while read -r -n 1 -s reponse
@@ -340,19 +340,19 @@ demander_utilisateur()
 # }}}
 
 # fonction des options                      {{{
-afficher_aide()
+function afficher_aide()
 {
     declare -r NOM_SCRIPT=`basename "${0}"`
     printf >&2 "${NOM_SCRIPT} [-h]\n"
     printf >&2 "    -h --help\n        Affiche l'aide et quitte\n"
 }
 
-traitement_option_o()
+function traitement_option_o()
 {
     printf "Option o\n"
 }
 
-traitement_option_u()
+function traitement_option_u()
 {
     local ARGUMENT="${1}"
     printf "Option u = ${ARGUMENT}\n"
