@@ -433,3 +433,5 @@ function! ColonneGaucheToggle()                                             "{{{
 endfunction
 
 "}}}
+
+" vim:foldlevel=0:foldmethod=marker

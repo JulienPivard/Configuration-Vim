@@ -108,3 +108,5 @@ function! StatModifications()                                               "{{{
 endfunction
 
 "}}}
+
+" vim:foldlevel=0:foldmethod=marker

@@ -42,3 +42,5 @@ Plug 'vim-scripts/hexHighlight.vim'
 
 call plug#end()
 filetype plugin indent on
+
+" vim:foldlevel=0:foldmethod=marker

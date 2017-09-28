@@ -314,3 +314,5 @@ endtry
 let g:interstellaire_termcolors = system( 'tput colors' )
 
 "}}}
+
+" vim:foldlevel=0:foldmethod=marker

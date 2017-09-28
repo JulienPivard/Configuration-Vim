@@ -201,3 +201,5 @@ augroup pencil                                                              "{{{
 augroup END
 
 "}}}
+
+" vim:foldlevel=0:foldmethod=marker

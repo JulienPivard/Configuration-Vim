@@ -113,3 +113,5 @@ nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
 "}}}
+
+" vim:foldlevel=0:foldmethod=marker
