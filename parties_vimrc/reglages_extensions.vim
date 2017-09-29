@@ -1,4 +1,4 @@
-" Dernière modification : Jeudi 28 septembre[09] 2017
+" Dernière modification : Samedi 30 septembre[09] 2017
 
 scriptencoding utf-8
 
@@ -39,7 +39,8 @@ let g:syntastic_python_checkers = ['python']    " Pour ne pas avoir le checker d
 " LaTeX
 let g:syntastic_tex_checkers = ['lacheck']      " Pour ne pas avoir le checker d'accent.
 " ada
-let g:syntastic_ada_compiler_options = '-gnatif'
+let g:syntastic_ada_compiler_options = '-gnatif -gnatc'
+let g:syntastic_ada_check_header = 1
 " cpp
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'g++'
