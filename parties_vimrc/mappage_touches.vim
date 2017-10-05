@@ -1,4 +1,4 @@
-" Dernière modification : jeudi 28 septembre[09] 2017
+" Dernière modification : Jeudi 05 octobre[10] 2017
 
 " Mappage des touches utiles
 " Pour inverser une option booléenne utiliser set option!
@@ -37,8 +37,6 @@ noremap! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
 nnoremap gy :YcmGenerateConfig -f<Return>
 nnoremap gh :call MontrerGroupeSyntax()<Return>
 nnoremap gp :setlocal paste! paste?<Return>
-
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>alignTabulation()<Return>a
 
 " Change le caractère pour déclencher le mapping en mode commande.
 let mapleader = 'ù'
