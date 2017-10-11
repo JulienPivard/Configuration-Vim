@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : jeudi 28 septembre[09] 2017
+# Dernière modification : Mercredi 11 octobre[10] 2017
 
 # Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
 # Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
@@ -80,16 +80,16 @@ exit "${ERREUR}"' ERR
 #########################################
 #{{{ Constante de sortie et d'erreur    #
 #########################################
-declare -r EXIT_SUCCES=0
+declare -ri EXIT_SUCCES=0
 
-declare -r E_ARG_AFF_ERR_M=80
+declare -ri E_ARG_AFF_ERR_M=80
 
-declare -r E_ARG_SUPERFLUS_OPT_LONGUE=81
-declare -r E_OPT_LONGUE_NECESSITE_ARG=82
-declare -r E_OPT_LONGUE_INCONNUE=83
-declare -r E_OPT_NECESSITE_ARG=84
-declare -r E_OPT_INCONNUE=85
-declare -r E_OPT_NON_TRAITEE=86
+declare -ri E_ARG_SUPERFLUS_OPT_LONGUE=81
+declare -ri E_OPT_LONGUE_NECESSITE_ARG=82
+declare -ri E_OPT_LONGUE_INCONNUE=83
+declare -ri E_OPT_NECESSITE_ARG=84
+declare -ri E_OPT_INCONNUE=85
+declare -ri E_OPT_NON_TRAITEE=86
 
 
 #}}}
@@ -204,12 +204,12 @@ NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 if test_cmd_exist tput
 then
     [[ `tput colors 2>/dev/null` -ge 8 ]] &&
-        declare -r NB_COULEURS=`tput colors` || declare -r NB_COULEURS=0
+        declare -ri NB_COULEURS=`tput colors` || declare -ri NB_COULEURS=0
 
     declare -r NEUTRE="`tput sgr 0`" M_GRAS="`tput bold`" D_SOUL="`tput smul`"
     declare -r F_SOUL="`tput rmul`"  INVERS="`tput rev`"  M__DIM="`tput dim`"
 else
-    declare -r NB_COULEURS=0
+    declare -ri NB_COULEURS=0
 fi
 
 #}}}
