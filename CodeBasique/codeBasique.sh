@@ -4,8 +4,6 @@
 
 # Dernière modification : Mercredi 11 octobre[10] 2017
 
-# Trouver les variables non sécurisé [^"]\$\{?[a-zA-Z0-9?*#][a-zA-Z0-9?*#_]*\}?[^"]?
-# Trouver les variables qui ne sont pas entouré d'accolades \$[a-zA-Z0-9?*#][a-zA-Z0-9*?#_]*
 # Arrête le script si une variable non initialisé est utilisée
 set -u
 # Équivalent à set -o errtrace pour s'assurer que les trap sont bien
@@ -180,11 +178,9 @@ function maj_taille()
 {
     if test_cmd_exist tput
     then
-        NB_LIGNES=`tput lines`
-        NB_COLONNES=`tput cols`
+        NB_LIGNES=`tput lines` NB_COLONNES=`tput cols`
     else
-        NB_LIGNES=-1
-        NB_COLONNES=-1
+        NB_LIGNES=-1 NB_COLONNES=-1
     fi
 }
 
