@@ -1,4 +1,4 @@
-" Dernière modification : jeudi 28 septembre[09] 2017
+" Dernière modification : Mardi 17 octobre[10] 2017
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -14,6 +14,9 @@ augroup codeSourceAda                                                       "{{{
     autocmd!
     autocmd Filetype ada setlocal textwidth=79
     autocmd Filetype ada setlocal colorcolumn=80
+    autocmd Filetype ada setlocal softtabstop=3
+    autocmd Filetype ada setlocal tabstop=3
+    autocmd Filetype ada setlocal shiftwidth=3
 augroup END
 
 "}}}
