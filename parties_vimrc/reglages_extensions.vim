@@ -307,6 +307,7 @@ try
     Arpeggio noremap  jk <Esc>
     Arpeggio noremap! jk <Esc>
 catch
+    echom "Problème avec le plugin arpegio."
 endtry
 
 "}}}
