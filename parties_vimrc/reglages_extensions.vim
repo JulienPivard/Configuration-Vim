@@ -1,4 +1,4 @@
-" Dernière modification : Mardi 17 octobre[10] 2017
+" Dernière modification : Dimanche 22 octobre[10] 2017
 
 scriptencoding utf-8
 
@@ -257,19 +257,19 @@ let g:ada_default_compiler = 'gnat'
 " Réglages pour vim-pencil                                                  "{{{
 " -----------------------
 let g:pencil#autoformat_config = {
-            \ 'markdown': {
-            \     'black' : [
-            \         'htmlH[0-9]',
-            \         'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
-            \         'markdown(FencedCodeBlock|InlineCode)',
-            \         'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
-            \         'mmdTable[A-Za-z0-9]*',
-            \         ],
-            \     'white': [
-            \         'markdown(Code|Link)',
-            \         ],
-            \     },
-            \ }
+    \ 'markdown': {
+    \     'black' : [
+    \         'htmlH[0-9]',
+    \         'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
+    \         'markdown(FencedCodeBlock|InlineCode)',
+    \         'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
+    \         'mmdTable[A-Za-z0-9]*',
+    \         ],
+    \     'white': [
+    \         'markdown(Code|Link)',
+    \         ],
+    \     },
+    \ }
 
 "}}}
 
@@ -290,12 +290,12 @@ let g:pencil#autoformat_config = {
 " -----------------------
 " Réglage pour ctrlP                                                        "{{{
 " -----------------------
-let g:ctrlp_custom_ignore = {
-\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-\ 'file': '\v\.(exe|so|dll)$',
-\ }
 let g:ctrlp_extensions = [ 'autoignore' ]
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ }
 
 "}}}
 
