@@ -1,9 +1,9 @@
 // Auteur : Pivard Julien
-// Dernière modification : mercredi 08 juin[06] 2016
+// Dernière modification : Lundi 23 octobre[10] 2017
 
 #include <stdio.h>
 
-//  (=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)
+/*  (=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)  */
 
 int main( int argc, char **argv )
 {
