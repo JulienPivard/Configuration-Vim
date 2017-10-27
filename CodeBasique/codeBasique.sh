@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 11 octobre[10] 2017
+# Dernière modification : vendredi 27 octobre[10] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -278,7 +278,7 @@ function afficher_erreur()
 # Une erreur c'est produit durant l'exécution
 function gestion_err_couleur()
 {
-    afficher_erreur "\nLe script à subis une erreur ligne" "${1}"
+    afficher_erreur '\nLe script à subis une erreur ligne' "${1}"
 }
 
 trap '' ERR
