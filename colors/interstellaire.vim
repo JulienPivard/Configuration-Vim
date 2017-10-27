@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  Lundi 15 août[08] 2016
+" Last Change:  vendredi 27 octobre[10] 2017
 " Created:      1er janvier 2016
 
 "   @@@@@@    @@@@@@   @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@@
@@ -30,6 +30,8 @@ if exists('syntax_on')
   syntax reset
 endif
 let colors_name = 'interstellaire'
+
+let g:is_posix=1
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " }}}
