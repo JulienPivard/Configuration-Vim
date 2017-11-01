@@ -116,6 +116,8 @@ endfunction
 " sinon c'est le nom du fichier sans majuscule
 function! ExistMakeFileC()                                                  "{{{
 
+    let g:load_doxygen_syntax = 1
+    setlocal syntax=c.doxygen
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
         setlocal makeprg=make
