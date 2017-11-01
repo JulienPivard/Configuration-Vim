@@ -1,4 +1,4 @@
-" Dernière modification : Jeudi 05 octobre[10] 2017
+" Dernière modification : Mercredi 01 novembre[11] 2017
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -118,12 +118,16 @@ function! ExistMakeFileC()                                                  "{{{
 
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
-        let $nomFichier = substitute( split( getcwd(), '/' )[-1], "\\<\\u", "\\l\\0", "" )
         setlocal makeprg=make
         noremap  <buffer> <S-F9>        :make clean<Return>
         noremap! <buffer> <S-F9>  <Esc> :make clean<Return>
-        noremap  <buffer> <F10>         :!./$nomFichier<Space>
-        noremap! <buffer> <F10>   <Esc> :!./$nomFichier<Space>
+        if filereadable( 'client' )
+            noremap  <buffer> <F10>         :!./client<Space>
+            noremap! <buffer> <F10>   <Esc> :!./client<Space>
+        elseif filereadable( 'bin/Release/client' )
+            noremap  <buffer> <F10>         :!./bin/Release/client<Space>
+            noremap! <buffer> <F10>   <Esc> :!./bin/Release/client<Space>
+        endif
 
     else
 
