@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  vendredi 27 octobre[10] 2017
+" Last Change:  Mercredi 01 novembre[11] 2017
 " Created:      1er janvier 2016
 
 "   @@@@@@    @@@@@@   @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@@
@@ -418,8 +418,9 @@ exe 'highlight cppStructure'        . s:forme . s:underline                 . s:
 
 exe 'highlight doxygenErrorComment' . s:forme                               . s:texte . s:blanc             . s:fond . s:rougesombre
 exe 'highlight doxygenParam'        . s:forme                               . s:texte . s:cyansombre        . s:fond . s:none
-exe 'highlight doxygenSpecial'      . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
-exe 'highlight doxygenBrief'        . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
+exe 'highlight doxygenSpecial'      . s:forme . s:bold                      . s:texte . s:gris              . s:fond . s:none
+exe 'highlight doxygenBrief'        . s:forme . s:bold                      . s:texte . s:gris              . s:fond . s:none
+exe 'highlight doxygenComment'      . s:forme                               . s:texte . s:bleuclair         . s:fond . s:none
 highlight link doxygenSpecialOnelineDesc    doxygenSpecial
 highlight link doxygenSmallSpecial          doxygenParam
 highlight link doxygenBOther                doxygenParam
