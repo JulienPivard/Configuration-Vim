@@ -1,4 +1,4 @@
-" Dernière modification : jeudi 28 septembre[09] 2017
+" Dernière modification : Mercredi 01 novembre[11] 2017
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -25,7 +25,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-scripts/FSwitch', { 'for' : ['ada', 'cpp', 'hpp'] }
+Plug 'vim-scripts/FSwitch', { 'for' : ['ada', 'cpp', 'hpp', 'c', 'h'] }
 Plug 'vim-scripts/FuzzyFinder'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/SpellCheck'

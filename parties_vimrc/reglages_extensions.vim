@@ -1,4 +1,4 @@
-" Dernière modification : Dimanche 22 octobre[10] 2017
+" Dernière modification : Mercredi 01 novembre[11] 2017
 
 scriptencoding utf-8
 
@@ -178,6 +178,18 @@ augroup fichierCppCode
     autocmd!
     autocmd BufEnter *.cpp let b:fswitchdst  = 'hpp'
     autocmd BufEnter *.cpp let b:fswitchlocs = 'reg:|src|src/include|'
+augroup END
+" Réglages de FSwitch pour les h
+augroup fichierHHeader
+    autocmd!
+    autocmd BufEnter *.h let b:fswitchdst  = 'c'
+    autocmd BufEnter *.h let b:fswitchlocs = 'reg:|src/include|src|'
+augroup END
+" Réglages de FSwitch pour les c
+augroup fichierCCode
+    autocmd!
+    autocmd BufEnter *.c let b:fswitchdst  = 'h'
+    autocmd BufEnter *.c let b:fswitchlocs = 'reg:|src|src/include|'
 augroup END
 " Réglage de FSwitch pour les adb
 augroup fichierCorpAda
