@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : vendredi 27 octobre[10] 2017
+# Dernière modification : Jeudi 09 novembre[11] 2017
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -255,7 +255,7 @@ fi
 # L'argument 3 affiche le texte en rouge à la suite de l'argument 2
 function afficher_erreur()
 {
-    [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
+    [[ -n "${1}" ]] && local -r AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
     if [[ "${#}" -ge 2 ]]
     then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
@@ -338,7 +338,7 @@ function demander_utilisateur()
 # fonction des options                      {{{
 function afficher_aide()
 {
-    declare -r NOM_SCRIPT=`basename "${0}"`
+    local -r NOM_SCRIPT=`basename "${0}"`
     printf >&2 "${NOM_SCRIPT} [-h]\n"
     printf >&2 "    -h --help\n        Affiche l'aide et quitte\n"
 }
@@ -350,7 +350,7 @@ function traitement_option_o()
 
 function traitement_option_u()
 {
-    local ARGUMENT="${1}"
+    local -r ARGUMENT="${1}"
     printf "Option u = ${ARGUMENT}\n"
 }
 
