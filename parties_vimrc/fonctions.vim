@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 01 novembre[11] 2017
+" Dernière modification : mardi 02 janvier[01] 2018
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -350,6 +350,8 @@ function! MacrosLatexSpecifique()                                           "{{{
         noremap! <buffer> <S-F8>  <Esc> :!make index<Return>
         noremap  <buffer> <S-F9>        :!make clean<Return>
         noremap! <buffer> <S-F9>  <Esc> :!make clean<Return>
+        noremap  <buffer> <F10>         :!make run<Return>
+        noremap! <buffer> <F10>   <Esc> :!make run<Return>
 
     else
 
@@ -358,11 +360,10 @@ function! MacrosLatexSpecifique()                                           "{{{
         noremap! <buffer> <S-F8>  <Esc> :!makeindex %<.idx<Return>
         noremap  <buffer> <S-F9>        :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
         noremap! <buffer> <S-F9>  <Esc> :!rm -f %<.out %<.log %<.aux %<.toc %<.dvi %<.lof %<.lot %<.bbl %<.blg %<.idx %<.ilg %<.ind<Return>
+        noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
+        noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
 
     endif
-
-    noremap  <buffer> <F10>         :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
-    noremap! <buffer> <F10>   <Esc> :call system( NomLecteurPDF() . " " . expand( '%<' ) . '.pdf &' )<Return>
 
     if filereadable( 'bibliographie.bib' )
         noremap  <buffer> <S-F11>       :!bibtex %< <Return>
