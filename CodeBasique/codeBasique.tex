@@ -1,7 +1,7 @@
 \documentclass[a4paper, 10pt, onecolumn, draft]{article}
 % vim: foldmethod=marker:foldlevel=0:
 
-% Dernière modification : Samedi 25 février[02] 2017
+% Dernière modification : Lundi 12 février[02] 2018
 
 %\documentclass[a4paper, 10pt, onecolumn, draft]{book}
 %\documentclass[a4paper, 10pt, onecolumn, draft]{report}
@@ -232,6 +232,35 @@
     %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Personnalisation des titres        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Charge le package avec le contenu du titre en             %{{{
+% explicte avec #1
+%\usepackage[explicit]{titlesec}
+%
+%% block : Tout le titre et son numéro dans un seul bloc.
+%\titleformat{\section}[block]%
+%% description du style qui va s’appliquer au titre en entier, label et texte
+%{\normalfont\bfseries\Large}%
+%{% description du style qui s’applique seulement au label du titre
+%    \titlerule[1pt]\\%
+%    \vspace{.5ex}%
+%    \thesection%
+%}
+%% espace qui sépare le label du titre de son texte.
+%{1em}%
+%% description du style qui s’applique au texte du titre,
+%{#1}%
+%% commandes à exécuter à la fin du titre
+%[%
+%    \vspace{-2ex}%
+%    \rule{\textwidth}{1pt}%
+%]
+%
+%\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus.2ex}{2.3ex plus.2ex}
+    %}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Pour avoir des liens cliquable     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ce package doit toujours être chargé en dernier           %{{{
@@ -253,13 +282,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Quand la forme se répète utilisez une macro.              %{{{
 % La/les valeurs par défaut s'applique toujours aux premiers arguments.
-% Une nouvelle commande : \newcommand{\nomcommande}[nbarg][valdefaut]{definition}
-\newcommand{\titre}{Titre}
-\newcommand{\auteur}{\textsc{Pivard} Julien}
-\newcommand{\nom}[1]{\emph{#1}}
-\newcommand{\oldstyle}[1]
+% Pour des newcommandes courte si oublie d'accolade l'erreur
+% sera plus facile à trouver.
+% Une nouvelle commande : \newcommand*{\nomcommande}[nbarg][valdefaut]{definition}
+\newcommand*{\titre}{Titre}
+\newcommand*{\auteur}{\textsc{Pivard} Julien}
+\newcommand*{\nom}[1]{\emph{#1}}
+\newcommand*{\oldstyle}[1]
 {%Pour avoir un autre affichage des nombres
-    {\fontspec[Numbers={Proportional,OldStyle}]{TeX Gyre Adventor}#1}
+    {\fontspec[Numbers={Proportional,OldStyle}]{TeX Gyre Adventor}#1}%
 }
     %}}}
 
