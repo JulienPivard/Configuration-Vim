@@ -1,7 +1,7 @@
 \documentclass[a4paper, 10pt, onecolumn, draft]{article}
 % vim: foldmethod=marker:foldlevel=0:
 
-% Dernière modification : Lundi 12 février[02] 2018
+% Dernière modification : Mardi 13 février[02] 2018
 
 %\documentclass[a4paper, 10pt, onecolumn, draft]{book}
 %\documentclass[a4paper, 10pt, onecolumn, draft]{report}
@@ -180,8 +180,8 @@
 %                                        %
 %\pagestyle{fancy}
 %\addtolength{\headheight}{\baselineskip}
-%\fancyhead[LE,RO]{\thepage}
-%\fancyfoot[C]{\ding{164}}
+%\fancyhead[LE,RO]{\ding{164}}
+%\fancyfoot[C]{\thepage}
 %\fancyfoot[LE, RO]{\auteur}
 %\fancyfoot[RE, LO]{\titre}
 %\renewcommand{\headrulewidth}{0.5pt}
@@ -191,9 +191,9 @@
 %                                        %
 %\fancypagestyle{plain}
 %{\addtolength{\headheight}{\baselineskip}
-%    \fancyhead[LE,RO]{\thepage}
+%    \fancyhead[LE,RO]{\ding{164}}
 %    \fancyhead[LO,RE]{\leftmark}
-%    \fancyfoot[C]{\ding{164}}
+%    \fancyfoot[C]{\thepage}
 %    \fancyfoot[LE,RO]{\auteur}
 %    \fancyfoot[LO,RE]{\titre}
 %    \renewcommand{\headrulewidth}{0.5pt}
@@ -238,13 +238,14 @@
 % explicte avec #1
 %\usepackage[explicit]{titlesec}
 %
+%\newcommand{\ttrule}[1]{\rule[-2.2ex]{\textwidth}{#1}}
+%\newcommand{\btrule}[1]{\rule{\textwidth}{#1}}
 %% block : Tout le titre et son numéro dans un seul bloc.
 %\titleformat{\section}[block]%
 %% description du style qui va s’appliquer au titre en entier, label et texte
 %{\normalfont\bfseries\Large}%
 %{% description du style qui s’applique seulement au label du titre
-%    \titlerule[1pt]\\%
-%    \vspace{.5ex}%
+%    \ttrule{1pt}\\%
 %    \thesection%
 %}
 %% espace qui sépare le label du titre de son texte.
@@ -253,8 +254,8 @@
 %{#1}%
 %% commandes à exécuter à la fin du titre
 %[%
-%    \vspace{-2ex}%
-%    \rule{\textwidth}{1pt}%
+%    \vspace{-2.2ex}%
+%    \btrule{1pt}%
 %]
 %
 %\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus.2ex}{2.3ex plus.2ex}
