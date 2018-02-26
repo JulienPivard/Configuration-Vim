@@ -1,4 +1,4 @@
-" Dernière modification : Jeudi 07 décembre[12] 2017
+" Dernière modification : Lundi 26 février[02] 2018
 
 scriptencoding utf-8
 
@@ -195,13 +195,13 @@ augroup END
 augroup fichierCorpAda
     autocmd!
     autocmd BufEnter *.adb let b:fswitchdst  = 'ads'
-    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:./spec/'
+    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:./src'
 augroup END
 " Réglage de FSwitch pour les ads
 augroup fichierSpecAda
     autocmd!
     autocmd BufEnter *.ads let b:fswitchdst  = 'adb'
-    autocmd BufEnter *.ads let b:fswitchlocs = 'rel:./../'
+    autocmd BufEnter *.ads let b:fswitchlocs = 'rel:./src'
 augroup END
 " -----------------------
 
