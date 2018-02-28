@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 01 novembre[11] 2017
+" Dernière modification : Mercredi 28 février[02] 2018
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -15,7 +15,6 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'phongnh/vim-antlr', { 'for' : 'antlr' }
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
 Plug 'scrooloose/nerdtree', { 'on' :  'NERDTreeToggle'  }
