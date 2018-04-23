@@ -124,3 +124,11 @@ then
     affiche_section "${C_SUR___VERT}${C___NOIR}" "Compilation de vim"
     make
 fi
+
+erreur=$?
+
+if [[ "${erreur}" -eq 0 ]]
+then
+    affiche_section "${C_SUR___VERT}${C___NOIR}" "Installation de vim"
+    sudo make install
+fi
