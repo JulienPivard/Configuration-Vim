@@ -126,12 +126,19 @@ if [[ "${erreur}" -eq 0 ]]
 then
     affiche_section "${C_SUR___VERT}${C___NOIR}" "Compilation de vim"
     make
-fi
 
-erreur=$?
+    erreur=$?
+    if [[ "${erreur}" -eq 0 ]]
+    then
+        affiche_section "${C_SUR___VERT}${C___NOIR}" "Installation de vim"
+        sudo make install
+    fi
 
-if [[ "${erreur}" -eq 0 ]]
-then
-    affiche_section "${C_SUR___VERT}${C___NOIR}" "Installation de vim"
-    sudo make install
+else
+
+    affiche_section "${C_SUR__JAUNE}${C___NOIR}" "Erreur pendant la configuration"
+
+    printf "Certaines librairie pourraient ne pas être installée :\n"
+    printf "sudo apt-get install libperl-dev python-dev ruby-dev libncurses5-dev"
+
 fi
