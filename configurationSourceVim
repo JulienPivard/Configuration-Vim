@@ -98,7 +98,8 @@ affiche_section()
 
 #}}}
 
-export PATH='/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin'
+# Si le PATH ne s'initialise pas correctement :
+#export PATH='/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin'
 
 printf "\n\n"
 
