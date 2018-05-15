@@ -21,6 +21,9 @@ trap 'ERREUR="${?}";
 printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
 exit "${ERREUR}";' ERR
 
+# On s'assure que l'UID existe bien
+[[ -z "${UID}" ]] && UID="$(id -u)"
+
 ###############################################################################
 #                   ___                             __                        #
 #                  /   |  _________ ___  ____  ____/ /__  ___                 #
@@ -267,6 +270,140 @@ fi
 
 #}}}
 
+####################################################
+# {{{ Fonctions généraliste utilisant des couleurs #
+####################################################
+
+# ligne_vide                    {{{
+function ligne_vide ()
+{
+    printf >&2 '\n'
+}
+
+#}}}
+
+# separateur_section            {{{
+function separateur_section ()
+{
+    echo >&2 "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
+}
+
+#}}}
+
+# message_ok                    {{{
+function message_ok ()
+{
+    printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE}\n\n"
+}
+
+#}}}
+
+# message_erreur                {{{
+function message_erreur ()
+{
+    printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+#}}}
+
+# message_attention             {{{
+function message_attention ()
+{
+    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+#}}}
+
+# message_avertissement         {{{
+function message_avertissement ()
+{
+    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+#}}}
+
+# demander_utilisateur          {{{
+function demander_utilisateur ()
+{
+    printf >&2 "${*} (o/n)\n"
+    while read -r -n 1 -s reponse
+    do
+        [[ "${reponse}" = [OoYy] ]] && return 0
+        [[ "${reponse}" = [Nn] ]] && return 1
+    done
+}
+
+#}}}
+
+# affichage_echappee            {{{
+declare METHODE_D_AFFICHAGE_ECHAPPEE
+printf "%q " test >/dev/null 2>&1
+[[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE="printfq"
+function affichage_echappee ()
+{
+    if [[ "${METHODE_D_AFFICHAGE_ECHAPPEE}" == "printfq" ]]
+    then
+        printf "%q " "${@}"
+    else
+        printf "%s" "${*}"
+    fi
+    return 0
+}
+
+#}}}
+
+# executer_commande         {{{
+FICHIER_LOG_EXECUTION="/dev/null"
+function executer_commande ()
+{
+    local -r user="${USER--}" dir="${PWD}"
+    local info info_console
+
+    if [[ "${UID}" -eq 0 ]]
+    then
+        info="[root ${dir}]# "
+        info_console="[${M__DIM}${dir}${NEUTRE}]# "
+    else
+        info="[${user} ${dir}]$ "
+        info_console="[${M__DIM}${dir}${NEUTRE}]$ "
+    fi
+
+    # Consigne l'exécution de la commande dans les logs.
+    printf >> "${FICHIER_LOG_EXECUTION}" "${info}"
+    affichage_echappee >> "${FICHIER_LOG_EXECUTION}" "${@}"
+    printf >> "${FICHIER_LOG_EXECUTION}" " ... "
+
+    # Affiche l'exécution de la commande sur la sortie d'erreur standard.
+    printf >&2 "${info_console}${M_GRAS}${C__JAUNE}"
+    affichage_echappee >&2 "${@}"
+    printf >&2 "${NEUTRE}\n"
+
+    # Exécute la commande
+    if "${@}"
+    then
+        local -r Code_Erreur=0
+    else
+        local -r Code_Erreur="${?}"
+    fi
+
+    if [[ "${Code_Erreur}" -ne 0 ]]
+    then
+        message_erreur
+        printf >> "${FICHIER_LOG_EXECUTION}" "Erreur avec le code d'erreur : ${Code_Erreur}\n"
+    else
+        message_ok
+        printf >> "${FICHIER_LOG_EXECUTION}" "OK\n"
+    fi
+
+    return "${Code_Erreur}"
+}
+
 #}}}
 
 # Affichage simplifié des erreurs           #{{{
@@ -298,7 +435,9 @@ function afficher_erreur ()
 # Une erreur c'est produit durant l'exécution
 function gestion_err_couleur ()
 {
-    afficher_erreur '\nLe script à subis une erreur ligne' "${1}"
+    ligne_vide
+    separateur_section 'Avortement du script'
+    afficher_erreur 'Le script à subis une erreur ligne' "${1}"
 }
 
 trap '' ERR
@@ -314,46 +453,11 @@ exit "${ERREUR}";' ERR
 # {{{                   Code                       #
 ####################################################
 
-# fonction générales de fonctionnement      {{{
-function separateur_section ()
-{
-    echo >&2 "--- ${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
-}
+# fonctions de l'application elle même       {{{
 
-function message_ok ()
-{
-    printf >&2 "${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE}\n"
-}
 
-function message_erreur ()
-{
-    printf >&2 "${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
-    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
-}
+    #}}}
 
-function message_attention ()
-{
-    printf >&2 "${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
-    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
-}
-
-function message_avertissement ()
-{
-    printf >&2 "${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
-    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || printf >&2 "\n"
-}
-
-function demander_utilisateur ()
-{
-    printf >&2 "${*} (o/n)\n"
-    while read -r -n 1 -s reponse
-    do
-        [[ "${reponse}" = [OoYy] ]] && return 0
-        [[ "${reponse}" = [Nn] ]] && return 1
-    done
-}
-
-# }}}
 
 # fonctions des options                      {{{
 # afficher_aide                     {{{
