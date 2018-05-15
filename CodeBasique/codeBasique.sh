@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mardi 15 mai[05] 2018
+# Dernière modification : Mercredi 16 mai[05] 2018
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -293,7 +293,9 @@ function separateur_section ()
 # message_ok                    {{{
 function message_ok ()
 {
-    printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE}\n\n"
+    printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
 }
 
 #}}}
