@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : mardi 21 novembre[11] 2017
+# Dernière modification : Mardi 15 mai[05] 2018
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -19,7 +19,7 @@ set -o posix
 # Gestion des erreurs
 trap 'ERREUR="${?}";
 printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
-exit "${ERREUR}"' ERR
+exit "${ERREUR}";' ERR
 
 ###############################################################################
 #                   ___                             __                        #
@@ -99,13 +99,13 @@ declare -ri E_OPT_NON_TRAITEE=86
 # Réception d'un signal pour quitter l'app normalement
 function fin()
 {
-    exit
+    exit;
 }
 
 # Le script à été interrompu par l'utilisateur
 function interruption()
 {
-    exit
+    exit;
 }
 
 # Une erreur c'est produit durant l'exécution
@@ -117,13 +117,13 @@ function gestion_erreurs()
 # On ferme le script. Cette fonction sera exécutée en dernière
 function nettoyage_fin_script()
 {
-    exit
+    exit;
 }
 
 # Le terminal qui a lancé le processus à été fermé
 function fermeture_terminal()
 {
-    exit
+    exit;
 }
 
 # }}}
@@ -136,7 +136,7 @@ function fermeture_terminal()
 trap '' ERR
 trap 'ERREUR="${?}";
 gestion_erreurs "${LINENO}";
-exit "${ERREUR}"' ERR
+exit "${ERREUR}";' ERR
 
 # Gestion des interruption CTRL-C
 trap 'interruption' INT
@@ -255,7 +255,7 @@ fi
 # L'argument 3 affiche le texte en rouge à la suite de l'argument 2
 function afficher_erreur()
 {
-    [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}"
+    [[ -n "${1}" ]] && local AFFICHAGE="${1}" || exit "${E_ARG_AFF_ERR_M}";
     if [[ "${#}" -ge 2 ]]
     then
         AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
@@ -284,7 +284,7 @@ function gestion_err_couleur()
 trap '' ERR
 trap 'ERREUR="${?}";
 gestion_err_couleur "${LINENO}";
-exit "${ERREUR}"' ERR
+exit "${ERREUR}";' ERR
 
 # }}}
 
@@ -383,7 +383,7 @@ do
             ;;
         h)
             afficher_aide
-            exit "${EXIT_SUCCES}"
+            exit "${EXIT_SUCCES}";
             ;;
         -)
             LONG_OPTARG="${OPTARG#*=}"
@@ -396,34 +396,34 @@ do
                     ;;
                 help )
                     afficher_aide
-                    exit "${EXIT_SUCCES}"
+                    exit "${EXIT_SUCCES}";
                     ;;
                 orc* | help* )
                     afficher_erreur "L'option longue" "--${OPTARG}" "ne prend pas d'arguments."
                     afficher_aide
-                    exit "${E_ARG_SUPERFLUS_OPT_LONGUE}"
+                    exit "${E_ARG_SUPERFLUS_OPT_LONGUE}";
                     ;;
                 umbra* )
                     afficher_erreur "L'option longue" "--${OPTARG}" "nécessite un argument."
                     afficher_aide
-                    exit "${E_OPT_LONGUE_NECESSITE_ARG}"
+                    exit "${E_OPT_LONGUE_NECESSITE_ARG}";
                     ;;
                 *)
                     afficher_erreur "L'option longue" "--${OPTARG}" "n'existe pas !"
                     afficher_aide
-                    exit "${E_OPT_LONGUE_INCONNUE}"
+                    exit "${E_OPT_LONGUE_INCONNUE}";
                     ;;
             esac
             ;;
         :)
             afficher_erreur "L'option" "${OPTARG}" "nécessite un argument."
             afficher_aide
-            exit "${E_OPT_NECESSITE_ARG}"
+            exit "${E_OPT_NECESSITE_ARG}";
             ;;
         ?)
             afficher_erreur "L'option" "${OPTARG}" "n'existe pas."
             afficher_aide
-            exit "${E_OPT_INCONNUE}"
+            exit "${E_OPT_INCONNUE}";
             ;;
     esac
 done
@@ -436,7 +436,7 @@ if [[ "${#}" -ne 0 ]]
 then
     afficher_erreur "Le ou Les arguments suivant ne sont pas valide :" "${*}"
     afficher_aide
-    exit "${E_OPT_NON_TRAITEE}"
+    exit "${E_OPT_NON_TRAITEE}";
 fi
 
 # }}}
