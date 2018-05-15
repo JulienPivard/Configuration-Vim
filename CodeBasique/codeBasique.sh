@@ -96,37 +96,47 @@ declare -ri E_OPT_NON_TRAITEE=86
 #  Fonction de gestion des signaux  # {{{
 #####################################
 
-# Réception d'un signal pour quitter l'app normalement
+# Réception d'un signal pour quitter l'app normalement                  {{{
 function fin ()
 {
     exit;
 }
 
-# Le script à été interrompu par l'utilisateur
+#}}}
+
+# Le script à été interrompu par l'utilisateur                          {{{
 function interruption ()
 {
     exit;
 }
 
-# Une erreur c'est produit durant l'exécution
+#}}}
+
+# Une erreur c'est produit durant l'exécution                           {{{
 function gestion_erreurs ()
 {
     printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
 }
 
-# On ferme le script. Cette fonction sera exécutée en dernière
+#}}}
+
+# On ferme le script. Cette fonction sera exécutée en dernière          {{{
 function nettoyage_fin_script ()
 {
     exit;
 }
 
-# Le terminal qui a lancé le processus à été fermé
+#}}}
+
+# Le terminal qui a lancé le processus à été fermé                      {{{
 function fermeture_terminal ()
 {
     exit;
 }
 
-# }}}
+#}}}
+
+#}}}
 
 ###########################
 # {{{ Attrape erreurs     #
@@ -150,7 +160,7 @@ trap 'fin' QUIT TERM
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
 
-# }}}
+#}}}
 
 #############################################
 # {{{ Fonctions de gestions généraliste     #
@@ -158,16 +168,22 @@ trap 'nettoyage_fin_script' EXIT
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
+# which_cmd                     {{{
 function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
+#}}}
+
+# test_cmd_exist                {{{
 function test_cmd_exist ()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0
     return 1
 }
+
+#}}}
 
 #}}}
 
@@ -208,7 +224,7 @@ else
     declare -ri NB_COULEURS=0
 fi
 
-#}}}
+    #}}}
 
 # Définition des couleurs                   #{{{
 if [[ "${NB_COULEURS}" -gt 0 ]]
@@ -246,6 +262,10 @@ else
     declare -r C_SUR___INOIR="" C_SUR__IROUGE="" C_SUR___IVERT="" C_SUR__IJAUNE=""
     declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
 fi
+
+    #}}}
+
+#}}}
 
 #}}}
 
@@ -286,7 +306,7 @@ trap 'ERREUR="${?}";
 gestion_err_couleur "${LINENO}";
 exit "${ERREUR}";' ERR
 
-# }}}
+#}}}
 
 # Retirer l'extension %.* un % par extension à retirer.
 # Ne garder que l'extension avec #*. Voila.
@@ -335,7 +355,8 @@ function demander_utilisateur ()
 
 # }}}
 
-# fonction des options                      {{{
+# fonctions des options                      {{{
+# afficher_aide                     {{{
 function afficher_aide ()
 {
     local -r NOM_SCRIPT=`basename "${0}"`
@@ -343,20 +364,28 @@ function afficher_aide ()
     printf >&2 "    -h --help\n        Affiche l'aide et quitte\n"
 }
 
+        #}}}
+
+# traitement_option_o               {{{
 function traitement_option_o ()
 {
     printf "Option o\n"
 }
 
+        #}}}
+
+# traitement_option_u               {{{
 function traitement_option_u ()
 {
     local -r ARGUMENT="${1}"
     printf "Option u = ${ARGUMENT}\n"
 }
 
-# }}}
+        #}}}
 
-# }}}
+    #}}}
+
+#}}}
 
 ####################################################
 # {{{            Gestion des options               #
@@ -439,7 +468,7 @@ then
     exit "${E_OPT_NON_TRAITEE}";
 fi
 
-# }}}
+#}}}
 
 ###################################################
 #                   Exécution                     #
