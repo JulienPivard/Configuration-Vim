@@ -39,16 +39,24 @@ set -o posix
 # {{{ Fonctions de gestions généraliste     #
 #############################################
 
+declare -i NB_COULEURS=0
+
+# which_cmd                     {{{
 function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
+    #}}}
+
+# test_cmd_exist                {{{
 function test_cmd_exist ()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0
     return 1
 }
+
+    #}}}
 
 #}}}
 
@@ -113,7 +121,143 @@ fi
 
 #}}}
 
-#echo "Pour installer avec le support de clipboard installer xorg-dev"
+####################################################
+# {{{ Fonctions généraliste utilisant des couleurs #
+####################################################
+
+# ligne_vide                    {{{
+function ligne_vide ()
+{
+    printf >&2 '\n'
+}
+
+    #}}}
+
+# separateur_section            {{{
+function separateur_section ()
+{
+    echo >&2 "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
+}
+
+    #}}}
+
+# message_ok                    {{{
+function message_ok ()
+{
+    printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+    #}}}
+
+# message_erreur                {{{
+function message_erreur ()
+{
+    printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+    #}}}
+
+# message_attention             {{{
+function message_attention ()
+{
+    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+    #}}}
+
+# message_avertissement         {{{
+function message_avertissement ()
+{
+    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
+    [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
+    ligne_vide
+}
+
+    #}}}
+
+# demander_utilisateur          {{{
+function demander_utilisateur ()
+{
+    printf >&2 "${*} (o/n)\n"
+    while read -r -n 1 -s reponse
+    do
+        [[ "${reponse}" = [OoYy] ]] && return 0
+        [[ "${reponse}" = [Nn] ]] && return 1
+    done
+}
+
+    #}}}
+
+# affichage_echappee            {{{
+declare METHODE_D_AFFICHAGE_ECHAPPEE
+printf "%q " test >/dev/null 2>&1
+[[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE="printfq"
+function affichage_echappee ()
+{
+    if [[ "${METHODE_D_AFFICHAGE_ECHAPPEE}" == "printfq" ]]
+    then
+        printf "%q " "${@}"
+    else
+        printf "%s" "${*}"
+    fi
+    return 0
+}
+
+    #}}}
+
+# executer_commande         {{{
+FICHIER_LOG_EXECUTION="/dev/null"
+function executer_commande ()
+{
+    local -r user="${USER--}" dir="${PWD}"
+    local info info_console
+
+    if [[ "${UID}" -eq 0 ]]
+    then
+        info="[root ${dir}]# "
+        info_console="[${M__DIM}${dir}${NEUTRE}]# "
+    else
+        info="[${user} ${dir}]$ "
+        info_console="[${M__DIM}${dir}${NEUTRE}]$ "
+    fi
+
+    # Consigne l'exécution de la commande dans les logs.
+    printf >> "${FICHIER_LOG_EXECUTION}" "${info}"
+    affichage_echappee >> "${FICHIER_LOG_EXECUTION}" "${@}"
+    printf >> "${FICHIER_LOG_EXECUTION}" " ... "
+
+    # Affiche l'exécution de la commande sur la sortie d'erreur standard.
+    printf >&2 "${info_console}${M_GRAS}${C__JAUNE}"
+    affichage_echappee >&2 "${@}"
+    printf >&2 "${NEUTRE}\n"
+
+    # Exécute la commande
+    if "${@}"
+    then
+        local -r Code_Erreur=0
+    else
+        local -r Code_Erreur="${?}"
+    fi
+
+    if [[ "${Code_Erreur}" -ne 0 ]]
+    then
+        message_erreur
+        printf >> "${FICHIER_LOG_EXECUTION}" "Erreur avec le code d'erreur : ${Code_Erreur}\n"
+    else
+        message_ok
+        printf >> "${FICHIER_LOG_EXECUTION}" "OK\n"
+    fi
+
+    return "${Code_Erreur}"
+}
+
+    #}}}
 
 # Fonction affiche_section       #{{{
 affiche_section()
@@ -130,12 +274,16 @@ affiche_section()
     printf "${NEUTRE}\n"
 }
 
+    #}}}
+
 #}}}
 
 # Si le PATH ne s'initialise pas correctement :
 #export PATH='/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin'
 
-printf "\n\n"
+ligne_vide
+
+#echo "Pour installer avec le support de clipboard installer xorg-dev"
 
 if [[ -e "./src/vim" ]]
 then
@@ -172,7 +320,10 @@ else
 
     affiche_section "${C_SUR__JAUNE}${C___NOIR}" 'Erreur pendant la configuration'
 
-    printf "Certaines librairie pourraient ne pas être installée :\n"
-    printf "sudo apt-get install libperl-dev python-dev ruby-dev libncurses5-dev"
+    message_avertissement 'Certaines librairie pourraient ne pas être installée :'
+    printf >&2 'sudo apt-get install libperl-dev python-dev ruby-dev libncurses5-dev'
+    ligne_vide
 
 fi
+
+ligne_vide
