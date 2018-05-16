@@ -267,11 +267,11 @@ affiche_section()
     declare -i largeur=80
     declare -i taille_txt="${#t}"
     largeur=$(( ( largeur - taille_txt ) / 2 ))
-    printf "${COUL}"
-    eval "printf '%.s ' {1..$largeur}"
-    printf "${t}"
-    eval "printf '%.s ' {1..$largeur}"
-    printf "${NEUTRE}\n"
+    printf >&2 "${COUL}"
+    eval "printf >&2 '%.s ' {1..$largeur}"
+    printf >&2 "${t}"
+    eval "printf >&2 '%.s ' {1..$largeur}"
+    printf >&2 "${NEUTRE}\n"
 }
 
     #}}}
