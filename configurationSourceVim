@@ -288,12 +288,12 @@ ligne_vide
 if [[ -e "./src/vim" ]]
 then
     affiche_section "${C_SUR__JAUNE}${C___NOIR}" 'Nettoyage de la compilation précédente'
-    make distclean
+    executer_commande make distclean
 fi
 
 affiche_section "${C_SUR___VERT}${C___NOIR}" 'Configuration de vim'
 
-./configure --with-features=huge \
+executer_commande ./configure --with-features=huge \
             --with-compiledby=Asmodee \
             --enable-multibyte \
             --enable-rubyinterp \
@@ -307,13 +307,13 @@ erreur=$?
 if [[ "${erreur}" -eq 0 ]]
 then
     affiche_section "${C_SUR___VERT}${C___NOIR}" 'Compilation de vim'
-    make
+    executer_commande make
 
     erreur=$?
     if [[ "${erreur}" -eq 0 ]]
     then
         affiche_section "${C_SUR___VERT}${C___NOIR}" 'Installation de vim'
-        sudo make install
+        executer_commande sudo make install
     fi
 
 else
