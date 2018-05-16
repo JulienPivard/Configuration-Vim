@@ -39,18 +39,18 @@ set -o posix
 # {{{ Fonctions de gestions généraliste     #
 #############################################
 
-which_cmd()
+function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
-test_cmd_exist()
+function test_cmd_exist ()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0
     return 1
 }
 
-# }}}
+#}}}
 
 ####################################
 # {{{  Définition des couleurs     #
@@ -70,7 +70,7 @@ else
     declare -r NB_COULEURS=0
 fi
 
-#}}}
+    #}}}
 
 # Définition des couleurs                   #{{{
 if [[ "${NB_COULEURS}" -gt 0 ]]
@@ -109,9 +109,9 @@ else
     declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
 fi
 
-# }}}
+    #}}}
 
-# }}}
+#}}}
 
 #echo "Pour installer avec le support de clipboard installer xorg-dev"
 
@@ -139,11 +139,11 @@ printf "\n\n"
 
 if [[ -e "./src/vim" ]]
 then
-    affiche_section "${C_SUR__JAUNE}${C___NOIR}" "Nettoyage de la compilation précédente"
+    affiche_section "${C_SUR__JAUNE}${C___NOIR}" 'Nettoyage de la compilation précédente'
     make distclean
 fi
 
-affiche_section "${C_SUR___VERT}${C___NOIR}" "Configuration de vim"
+affiche_section "${C_SUR___VERT}${C___NOIR}" 'Configuration de vim'
 
 ./configure --with-features=huge \
             --with-compiledby=Asmodee \
@@ -158,19 +158,19 @@ erreur=$?
 
 if [[ "${erreur}" -eq 0 ]]
 then
-    affiche_section "${C_SUR___VERT}${C___NOIR}" "Compilation de vim"
+    affiche_section "${C_SUR___VERT}${C___NOIR}" 'Compilation de vim'
     make
 
     erreur=$?
     if [[ "${erreur}" -eq 0 ]]
     then
-        affiche_section "${C_SUR___VERT}${C___NOIR}" "Installation de vim"
+        affiche_section "${C_SUR___VERT}${C___NOIR}" 'Installation de vim'
         sudo make install
     fi
 
 else
 
-    affiche_section "${C_SUR__JAUNE}${C___NOIR}" "Erreur pendant la configuration"
+    affiche_section "${C_SUR__JAUNE}${C___NOIR}" 'Erreur pendant la configuration'
 
     printf "Certaines librairie pourraient ne pas être installée :\n"
     printf "sudo apt-get install libperl-dev python-dev ruby-dev libncurses5-dev"
