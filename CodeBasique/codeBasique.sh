@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 16 mai[05] 2018
+# Dernière modification : Jeudi 17 mai[05] 2018
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -463,11 +463,16 @@ exit "${ERREUR}";' ERR
 
 # fonctions des options                      {{{
 # afficher_aide                     {{{
+declare -r NOM_SCRIPT=`basename "${0}"`
+declare -r USAGE="\
+${NOM_SCRIPT} [-h]
+    -h --help
+        Affiche l'aide et quitte.
+"
+
 function afficher_aide ()
 {
-    local -r NOM_SCRIPT=`basename "${0}"`
-    printf >&2 "${NOM_SCRIPT} [-h]\n"
-    printf >&2 "    -h --help\n        Affiche l'aide et quitte\n"
+    printf >&2 "${USAGE}"
 }
 
         #}}}
