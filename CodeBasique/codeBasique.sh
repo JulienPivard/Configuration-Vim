@@ -465,7 +465,11 @@ exit "${ERREUR}";' ERR
 # afficher_aide                     {{{
 declare -r NOM_SCRIPT=`basename "${0}"`
 declare -r USAGE="\
-${NOM_SCRIPT} [-h]
+Usage : ${NOM_SCRIPT} [-h]
+
+Petite explication du rôle du script
+
+Options :
     -h --help
         Affiche l'aide et quitte.
 "
