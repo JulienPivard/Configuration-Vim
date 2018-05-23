@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Jeudi 17 mai[05] 2018
+# Dernière modification : Mercredi 23 mai[05] 2018
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -361,7 +361,7 @@ function affichage_echappee ()
     #}}}
 
 # executer_commande         {{{
-FICHIER_LOG_EXECUTION="/dev/null"
+declare FICHIER_LOG_EXECUTION='/dev/null'
 function executer_commande ()
 {
     local -r user="${USER--}" dir="${PWD}"
@@ -509,7 +509,6 @@ function traitement_option_u ()
 #  Affiche l'aide si aucun arguments n'est donné
 if [[ "${#}" -eq 0 ]]
 then
-    printf >&2 "${C_SUR__JAUNE} ${C___NOIR}Afficher l'aide ${NEUTRE}\n"
     afficher_aide
     exit "${EXIT_SUCCES}";
 fi
