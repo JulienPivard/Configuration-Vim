@@ -4,26 +4,6 @@
 
 # Dernière modification : Mercredi 23 mai[05] 2018
 
-# Arrête le script si une variable non initialisé est utilisée
-set -u
-# Équivalent à set -o errtrace pour s'assurer que les trap sont bien
-# hérité dans les sous shell
-set -E
-# Permet de traiter les erreurs dans les pipeline avec la trap ERR
-set -o pipefail
-set -o posix
-# Activation du mode verbose affiche la commande qui va être exécuté
-#set -v
-# Activation du mode xtrace affiche le résultat de chaque commande
-#set -x
-# Gestion des erreurs
-trap 'ERREUR="${?}";
-printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
-exit "${ERREUR}";' ERR
-
-# On s'assure que l'UID existe bien
-[[ -z "${UID}" ]] && UID="$(id -u)"
-
 ###############################################################################
 #                   ___                             __                        #
 #                  /   |  _________ ___  ____  ____/ /__  ___                 #
@@ -77,6 +57,29 @@ exit "${ERREUR}";' ERR
 #}}}
 
 # Vérifie la syntaxe : bash -n
+
+# Options comportementales                      #{{{
+# Arrête le script si une variable non initialisé est utilisée
+set -u
+# Équivalent à set -o errtrace pour s'assurer que les trap sont bien
+# hérité dans les sous shell
+set -E
+# Permet de traiter les erreurs dans les pipeline avec la trap ERR
+set -o pipefail
+set -o posix
+# Activation du mode verbose affiche la commande qui va être exécuté
+#set -v
+# Activation du mode xtrace affiche le résultat de chaque commande
+#set -x
+# Gestion des erreurs
+trap 'ERREUR="${?}";
+printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
+exit "${ERREUR}";' ERR
+
+# On s'assure que l'UID existe bien
+[[ -z "${UID}" ]] && UID="$(id -u)"
+
+#}}}
 
 ####################################################
 #{{{    Fonctions généralistes et configuration    #
