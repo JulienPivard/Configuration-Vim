@@ -57,7 +57,6 @@
 #}}}
 
 # Vérifie la syntaxe : bash -n
-
 # Options comportementales                      #{{{
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -85,7 +84,6 @@ exit "${ERREUR}";' ERR
 #{{{    Fonctions généralistes et configuration    #
 ####################################################
 
-####################################################
 #{{{        Constante de sortie et d'erreur        #
 ####################################################
 declare -ri EXIT_SUCCES=0
@@ -102,7 +100,6 @@ declare -ri E_OPT_NON_TRAITEE=86
 
     #}}}
 
-####################################################
 #{{{        Fonction de gestion des signaux        #
 ####################################################
 
@@ -148,7 +145,6 @@ function fermeture_terminal ()
 
     #}}}
 
-####################################################
 #{{{                Attrape signaux                #
 ####################################################
 
@@ -172,7 +168,6 @@ trap 'nettoyage_fin_script' EXIT
 
     #}}}
 
-####################################################
 #{{{       Fonctions de gestions généraliste       #
 ####################################################
 
@@ -197,9 +192,9 @@ function test_cmd_exist ()
 
     #}}}
 
-####################################################
 #{{{  Gestion du redimensionnement  de la fenêtre  #
 ####################################################
+
 # maj_taille                        {{{
 function maj_taille ()
 {
@@ -219,7 +214,6 @@ trap 'maj_taille' WINCH
 
     #}}}
 
-####################################################
 #{{{            Définition des couleurs            #
 ####################################################
 
@@ -280,7 +274,6 @@ fi
 
     #}}}
 
-####################################################
 #{{{ Fonctions généralistes utilisant des couleurs #
 ####################################################
 
@@ -444,9 +437,8 @@ function afficher_erreur ()
 
         #}}}
 
-# Une erreur c'est produit durant l'exécution
-# gestion_err_couleur               {{{
-function gestion_err_couleur ()
+# gestion_erreur_couleur            {{{
+function gestion_erreur_couleur ()
 {
     ligne_vide
     separateur_section 'Avortement du script'
@@ -457,7 +449,7 @@ function gestion_err_couleur ()
 
 trap '' ERR
 trap 'ERREUR="${?}";
-gestion_err_couleur "${LINENO}";
+gestion_erreur_couleur "${LINENO}";
 exit "${ERREUR}";' ERR
 
     #}}}
@@ -474,7 +466,6 @@ exit "${ERREUR}";' ERR
 
 
     #}}}
-
 
 # fonctions des options                      {{{
 # afficher_aide                     {{{
