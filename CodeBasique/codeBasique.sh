@@ -42,7 +42,7 @@ exit "${ERREUR}";' ERR
 #                               résumé vite fait                              #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
-# Documentation                     {{{
+# Documentation                                 #{{{
 #┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
 #┃                                                                           ┃#
 #┃           Explication sur le fonctionnement du script et son but          ┃#
@@ -78,9 +78,9 @@ exit "${ERREUR}";' ERR
 
 # Vérifie la syntaxe : bash -n
 
-#########################################
-#{{{ Constante de sortie et d'erreur    #
-#########################################
+####################################################
+#{{{        Constante de sortie et d'erreur        #
+####################################################
 declare -ri EXIT_SUCCES=0
 
 declare -ri E_ARG_AFF_ERR_M=80
@@ -95,9 +95,9 @@ declare -ri E_OPT_NON_TRAITEE=86
 
 #}}}
 
-###########################################
-# {{{ Fonction de gestion des signaux     #
-###########################################
+####################################################
+#{{{        Fonction de gestion des signaux        #
+####################################################
 
 # Réception d'un signal pour quitter l'app normalement                  {{{
 function fin ()
@@ -141,9 +141,9 @@ function fermeture_terminal ()
 
 #}}}
 
-############################
-# {{{ Pièges à erreurs     #
-############################
+####################################################
+#{{{                Attrape signaux                #
+####################################################
 
 # Permet de reste le signal d'erreur
 trap '' ERR
@@ -165,9 +165,9 @@ trap 'nettoyage_fin_script' EXIT
 
 #}}}
 
-#############################################
-# {{{ Fonctions de gestions généraliste     #
-#############################################
+####################################################
+#{{{       Fonctions de gestions généraliste       #
+####################################################
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
@@ -190,9 +190,9 @@ function test_cmd_exist ()
 
 #}}}
 
-######################################################
-# {{{ Gestion du redimensionnement de la fenêtre     #
-######################################################
+####################################################
+#{{{  Gestion du redimensionnement  de la fenêtre  #
+####################################################
 function maj_taille ()
 {
     if test_cmd_exist tput
@@ -209,9 +209,9 @@ trap 'maj_taille' WINCH
 
 #}}}
 
-####################################
-# {{{  Définition des couleurs     #
-####################################
+####################################################
+#{{{            Définition des couleurs            #
+####################################################
 
 NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
@@ -271,7 +271,7 @@ fi
 #}}}
 
 ####################################################
-# {{{ Fonctions généraliste utilisant des couleurs #
+#{{{ Fonctions généralistes utilisant des couleurs #
 ####################################################
 
 # ligne_vide                        {{{
@@ -452,7 +452,7 @@ exit "${ERREUR}";' ERR
 # Retirer l'extension %.* un % par extension à retirer.
 # Ne garder que l'extension avec #*. Voila.
 ####################################################
-# {{{                   Code                       #
+#{{{                    Code                       #
 ####################################################
 
 # fonctions de l'application elle même       {{{
@@ -503,7 +503,7 @@ function traitement_option_u ()
 #}}}
 
 ####################################################
-# {{{            Gestion des options               #
+#{{{             Gestion des options               #
 ####################################################
 
 #  Affiche l'aide si aucun arguments n'est donné
@@ -584,9 +584,11 @@ fi
 
 #}}}
 
-###################################################
-#                   Exécution                     #
-###################################################
+####################################################
+#{{{                 Exécution                     #
+####################################################
 
+
+#}}}
 
 exit "${EXIT_SUCCES}";
