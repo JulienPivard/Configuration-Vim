@@ -56,7 +56,6 @@
 
 #}}}
 
-# Vérifie la syntaxe : bash -n
 # Options comportementales                      #{{{
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -288,7 +287,7 @@ function ligne_vide ()
 # separateur_section                {{{
 function separateur_section ()
 {
-    echo >&2 "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
+    printf >&2 '%s\n' "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
 }
 
         #}}}
@@ -336,7 +335,7 @@ function message_avertissement ()
 # demander_utilisateur              {{{
 function demander_utilisateur ()
 {
-    printf >&2 "${*} (o/n)\n"
+    printf >&2 '%s\n' "${*} (o/n)"
     while read -r -n 1 -s reponse
     do
         [[ "${reponse}" = [OoYy] ]] && return 0
@@ -348,15 +347,15 @@ function demander_utilisateur ()
 
 # affichage_echappee                {{{
 declare METHODE_D_AFFICHAGE_ECHAPPEE
-printf "%q " test >/dev/null 2>&1
-[[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE="printfq"
+printf '%q ' test >/dev/null 2>&1
+[[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE='printfq'
 function affichage_echappee ()
 {
-    if [[ "${METHODE_D_AFFICHAGE_ECHAPPEE}" == "printfq" ]]
+    if [[ "${METHODE_D_AFFICHAGE_ECHAPPEE}" == 'printfq' ]]
     then
-        printf "%q " "${@}"
+        printf '%q ' "${@}"
     else
-        printf "%s" "${*}"
+        printf '%s' "${*}"
     fi
     return 0
 }
@@ -380,9 +379,9 @@ function executer_commande ()
     fi
 
     # Consigne l'exécution de la commande dans les logs.
-    printf >> "${FICHIER_LOG_EXECUTION}" "${info}"
-    affichage_echappee >> "${FICHIER_LOG_EXECUTION}" "${@}"
-    printf >> "${FICHIER_LOG_EXECUTION}" " ... "
+    printf >>"${FICHIER_LOG_EXECUTION}" "${info}"
+    affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
+    printf >>"${FICHIER_LOG_EXECUTION}" " ... "
 
     # Affiche l'exécution de la commande sur la sortie d'erreur standard.
     printf >&2 "${info_console}${M_GRAS}${C__JAUNE}"
@@ -400,10 +399,10 @@ function executer_commande ()
     if [[ "${Code_Erreur}" -ne 0 ]]
     then
         message_erreur
-        printf >> "${FICHIER_LOG_EXECUTION}" "Erreur avec le code d'erreur : ${Code_Erreur}\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" "Erreur avec le code d'erreur : ${Code_Erreur}\n"
     else
         message_ok
-        printf >> "${FICHIER_LOG_EXECUTION}" "OK\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" "OK\n"
     fi
 
     return "${Code_Erreur}"
@@ -432,7 +431,7 @@ function afficher_erreur ()
         AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
     fi
     [[ "${#}" -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
-    printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n"
+    printf >&2 '%s\n' "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}"
 }
 
         #}}}
@@ -468,6 +467,7 @@ exit "${ERREUR}";' ERR
     #}}}
 
 # fonctions des options                      {{{
+
 # afficher_aide                     {{{
 declare -r NOM_SCRIPT=`basename "${0}"`
 declare -r USAGE="\
@@ -482,7 +482,7 @@ Options :
 
 function afficher_aide ()
 {
-    printf >&2 "${USAGE}"
+    printf >&2 '%s' "${USAGE}"
 }
 
         #}}}
