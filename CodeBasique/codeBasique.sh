@@ -323,7 +323,7 @@ function message_erreur ()
 # message_attention                 {{{
 function message_attention ()
 {
-    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
+    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} ATTENTION ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
@@ -333,7 +333,7 @@ function message_attention ()
 # message_avertissement             {{{
 function message_avertissement ()
 {
-    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
+    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} AVERTISSEMENT ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
