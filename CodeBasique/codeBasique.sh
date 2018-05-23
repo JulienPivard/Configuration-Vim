@@ -79,6 +79,10 @@ exit "${ERREUR}";' ERR
 # Vérifie la syntaxe : bash -n
 
 ####################################################
+#{{{    Fonctions généralistes et configuration    #
+####################################################
+
+####################################################
 #{{{        Constante de sortie et d'erreur        #
 ####################################################
 declare -ri EXIT_SUCCES=0
@@ -93,7 +97,7 @@ declare -ri E_OPT_INCONNUE=85
 declare -ri E_OPT_NON_TRAITEE=86
 
 
-#}}}
+    #}}}
 
 ####################################################
 #{{{        Fonction de gestion des signaux        #
@@ -105,7 +109,7 @@ function fin ()
     exit;
 }
 
-    #}}}
+        #}}}
 
 # Le script à été interrompu par l'utilisateur                          {{{
 function interruption ()
@@ -113,7 +117,7 @@ function interruption ()
     exit;
 }
 
-    #}}}
+        #}}}
 
 # Une erreur c'est produit durant l'exécution                           {{{
 function gestion_erreurs ()
@@ -121,7 +125,7 @@ function gestion_erreurs ()
     printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
 }
 
-    #}}}
+        #}}}
 
 # On ferme le script. Cette fonction sera exécutée en dernière          {{{
 function nettoyage_fin_script ()
@@ -129,7 +133,7 @@ function nettoyage_fin_script ()
     exit;
 }
 
-    #}}}
+        #}}}
 
 # Le terminal qui a lancé le processus à été fermé                      {{{
 function fermeture_terminal ()
@@ -137,9 +141,9 @@ function fermeture_terminal ()
     exit;
 }
 
-    #}}}
+        #}}}
 
-#}}}
+    #}}}
 
 ####################################################
 #{{{                Attrape signaux                #
@@ -163,7 +167,7 @@ trap 'fin' QUIT TERM
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
 
-#}}}
+    #}}}
 
 ####################################################
 #{{{       Fonctions de gestions généraliste       #
@@ -171,28 +175,29 @@ trap 'nettoyage_fin_script' EXIT
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
-# which_cmd                     {{{
+# which_cmd                         {{{
 function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
-    #}}}
+        #}}}
 
-# test_cmd_exist                {{{
+# test_cmd_exist                    {{{
 function test_cmd_exist ()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0
     return 1
 }
 
-    #}}}
+        #}}}
 
-#}}}
+    #}}}
 
 ####################################################
 #{{{  Gestion du redimensionnement  de la fenêtre  #
 ####################################################
+# maj_taille                        {{{
 function maj_taille ()
 {
     if test_cmd_exist tput
@@ -203,11 +208,13 @@ function maj_taille ()
     fi
 }
 
+        #}}}
+
 maj_taille
 
 trap 'maj_taille' WINCH
 
-#}}}
+    #}}}
 
 ####################################################
 #{{{            Définition des couleurs            #
@@ -227,7 +234,7 @@ else
     declare -ri NB_COULEURS=0
 fi
 
-    #}}}
+        #}}}
 
 # Définition des couleurs                           {{{
 if [[ "${NB_COULEURS}" -gt 0 ]]
@@ -266,9 +273,9 @@ else
     declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
 fi
 
-    #}}}
+        #}}}
 
-#}}}
+    #}}}
 
 ####################################################
 #{{{ Fonctions généralistes utilisant des couleurs #
@@ -280,7 +287,7 @@ function ligne_vide ()
     printf >&2 '\n'
 }
 
-    #}}}
+        #}}}
 
 # separateur_section                {{{
 function separateur_section ()
@@ -288,7 +295,7 @@ function separateur_section ()
     echo >&2 "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
 }
 
-    #}}}
+        #}}}
 
 # message_ok                        {{{
 function message_ok ()
@@ -298,7 +305,7 @@ function message_ok ()
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
 # message_erreur                    {{{
 function message_erreur ()
@@ -308,7 +315,7 @@ function message_erreur ()
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
 # message_attention                 {{{
 function message_attention ()
@@ -318,7 +325,7 @@ function message_attention ()
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
 # message_avertissement             {{{
 function message_avertissement ()
@@ -328,7 +335,7 @@ function message_avertissement ()
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
 # demander_utilisateur              {{{
 function demander_utilisateur ()
@@ -341,7 +348,7 @@ function demander_utilisateur ()
     done
 }
 
-    #}}}
+        #}}}
 
 # affichage_echappee                {{{
 declare METHODE_D_AFFICHAGE_ECHAPPEE
@@ -358,7 +365,7 @@ function affichage_echappee ()
     return 0
 }
 
-    #}}}
+        #}}}
 
 # executer_commande                 {{{
 declare FICHIER_LOG_EXECUTION='/dev/null'
@@ -406,7 +413,7 @@ function executer_commande ()
     return "${Code_Erreur}"
 }
 
-    #}}}
+        #}}}
 
 # Affichage simplifié des erreurs   {{{
 # L'argument 1 affiche le texte en rouge
@@ -432,9 +439,10 @@ function afficher_erreur ()
     printf >&2 "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}\n"
 }
 
-    #}}}
+        #}}}
 
 # Une erreur c'est produit durant l'exécution
+# gestion_err_couleur               {{{
 function gestion_err_couleur ()
 {
     ligne_vide
@@ -442,10 +450,14 @@ function gestion_err_couleur ()
     afficher_erreur 'Le script à subis une erreur ligne' "${1}"
 }
 
+        #}}}
+
 trap '' ERR
 trap 'ERREUR="${?}";
 gestion_err_couleur "${LINENO}";
 exit "${ERREUR}";' ERR
+
+    #}}}
 
 #}}}
 
