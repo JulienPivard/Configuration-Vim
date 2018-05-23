@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 23 mai[05] 2018
+# Dernière modification : Jeudi 24 mai[05] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -287,7 +287,7 @@ function ligne_vide ()
 # separateur_section                {{{
 function separateur_section ()
 {
-    printf >&2 '%s\n' "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
+    printf >&2 '%s\n' " --- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} --- "
 }
 
         #}}}
