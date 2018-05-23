@@ -42,7 +42,7 @@ exit "${ERREUR}";' ERR
 #                               résumé vite fait                              #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
-# Documentation                     #{{{
+# Documentation                     {{{
 #┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
 #┃                                                                           ┃#
 #┃           Explication sur le fonctionnement du script et son but          ┃#
@@ -95,9 +95,9 @@ declare -ri E_OPT_NON_TRAITEE=86
 
 #}}}
 
-#####################################
-#  Fonction de gestion des signaux  # {{{
-#####################################
+###########################################
+# {{{ Fonction de gestion des signaux     #
+###########################################
 
 # Réception d'un signal pour quitter l'app normalement                  {{{
 function fin ()
@@ -141,9 +141,9 @@ function fermeture_terminal ()
 
 #}}}
 
-###########################
-# {{{ Attrape erreurs     #
-###########################
+############################
+# {{{ Pièges à erreurs     #
+############################
 
 # Permet de reste le signal d'erreur
 trap '' ERR
@@ -215,7 +215,7 @@ trap 'maj_taille' WINCH
 
 NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
-# Vérification de l'existence de la commande tput           #{{{
+# Vérification de l'existence de la commande tput   {{{
 if test_cmd_exist tput
 then
     [[ `tput colors 2>/dev/null` -ge 8 ]] &&
@@ -229,7 +229,7 @@ fi
 
     #}}}
 
-# Définition des couleurs                   #{{{
+# Définition des couleurs                           {{{
 if [[ "${NB_COULEURS}" -gt 0 ]]
 then
     declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
@@ -274,7 +274,7 @@ fi
 # {{{ Fonctions généraliste utilisant des couleurs #
 ####################################################
 
-# ligne_vide                    {{{
+# ligne_vide                        {{{
 function ligne_vide ()
 {
     printf >&2 '\n'
@@ -282,7 +282,7 @@ function ligne_vide ()
 
     #}}}
 
-# separateur_section            {{{
+# separateur_section                {{{
 function separateur_section ()
 {
     echo >&2 "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
@@ -290,7 +290,7 @@ function separateur_section ()
 
     #}}}
 
-# message_ok                    {{{
+# message_ok                        {{{
 function message_ok ()
 {
     printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
@@ -300,7 +300,7 @@ function message_ok ()
 
     #}}}
 
-# message_erreur                {{{
+# message_erreur                    {{{
 function message_erreur ()
 {
     printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
@@ -310,7 +310,7 @@ function message_erreur ()
 
     #}}}
 
-# message_attention             {{{
+# message_attention                 {{{
 function message_attention ()
 {
     printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
@@ -320,7 +320,7 @@ function message_attention ()
 
     #}}}
 
-# message_avertissement         {{{
+# message_avertissement             {{{
 function message_avertissement ()
 {
     printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
@@ -330,7 +330,7 @@ function message_avertissement ()
 
     #}}}
 
-# demander_utilisateur          {{{
+# demander_utilisateur              {{{
 function demander_utilisateur ()
 {
     printf >&2 "${*} (o/n)\n"
@@ -343,7 +343,7 @@ function demander_utilisateur ()
 
     #}}}
 
-# affichage_echappee            {{{
+# affichage_echappee                {{{
 declare METHODE_D_AFFICHAGE_ECHAPPEE
 printf "%q " test >/dev/null 2>&1
 [[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE="printfq"
@@ -360,7 +360,7 @@ function affichage_echappee ()
 
     #}}}
 
-# executer_commande         {{{
+# executer_commande                 {{{
 declare FICHIER_LOG_EXECUTION='/dev/null'
 function executer_commande ()
 {
@@ -408,7 +408,7 @@ function executer_commande ()
 
     #}}}
 
-# Affichage simplifié des erreurs           #{{{
+# Affichage simplifié des erreurs   {{{
 # L'argument 1 affiche le texte en rouge
 # L'argument 2 est fait pour afficher le contenu d'une variable
 # L'argument 3 affiche le texte en rouge à la suite de l'argument 2
