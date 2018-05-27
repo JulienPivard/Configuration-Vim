@@ -151,9 +151,7 @@ function fermeture_terminal ()
 
 # Permet de reste le signal d'erreur
 trap '' ERR
-trap 'ERREUR="${?}";
-gestion_erreurs "${LINENO}";
-exit "${ERREUR}";' ERR
+trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}";' ERR
 
 # Gestion des interruption CTRL-C
 trap 'interruption' INT
@@ -185,8 +183,7 @@ function which_cmd ()
 # test_cmd_exist                    {{{
 function test_cmd_exist ()
 {
-    which_cmd "${1}" >/dev/null 2>&1 && return 0
-    return 1
+    which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
 }
 
         #}}}
