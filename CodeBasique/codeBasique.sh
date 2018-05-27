@@ -337,9 +337,10 @@ function message_avertissement ()
 # demander_utilisateur              {{{
 function demander_utilisateur ()
 {
-    printf >&2 '%s\n' "${*} (o/n)"
-    while read -r -n 1 -s reponse
+    printf >&2 '%s\n%s' "${*}" '(o/n) : '
+    while IFS= read -r -n 1 -s reponse
     do
+        [[ "${reponse}" = [OoYyNn] ]] && printf >&2 '%s\n' "${reponse}"
         [[ "${reponse}" = [OoYy] ]] && return 0
         [[ "${reponse}" = [Nn] ]] && return 1
     done
