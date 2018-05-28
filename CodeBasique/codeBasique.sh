@@ -395,7 +395,7 @@ function executer_commande ()
     if [[ "${Code_Erreur}" -ne 0 ]]
     then
         message_erreur
-        printf >>"${FICHIER_LOG_EXECUTION}" "Erreur avec le code d'erreur : ${Code_Erreur}\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" "Erreur avec le code : ${Code_Erreur}\n"
     else
         message_ok
         printf >>"${FICHIER_LOG_EXECUTION}" "OK\n"
