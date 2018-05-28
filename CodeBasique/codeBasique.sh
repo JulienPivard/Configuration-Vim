@@ -161,8 +161,10 @@ exit "${ERREUR}";' ERR
         #}}}
 
 # nettoyage_fin_script              {{{
+declare FICHIER_LOG_EXECUTION='/dev/null'
 function nettoyage_fin_script ()
 {
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n\n' "Exit ${?}"
     # On rend le curseur à nouveau visible
     test_cmd_exist tput && tput cnorm
     exit;
@@ -358,7 +360,6 @@ function affichage_echappee ()
         #}}}
 
 # executer_commande                 {{{
-declare FICHIER_LOG_EXECUTION='/dev/null'
 function executer_commande ()
 {
     local -r user="${USER--}" dir="${PWD}"
@@ -507,6 +508,9 @@ function traitement_option_u ()
     #}}}
 
 #}}}
+
+declare -r FICHIER_LOG_EXECUTION="./log_${NOM_SCRIPT%.*}.log"
+printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s\n' '---------------------' "`date '+%F %T'`"
 
 ####################################################
 #{{{             Gestion des options               #
