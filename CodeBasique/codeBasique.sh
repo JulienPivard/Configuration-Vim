@@ -85,6 +85,7 @@ exit "${ERREUR}";' ERR
 
 #{{{        Constante de sortie et d'erreur        #
 ####################################################
+
 declare -ri EXIT_SUCCES=0
 
 declare -ri E_ARG_AFF_ERR_M=80
@@ -96,6 +97,29 @@ declare -ri E_OPT_NECESSITE_ARG=84
 declare -ri E_OPT_INCONNUE=85
 declare -ri E_OPT_NON_TRAITEE=86
 
+
+    #}}}
+
+#{{{       Fonctions de gestions généraliste       #
+####################################################
+
+declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
+
+# which_cmd                         {{{
+function which_cmd ()
+{
+    which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
+}
+
+        #}}}
+
+# test_cmd_exist                    {{{
+function test_cmd_exist ()
+{
+    which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
+}
+
+        #}}}
 
     #}}}
 
@@ -164,29 +188,6 @@ trap 'fin' QUIT TERM
 
 # Sera toujours exécuté quand une instruction exit est rencontré
 trap 'nettoyage_fin_script' EXIT
-
-    #}}}
-
-#{{{       Fonctions de gestions généraliste       #
-####################################################
-
-declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
-
-# which_cmd                         {{{
-function which_cmd ()
-{
-    which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
-}
-
-        #}}}
-
-# test_cmd_exist                    {{{
-function test_cmd_exist ()
-{
-    which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
-}
-
-        #}}}
 
     #}}}
 
