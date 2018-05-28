@@ -347,12 +347,11 @@ function demander_utilisateur ()
         #}}}
 
 # affichage_echappee                {{{
-declare METHODE_D_AFFICHAGE_ECHAPPEE
 printf '%q ' test >/dev/null 2>&1
-[[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE='printfq'
+[[ "${?}" -eq 0 ]] && declare -r AFFICHAGE_ECHAPPE='printfq'
 function affichage_echappee ()
 {
-    if [[ "${METHODE_D_AFFICHAGE_ECHAPPEE}" == 'printfq' ]]
+    if [[ "${AFFICHAGE_ECHAPPE}" == 'printfq' ]]
     then
         printf '%q ' "${@}"
     else
