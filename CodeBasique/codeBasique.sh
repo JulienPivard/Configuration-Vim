@@ -123,71 +123,64 @@ function test_cmd_exist ()
 
     #}}}
 
-#{{{        Fonction de gestion des signaux        #
+#{{{    Attrape signaux et fonctions de gestion    #
 ####################################################
 
-# Réception d'un signal pour quitter l'app normalement                  {{{
+# fin                               {{{
 function fin ()
 {
     exit;
 }
+# Réception d'un signal pour quitter l'app normalement
+# Gestion des autres signaux de fin
+trap 'fin' QUIT TERM
 
         #}}}
 
-# Le script à été interrompu par l'utilisateur                          {{{
+# interruption                      {{{
 function interruption ()
 {
     exit;
 }
+# Le script à été interrompu par l'utilisateur avec CTRL-C
+trap 'interruption' INT
 
         #}}}
 
-# Une erreur c'est produit durant l'exécution                           {{{
+# gestion_erreurs                   {{{
 function gestion_erreurs ()
 {
     printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
 }
+# Une erreur c'est produit durant l'exécution
+trap '' ERR
+trap 'ERREUR="${?}";
+gestion_erreurs "${LINENO}";
+exit "${ERREUR}";' ERR
 
         #}}}
 
-# On ferme le script. Cette fonction sera exécutée en dernière          {{{
+# nettoyage_fin_script              {{{
 function nettoyage_fin_script ()
 {
     # On rend le curseur à nouveau visible
     test_cmd_exist tput && tput cnorm
     exit;
 }
+# On ferme le script à la rencontre d'un exit. Sera toujours exécutée en dernière
+trap 'nettoyage_fin_script' EXIT
 
         #}}}
 
-# Le terminal qui a lancé le processus à été fermé                      {{{
+# fermeture_terminal                {{{
 function fermeture_terminal ()
 {
     exit;
 }
-
-        #}}}
-
-    #}}}
-
-#{{{                Attrape signaux                #
-####################################################
-
-# Permet de reste le signal d'erreur
-trap '' ERR
-trap 'ERREUR="${?}"; gestion_erreurs "${LINENO}"; exit "${ERREUR}";' ERR
-
-# Gestion des interruption CTRL-C
-trap 'interruption' INT
-
-# Gestion de la fermeture du terminal
+# Le terminal qui a lancé le processus à été fermé
 trap 'fermeture_terminal' HUP
 
-# Gestion des autres signaux de fin
-trap 'fin' QUIT TERM
-
-# Sera toujours exécuté quand une instruction exit est rencontré
-trap 'nettoyage_fin_script' EXIT
+        #}}}
 
     #}}}
 
