@@ -462,12 +462,12 @@ exit "${ERREUR}";' ERR
 #{{{                    Code                       #
 ####################################################
 
-# fonctions de l'application elle même       {{{
+# fonctions de l'application elle même      {{{
 
 
     #}}}
 
-# fonctions des options                      {{{
+# fonctions des options                     {{{
 
 # afficher_aide                     {{{
 declare -r NOM_SCRIPT=`basename "${0}"`
