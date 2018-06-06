@@ -1,4 +1,4 @@
-" Dernière modification : Lundi 26 février[02] 2018
+" Dernière modification : Mercredi 06 juin[06] 2018
 
 scriptencoding utf-8
 
@@ -229,14 +229,21 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'forest'
 
 let g:airline#extensions#ycm#enabled = 1
+
 let g:airline#extensions#tabline#enabled = 1
+
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
+
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = '····'
+let g:airline#extensions#branch#format = 0
 let g:airline#extensions#branch#displayed_head_limit = 20
+
+let g:airline#extensions#fugitiveline#enabled = 1
 
 "}}}
 
