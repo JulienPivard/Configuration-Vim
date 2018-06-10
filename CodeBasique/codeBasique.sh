@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Lundi 28 mai[05] 2018
+# Dernière modification : Dimanche 10 juin[06] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -509,7 +509,7 @@ function traitement_option_u ()
 
 #}}}
 
-declare -r FICHIER_LOG_EXECUTION="./log_${NOM_SCRIPT%.*}.log"
+declare -r FICHIER_LOG_EXECUTION="./.log_${NOM_SCRIPT%.*}.log"
 printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s\n' '---------------------' "`date '+%F %T'`"
 
 ####################################################
