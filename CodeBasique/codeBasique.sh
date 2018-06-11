@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 10 juin[06] 2018
+# Dernière modification : Lundi 11 juin[06] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -345,7 +345,7 @@ function demander_utilisateur ()
 
 # affichage_echappee                {{{
 printf '%q ' test >/dev/null 2>&1
-[[ "${?}" -eq 0 ]] && declare -r AFFICHAGE_ECHAPPE='printfq'
+[[ "${?}" -eq 0 ]] && AFFICHAGE_ECHAPPE='printfq' || AFFICHAGE_ECHAPPE=''
 function affichage_echappee ()
 {
     if [[ "${AFFICHAGE_ECHAPPE}" == 'printfq' ]]
@@ -515,6 +515,10 @@ printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s\n' '---------------------' "`date '+
 ####################################################
 #{{{             Gestion des options               #
 ####################################################
+
+printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'Script appelé avec les options : '
+[[ "${#}" -gt 0 ]] && affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
+printf >>"${FICHIER_LOG_EXECUTION}" '\n\n'
 
 #  Affiche l'aide si aucun arguments n'est donné
 if [[ "${#}" -eq 0 ]]
