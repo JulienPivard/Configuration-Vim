@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Lundi 11 juin[06] 2018
+# Dernière modification : dimanche 01 juillet[07] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -516,9 +516,16 @@ printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s\n' '---------------------' "`date '+
 #{{{             Gestion des options               #
 ####################################################
 
-printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'Script appelé avec les options : '
-[[ "${#}" -gt 0 ]] && affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
-printf >>"${FICHIER_LOG_EXECUTION}" '\n\n'
+# Si on a des arguments
+if [[ "${#}" -gt 0 ]]
+then
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'Script appelé avec les options : '
+    affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
+    printf >>"${FICHIER_LOG_EXECUTION}" '\n'
+else
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'Script appelé sans options'
+fi
+printf >>"${FICHIER_LOG_EXECUTION}" '\n'
 
 #  Affiche l'aide si aucun arguments n'est donné
 if [[ "${#}" -eq 0 ]]
