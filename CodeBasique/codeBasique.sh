@@ -524,12 +524,12 @@ function traitement_option_u ()
 
 declare -r FICHIER_LOG_EXECUTION="./.log_${NOM_SCRIPT%.*}.log"
 cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
------------------------------- : `date '+%F %T'`
-System             : ${SYSTEM}
-Operating System   : ${OS}
-Machine            : ${MACHINE}
-BASH major version : ${BASH_MAJOR_VERSION}
-----
+---------------------------------- : `date '+%F %T'`
+--  System             : ${SYSTEM}
+--  Operating System   : ${OS}
+--  Machine            : ${MACHINE}
+--  BASH major version : ${BASH_MAJOR_VERSION}
+----------------------------------
 EOF
 
 ####################################################
