@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : dimanche 01 juillet[07] 2018
+# Dernière modification : Mercredi 15 août[08] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -169,7 +169,8 @@ function nettoyage_fin_script ()
     test_cmd_exist tput && tput cnorm
     exit;
 }
-# On ferme le script à la rencontre d'un exit. Sera toujours exécutée en dernière
+# On ferme le script à la rencontre d'un exit.
+# Sera toujours exécutée en dernière
 trap 'nettoyage_fin_script' EXIT
 
         #}}}
