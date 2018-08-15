@@ -455,6 +455,18 @@ exit "${ERREUR}";' ERR
 
     #}}}
 
+# Informations système              {{{
+# Vérifie si le script à été lancé avec bash
+[[ -z "${BASH_VERSION}" ]] && BASH_MAJOR_VERSION='0' || BASH_MAJOR_VERSION="${BASH_VERSINFO[0]}"
+declare -r BASH_MAJOR_VERSION
+
+declare -r SYSTEM="$(uname -s)"
+[[ "${SYSTEM}" = 'Darwin' ]] && OS='MacOS' || OS="$(uname -o)"
+declare -r OS
+declare -r MACHINE="$(uname -m)"
+
+    #}}}
+
 #}}}
 
 # Retirer l'extension %.* un % par extension à retirer.
@@ -511,7 +523,14 @@ function traitement_option_u ()
 #}}}
 
 declare -r FICHIER_LOG_EXECUTION="./.log_${NOM_SCRIPT%.*}.log"
-printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s\n' '---------------------' "`date '+%F %T'`"
+cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
+------------------------------ : `date '+%F %T'`
+System             : ${SYSTEM}
+Operating System   : ${OS}
+Machine            : ${MACHINE}
+BASH major version : ${BASH_MAJOR_VERSION}
+----
+EOF
 
 ####################################################
 #{{{             Gestion des options               #
