@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 15 août[08] 2018
+# Dernière modification : Jeudi 06 septembre[09] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -204,7 +204,6 @@ function maj_taille ()
         #}}}
 
 maj_taille
-
 trap 'maj_taille' WINCH
 
     #}}}
@@ -386,12 +385,7 @@ function executer_commande ()
     printf >&2 "${NEUTRE}\n"
 
     # Exécute la commande
-    if "${@}"
-    then
-        local -r Code_Erreur=0
-    else
-        local -r Code_Erreur="${?}"
-    fi
+    "${@}" && local -r Code_Erreur=0 || local -r Code_Erreur="${?}"
 
     if [[ "${Code_Erreur}" -ne 0 ]]
     then
