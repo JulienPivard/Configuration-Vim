@@ -34,6 +34,8 @@
 #┃       --orc                                                               ┃#
 #┃       -u une option avec un argument                                      ┃#
 #┃       --umbra                                                             ┃#
+#┃       -m une option qui peut être appelée de multiple fois                ┃#
+#┃       --multiple                                                          ┃#
 #┃       -h affiche l'aide                                                   ┃#
 #┃       --help                                                              ┃#
 #┃  -    --------------------------------------------------                  ┃#
@@ -512,6 +514,24 @@ function traitement_option_u ()
 
         #}}}
 
+# traitement_option_m               {{{
+# Multiples appels de la même option
+declare -a TAB_OPTION_M=()
+
+function traitement_option_m ()
+{
+    # Ajoute à la fin du tableau
+    TAB_OPTION_M["${#TAB_OPTION_M[*]}"]="${1}"
+    # Parcours le tableau des options de m pour afficher
+    for ((i = 0; i < ${#TAB_OPTION_M[*]}; i++))
+    do
+        echo "$i  : ${TAB_OPTION_M[$i]}"
+    done
+    echo
+}
+
+        #}}}
+
     #}}}
 
 #}}}
@@ -550,7 +570,7 @@ fi
 
 # option o ne nécessite pas d'arguments en plus u si.
 # Le premier : permet de gérer manuellement les erreurs
-while getopts ":hou:-:" option
+while getopts ":hou:m:-:" option
 do
     case "${option}" in
         o)
@@ -558,6 +578,9 @@ do
             ;;
         u)
             traitement_option_u "${OPTARG}"
+            ;;
+        m)
+            traitement_option_m "${OPTARG}"
             ;;
         h)
             afficher_aide
@@ -572,6 +595,9 @@ do
                 umbra=?* )
                     traitement_option_u "${LONG_OPTARG}"
                     ;;
+                multiple=?*)
+                    traitement_option_m "${LONG_OPTARG}"
+                    ;;
                 help )
                     afficher_aide
                     exit "${EXIT_SUCCES}";
@@ -581,7 +607,7 @@ do
                     afficher_aide
                     exit "${E_ARG_SUPERFLUS_OPT_LONGUE}";
                     ;;
-                umbra* )
+                umbra* | multiple* )
                     afficher_erreur "L'option longue" "--${OPTARG}" "nécessite un argument."
                     afficher_aide
                     exit "${E_OPT_LONGUE_NECESSITE_ARG}";
