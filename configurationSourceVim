@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 16 mai[05] 2018
+# Dernière modification : dimanche 30 septembre[09] 2018
 
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -325,5 +325,3 @@ else
     ligne_vide
 
 fi
-
-ligne_vide
