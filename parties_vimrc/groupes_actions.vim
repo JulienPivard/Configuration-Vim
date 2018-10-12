@@ -1,4 +1,4 @@
-" Dernière modification : Mardi 17 octobre[10] 2017
+" Dernière modification : Vendredi 12 octobre[10] 2018
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -17,6 +17,22 @@ augroup codeSourceAda                                                       "{{{
     autocmd Filetype ada setlocal softtabstop=3
     autocmd Filetype ada setlocal tabstop=3
     autocmd Filetype ada setlocal shiftwidth=3
+    autocmd Filetype ada setlocal errorformat=%-G%f:%s:,
+                \%-G%f:%l:\ %#error:\ %#(Each\ undeclared\ identifier\ is\ reported\ only%.%#,
+                \%-G%f:%l:\ %#error:\ %#for\ each\ function\ it\ appears%.%#,
+                \%-GIn\ file\ included%.%#,
+                \%-G\ %#from\ %f:%l\,,
+                \%-Gmake:\ %#%s,
+                \%-Gcompleted%s,
+                \%-Ggnatcheck%s,
+                \%f:%l:%c:\ instance\ at\ %m,
+                \%f:%l:%c:\ %trror:\ %m,
+                \%f:%l:%c:\ %tarning:\ %m,
+                \%f:%l:%c:\ %theck:\ %m,
+                \%f:%l:%c:\ %m,
+                \%f:%l:\ %trror:\ %m,
+                \%f:%l:\ %tarning:\ %m,
+                \%f:%l:\ %m
 augroup END
 
 "}}}
