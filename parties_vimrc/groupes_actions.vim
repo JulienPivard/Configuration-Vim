@@ -1,4 +1,4 @@
-" Dernière modification : Vendredi 12 octobre[10] 2018
+" Dernière modification : Samedi 13 octobre[10] 2018
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -25,6 +25,12 @@ augroup codeSourceAda                                                       "{{{
                 \%-Gmake:\ %#%s,
                 \%-Gcompleted%s,
                 \%-Ggnatcheck%s,
+                \%-Ggprbuild%s,
+                \%-GSetup,
+                \%-GCompile,
+                \%-GBind,
+                \%-GLink,
+                \%-G\ %s,
                 \%f:%l:%c:\ instance\ at\ %m,
                 \%f:%l:%c:\ %trror:\ %m,
                 \%f:%l:%c:\ %tarning:\ %m,
