@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Jeudi 06 septembre[09] 2018
+# Dernière modification : Mercredi 17 octobre[10] 2018
 
 ###############################################################################
 #                   ___                             __                        #
@@ -481,7 +481,8 @@ declare -r MACHINE="$(uname -m)"
 # afficher_aide                     {{{
 declare -r NOM_SCRIPT=`basename "${0}"`
 declare -r USAGE="\
-Usage : ${NOM_SCRIPT} [-h]
+ Usage : ${NOM_SCRIPT}
+    ou : ${NOM_SCRIPT} [-h]
 
 Petite explication du rôle du script
 
