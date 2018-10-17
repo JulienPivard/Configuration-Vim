@@ -404,9 +404,8 @@ function executer_commande ()
         #}}}
 
 # Affichage simplifié des erreurs   {{{
-# L'argument 1 affiche le texte en rouge
-# L'argument 2 est fait pour afficher le contenu d'une variable
-# L'argument 3 affiche le texte en rouge à la suite de l'argument 2
+# Affichage : Affiche en couleur rouge arg1; en violet gras [arg2];
+# arg3 en rouge...
 function afficher_erreur ()
 {
     [[ -n "${1}" ]] || exit "${E_ARG_AFF_ERR_M}";
