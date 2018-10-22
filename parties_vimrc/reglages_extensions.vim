@@ -11,7 +11,7 @@ let g:gundo_right = 0               " Ouvre l'arbre à gauche.
 let g:gundo_preview_bottom = 1      " Pour que la fenêtre d'aperçus prenne toute la largeur.
 let g:gundo_close_on_revert = 1     " Fermer automatiquement après annulation.
 let g:gundo_auto_preview = 0        " Désactive l'affichage automatique des différence.
-let g:gundo_prefer_python3 = 0
+let g:gundo_prefer_python3 = 1
 let g:gundo_tree_statusline = '%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline = '%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
