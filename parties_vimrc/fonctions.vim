@@ -1,4 +1,4 @@
-" Dernière modification : Vendredi 19 octobre[10] 2018
+" Dernière modification : dimanche 04 novembre[11] 2018
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -49,17 +49,15 @@ function! Nettoyage()                                                       "{{{
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
     let curline = line( '.' )
-    let recherchePred = @/
     " Effectue la suppression des espaces en trop en fin de ligne.
-    silent execute "normal! " . ':%s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
+    silent execute "normal! " . ':keeppatterns %s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
     " On efface les lignes blanches inutiles en fin de fichier.
     if prevnonblank( line( '$' ) ) < line( '$' )
-        silent execute "normal! :" . prevnonblank( line( '$' ) ) . '+s/\v^\n\n+//e' . "\<Return>" . ":nohlsearch\<Return>"
+        silent execute "normal! :keeppatterns " . prevnonblank( line( '$' ) ) . '+s/\v^\n\n+//e' . "\<Return>" . ":nohlsearch\<Return>"
     endif
     " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
     " On retire les variables.
-    let @/ = recherchePred
     unlet curcol
     unlet curline
 
