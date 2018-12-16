@@ -1,4 +1,4 @@
-" Dernière modification : Samedi 13 octobre[10] 2018
+" Dernière modification : Dimanche 16 décembre[12] 2018
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -223,6 +223,13 @@ augroup pencil                                                              "{{{
     autocmd!
     autocmd FileType markdown,mkd call pencil#init()
 "    autocmd FileType text         call pencil#init()
+augroup END
+
+"}}}
+
+augroup latex                                                               "{{{
+    autocmd!
+    autocmd FileType tex compiler tex
 augroup END
 
 "}}}
