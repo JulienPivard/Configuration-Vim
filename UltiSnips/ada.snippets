@@ -1,20 +1,27 @@
 priority -45
 
 snippet ent "entry ... when"
-entry $1 ($2) when $3 is
+entry $1
+	($2)
+	when $3
+is
 begin
 	$0
 end $1;
 endsnippet
 
 snippet acc "accept"
-accept $1 ($2) do
+accept $1
+	($2)
+do
 	$0
 end $1;
 endsnippet
 
 snippet prot "protected type"
-protected type $1 ($2) is
+protected type $1
+	($2)
+is
 	$0
 end $1;
 endsnippet
@@ -51,7 +58,9 @@ endsnippet
 
 snippet proc "procedure"
 ---------------------------------------------------------------------------
-procedure $1 ($2) is
+procedure $1
+	($2)
+is
 	$3
 begin
 	$0
@@ -60,7 +69,10 @@ endsnippet
 
 snippet fun "function"
 ---------------------------------------------------------------------------
-function $1 ($2) return $3 is
+function $1
+	($2)
+	return $3
+is
 	$4
 begin
 	$0
