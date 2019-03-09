@@ -1,5 +1,20 @@
 priority -45
 
+global !p
+
+def ada_case(word):
+	out = word[0].upper()
+	for i in range(1, len(word)):
+		if word[i] == '-':
+			out = out + '.'
+		elif word[i - 1] == '_' or word[i - 1] == '-':
+			out = out + word[i].upper()
+		else:
+			out = out + word[i]
+	return out
+
+endglobal
+
 snippet pac "package"
 --  @summary
 --  Une petite explication
