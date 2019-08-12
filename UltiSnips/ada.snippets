@@ -21,9 +21,33 @@ snippet pac "package"
 --  @description
 --  Une description plus longue
 --  @group Un nom de groupe
-package ${1:`!p snip.rv = ada_case(snip.basename)`} is
+package ${1:`!p snip.rv = ada_case(snip.basename)`}
+	with
+		Pure           => True,
+		Preelaborate   => False,
+		Elaborate_Body => False,
+		Spark_Mode     => Off
+is
 	$0
 end $1;
+endsnippet
+
+snippet pacb "package body"
+package body ${1:`!p snip.rv = ada_case(snip.basename)`}
+	with Spark_Mode => Off
+is
+	$0
+end $1;
+endsnippet
+
+snippet taskb "task body"
+---------------------------------------------------------------------------
+task body $1 is
+	$2
+begin
+	$0
+end $1;
+---------------------------------------------------------------------------
 endsnippet
 
 snippet ent "entry ... when"
@@ -44,12 +68,27 @@ do
 end $1;
 endsnippet
 
-snippet prot "protected type"
+snippet protd "protected object declaration"
+protected $1
+is
+	$0
+end $1;
+endsnippet
+
+snippet prot_typ "protected type"
 protected type $1
 	($2)
 is
 	$0
 end $1;
+endsnippet
+
+snippet prob "protected body"
+---------------------------------------------------------------------------
+protected body $1 is
+	$0
+end $1;
+---------------------------------------------------------------------------
 endsnippet
 
 snippet decn "declare named block"
@@ -91,6 +130,7 @@ is
 begin
 	$0
 end $1;
+---------------------------------------------------------------------------
 endsnippet
 
 snippet procd "procedure declaration"
@@ -110,6 +150,7 @@ is
 begin
 	$0
 end $1;
+---------------------------------------------------------------------------
 endsnippet
 
 snippet fund "function declaration"
