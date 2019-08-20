@@ -1,5 +1,10 @@
 set nocompatible                        " Casser compatible avec vielle version
 
+if system ('uname') =~? 'darwin'
+    let &t_ZH="\e[3m"
+    let &t_ZR="\e[23m"
+endif
+
 " Dernière modification : Mardi 20 août[08] 2019
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
