@@ -1,4 +1,4 @@
-" Dernière modification : dimanche 04 novembre[11] 2018
+" Dernière modification : Mardi 20 août[08] 2019
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -53,7 +53,7 @@ function! Nettoyage()                                                       "{{{
     silent execute "normal! " . ':keeppatterns %s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
     " On efface les lignes blanches inutiles en fin de fichier.
     if prevnonblank( line( '$' ) ) < line( '$' )
-        silent execute "normal! :keeppatterns " . prevnonblank( line( '$' ) ) . '+s/\v^\n\n+//e' . "\<Return>" . ":nohlsearch\<Return>"
+        silent execute "normal! :keeppatterns " . '%s/\v\n+%$//e' . "\<Return>" . ":nohlsearch\<Return>"
     endif
     " On remet le curseur la ou il était avant la suppression.
     call cursor( curline, curcol )
