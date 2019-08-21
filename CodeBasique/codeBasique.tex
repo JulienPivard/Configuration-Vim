@@ -1,7 +1,7 @@
 \documentclass[francais, a4paper, 10pt, onecolumn, draft]{article}
 % vim: foldmethod=marker:foldlevel=0:
 
-% Dernière modification : Vendredi 22 février[02] 2019
+% Dernière modification : Mercredi 21 août[08] 2019
 
 %\documentclass[a4paper, 10pt, onecolumn, draft]{book}
 %\documentclass[a4paper, 10pt, onecolumn, draft]{report}
@@ -296,6 +296,57 @@
     pdfkeywords={Hyp,PDF,XeLaTeX,LaTeX,TeX}
 }
     %}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Pour faire un glossaire         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour afficher le glossaire : \printglossaries             %{{{
+% xindy : Utilise xindy au lieu de makindex pour faire le lexique.
+% acronyme : pour ajouter la possibilité de faire des acronymes
+% toc  : Pour que le lexique et les acronymes apparaissent dans
+% le sommaire.
+
+%\usepackage[xindy, acronym, toc, translate=babel,
+%nohypertypes={acronym,main}]{glossaries}
+
+% Pour ajouter les fichiers de glossaires et acronymes
+% Pour afficher le mot défini dans le texte :
+% \gls{label} \Gls{label} \glspl{label} \Glspl{label}
+% Pour l'affichage des accronymes :
+% \acrfull{label} \acrshort{label} \acrlong{label}
+
+%\loadglsentries[main]{src/glossaire.tex}
+
+% Dans le fichier des définitions
+%\newglossaryentry{modbus}
+%{%
+%    type=main,
+%    name=mot,
+%    description={la définition},
+%    %sort=mot_sans_accents,
+%    %plural=le_pluriel_de_mot
+%}
+
+%\loadglsentries[altacronym]{src/acronymes.tex}
+
+% Dans le fichier des acronymes
+% \newacronym{label}{abbrev}{version longue}
+% Le style d'affichage de l'index
+
+%\setglossarystyle{altlist}
+
+% Pour que l'abréviation soit en petites majuscules
+
+%\setacronymstyle{long-sc-short}
+
+% Pour afficher dans le fichier
+% \printglossary[type=main, title=Lexique, toctitle=Lexique]
+% \printglossary[type=\acronymtype]
+
+%\makeglossaries
+
+    %}}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Macro défini par l'utilisateur     %
