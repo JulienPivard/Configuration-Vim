@@ -281,6 +281,23 @@
     %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Macro défini par l'utilisateur     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Quand la forme se répète utilisez une macro.              %{{{
+% La/les valeurs par défaut s'applique toujours aux premiers arguments.
+% Pour des newcommandes courte si oublie d'accolade l'erreur
+% sera plus facile à trouver.
+% Une nouvelle commande : \newcommand*{\nomcommande}[nbarg][valdefaut]{definition}
+\newcommand*{\titre}{Titre}
+\newcommand*{\auteur}{\textsc{Pivard} Julien}
+\newcommand*{\nom}[1]{\emph{#1}}
+\newcommand*{\oldstyle}[1]
+{%Pour avoir un autre affichage des nombres
+    {\fontspec[Numbers={Proportional,OldStyle}]{TeX Gyre Adventor}#1}%
+}
+    %}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Pour avoir des liens cliquable     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ce package doit toujours être chargé en dernier           %{{{
@@ -290,8 +307,8 @@
 \hypersetup{%hidelinks,
     colorlinks=true,
     linkcolor=blue,
-    pdftitle={Titre},
-    pdfauthor={PIVARD Julien},
+    pdftitle={\titre},
+    pdfauthor={\auteur},
     pdfsubject={Squelette},
     pdfkeywords={Hyp,PDF,XeLaTeX,LaTeX,TeX}
 }
@@ -345,24 +362,6 @@
 
 %\makeglossaries
 
-    %}}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     Macro défini par l'utilisateur     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Quand la forme se répète utilisez une macro.              %{{{
-% La/les valeurs par défaut s'applique toujours aux premiers arguments.
-% Pour des newcommandes courte si oublie d'accolade l'erreur
-% sera plus facile à trouver.
-% Une nouvelle commande : \newcommand*{\nomcommande}[nbarg][valdefaut]{definition}
-\newcommand*{\titre}{Titre}
-\newcommand*{\auteur}{\textsc{Pivard} Julien}
-\newcommand*{\nom}[1]{\emph{#1}}
-\newcommand*{\oldstyle}[1]
-{%Pour avoir un autre affichage des nombres
-    {\fontspec[Numbers={Proportional,OldStyle}]{TeX Gyre Adventor}#1}%
-}
     %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
