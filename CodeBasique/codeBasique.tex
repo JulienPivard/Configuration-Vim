@@ -2,12 +2,12 @@
 % vim: foldmethod=marker:foldlevel=0:
 \documentclass[francais, a4paper, 10pt, onecolumn, draft]{article}
 
-% Dernière modification : Lundi 02 septembre[09] 2019
+% Dernière modification : Mardi 03 septembre[09] 2019
 
-%\documentclass[a4paper, 10pt, onecolumn, draft]{book}
-%\documentclass[a4paper, 10pt, onecolumn, draft]{report}
-%\documentclass[a4paper, 10pt, onecolumn, draft]{lettre}
-%\documentclass[draft]{beamer}
+%\documentclass[francais, a4paper, 10pt, onecolumn, draft]{book}
+%\documentclass[francais, a4paper, 10pt, onecolumn, draft]{report}
+%\documentclass[francais, a4paper, 10pt, onecolumn, draft]{lettre}
+%\documentclass[francais, a4paper, draft]{beamer}
 % openright pour avoir les chapitre à droite
 % twoside pour obtenir une mise en page type livre
 % twocolumn Pour avoir un texte multicolonne
@@ -319,6 +319,7 @@
 %     Pour avoir des liens cliquable     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ce package doit toujours être chargé en dernier           %{{{
+% NE PAS CHARGER POUR LES PRÉSENTATIONS BEAMER
 % hidelinks pour ne pas avoir la box rouge ni la couleur des liens
 % colorlinks active les couleurs des liens et retire l'encadrement
 \usepackage[unicode,pdfencoding=auto]{hyperref}
@@ -408,6 +409,21 @@
 %\listoffigures      % Si on veut une liste des images
 %\renewcommand{\lstlistlistingname}{Table des exemples}
 %\lstlistoflistings  % Si on veut une liste des listings avec des labels
+
+% Pour les présentations
+% Ajouter une diapo au début de chaque section avec le résumé du plan.
+%\AtBeginSection
+%{%
+%    \begin{frame}[t]{Plan}
+%        \tableofcontents[currentsection, currentsubsection]
+%    \end{frame}
+%}
+% Une diapo
+%\section {Le sujet}
+%\begin{frame}[c]{Le sujet}
+%    \centering
+%    Blabla
+%\end{frame}
 
 \hfill{}À remplir comme les petites filles!\hfill{}
 
