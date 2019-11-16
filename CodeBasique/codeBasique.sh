@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 17 octobre[10] 2018
+# Dernière modification : Samedi 16 novembre[11] 2019
 
 ###############################################################################
 #                   ___                             __                        #
@@ -18,6 +18,7 @@
 #                          écrit par : PIVARD Julien                          #
 #                       contact : pivardjulien@gmail.com                      #
 #                                date création                                #
+#                               Licence : GPLv3                               #
 #                                                                             #
 #                               résumé vite fait                              #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
