@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Samedi 16 novembre[11] 2019
+# Dernière modification : Dimanche 17 novembre[11] 2019
 
 ###############################################################################
 #                   ___                             __                        #
@@ -451,7 +451,8 @@ exit "${ERREUR}";' ERR
 
     #}}}
 
-# Informations système              {{{
+#{{{            Informations système               #
+####################################################
 # Vérifie si le script à été lancé avec bash
 [[ -z "${BASH_VERSION}" ]] && BASH_MAJOR_VERSION='0' || BASH_MAJOR_VERSION="${BASH_VERSINFO[0]}"
 declare -r BASH_MAJOR_VERSION
