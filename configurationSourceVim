@@ -2,20 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : dimanche 30 septembre[09] 2018
-
-# Arrête le script si une variable non initialisé est utilisée
-set -u
-# Équivalent à set -o errtrace pour s'assurer que les trap sont bien
-# hérité dans les sous shell
-set -E
-# Permet de traiter les erreurs dans les pipeline avec la trap ERR
-set -o pipefail
-set -o posix
-# Activation du mode verbose affiche la commande qui va être exécuté
-#set -v
-# Activation du mode xtrace affiche le résultat de chaque commande
-#set -x
+# Dernière modification : Jeudi 21 novembre[11] 2019
 
 ###############################################################################
 #                   ___                             __                        #
@@ -31,56 +18,90 @@ set -o posix
 #                          écrit par : PIVARD Julien                          #
 #                       contact : pivardjulien@gmail.com                      #
 #                                Novembre 2013                                #
+#                               Licence : GPLv3                               #
 #                                                                             #
 #              Configuration et compilation des sources de vim.               #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
-#############################################
-# {{{ Fonctions de gestions généraliste     #
-#############################################
+# Options comportementales                      #{{{
+# Arrête le script si une variable non initialisé est utilisée
+set -u
+# Équivalent à set -o errtrace pour s'assurer que les trap sont bien
+# hérité dans les sous shell
+set -E
+# Permet de traiter les erreurs dans les pipeline avec la trap ERR
+set -o pipefail
+set -o posix
+# Activation du mode verbose affiche la commande qui va être exécuté
+#set -v
+# Activation du mode xtrace affiche le résultat de chaque commande
+#set -x
+# Gestion des erreurs
+trap 'ERREUR="${?}";
+printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
+exit "${ERREUR}";' ERR
 
-declare -i NB_COULEURS=0
+# On s'assure que l'UID existe bien
+[[ -z "${UID}" ]] && UID="$(id -u)"
 
-# which_cmd                     {{{
+#}}}
+
+####################################################
+#{{{    Fonctions généralistes et configuration    #
+####################################################
+
+#{{{        Constante de sortie et d'erreur        #
+####################################################
+
+declare -ri EXIT_SUCCES=0
+
+declare -ri E_ARG_AFF_ERR_M=80
+
+    #}}}
+
+#{{{       Fonctions de gestions généraliste       #
+####################################################
+
+declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
+
+# which_cmd                         {{{
 function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
-    #}}}
+        #}}}
 
-# test_cmd_exist                {{{
+# test_cmd_exist                    {{{
 function test_cmd_exist ()
 {
-    which_cmd "${1}" >/dev/null 2>&1 && return 0
-    return 1
+    which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
 }
+
+        #}}}
 
     #}}}
 
-#}}}
-
-####################################
-# {{{  Définition des couleurs     #
-####################################
+#{{{            Définition des couleurs            #
+####################################################
 
 NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
-# Vérification de l'existence de la commande tput           #{{{
+# Vérification de l'existence de la commande tput   {{{
 if test_cmd_exist tput
 then
     [[ `tput colors 2>/dev/null` -ge 8 ]] &&
-        declare -r NB_COULEURS=`tput colors` || declare -r NB_COULEURS=0
+        declare -ri NB_COULEURS=`tput colors` || declare -ri NB_COULEURS=0
 
     declare -r NEUTRE="`tput sgr 0`" M_GRAS="`tput bold`" D_SOUL="`tput smul`"
     declare -r F_SOUL="`tput rmul`"  INVERS="`tput rev`"  M__DIM="`tput dim`"
 else
-    declare -r NB_COULEURS=0
+    declare -ri NB_COULEURS=0
 fi
 
-    #}}}
+        #}}}
 
-# Définition des couleurs                   #{{{
+# Définition des couleurs                           {{{
 if [[ "${NB_COULEURS}" -gt 0 ]]
 then
     declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
@@ -117,31 +138,30 @@ else
     declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
 fi
 
+        #}}}
+
     #}}}
 
-#}}}
-
-####################################################
-# {{{ Fonctions généraliste utilisant des couleurs #
+#{{{ Fonctions généralistes utilisant des couleurs #
 ####################################################
 
-# ligne_vide                    {{{
+# ligne_vide                        {{{
 function ligne_vide ()
 {
     printf >&2 '\n'
 }
 
-    #}}}
+        #}}}
 
-# separateur_section            {{{
+# separateur_section                {{{
 function separateur_section ()
 {
-    echo >&2 "--- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} ---"
+    printf >&2 '%s\n' " --- ${NEUTRE}${M__DIM}${M_GRAS}${*}${NEUTRE} --- "
 }
 
-    #}}}
+        #}}}
 
-# message_ok                    {{{
+# message_ok                        {{{
 function message_ok ()
 {
     printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
@@ -149,9 +169,9 @@ function message_ok ()
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
-# message_erreur                {{{
+# message_erreur                    {{{
 function message_erreur ()
 {
     printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
@@ -159,60 +179,61 @@ function message_erreur ()
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
-# message_attention             {{{
+# message_attention                 {{{
 function message_attention ()
 {
-    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} Attention ! ${NEUTRE} "
+    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} ATTENTION ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
-# message_avertissement         {{{
+# message_avertissement             {{{
 function message_avertissement ()
 {
-    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} Avertissement ! ${NEUTRE} "
+    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} AVERTISSEMENT ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
 
-    #}}}
+        #}}}
 
-# demander_utilisateur          {{{
+# demander_utilisateur              {{{
 function demander_utilisateur ()
 {
-    printf >&2 "${*} (o/n)\n"
-    while read -r -n 1 -s reponse
+    printf >&2 '%s\n%s' "${*}" '(o/n) : '
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s' "${*}" '(o/n) : '
+    while IFS= read -r -n 1 -s reponse
     do
+        [[ "${reponse}" = [OoYyNn] ]] && printf >&2 '%s\n' "${reponse}"
+        [[ "${reponse}" = [OoYyNn] ]] && printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${reponse}"
         [[ "${reponse}" = [OoYy] ]] && return 0
         [[ "${reponse}" = [Nn] ]] && return 1
     done
 }
 
-    #}}}
+        #}}}
 
-# affichage_echappee            {{{
-declare METHODE_D_AFFICHAGE_ECHAPPEE
-printf "%q " test >/dev/null 2>&1
-[[ "${?}" -eq 0 ]] && METHODE_D_AFFICHAGE_ECHAPPEE="printfq"
+# affichage_echappee                {{{
+printf '%q ' test >/dev/null 2>&1 && AFFICHAGE_ECHAPPE='printfq' || AFFICHAGE_ECHAPPE=''
+declare -r AFFICHAGE_ECHAPPE
 function affichage_echappee ()
 {
-    if [[ "${METHODE_D_AFFICHAGE_ECHAPPEE}" == "printfq" ]]
+    if [[ "${AFFICHAGE_ECHAPPE}" == 'printfq' ]]
     then
-        printf "%q " "${@}"
+        printf '%q ' "${@}"
     else
-        printf "%s" "${*}"
+        printf '%s' "${*}"
     fi
     return 0
 }
 
-    #}}}
+        #}}}
 
-# executer_commande         {{{
-FICHIER_LOG_EXECUTION="/dev/null"
+# executer_commande                 {{{
 function executer_commande ()
 {
     local -r user="${USER--}" dir="${PWD}"
@@ -228,9 +249,9 @@ function executer_commande ()
     fi
 
     # Consigne l'exécution de la commande dans les logs.
-    printf >> "${FICHIER_LOG_EXECUTION}" "${info}"
-    affichage_echappee >> "${FICHIER_LOG_EXECUTION}" "${@}"
-    printf >> "${FICHIER_LOG_EXECUTION}" " ... "
+    printf >>"${FICHIER_LOG_EXECUTION}" "${info}"
+    affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
+    printf >>"${FICHIER_LOG_EXECUTION}" " ... "
 
     # Affiche l'exécution de la commande sur la sortie d'erreur standard.
     printf >&2 "${info_console}${M_GRAS}${C__JAUNE}"
@@ -238,26 +259,76 @@ function executer_commande ()
     printf >&2 "${NEUTRE}\n"
 
     # Exécute la commande
-    if "${@}"
-    then
-        local -r Code_Erreur=0
-    else
-        local -r Code_Erreur="${?}"
-    fi
+    "${@}" && local -r Code_Erreur=0 || local -r Code_Erreur="${?}"
 
     if [[ "${Code_Erreur}" -ne 0 ]]
     then
         message_erreur
-        printf >> "${FICHIER_LOG_EXECUTION}" "Erreur avec le code d'erreur : ${Code_Erreur}\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" "Erreur avec le code : ${Code_Erreur}\n"
     else
         message_ok
-        printf >> "${FICHIER_LOG_EXECUTION}" "OK\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" "OK\n"
     fi
 
     return "${Code_Erreur}"
 }
 
+        #}}}
+
+# Affichage simplifié des erreurs   {{{
+# Affichage : Affiche en couleur rouge arg1; en violet gras [arg2];
+# arg3 en rouge...
+function afficher_erreur ()
+{
+    [[ -n "${1}" ]] || exit "${E_ARG_AFF_ERR_M}";
+    local AFFICHAGE="${1}" LOG="${1}"
+    if [[ "${#}" -ge 2 ]]
+    then
+        AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
+        AFFICHAGE="${AFFICHAGE}${2}"
+        AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
+        LOG="${LOG} [ ${2} ] "
+    fi
+    [[ "${#}" -ge 3 ]] && AFFICHAGE="${AFFICHAGE}${3}" LOG="${LOG}${3}"
+    if [[ "${#}" -ge 4 ]]
+    then
+        AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
+        AFFICHAGE="${AFFICHAGE}${4}"
+        AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
+        LOG="${LOG} [ ${4} ] "
+    fi
+    [[ "${#}" -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
+    [[ "${#}" -ge 5 ]] && LOG="${LOG}${5}"
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${LOG}"
+    printf >&2 '%s\n' "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}"
+}
+
+        #}}}
+
     #}}}
+
+#{{{            Informations système               #
+####################################################
+# Vérifie si le script à été lancé avec bash
+[[ -z "${BASH_VERSION}" ]] && BASH_MAJOR_VERSION='0' || BASH_MAJOR_VERSION="${BASH_VERSINFO[0]}"
+declare -r BASH_MAJOR_VERSION
+
+declare -r SYSTEM="$(uname -s)"
+[[ "${SYSTEM}" = 'Darwin' ]] && OS='MacOS' || OS="$(uname -o)"
+declare -r OS
+declare -r MACHINE="$(uname -m)"
+
+    #}}}
+
+#}}}
+
+# Retirer l'extension %.* un % par extension à retirer.
+# Ne garder que l'extension avec #*. Voila.
+####################################################
+#{{{                    Code                       #
+####################################################
+
+# fonctions de l'application elle même      {{{
 
 # Fonction affiche_section       #{{{
 affiche_section()
@@ -277,6 +348,20 @@ affiche_section()
     #}}}
 
 #}}}
+
+declare -r FICHIER_LOG_EXECUTION="./.log_${NOM_SCRIPT%.*}.log"
+cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
+---------------------------------- : `date '+%F %T'`
+--  System             : ${SYSTEM}
+--  Operating System   : ${OS}
+--  Machine            : ${MACHINE}
+--  BASH major version : ${BASH_MAJOR_VERSION}
+----------------------------------
+EOF
+
+####################################################
+#{{{                 Exécution                     #
+####################################################
 
 # Si le PATH ne s'initialise pas correctement :
 #export PATH='/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin'
@@ -325,3 +410,7 @@ else
     ligne_vide
 
 fi
+
+#}}}
+
+exit "${EXIT_SUCCES}";
