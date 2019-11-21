@@ -26,13 +26,13 @@
 # Documentation                                 #{{{
 #┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
 #┃                                                                           ┃#
-#┃           Script destiné à configurer automatiqement le code              ┃#
+#┃           Script destiné à configurer automatiquement le code             ┃#
 #┃            source de vim puis de le compiler et l'installer               ┃#
 #┃                                                                           ┃#
 #┃       Option minimal                                                      ┃#
 #┃  -    --------------------------------------------------                  ┃#
 #┃       Options                                                             ┃#
-#┃           Aucune, à utiliser directerment dans le dossier des sources     ┃#
+#┃           Aucune, à utiliser directement dans le dossier des sources      ┃#
 #┃  -    --------------------------------------------------                  ┃#
 #┃       Exemples d'utilisation :                                            ┃#
 #┃           configurationSourceVim                                          ┃#
