@@ -1,4 +1,7 @@
+# Ignorer la documentation
 doc/
+# Fichier généré par des plugins
 log.txt
 shada
+# Généré lors de la maj de vim-plug
 plug.vim.old
