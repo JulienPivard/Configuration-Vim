@@ -489,13 +489,13 @@ affiche_section()
 declare -r NOM_SCRIPT=`basename "${0}"`
 declare -r USAGE="\
  Usage : ${NOM_SCRIPT}
-    ou : ${NOM_SCRIPT} [-h]
 
-Petite explication du rôle du script
+Configure les sources de vim avec les réglages qui m'intéressent,
+et active plusieurs options lors de la compilation pour obtenir
+une version avec un certain nombre de fonctionnalité.
 
 Options :
-    -h --help
-        Affiche l'aide et quitte.
+    Aucune options
 "
 
 function afficher_aide ()
