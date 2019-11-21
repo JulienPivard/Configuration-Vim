@@ -109,7 +109,98 @@ function test_cmd_exist ()
 
     #}}}
 
+#{{{    Attrape signaux et fonctions de gestion    #
+####################################################
+
+# fin                               {{{
+function fin ()
+{
+    exit;
+}
+# Réception d'un signal pour quitter l'app normalement
+# Gestion des autres signaux de fin
+trap 'fin' QUIT TERM
+
+        #}}}
+
+# interruption                      {{{
+function interruption ()
+{
+    exit;
+}
+# Le script à été interrompu par l'utilisateur avec CTRL-C
+trap 'interruption' INT
+
+        #}}}
+
+# gestion_erreurs                   {{{
+function gestion_erreurs ()
+{
+    printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
+}
+# Une erreur c'est produit durant l'exécution
+trap '' ERR
+trap 'ERREUR="${?}";
+gestion_erreurs "${LINENO}";
+exit "${ERREUR}";' ERR
+
+        #}}}
+
+# nettoyage_fin_script              {{{
 declare FICHIER_LOG_EXECUTION='/dev/null'
+
+declare -i ERREUR=0
+
+function nettoyage_fin_script ()
+{
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n\n' "Exit ${?}"
+    # On rend le curseur à nouveau visible
+    test_cmd_exist tput && tput cnorm
+    # Si une erreur survient on affiche l'avortement du script
+    if [[ "${ERREUR}" -ne 0 ]]
+    then
+        test_cmd_exist separateur_section && separateur_section 'Avortement du script'
+    fi
+    exit;
+}
+# On ferme le script à la rencontre d'un exit.
+# Sera toujours exécutée en dernière
+trap 'nettoyage_fin_script' EXIT
+
+        #}}}
+
+# fermeture_terminal                {{{
+function fermeture_terminal ()
+{
+    exit;
+}
+# Le terminal qui a lancé le processus à été fermé
+trap 'fermeture_terminal' HUP
+
+        #}}}
+
+    #}}}
+
+#{{{  Gestion du redimensionnement  de la fenêtre  #
+####################################################
+
+# maj_taille                        {{{
+function maj_taille ()
+{
+    if test_cmd_exist tput
+    then
+        NB_LIGNES=`tput lines` NB_COLONNES=`tput cols`
+    else
+        NB_LIGNES=-1 NB_COLONNES=-1
+    fi
+}
+
+        #}}}
+
+maj_taille
+trap 'maj_taille' WINCH
+
+    #}}}
 
 #{{{            Définition des couleurs            #
 ####################################################
@@ -333,6 +424,20 @@ function afficher_erreur ()
 }
 
         #}}}
+
+# gestion_erreur_couleur            {{{
+function gestion_erreur_couleur ()
+{
+    ligne_vide
+    afficher_erreur 'Le script à subis une erreur ligne' "${1}"
+}
+
+        #}}}
+
+trap '' ERR
+trap 'ERREUR="${?}";
+gestion_erreur_couleur "${LINENO}";
+exit "${ERREUR}";' ERR
 
     #}}}
 
