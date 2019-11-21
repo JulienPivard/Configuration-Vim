@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 17 novembre[11] 2019
+# Dernière modification : Jeudi 21 novembre[11] 2019
 
 ###############################################################################
 #                   ___                             __                        #
@@ -165,11 +165,19 @@ exit "${ERREUR}";' ERR
 
 # nettoyage_fin_script              {{{
 declare FICHIER_LOG_EXECUTION='/dev/null'
+
+declare -i ERREUR=0
+
 function nettoyage_fin_script ()
 {
     printf >>"${FICHIER_LOG_EXECUTION}" '%s\n\n' "Exit ${?}"
     # On rend le curseur à nouveau visible
     test_cmd_exist tput && tput cnorm
+    # Si une erreur survient on affiche l'avortement du script
+    if [[ "${ERREUR}" -ne 0 ]]
+    then
+        test_cmd_exist separateur_section && separateur_section 'Avortement du script'
+    fi
     exit;
 }
 # On ferme le script à la rencontre d'un exit.
@@ -438,7 +446,6 @@ function afficher_erreur ()
 function gestion_erreur_couleur ()
 {
     ligne_vide
-    separateur_section 'Avortement du script'
     afficher_erreur 'Le script à subis une erreur ligne' "${1}"
 }
 
