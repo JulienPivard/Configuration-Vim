@@ -23,6 +23,30 @@
 #              Configuration et compilation des sources de vim.               #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
+# Documentation                                 #{{{
+#┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
+#┃                                                                           ┃#
+#┃           Script destiné à configurer automatiqement le code              ┃#
+#┃            source de vim puis de le compiler et l'installer               ┃#
+#┃                                                                           ┃#
+#┃       Option minimal                                                      ┃#
+#┃  -    --------------------------------------------------                  ┃#
+#┃       Options                                                             ┃#
+#┃           Aucune, à utiliser directerment dans le dossier des sources     ┃#
+#┃  -    --------------------------------------------------                  ┃#
+#┃       Exemples d'utilisation :                                            ┃#
+#┃           configurationSourceVim                                          ┃#
+#┃                                                                           ┃#
+#┃ Codes d'erreurs :                                                         ┃#
+#┃     - 80  Erreur « afficher_erreur » nécessite au moins un argument       ┃#
+#┃          Erreurs dans les options de la ligne de commande                 ┃#
+#┃     - 86  des options qui sont invalides ont été donnée                   ┃#
+#┃          Erreurs lors de l'exécution du code                              ┃#
+#┃                                                                           ┃#
+#┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
+
+#}}}
+
 # Options comportementales                      #{{{
 # Arrête le script si une variable non initialisé est utilisée
 set -u
@@ -84,6 +108,8 @@ function test_cmd_exist ()
         #}}}
 
     #}}}
+
+declare FICHIER_LOG_EXECUTION='/dev/null'
 
 #{{{            Définition des couleurs            #
 ####################################################
