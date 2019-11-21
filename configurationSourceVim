@@ -57,6 +57,9 @@ declare -ri EXIT_SUCCES=0
 
 declare -ri E_ARG_AFF_ERR_M=80
 
+declare -ri E_OPT_NON_TRAITEE=86
+
+
     #}}}
 
 #{{{       Fonctions de gestions généraliste       #
@@ -345,6 +348,32 @@ affiche_section()
     printf >&2 "${NEUTRE}\n"
 }
 
+        #}}}
+
+    #}}}
+
+# fonctions des options                     {{{
+
+# afficher_aide                     {{{
+declare -r NOM_SCRIPT=`basename "${0}"`
+declare -r USAGE="\
+ Usage : ${NOM_SCRIPT}
+    ou : ${NOM_SCRIPT} [-h]
+
+Petite explication du rôle du script
+
+Options :
+    -h --help
+        Affiche l'aide et quitte.
+"
+
+function afficher_aide ()
+{
+    printf >&2 '%s' "${USAGE}"
+}
+
+        #}}}
+
     #}}}
 
 #}}}
@@ -358,6 +387,34 @@ cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
 --  BASH major version : ${BASH_MAJOR_VERSION}
 ----------------------------------
 EOF
+
+####################################################
+#{{{             Gestion des options               #
+####################################################
+
+# Si on a des arguments
+if [[ "${#}" -gt 0 ]]
+then
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'Script appelé avec les options : '
+    affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
+    printf >>"${FICHIER_LOG_EXECUTION}" '\n'
+else
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'Script appelé sans options'
+fi
+printf >>"${FICHIER_LOG_EXECUTION}" '\n'
+
+# Vérifie que toutes les options ont été traitées
+# OPTIND indique la position de l'argument suivant à traiter par getopt
+shift $((OPTIND-1))
+# Si toutes les options n'ont pas été traitée on affiche une erreur
+if [[ "${#}" -ne 0 ]]
+then
+    afficher_erreur "Le ou Les arguments suivant ne sont pas valide :" "${*}"
+    afficher_aide
+    exit "${E_OPT_NON_TRAITEE}";
+fi
+
+#}}}
 
 ####################################################
 #{{{                 Exécution                     #
