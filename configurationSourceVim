@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Jeudi 21 novembre[11] 2019
+# Dernière modification : Mardi 26 novembre[11] 2019
 
 ###############################################################################
 #                   ___                             __                        #
@@ -467,15 +467,18 @@ declare -r MACHINE="$(uname -m)"
 # Fonction affiche_section       #{{{
 affiche_section()
 {
-    declare -r COUL="${1}"
-    declare -r t="${2}"
+    declare -r couleur_section="${1}"
+    declare -r texte_section="${2}"
+
     declare -i largeur=80
-    declare -i taille_txt="${#t}"
+    declare -i taille_txt="${#texte_section}"
+
     largeur=$(( ( largeur - taille_txt ) / 2 ))
-    printf >&2 "${COUL}"
-    eval "printf >&2 '%.s ' {1..$largeur}"
-    printf >&2 "${t}"
-    eval "printf >&2 '%.s ' {1..$largeur}"
+
+    printf >&2 "${couleur_section}"
+    eval "printf >&2 '%.s ' {1..${largeur}}"
+    printf >&2 "${texte_section}"
+    eval "printf >&2 '%.s ' {1..${largeur}}"
     printf >&2 "${NEUTRE}\n"
 }
 
