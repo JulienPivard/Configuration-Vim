@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  Mercredi 01 novembre[11] 2017
+" Last Change:  Samedi 07 décembre[12] 2019
 " Created:      1er janvier 2016
 
 "   @@@@@@    @@@@@@   @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@@
@@ -445,6 +445,7 @@ highlight link javaCommentStar              SpecialComment
 
 exe 'highlight adaStorageClass'     . s:forme . s:underline                 . s:texte . s:jaune             . s:fond . s:none
 exe 'highlight adaTypedef'          . s:forme                               . s:texte . s:vertclair         . s:fond . s:none
+exe 'highlight adaUseType'          . s:forme . s:underline . s:bold        . s:texte . s:vertclair         . s:fond . s:none
 exe 'highlight adaStructure'        . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
