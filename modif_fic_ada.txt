@@ -1,0 +1,25 @@
+" vim:filetype=vim
+" Dans le fichier [autoload/gnat.vim] ligne 122 remplacer par :
+			   \ '%f:%l:%c: (%ttyle) %m'   .
+			   \ '%f:%l:%c: %m' }
+
+
+
+" Dans le fichier [autoload/ada.vim] ligne 120 ajouter Scalar_Storage_Order
+" au dictionnaire.
+'''Safe_Small', '''Scalar_Storage_Order', '''Scale'
+
+
+
+" Dans le fichier [compiler/gnat.vim] ligne 33 remplacer F7 par une autre commande
+
+
+
+" Dans le fichier [syntax/ada.vim] ligne 60 ajouter \> en fin de ligne :
+      execute 'syntax match adaAttribute "\V' . b:Item['word'] . '\>"'
+
+" Dans le meme fichier ligne 240 remplacer :
+   syntax match adaBeginWith	"^\s*\zs\(\(with\(\s\+type\)\=\)\|\(use\)\)\>" contains=adaInc
+" par :
+   syntax match adaBeginWith	"^\zs\(\(with\)\|\(use\)\)\>" contains=adaInc
+   syntax match adaSemiWith	 ";\s*\zs\(\(with\)\|\(use\)\)\>" contains=adaInc
