@@ -23,3 +23,14 @@
 " par :
    syntax match adaBeginWith	"^\zs\(\(with\)\|\(use\)\)\>" contains=adaInc
    syntax match adaSemiWith	 ";\s*\zs\(\(with\)\|\(use\)\)\>" contains=adaInc
+
+
+
+" Dans le fichier [indent/ada.vim] ligne 46 remplacer par :
+   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|task\>\|package\>\|protected\>\|project\>\|then\>\|when\>\|is\>\)'
+" et ligne 48
+   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|task\>\|package\>\|protected\>\|then\>\|when\>\|is\>\)'
+" Ligne 262
+      let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
+" Ligne 287
+      let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\>\|task\>\|package\)\>', '' )
