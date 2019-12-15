@@ -1,6 +1,6 @@
 " Ajouter ligne 250 :
 " Permet de reconnaitre l'utilisation de use all type
-syntax match adaUseType 	"^\s*\zsuse\(\s\+all\)\?\s\+type\>"
+syntax match adaUseType 	"^\s\+\zsuse\(\s\+all\)\?\s\+type\>"
 
 " Dans le fichier [syntax/ada.vim] ligne 327 avec : (392 avec les ajouts)
 highlight def link adaUseType	    Typedef
