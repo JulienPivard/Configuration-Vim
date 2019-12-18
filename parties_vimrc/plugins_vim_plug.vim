@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 28 février[02] 2018
+" Dernière modification : Mercredi 11 décembre[12] 2019
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -34,6 +34,8 @@ Plug 'chr4/nginx.vim'
 
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
+
+"Plug '~/Programmation/Ada/MonPluginAda'
 
 " Charger un plugin depuis l'extérieur
 "Plug '~/Programmation/VimScript/potion'
