@@ -58,7 +58,7 @@ syntax keyword docAdaExceptions
     \ containedin=docAdaComment
     \ skipwhite
 
-syntax keyword docAdaCommentIntro  contained summary description group
+syntax keyword docAdaCommentIntro  contained summary description group private
 
 highlight docAdaChamps      ctermfg=6
 highlight docAdaChampsIntro ctermfg=6
