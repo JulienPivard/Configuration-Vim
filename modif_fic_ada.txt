@@ -21,8 +21,8 @@
 " Dans le meme fichier ligne 240 remplacer :
    syntax match adaBeginWith	"^\s*\zs\(\(with\(\s\+type\)\=\)\|\(use\)\)\>" contains=adaInc
 " par :
-   syntax match adaBeginWith	"^\zs\(\(with\)\|\(use\)\)\>" contains=adaInc
-   syntax match adaSemiWith	 ";\s*\zs\(\(with\)\|\(use\)\)\>" contains=adaInc
+   syntax match adaBeginWith        "^\zs\(\(with\)\|\(use\)\)\>" contains=adaInc nextgroup=adaSemiWith
+   syntax match adaSemiWith "\(;\s*\)\@<=\(\(with\)\|\(use\)\)\>" contains=adaInc nextgroup=adaSemiWith
 
 
 
