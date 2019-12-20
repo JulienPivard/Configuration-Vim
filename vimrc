@@ -5,19 +5,9 @@ if system ('uname') =~? 'darwin'
     let &t_ZR="\e[23m"
 endif
 
-" Dernière modification : Mardi 20 août[08] 2019
+" Dernière modification : Vendredi 20 décembre[12] 2019
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
-
-" Dans le fichier share/vim/vim81/autoload/ada.vim
-" Modifier la ligne 132 remplacer Bit par Bit\>
-" pour que la syntaxe match correctement Bit_Order
-" Ajouter Scalar_Storage_Order ligne 120 pour avoir
-" la coloration de Scalar_Storage_Order
-
-" Dans le fichier share/vim/vim81/compiler/gnat.vim
-" Modifier la ligne 33 pour supprimer F7 et le remplacer
-" par :GnatMake
 
 " Définie les conditions de compilation de YCM                              "{{{
 " info est un dictionnaire avec 3 champs.
