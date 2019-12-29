@@ -1,11 +1,12 @@
 set nocompatible                        " Casser compatible avec vielle version
 
+" Active l'italique avec vim pour MacOs
 if system ('uname') =~? 'darwin'
     let &t_ZH="\e[3m"
     let &t_ZR="\e[23m"
 endif
 
-" Dernière modification : Vendredi 20 décembre[12] 2019
+" Dernière modification : Dimanche 29 décembre[12] 2019
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
