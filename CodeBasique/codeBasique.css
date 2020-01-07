@@ -1,5 +1,5 @@
 /*
- * Dernière modification : mercredi 08 juin[06] 2016
+ * Dernière modification : Dimanche 05 janvier[01] 2020
  * */
 body *
 {
@@ -23,14 +23,14 @@ a:link      /*Liens non visité*/
     color: blue;
 }
 
+a:visited   /*Liens déjà visité*/
+{
+    text-decoration: underline;
+}
+
 a:hover     /*Liens survolé par la souris*/
 {
     color: #CACACA;
     font-weight: bold;
     text-decoration: none;
-}
-
-a:visited   /*Liens déjà visité*/
-{
-    text-decoration: underline;
 }
