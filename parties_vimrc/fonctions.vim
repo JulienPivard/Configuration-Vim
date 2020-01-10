@@ -1,4 +1,4 @@
-" Dernière modification : Mardi 20 août[08] 2019
+" Dernière modification : Vendredi 10 janvier[01] 2020
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -24,6 +24,10 @@ endfunction
 
 " Permet de changer les droits d'un fichier pour le rendre exécutable
 function! ModeChange()                                                      "{{{
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     if getline( 1 ) =~ '^#!.*/bin/'
         silent !chmod u+x "<afile>"
     endif
@@ -68,6 +72,11 @@ endfunction
 " Pour pouvoir ajouter ou modifier la date courante au début du fichier
 function! DerniereModification()                                            "{{{
 
+    " Si le fichier est un buffer du plugin fugitive
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let l:curcol = col( '.' )
     let l:curline = line( '.' )
@@ -106,6 +115,10 @@ endfunction
 
 " Execution du make
 function! CompilationMacro()                                                "{{{
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     silent !clear
     make
 endfunction
@@ -118,6 +131,11 @@ function! ExistMakeFileC()                                                  "{{{
 
     let g:load_doxygen_syntax = 1
     setlocal syntax=c.doxygen
+
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
         setlocal makeprg=make
@@ -145,6 +163,10 @@ endfunction
 
 " Configuration des raccourcis pour compiler en ada.
 function! ExistBuildAda()                                                   "{{{
+
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
 
     if filereadable( glob( './[Mm]akefile' ) )
 
@@ -239,6 +261,13 @@ endfunction
 " Pour trouver la classe correspondante taper :tag nomclasse.cpp
 function! MacrosCPP()                                                       "{{{
 
+    let g:load_doxygen_syntax = 1
+    setlocal syntax=cpp.doxygen
+
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
         noremap  <buffer> <F10>         :!./bin/client<Space>
@@ -259,8 +288,6 @@ function! MacrosCPP()                                                       "{{{
     noremap! <silent> <buffer> <S-F8>  <Esc> :call CreationTags( 'cpp' )<Return>
     noremap  <buffer> <S-F11>       :!doxygen<Return>
     noremap! <buffer> <S-F11> <Esc> :!doxygen<Return>
-    let g:load_doxygen_syntax = 1
-    setlocal syntax=cpp.doxygen
     " Ajoute de tags pour l'omnicompletion
     " git clone https://github.com/universal-ctags/ctags.git
     " Compiler ctags avec utf-8 support
@@ -291,6 +318,10 @@ endfunction
 " La première lettre du nom de dossier java est en minuscule pour exécuter le
 " fichier java on convertit la première lettre du dossier en majuscule
 function! ExistConfigurationJava()                                          "{{{
+
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
 
     " Si il existe un fichier d'automatisation dans le dossier courant.
     if filereadable( 'build.xml' )
@@ -343,6 +374,11 @@ endfunction
 function! MacrosLatexSpecifique()                                           "{{{
 
     NoMatchParen
+
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     if filereadable( 'makefile' ) || filereadable( 'Makefile' )
 
         setlocal makeprg=make
@@ -381,6 +417,10 @@ endfunction
 " Avec shift compile en pdf au lieu d'afficher sur le terminal
 function! AffichageGroff()                                                  "{{{
 
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
+
     " Compilation pour avoir un aperçus dans un terminal
     noremap  <buffer> <F5>       :!groff -Kutf8 -me  -Tutf8 % <Return>
     noremap! <buffer> <F5>  <Esc>:!groff -Kutf8 -me  -Tutf8 % <Return>
@@ -406,6 +446,10 @@ endfunction
 
 " Raccourcis pour les fichiers antlr compile et lance les tests
 function! ConfigAntlr()                                                     "{{{
+
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
 
     noremap  <buffer> <S-F5>       :!./runAntlr.sh %< <Return>
     noremap! <buffer> <S-F5> <Esc> :!./runAntlr.sh %< <Return>
