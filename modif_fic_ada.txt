@@ -34,3 +34,5 @@
       let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
 " Ligne 287
       let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\>\|task\>\|package\)\>', '' )
+"Ligne 36
+" Ajouter ,0=~else
