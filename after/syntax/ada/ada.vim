@@ -5,6 +5,8 @@ syntax match adaUseType 	"^\s\+\zsuse\(\s\+all\)\?\s\+type\>"
 " Dans le fichier [syntax/ada.vim] ligne 327 avec : (392 avec les ajouts)
 highlight def link adaUseType	    Typedef
 
+syntax keyword  adaKeyword	some
+
 " Dans le fichier [syntax/ada.vim] ligne 263 ajouter :
 syntax region  adaComment
     \ oneline
