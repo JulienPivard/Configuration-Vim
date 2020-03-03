@@ -37,6 +37,12 @@
 "Ligne 263
    elseif line =~ '^\s*do\>'
       let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '' )
+"Ligne 187
+   let line = substitute (getline (v:lnum), g:ada#Comment, '', '')
+   if line =~ '^\s*)'
+      let pos_par_ouvrante = searchpair ('(', '', ')', 'bW', '')
+      return indent (pos_par_ouvrante)
+   endif
 "Ligne 36
 setlocal indentkeys+=0=~then,0=~end,0=~elsif,0=~else,0=~when,0=~exception
 setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0),0(
