@@ -35,4 +35,5 @@
 " Ligne 287
       let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\>\|task\>\|package\)\>', '' )
 "Ligne 36
-" Ajouter ,0=~else
+setlocal indentkeys+=0=~then,0=~end,0=~elsif,0=~else,0=~when,0=~exception
+setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0),0(
