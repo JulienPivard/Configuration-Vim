@@ -37,9 +37,13 @@
 "Ligne 263
    elseif line =~ '^\s*do\>'
       let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '' )
-"Ligne 187
+"Ligne 183
    let line = substitute (getline (v:lnum), g:ada#Comment, '', '')
    if line =~ '^\s*)'
+      " On se place au début de ligne qui viens d'être écrite.
+      call cursor (v:lnum, 1)
+      " On cherche la position de la parenthèse qui viens d'être écrite.
+      call searchpos (')', 'cW')
       let pos_par_ouvrante = searchpair ('(', '', ')', 'bW', '')
       return indent (pos_par_ouvrante)
    endif
