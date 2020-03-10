@@ -43,9 +43,9 @@ setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0)
       let pos_par_ouvrante = searchpair ('(', '', ')', 'bW', '')
       return indent (pos_par_ouvrante)
    endif
-" Ligne 262
+" Ligne 273
       let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
-"Ligne 263
+"Ligne 274
    elseif line =~ '^\s*do\>'
       let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '' )
    elseif line =~ '^\s*or\>'
