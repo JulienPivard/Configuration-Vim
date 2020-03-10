@@ -54,5 +54,5 @@ setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0),0=~or
    elseif line =~ '^\s*when\>'
       " Align 'when' one /in/ from matching block start
       let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\)\>', '' ) + shiftwidth()
-" Ligne 287
-      let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|package\)\>', '' )
+" Ligne 302
+      let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|package\|select\)\>', '' )
