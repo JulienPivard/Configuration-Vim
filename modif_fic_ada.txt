@@ -27,9 +27,9 @@
 
 
 " Dans le fichier [indent/ada.vim] ligne 46 remplacer par :
-   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|task\>\|package\>\|protected\>\|project\>\|then\>\|when\>\|is\>\)'
+   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|task\>\|package\>\|protected\>\|project\>\|then\>\|when\>\|is\>\|select\>\|or\>\)'
 " et ligne 48
-   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|task\>\|package\>\|protected\>\|then\>\|when\>\|is\>\)'
+   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|task\>\|package\>\|protected\>\|then\>\|when\>\|is\>\|select\>\|or\>\)'
 "Ligne 36
 setlocal indentkeys+=0=~then,0=~end,0=~elsif,0=~else,0=~when,0=~exception
 setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0)
