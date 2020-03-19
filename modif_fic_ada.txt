@@ -47,7 +47,7 @@ setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0),0=~or,0=~private
       let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
 "Ligne 274
    elseif line =~ '^\s*do\>'
-      let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '' )
+      let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '\(if\|while\|for\|loop\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>' )
    elseif line =~ '^\s*or\>'
       let ind = s:MainBlockIndent( ind, lnum, 'select\>', '\<if\>' )
 " Ligne 284
