@@ -1,9 +1,4 @@
 " vim:filetype=vim
-" Dans le fichier [autoload/gnat.vim] ligne 122 remplacer par :
-			   \ '%f:%l:%c: (%ttyle) %m'   .
-			   \ '%f:%l:%c: %m' }
-
-
 
 " Dans le fichier [autoload/ada.vim] ligne 120 ajouter Scalar_Storage_Order
 " au dictionnaire.

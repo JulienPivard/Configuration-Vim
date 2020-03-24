@@ -1,4 +1,4 @@
-" Dernière modification : Dimanche 16 décembre[12] 2018
+" Dernière modification : Mardi 24 mars[03] 2020
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -34,11 +34,13 @@ augroup codeSourceAda                                                       "{{{
                 \%f:%l:%c:\ instance\ at\ %m,
                 \%f:%l:%c:\ %trror:\ %m,
                 \%f:%l:%c:\ %tarning:\ %m,
+                \%f:%l:%c:\ %tnfo:\ %m,
                 \%f:%l:%c:\ %theck:\ %m,
+                \%f:%l:%c:\ (%ttyle)\ %m,
                 \%f:%l:%c:\ %m,
                 \%f:%l:\ %trror:\ %m,
                 \%f:%l:\ %tarning:\ %m,
-                \%f:%l:\ %m
+                \%f:%l:\ %m,
 augroup END
 
 "}}}
