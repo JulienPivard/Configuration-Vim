@@ -43,6 +43,7 @@ augroup codeSourceAda                                                       "{{{
                 \%f:%l:\ %trror:\ %m,
                 \%f:%l:\ %tarning:\ %m,
                 \%f:%l:\ %m,
+                \%-G%.%#,
 augroup END
 
 "}}}
