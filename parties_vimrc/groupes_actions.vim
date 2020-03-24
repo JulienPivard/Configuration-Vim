@@ -17,7 +17,9 @@ augroup codeSourceAda                                                       "{{{
     autocmd Filetype ada setlocal softtabstop=3
     autocmd Filetype ada setlocal tabstop=3
     autocmd Filetype ada setlocal shiftwidth=3
+    " \%-G\\s%#, ignorer lignes vide
     autocmd Filetype ada setlocal errorformat=%-G%f:%s:,
+                \%-G\\s%#,
                 \%-G%f:%l:\ %#error:\ %#(Each\ undeclared\ identifier\ is\ reported\ only%.%#,
                 \%-G%f:%l:\ %#error:\ %#for\ each\ function\ it\ appears%.%#,
                 \%-GIn\ file\ included%.%#,
