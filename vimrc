@@ -6,7 +6,7 @@ if system ('uname') =~? 'darwin'
     let &t_ZR="\e[23m"
 endif
 
-" Dernière modification : Dimanche 29 décembre[12] 2019
+" Dernière modification : Mercredi 25 mars[03] 2020
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -95,7 +95,7 @@ set   ignorecase                        " Désactive la casse pour utiliser la c
 set nojoinspaces                        " Ne met qu'un seul espace quand on joint des lignes
 set   laststatus=2                      " La barre de statut s'affiche toujours
 set   linebreak                         " Enroule la ligne a partir de la coupure d'un mot
-set   matchpairs=(:),{:},[:],«:»        " Trouver la paire correspondante"
+set   matchpairs=(:),{:},[:],«:»        " Trouver la paire correspondante
 set   modeline                          " Options spécifiques à vim dans les premières lignes
 set   modelines=3                       " Nombres de lignes vérifiées à l'ouverture
 set   nrformats=alpha,octal,hex         " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
