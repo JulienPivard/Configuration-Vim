@@ -18,6 +18,10 @@
 " par :
    syntax match adaBeginWith        "^\zs\(\(with\)\|\(use\)\)\>" contains=adaInc nextgroup=adaSemiWith
    syntax match adaSemiWith "\(;\s*\)\@<=\(\(with\)\|\(use\)\)\>" contains=adaInc nextgroup=adaSemiWith
+" Ligne 225
+if exists("ada_with_gnat_project_files")
+   syntax keyword adaBegin	project library extends aggregate
+endif
 
 
 
