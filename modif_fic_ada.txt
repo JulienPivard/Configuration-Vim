@@ -25,10 +25,7 @@ endif
 
 
 
-" Dans le fichier [indent/ada.vim] ligne 46 remplacer par :
-   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|return\>\s*.*\s*\<do\>\|task\>\|package\>\|protected\>\|project\>\|then\>\|when\>\|is\>\|select\>\|or\>\|\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)\)'
-" et ligne 48
-   let s:AdaBlockStart = '^\s*\(if\>\|while\>\|else\>\|elsif\>\|loop\>\|for\>.*\<\(loop\|use\)\>\|declare\>\|begin\>\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>\|procedure\>\|function\>\|entry\>\|accept\>\|do\>\|return\>\s*.*\s*\<do\>\|task\>\|package\>\|protected\>\|then\>\|when\>\|is\>\|select\>\|or\>\|\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)\)'
+" Dans le fichier [indent/ada.vim]
 "Ligne 36
 setlocal indentkeys+=0=~then,0=~end,0=~elsif,0=~else,0=~when,0=~exception
 setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0),0=~or,0=~private
@@ -58,3 +55,21 @@ setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0),0=~or,0=~private
 " Ligne 306 avant le endif
    elseif line =~ '\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
       let ind = s:MainBlockIndent( ind, lnum, '\(package\|protected\)\>', '' )
+
+" Ligne 46 remplacer la définition de AdaBlockStart par
+let s:AdaBlockStart   = '^\s*\('
+let s:AdaBlockStart ..= 'if\>\|else\>\|elsif\>\|then\>'
+let s:AdaBlockStart ..= '\|while\>\|loop\>\|for\>.*\<\(loop\|use\)\>'
+let s:AdaBlockStart ..= '\|declare\>\|begin\>\|package\>\|is\>'
+let s:AdaBlockStart ..= '\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>'
+let s:AdaBlockStart ..= '\|procedure\>\|function\>\|entry\>\|protected\>'
+let s:AdaBlockStart ..= '\|task\>\|accept\>\|do\>'
+let s:AdaBlockStart ..= '\|when\>\|select\>\|or\>'
+let s:AdaBlockStart ..= '\|return\>\s*.*\s*\<do\>'
+let s:AdaBlockStart ..= '\|\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
+
+if exists("g:ada_with_gnat_project_files")
+   let s:AdaBlockStart ..= '\|project\>\)'
+else
+   let s:AdaBlockStart ..= '\)'
+endif
