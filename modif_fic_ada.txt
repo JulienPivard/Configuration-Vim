@@ -52,6 +52,8 @@ setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0),0=~or,0=~private
       let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\)\>', '' ) + shiftwidth()
 " Ligne 302
       let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>', '' )
+   elseif line =~ '^\s*exception\>'
+      let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
 " Ligne 306 avant le endif
    elseif line =~ '\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
       let ind = s:MainBlockIndent( ind, lnum, '\(package\|protected\)\>', '' )
