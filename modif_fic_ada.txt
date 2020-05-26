@@ -49,6 +49,7 @@ setlocal indentkeys+=0=~package,0=~procedure,0=~function
    elseif line =~ '^\s*do\>'
       let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '\(if\|while\|for\|loop\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>' )
    elseif line =~ '^\s*or\(\(\s*\<else\>\)\@!\)\>'
+      " Le mot clef or sans else après.
       let ind = s:MainBlockIndent( ind, lnum, 'select\>', '\<if\>' )
 " Ligne 286
    elseif line =~ '^\s*when\>'
@@ -60,6 +61,7 @@ setlocal indentkeys+=0=~package,0=~procedure,0=~function
       let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
 " Ligne 308 avant le endif
    elseif line =~ '\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
+      "Le mot clef private, sans tagged devant et sans with après.
       let ind = s:MainBlockIndent( ind, lnum, '\(package\|protected\)\>', '' )
 
 " Ligne 47 remplacer la définition de AdaBlockStart par
