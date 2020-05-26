@@ -40,29 +40,29 @@ setlocal indentkeys+=0=~package,0=~procedure,0=~function
       let pos_par_ouvrante = searchpair ('(', '', ')', 'bW', '')
       return indent (pos_par_ouvrante)
    endif
-" Ligne 273
+" Ligne 275
    elseif line =~ '^\s*\(begin\|is\)\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
    elseif line =~ '^\s*\(procedure\|function\|package\)\>'
       let ind = s:MainBlockIndent( ind, lnum, 'generic\>', '\(procedure\|function\|declare\|package\|task\|protected\|entry\|begin\)\>' )
-"Ligne 274
+"Ligne 276
    elseif line =~ '^\s*do\>'
       let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '\(if\|while\|for\|loop\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>' )
    elseif line =~ '^\s*or\(\(\s*\<else\>\)\@!\)\>'
       let ind = s:MainBlockIndent( ind, lnum, 'select\>', '\<if\>' )
-" Ligne 284
+" Ligne 286
    elseif line =~ '^\s*when\>'
       " Align 'when' one /in/ from matching block start
       let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\)\>', '' ) + shiftwidth()
-" Ligne 302
+" Ligne 304
       let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>', '' )
    elseif line =~ '^\s*exception\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
-" Ligne 306 avant le endif
+" Ligne 308 avant le endif
    elseif line =~ '\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
       let ind = s:MainBlockIndent( ind, lnum, '\(package\|protected\)\>', '' )
 
-" Ligne 46 remplacer la définition de AdaBlockStart par
+" Ligne 47 remplacer la définition de AdaBlockStart par
 let s:AdaBlockStart   = '^\s*\('
 let s:AdaBlockStart ..= 'if\>\|else\>\|elsif\>\|then\>'
 let s:AdaBlockStart ..= '\|while\>\|loop\>\|for\>.*\<\(loop\|use\)\>'
