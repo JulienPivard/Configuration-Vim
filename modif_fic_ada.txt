@@ -60,7 +60,7 @@ setlocal indentkeys+=0=~package,0=~procedure,0=~function
    elseif line =~ '^\s*exception\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
 " Ligne 308 avant le endif
-   elseif line =~ '\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
+   elseif line =~ '^\s*\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
       "Le mot clef private, sans tagged devant et sans with après.
       let ind = s:MainBlockIndent( ind, lnum, '\(package\|protected\)\>', '' )
 
