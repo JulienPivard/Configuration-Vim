@@ -3,6 +3,8 @@
 " Dans le fichier [autoload/ada.vim] ligne 120 ajouter Scalar_Storage_Order
 " au dictionnaire.
 '''Safe_Small', '''Scalar_Storage_Order', '''Scale'
+'''Remainder', '''Result', '''Round',
+'''Modulus', '''Old',  '''Output',
 
 
 
