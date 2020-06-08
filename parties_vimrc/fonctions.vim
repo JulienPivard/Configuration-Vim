@@ -1,4 +1,4 @@
-" Dernière modification : Vendredi 10 janvier[01] 2020
+" Dernière modification : Lundi 08 juin[06] 2020
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -49,6 +49,9 @@ endfunction
 " \s correspond à un espace ou une tab \+ 1 ou plus $ fin de ligne
 " /e pour ne pas générer d'erreur si on ne trouve pas de correspondance
 function! Nettoyage()                                                       "{{{
+    if bufname ("%") =~# "fugitive://.*"
+        return
+    endif
 
     " Permet de récupérer la ligne et la colonne ou se trouve le curseur.
     let curcol = col( '.' )
