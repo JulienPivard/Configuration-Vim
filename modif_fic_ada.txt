@@ -58,6 +58,8 @@ setlocal indentkeys+=0=~package,0=~procedure,0=~function
       " Align 'when' one /in/ from matching block start
       let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\)\>', '' ) + shiftwidth()
 " Ligne 304
+   elseif line =~ '^\s*end\>'
+      " General case for end
       let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>', '' )
    elseif line =~ '^\s*exception\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
