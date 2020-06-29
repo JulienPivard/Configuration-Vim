@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 11 décembre[12] 2019
+" Dernière modification : Lundi 29 juin[06] 2020
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -31,6 +31,7 @@ Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
 Plug 'vim-scripts/matchit.zip'
 Plug 'chr4/nginx.vim'
+Plug 'osyo-manga/vim-anzu'
 
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
