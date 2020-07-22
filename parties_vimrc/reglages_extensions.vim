@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 06 juin[06] 2018
+" Dernière modification : Mercredi 08 juillet[07] 2020
 
 scriptencoding utf-8
 
@@ -244,6 +244,8 @@ let g:airline#extensions#branch#format = 0
 let g:airline#extensions#branch#displayed_head_limit = 20
 
 let g:airline#extensions#fugitiveline#enabled = 1
+
+let airline#extensions#searchcount#enabled = 1
 
 "}}}
 
