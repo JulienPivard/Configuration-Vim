@@ -23,7 +23,7 @@
 #                               résumé vite fait                              #
 #(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)(=^.^=)#
 
-# Documentation                                 #{{{
+# Documentation                                 #{{{1
 #┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓#
 #┃                                                                           ┃#
 #┃           Explication sur le fonctionnement du script et son but          ┃#
@@ -57,9 +57,9 @@
 #┃                                                                           ┃#
 #┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛#
 
-#}}}
+#}}}1
 
-# Options comportementales                      #{{{
+# Options comportementales                      #{{{1
 # Arrête le script si une variable non initialisé est utilisée
 set -u
 # Équivalent à set -o errtrace pour s'assurer que les trap sont bien
@@ -80,13 +80,13 @@ exit "${ERREUR}";' ERR
 # On s'assure que l'UID existe bien
 [[ -z "${UID}" ]] && UID="$(id -u)"
 
-#}}}
+#}}}1
 
 ####################################################
-#    Fonctions généralistes et configuration    #{{{
+#    Fonctions généralistes et configuration    #{{{1
 ####################################################
 
-#        Constante de sortie et d'erreur        #{{{
+#        Constante de sortie et d'erreur        #{{{2
 ####################################################
 
 declare -ri EXIT_SUCCES=0
@@ -101,35 +101,35 @@ declare -ri E_OPT_INCONNUE=85
 declare -ri E_OPT_NON_TRAITEE=86
 
 
-    #}}}
+    #}}}2
 
-#       Fonctions de gestions généraliste       #{{{
+#       Fonctions de gestions généraliste       #{{{2
 ####################################################
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
-# which_cmd                         {{{
+# which_cmd                         {{{3
 function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
 }
 
-        #}}}
+        #}}}3
 
-# test_cmd_exist                    {{{
+# test_cmd_exist                    {{{3
 function test_cmd_exist ()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
 }
 
-        #}}}
+        #}}}3
 
-    #}}}
+    #}}}2
 
-#    Attrape signaux et fonctions de gestion    #{{{
+#    Attrape signaux et fonctions de gestion    #{{{2
 ####################################################
 
-# fin                               {{{
+# fin                               {{{3
 function fin ()
 {
     exit;
@@ -138,9 +138,9 @@ function fin ()
 # Gestion des autres signaux de fin
 trap 'fin' QUIT TERM
 
-        #}}}
+        #}}}3
 
-# interruption                      {{{
+# interruption                      {{{3
 function interruption ()
 {
     exit;
@@ -148,9 +148,9 @@ function interruption ()
 # Le script à été interrompu par l'utilisateur avec CTRL-C
 trap 'interruption' INT
 
-        #}}}
+        #}}}3
 
-# gestion_erreurs                   {{{
+# gestion_erreurs                   {{{3
 function gestion_erreurs ()
 {
     printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
@@ -161,9 +161,9 @@ trap 'ERREUR="${?}";
 gestion_erreurs "${LINENO}";
 exit "${ERREUR}";' ERR
 
-        #}}}
+        #}}}3
 
-# nettoyage_fin_script              {{{
+# nettoyage_fin_script              {{{3
 declare FICHIER_LOG_EXECUTION='/dev/null'
 
 declare -i ERREUR=0
@@ -184,9 +184,9 @@ function nettoyage_fin_script ()
 # Sera toujours exécutée en dernière
 trap 'nettoyage_fin_script' EXIT
 
-        #}}}
+        #}}}3
 
-# fermeture_terminal                {{{
+# fermeture_terminal                {{{3
 function fermeture_terminal ()
 {
     exit;
@@ -194,14 +194,14 @@ function fermeture_terminal ()
 # Le terminal qui a lancé le processus à été fermé
 trap 'fermeture_terminal' HUP
 
-        #}}}
+        #}}}3
 
-    #}}}
+    #}}}2
 
-#  Gestion du redimensionnement  de la fenêtre  #{{{
+#  Gestion du redimensionnement  de la fenêtre  #{{{2
 ####################################################
 
-# maj_taille                        {{{
+# maj_taille                        {{{3
 function maj_taille ()
 {
     if test_cmd_exist tput
@@ -212,19 +212,19 @@ function maj_taille ()
     fi
 }
 
-        #}}}
+        #}}}3
 
 maj_taille
 trap 'maj_taille' WINCH
 
-    #}}}
+    #}}}2
 
-#            Définition des couleurs            #{{{
+#            Définition des couleurs            #{{{2
 ####################################################
 
 NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
-# Vérification de l'existence de la commande tput   {{{
+# Vérification de l'existence de la commande tput   {{{3
 if test_cmd_exist tput
 then
     [[ `tput colors 2>/dev/null` -ge 8 ]] &&
@@ -236,9 +236,9 @@ else
     declare -ri NB_COULEURS=0
 fi
 
-        #}}}
+        #}}}3
 
-# Définition des couleurs                           {{{
+# Définition des couleurs                           {{{3
 if [[ "${NB_COULEURS}" -gt 0 ]]
 then
     declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
@@ -275,30 +275,30 @@ else
     declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
 fi
 
-        #}}}
+        #}}}3
 
-    #}}}
+    #}}}2
 
-# Fonctions généralistes utilisant des couleurs #{{{
+# Fonctions généralistes utilisant des couleurs #{{{2
 ####################################################
 
-# ligne_vide                        {{{
+# ligne_vide                        {{{3
 function ligne_vide ()
 {
     printf >&2 '\n'
 }
 
-        #}}}
+        #}}}3
 
-# separateur_section                {{{
+# separateur_section                {{{3
 function separateur_section ()
 {
     printf >&2 '%s\n' " --- ${NEUTRE}${M__DIM}${M_GRAS} ${*} ${NEUTRE} --- "
 }
 
-        #}}}
+        #}}}3
 
-# message_ok                        {{{
+# message_ok                        {{{3
 function message_ok ()
 {
     printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
@@ -306,9 +306,9 @@ function message_ok ()
     ligne_vide
 }
 
-        #}}}
+        #}}}3
 
-# message_erreur                    {{{
+# message_erreur                    {{{3
 function message_erreur ()
 {
     printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
@@ -316,9 +316,9 @@ function message_erreur ()
     ligne_vide
 }
 
-        #}}}
+        #}}}3
 
-# message_attention                 {{{
+# message_attention                 {{{3
 function message_attention ()
 {
     printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} ATTENTION ! ${NEUTRE} "
@@ -326,9 +326,9 @@ function message_attention ()
     ligne_vide
 }
 
-        #}}}
+        #}}}3
 
-# message_avertissement             {{{
+# message_avertissement             {{{3
 function message_avertissement ()
 {
     printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} AVERTISSEMENT ! ${NEUTRE} "
@@ -336,9 +336,9 @@ function message_avertissement ()
     ligne_vide
 }
 
-        #}}}
+        #}}}3
 
-# demander_utilisateur              {{{
+# demander_utilisateur              {{{3
 function demander_utilisateur ()
 {
     printf >&2 '%s\n%s' "${*}" '(o/n) : '
@@ -352,9 +352,9 @@ function demander_utilisateur ()
     done
 }
 
-        #}}}
+        #}}}3
 
-# affichage_echappee                {{{
+# affichage_echappee                {{{3
 printf '%q ' test >/dev/null 2>&1 && AFFICHAGE_ECHAPPE='printfq' || AFFICHAGE_ECHAPPE=''
 declare -r AFFICHAGE_ECHAPPE
 function affichage_echappee ()
@@ -368,9 +368,9 @@ function affichage_echappee ()
     return 0
 }
 
-        #}}}
+        #}}}3
 
-# executer_commande                 {{{
+# executer_commande                 {{{3
 function executer_commande ()
 {
     local -r user="${USER--}" dir="${PWD}"
@@ -410,9 +410,9 @@ function executer_commande ()
     return "${Code_Erreur}"
 }
 
-        #}}}
+        #}}}3
 
-# Affichage simplifié des erreurs   {{{
+# Affichage simplifié des erreurs   {{{3
 # Affichage : Affiche en couleur rouge arg1; en violet gras [arg2];
 # arg3 en rouge...
 function afficher_erreur ()
@@ -440,25 +440,25 @@ function afficher_erreur ()
     printf >&2 '%s\n' "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}"
 }
 
-        #}}}
+        #}}}3
 
-# gestion_erreur_couleur            {{{
+# gestion_erreur_couleur            {{{3
 function gestion_erreur_couleur ()
 {
     ligne_vide
     afficher_erreur 'Le script à subis une erreur ligne' "${1}"
 }
 
-        #}}}
+        #}}}3
 
 trap '' ERR
 trap 'ERREUR="${?}";
 gestion_erreur_couleur "${LINENO}";
 exit "${ERREUR}";' ERR
 
-    #}}}
+    #}}}2
 
-#            Informations système               #{{{
+#            Informations système               #{{{2
 ####################################################
 # Vérifie si le script à été lancé avec bash
 [[ -z "${BASH_VERSION}" ]] && BASH_MAJOR_VERSION='0' || BASH_MAJOR_VERSION="${BASH_VERSINFO[0]}"
@@ -469,24 +469,24 @@ declare -r SYSTEM="$(uname -s)"
 declare -r OS
 declare -r MACHINE="$(uname -m)"
 
-    #}}}
+    #}}}2
 
-#}}}
+#}}}1
 
 # Retirer l'extension %.* un % par extension à retirer.
 # Ne garder que l'extension avec #*. Voila.
 ####################################################
-#                    Code                       #{{{
+#                    Code                       #{{{1
 ####################################################
 
-# fonctions de l'application elle même      {{{
+# fonctions de l'application elle même      {{{2
 
 
-    #}}}
+    #}}}2
 
-# fonctions des options                     {{{
+# fonctions des options                     {{{2
 
-# afficher_aide                     {{{
+# afficher_aide                     {{{3
 declare -r NOM_SCRIPT=`basename "${0}"`
 declare -r USAGE="\
  Usage : ${NOM_SCRIPT}
@@ -504,26 +504,26 @@ function afficher_aide ()
     printf >&2 '%s' "${USAGE}"
 }
 
-        #}}}
+        #}}}3
 
-# traitement_option_o               {{{
+# traitement_option_o               {{{3
 function traitement_option_o ()
 {
     printf "Option o\n"
 }
 
-        #}}}
+        #}}}3
 
-# traitement_option_u               {{{
+# traitement_option_u               {{{3
 function traitement_option_u ()
 {
     local -r ARGUMENT="${1}"
     printf "Option u = ${ARGUMENT}\n"
 }
 
-        #}}}
+        #}}}3
 
-# traitement_option_m               {{{
+# traitement_option_m               {{{3
 # Multiples appels de la même option
 declare -a TAB_OPTION_M=()
 
@@ -539,11 +539,11 @@ function traitement_option_m ()
     echo
 }
 
-        #}}}
+        #}}}3
 
-    #}}}
+    #}}}2
 
-#}}}
+#}}}1
 
 declare -r FICHIER_LOG_EXECUTION="./.log_${NOM_SCRIPT%.*}.log"
 cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
@@ -556,7 +556,7 @@ cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
 EOF
 
 ####################################################
-#             Gestion des options               #{{{
+#             Gestion des options               #{{{1
 ####################################################
 
 # Si on a des arguments
@@ -652,13 +652,13 @@ then
     exit "${E_OPT_NON_TRAITEE}";
 fi
 
-#}}}
+#}}}1
 
 ####################################################
-#                 Exécution                     #{{{
+#                 Exécution                     #{{{1
 ####################################################
 
 
-#}}}
+#}}}1
 
 exit "${EXIT_SUCCES}";
