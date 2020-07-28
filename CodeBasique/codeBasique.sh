@@ -108,7 +108,7 @@ declare -ri E_OPT_NON_TRAITEE=86
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
 
-# which_cmd                         {{{3
+# which_cmd                         #{{{3
 function which_cmd ()
 {
     which "${1}" 2>/dev/null || command -v "${1}" 2>/dev/null
@@ -116,7 +116,7 @@ function which_cmd ()
 
         #}}}3
 
-# test_cmd_exist                    {{{3
+# test_cmd_exist                    #{{{3
 function test_cmd_exist ()
 {
     which_cmd "${1}" >/dev/null 2>&1 && return 0 || return 1
@@ -129,7 +129,7 @@ function test_cmd_exist ()
 #    Attrape signaux et fonctions de gestion    #{{{2
 ####################################################
 
-# fin                               {{{3
+# fin                               #{{{3
 function fin ()
 {
     exit;
@@ -140,7 +140,7 @@ trap 'fin' QUIT TERM
 
         #}}}3
 
-# interruption                      {{{3
+# interruption                      #{{{3
 function interruption ()
 {
     exit;
@@ -150,7 +150,7 @@ trap 'interruption' INT
 
         #}}}3
 
-# gestion_erreurs                   {{{3
+# gestion_erreurs                   #{{{3
 function gestion_erreurs ()
 {
     printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
@@ -163,7 +163,7 @@ exit "${ERREUR}";' ERR
 
         #}}}3
 
-# nettoyage_fin_script              {{{3
+# nettoyage_fin_script              #{{{3
 declare FICHIER_LOG_EXECUTION='/dev/null'
 
 declare -i ERREUR=0
@@ -186,7 +186,7 @@ trap 'nettoyage_fin_script' EXIT
 
         #}}}3
 
-# fermeture_terminal                {{{3
+# fermeture_terminal                #{{{3
 function fermeture_terminal ()
 {
     exit;
@@ -201,7 +201,7 @@ trap 'fermeture_terminal' HUP
 #  Gestion du redimensionnement  de la fenêtre  #{{{2
 ####################################################
 
-# maj_taille                        {{{3
+# maj_taille                        #{{{3
 function maj_taille ()
 {
     if test_cmd_exist tput
@@ -224,7 +224,7 @@ trap 'maj_taille' WINCH
 
 NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
 
-# Vérification de l'existence de la commande tput   {{{3
+# Vérification de l'existence de la commande tput   #{{{3
 if test_cmd_exist tput
 then
     [[ `tput colors 2>/dev/null` -ge 8 ]] &&
@@ -238,7 +238,7 @@ fi
 
         #}}}3
 
-# Définition des couleurs                           {{{3
+# Définition des couleurs                           #{{{3
 if [[ "${NB_COULEURS}" -gt 0 ]]
 then
     declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
@@ -282,7 +282,7 @@ fi
 # Fonctions généralistes utilisant des couleurs #{{{2
 ####################################################
 
-# ligne_vide                        {{{3
+# ligne_vide                        #{{{3
 function ligne_vide ()
 {
     printf >&2 '\n'
@@ -290,7 +290,7 @@ function ligne_vide ()
 
         #}}}3
 
-# separateur_section                {{{3
+# separateur_section                #{{{3
 function separateur_section ()
 {
     printf >&2 '%s\n' " --- ${NEUTRE}${M__DIM}${M_GRAS} ${*} ${NEUTRE} --- "
@@ -298,7 +298,7 @@ function separateur_section ()
 
         #}}}3
 
-# message_ok                        {{{3
+# message_ok                        #{{{3
 function message_ok ()
 {
     printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
@@ -308,7 +308,7 @@ function message_ok ()
 
         #}}}3
 
-# message_erreur                    {{{3
+# message_erreur                    #{{{3
 function message_erreur ()
 {
     printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
@@ -318,7 +318,7 @@ function message_erreur ()
 
         #}}}3
 
-# message_attention                 {{{3
+# message_attention                 #{{{3
 function message_attention ()
 {
     printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} ATTENTION ! ${NEUTRE} "
@@ -328,7 +328,7 @@ function message_attention ()
 
         #}}}3
 
-# message_avertissement             {{{3
+# message_avertissement             #{{{3
 function message_avertissement ()
 {
     printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} AVERTISSEMENT ! ${NEUTRE} "
@@ -338,7 +338,7 @@ function message_avertissement ()
 
         #}}}3
 
-# demander_utilisateur              {{{3
+# demander_utilisateur              #{{{3
 function demander_utilisateur ()
 {
     printf >&2 '%s\n%s' "${*}" '(o/n) : '
@@ -354,7 +354,7 @@ function demander_utilisateur ()
 
         #}}}3
 
-# affichage_echappee                {{{3
+# affichage_echappee                #{{{3
 printf '%q ' test >/dev/null 2>&1 && AFFICHAGE_ECHAPPE='printfq' || AFFICHAGE_ECHAPPE=''
 declare -r AFFICHAGE_ECHAPPE
 function affichage_echappee ()
@@ -370,7 +370,7 @@ function affichage_echappee ()
 
         #}}}3
 
-# executer_commande                 {{{3
+# executer_commande                 #{{{3
 function executer_commande ()
 {
     local -r user="${USER--}" dir="${PWD}"
@@ -412,7 +412,7 @@ function executer_commande ()
 
         #}}}3
 
-# Affichage simplifié des erreurs   {{{3
+# Affichage simplifié des erreurs   #{{{3
 # Affichage : Affiche en couleur rouge arg1; en violet gras [arg2];
 # arg3 en rouge...
 function afficher_erreur ()
@@ -442,7 +442,7 @@ function afficher_erreur ()
 
         #}}}3
 
-# gestion_erreur_couleur            {{{3
+# gestion_erreur_couleur            #{{{3
 function gestion_erreur_couleur ()
 {
     ligne_vide
@@ -479,14 +479,14 @@ declare -r MACHINE="$(uname -m)"
 #                    Code                       #{{{1
 ####################################################
 
-# fonctions de l'application elle même      {{{2
+# fonctions de l'application elle même      #{{{2
 
 
     #}}}2
 
-# fonctions des options                     {{{2
+# fonctions des options                     #{{{2
 
-# afficher_aide                     {{{3
+# afficher_aide                     #{{{3
 declare -r NOM_SCRIPT=`basename "${0}"`
 declare -r USAGE="\
  Usage : ${NOM_SCRIPT}
@@ -506,7 +506,7 @@ function afficher_aide ()
 
         #}}}3
 
-# traitement_option_o               {{{3
+# traitement_option_o               #{{{3
 function traitement_option_o ()
 {
     printf "Option o\n"
@@ -514,7 +514,7 @@ function traitement_option_o ()
 
         #}}}3
 
-# traitement_option_u               {{{3
+# traitement_option_u               #{{{3
 function traitement_option_u ()
 {
     local -r ARGUMENT="${1}"
@@ -523,7 +523,7 @@ function traitement_option_u ()
 
         #}}}3
 
-# traitement_option_m               {{{3
+# traitement_option_m               #{{{3
 # Multiples appels de la même option
 declare -a TAB_OPTION_M=()
 
