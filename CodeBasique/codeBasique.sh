@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mardi 09 juin[06] 2020
+# Dernière modification : Mardi 28 juillet[07] 2020
 
 ###############################################################################
 #                   ___                             __                        #
@@ -83,10 +83,10 @@ exit "${ERREUR}";' ERR
 #}}}
 
 ####################################################
-#{{{    Fonctions généralistes et configuration    #
+#    Fonctions généralistes et configuration    #{{{
 ####################################################
 
-#{{{        Constante de sortie et d'erreur        #
+#        Constante de sortie et d'erreur        #{{{
 ####################################################
 
 declare -ri EXIT_SUCCES=0
@@ -103,7 +103,7 @@ declare -ri E_OPT_NON_TRAITEE=86
 
     #}}}
 
-#{{{       Fonctions de gestions généraliste       #
+#       Fonctions de gestions généraliste       #{{{
 ####################################################
 
 declare -i NB_COULEURS=0 NB_COLONNES=0 NB_LIGNES=0
@@ -126,7 +126,7 @@ function test_cmd_exist ()
 
     #}}}
 
-#{{{    Attrape signaux et fonctions de gestion    #
+#    Attrape signaux et fonctions de gestion    #{{{
 ####################################################
 
 # fin                               {{{
@@ -198,7 +198,7 @@ trap 'fermeture_terminal' HUP
 
     #}}}
 
-#{{{  Gestion du redimensionnement  de la fenêtre  #
+#  Gestion du redimensionnement  de la fenêtre  #{{{
 ####################################################
 
 # maj_taille                        {{{
@@ -219,7 +219,7 @@ trap 'maj_taille' WINCH
 
     #}}}
 
-#{{{            Définition des couleurs            #
+#            Définition des couleurs            #{{{
 ####################################################
 
 NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
@@ -279,7 +279,7 @@ fi
 
     #}}}
 
-#{{{ Fonctions généralistes utilisant des couleurs #
+# Fonctions généralistes utilisant des couleurs #{{{
 ####################################################
 
 # ligne_vide                        {{{
@@ -458,7 +458,7 @@ exit "${ERREUR}";' ERR
 
     #}}}
 
-#{{{            Informations système               #
+#            Informations système               #{{{
 ####################################################
 # Vérifie si le script à été lancé avec bash
 [[ -z "${BASH_VERSION}" ]] && BASH_MAJOR_VERSION='0' || BASH_MAJOR_VERSION="${BASH_VERSINFO[0]}"
@@ -476,7 +476,7 @@ declare -r MACHINE="$(uname -m)"
 # Retirer l'extension %.* un % par extension à retirer.
 # Ne garder que l'extension avec #*. Voila.
 ####################################################
-#{{{                    Code                       #
+#                    Code                       #{{{
 ####################################################
 
 # fonctions de l'application elle même      {{{
@@ -556,7 +556,7 @@ cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
 EOF
 
 ####################################################
-#{{{             Gestion des options               #
+#             Gestion des options               #{{{
 ####################################################
 
 # Si on a des arguments
@@ -655,7 +655,7 @@ fi
 #}}}
 
 ####################################################
-#{{{                 Exécution                     #
+#                 Exécution                     #{{{
 ####################################################
 
 
