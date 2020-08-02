@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  Samedi 07 décembre[12] 2019
+" Last Change:  Mercredi 29 juillet[07] 2020
 " Created:      1er janvier 2016
 
 "   @@@@@@    @@@@@@   @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@@
@@ -444,9 +444,11 @@ highlight link javaCommentStar              SpecialComment
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 exe 'highlight adaStorageClass'     . s:forme . s:underline                 . s:texte . s:jaune             . s:fond . s:none
-exe 'highlight adaTypedef'          . s:forme                               . s:texte . s:vertclair         . s:fond . s:none
+exe 'highlight adaTypeDef'          . s:forme                               . s:texte . s:vertclair         . s:fond . s:none
 exe 'highlight adaUseType'          . s:forme . s:underline . s:bold        . s:texte . s:vertclair         . s:fond . s:none
 exe 'highlight adaStructure'        . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
+exe 'highlight adaAttribute'        . s:forme . s:bold                      . s:texte . s:orangeclair       . s:fond . s:none
+exe 'highlight adaAspect'           . s:forme . s:bold                      . s:texte . s:orangeclair       . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " }}}
