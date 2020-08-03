@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 08 juillet[07] 2020
+" Dernière modification : Lundi 03 août[08] 2020
 
 scriptencoding utf-8
 
@@ -291,13 +291,6 @@ let g:pencil#autoformat_config = {
     \         ],
     \     },
     \ }
-
-"}}}
-
-" -----------------------
-" Réglage pour les curseurs multiples                                       "{{{
-" -----------------------
-let g:multi_cursor_start_key = '<C-n>'
 
 "}}}
 

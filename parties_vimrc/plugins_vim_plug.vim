@@ -1,4 +1,4 @@
-" Dernière modification : Lundi 29 juin[06] 2020
+" Dernière modification : Lundi 03 août[08] 2020
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -20,7 +20,6 @@ Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
 Plug 'scrooloose/nerdtree', { 'on' :  'NERDTreeToggle'  }
 Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim', { 'on' : 'GundoToggle' }
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -31,7 +30,6 @@ Plug 'vim-scripts/SpellCheck'
 Plug 'vim-scripts/ingo-library'
 Plug 'vim-scripts/matchit.zip'
 Plug 'chr4/nginx.vim'
-Plug 'osyo-manga/vim-anzu'
 
 " Plugin pour gvim.
 Plug 'vim-scripts/hexHighlight.vim'
