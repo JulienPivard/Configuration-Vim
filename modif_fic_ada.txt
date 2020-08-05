@@ -26,6 +26,36 @@
 if exists("ada_with_gnat_project_files")
    syntax keyword adaBegin	project library extends aggregate
 endif
+" Ligne 238
+   syntax match adaInc      "\<private\>\s*\<with\>"
+   syntax match adaInc      "\<limited\>\s*\<with\>"
+
+" Ligne 210 remplacer
+syntax keyword  adaKeyword	    separate until overriding
+" Par
+syntax keyword  adaKeyword	    separate overriding
+
+" Ligne 190 remplacer
+syntax keyword adaStorageClass	digits limited of private range tagged
+" Par
+syntax keyword adaStorageClass	digits of range tagged
+syntax match   adaStorageClass	"\<private\>"
+syntax match   adaStorageClass	"\<limited\>"
+
+" Ligne 170 remplacer
+syntax keyword  adaStatement accept delay goto raise requeue return
+" Supprimer delay
+syntax keyword  adaStatement accept goto raise requeue return
+
+" Ligne 172 remplacer
+syntax match    adaStatement  "\<delay\>"
+syntax match    adaStatement  "\<delay\>\s*\<until\>"
+
+" Ligne 105 supprimer le point dans l'expression régulière
+    syntax match	adaSpecial	 "[:;(),]"
+endif
+" Un point qui n'est pas suivi immédiatement d'un autre point.
+syntax match	adaSpecial	 "\.\(\(\.\)\@!\)"
 
 
 
