@@ -193,7 +193,8 @@ syntax match adaMotClef	    "\<record;"me=e-1
 
 " Section: type et classes {{{1
 "
-syntax keyword adaStorageClass	abstract access aliased array at
+syntax match   adaStorageClass	"\<abstract\>"
+syntax keyword adaStorageClass	access aliased array at
 syntax keyword adaStorageClass	constant delta digits of range
 syntax keyword adaStorageClass	tagged interface synchronized
 syntax match   adaStorageClass	"\<private\>"
