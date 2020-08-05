@@ -5,6 +5,8 @@
 '''Safe_Small', '''Scalar_Storage_Order', '''Scale'
 '''Remainder', '''Result', '''Round',
 '''Modulus', '''Old',  '''Output',
+" Ligne 144 ajouter
+'External_Name', 'Spark_Mode',
 
 
 
