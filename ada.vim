@@ -389,7 +389,11 @@ highlight def link adaUseType	    Typedef
 "
 " We don't need to look backwards to highlight correctly;
 " this speeds things up greatly.
+if line ('$') < 1000
+    syntax sync fromstart
+else
 syntax sync minlines=1 maxlines=10
+endif
 "syntax sync fromstart
 
 let &cpo = s:keepcpo
