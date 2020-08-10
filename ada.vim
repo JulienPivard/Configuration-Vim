@@ -248,12 +248,12 @@ endif
 
 if line ('$') < 1000
     syntax region adaPackage
-                \ start="\v(<package>\s+<body>|<package>)\s+\z(\k+)\_s+(<with>(\_s+\k+\s+\=\>\s+\k+,?\_s+)+)?<is>(\_s+<new>)@!"
+                \ start="\v(<package>\s+<body>|<package>)\s+\z(\k+(\.\k+)*)\_s+(<with>(\_s+\k+\s+\=\>\s+\k+,?\_s+)+)?<is>(\_s+<new>)@!"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
                 \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom
     syntax region adaProject
-                \ start="\v^((<aggregate>(\s+<library>)?|<abstract>|<library>)\s+)?<project>\s+\z(\k+)\_s+(<extends>\s+(<all>\s+)?\"[a-zA-Z0-9/-_]+\.gpr\"\_s+)?<is>"
+                \ start="\v^((<aggregate>(\s+<library>)?|<abstract>|<library>)\s+)?<project>\s+\z(\k+(\.\k+)*)\_s+(<extends>\s+(<all>\s+)?\"[a-zA-Z0-9/-_]+\.gpr\"\_s+)?<is>"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
                 \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom
@@ -392,7 +392,7 @@ highlight def link adaUseType	    Typedef
 if line ('$') < 1000
     syntax sync fromstart
 else
-syntax sync minlines=1 maxlines=10
+    syntax sync minlines=1 maxlines=10
 endif
 "syntax sync fromstart
 
