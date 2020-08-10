@@ -19,6 +19,7 @@
 
 
 
+" Remplacer le fichier [indent/ada.vim] par ~/.vim/modif_fic_ada/indent/ada.vim
 " Dans le fichier [indent/ada.vim]
 "Ligne 36
 setlocal indentkeys+=0=~then,0=~end,0=~elsif,0=~else,0=~when,0=~exception
