@@ -248,6 +248,11 @@ if exists("ada_with_gnat_project_files")
 endif
 
 if line ('$') < 1000
+    syntax region adaSeparate
+                \ start="\v<separate>\s+\(\k+(\.\k+)*\)\_s+<procedure>\s+\z(\k+)"
+                \ end="\<end\>\s\+\z1\s*;"
+                \ transparent keepend extend
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom
     syntax region adaPackage
                 \ start="\v(<package>\s+<body>|<package>)\s+\z(\k+(\.\k+)*)\_s+(<with>(\_s+\k+\s+\=\>\s+\k+,?\_s+)+)?<is>(\_s+<new>)@!"
                 \ end="\<end\>\s\+\z1\s*;"
