@@ -222,8 +222,9 @@ syntax keyword  adaConditional	elsif when
 
 " Section: Autres mots clefs {{{1
 syntax match    adaMotClef	    "\<is\>"
+syntax match    adaMotClef	    "\<separate\>" contains=adaSeparate
 syntax keyword  adaMotClef	    all do exception in new null
-syntax keyword  adaMotClef	    out separate overriding some
+syntax keyword  adaMotClef	    out overriding some
 
 "}}}1
 
