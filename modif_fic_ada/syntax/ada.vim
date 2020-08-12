@@ -291,15 +291,13 @@ syntax match adaMotClef	"\<with\>\s\+\<null\>\s\+\<record\>"
 syntax match adaMotClef	";\s*\zs\<with\>\s\+\<\(function\|procedure\|package\)\>"
 syntax match adaMotClef	"^\s*\zs\<with\>\s\+\<\(function\|procedure\|package\)\>"
 
-if line ('$') < 1000
-    " Le mot clef with qui n'est pas suivis de procedure function package
-    " et que n'est pas un héritage objet
-    syntax region adaWith
-                \ start="\v^\s+<with>((\s+(function|procedure|package))@!)"
-                \ end="\(;\|\<is\>\)"
-                \ transparent keepend
-                \ contains=adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString
-endif
+" Le mot clef with qui n'est pas suivis de procedure function package
+" et que n'est pas un héritage objet
+syntax region adaWith
+            \ start="\v^\s+<with>((\s+(function|procedure|package))@!)"
+            \ end="\(;\|\<is\>\)"
+            \ transparent keepend
+            \ contains=adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString
 
 "}}}1
 
