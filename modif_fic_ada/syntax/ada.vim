@@ -252,17 +252,17 @@ if line ('$') < 1000
                 \ start="\v<separate>\s+\(\k+(\.\k+)*\)\_s+<procedure>\s+\z(\k+)"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
-                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom
     syntax region adaPackage
                 \ start="\v(<package>\s+<body>|<package>)\s+\z(\k+(\.\k+)*)\_s+(<with>(\_s+\k+\s+\=\>\s+\k+,?\_s+)+)?<is>(\_s+<new>)@!"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
-                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom
     syntax region adaProject
                 \ start="\v^((<aggregate>(\s+<library>)?|<abstract>|<library>)\s+)?<project>\s+\z(\k+(\.\k+)*)\_s+(<extends>\s+(<all>\s+)?\"[a-zA-Z0-9/-_]+\.gpr\"\_s+)?<is>"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
-                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom
 endif
 
 " Section: Distinction entre with et with {{{1
