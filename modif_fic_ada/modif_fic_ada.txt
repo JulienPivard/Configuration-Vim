@@ -1,12 +1,5 @@
 " vim:filetype=vim
 
-" Dans le fichier [autoload/ada.vim] ligne 120 ajouter Scalar_Storage_Order
-" au dictionnaire.
-'''Safe_Small', '''Scalar_Storage_Order', '''Scale'
-'''Remainder', '''Result', '''Round',
-'''Modulus', '''Old',  '''Output',
-" Ligne 144 ajouter
-'External_Name', 'Spark_Mode',
 " Remplacer le fichier [autoload/ada.vim] par ~/.vim/modif_fic_ada/autoload/ada.vim
 
 
@@ -20,62 +13,3 @@
 
 
 " Remplacer le fichier [indent/ada.vim] par ~/.vim/modif_fic_ada/indent/ada.vim
-" Dans le fichier [indent/ada.vim]
-"Ligne 36
-setlocal indentkeys+=0=~then,0=~end,0=~elsif,0=~else,0=~when,0=~exception
-setlocal indentkeys+=0=~begin,0=~is,0=~record,0=~do,0(,0),0=~or,0=~private
-setlocal indentkeys+=0=~package,0=~procedure,0=~function
-"Ligne 183
-   let line = substitute (getline (v:lnum), g:ada#Comment, '', '')
-   if line =~ '^\s*)'
-      " On se place au début de ligne qui viens d'être écrite.
-      call cursor (v:lnum, 1)
-      " On cherche la position de la parenthèse qui viens d'être écrite.
-      call searchpos (')', 'cW')
-      let pos_par_ouvrante = searchpair ('(', '', ')', 'bW', '')
-      return indent (pos_par_ouvrante)
-   endif
-" Ligne 275
-   elseif line =~ '^\s*\(begin\|is\)\>'
-      let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
-   elseif line =~ '^\s*\(procedure\|function\|package\)\>'
-      let ind = s:MainBlockIndent( ind, lnum, 'generic\>', '\(procedure\|function\|declare\|package\|task\|protected\|entry\|begin\)\>' )
-"Ligne 276
-   elseif line =~ '^\s*do\>'
-      let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '\(if\|while\|for\|loop\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>' )
-   elseif line =~ '^\s*or\(\(\s*\<else\>\)\@!\)\>'
-      " Le mot clef or sans else après.
-      let ind = s:MainBlockIndent( ind, lnum, 'select\>', '\<if\>' )
-" Ligne 286
-   elseif line =~ '^\s*when\>'
-      " Align 'when' one /in/ from matching block start
-      let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\)\>', '' ) + shiftwidth()
-" Ligne 304
-   elseif line =~ '^\s*end\>'
-      " General case for end
-      let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|\<package\>\(\(\s*.*\s*\<is\>\s*\<new\>\)\@!\)\|select\|return\>\s*.*\s*\<do\)\>', '' )
-   elseif line =~ '^\s*exception\>'
-      let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
-" Ligne 308 avant le endif
-   elseif line =~ '^\s*\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
-      "Le mot clef private, sans tagged devant et sans with après.
-      let ind = s:MainBlockIndent( ind, lnum, '\(\<package\>\(\(\s*.*\s*\<is\>\s*\<new\>\)\@!\)\|\<protected\>\)', '' )
-
-" Ligne 47 remplacer la définition de AdaBlockStart par
-let s:AdaBlockStart   = '^\s*\('
-let s:AdaBlockStart ..= 'if\>\|else\>\|elsif\>\|then\>'
-let s:AdaBlockStart ..= '\|while\>\|loop\>\|for\>.*\<\(loop\|use\)\>'
-let s:AdaBlockStart ..= '\|declare\>\|begin\>\|package\>\|is\>'
-let s:AdaBlockStart ..= '\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>'
-let s:AdaBlockStart ..= '\|procedure\>\|function\>\|entry\>\|protected\>'
-let s:AdaBlockStart ..= '\|task\>\|accept\>\|do\>'
-let s:AdaBlockStart ..= '\|when\>\|select\>\|or\(\(\s*\<else\>\)\@!\)\>'
-let s:AdaBlockStart ..= '\|return\>\s*.*\s*\<do\>'
-let s:AdaBlockStart ..= '\|\<generic\>'
-let s:AdaBlockStart ..= '\|\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
-
-if exists("g:ada_with_gnat_project_files")
-   let s:AdaBlockStart ..= '\|project\>\)'
-else
-   let s:AdaBlockStart ..= '\)'
-endif
