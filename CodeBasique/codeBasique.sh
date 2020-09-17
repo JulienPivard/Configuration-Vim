@@ -74,7 +74,7 @@ set -o posix
 #set -x
 # Gestion des erreurs
 trap 'ERREUR="${?}";
-printf >&2 "%s\n" "\nErreur dans les définitions préliminaire ligne : ${LINENO}";
+printf >&2 "\n%s\n" "Erreur dans les définitions préliminaire ligne : ${LINENO}";
 exit "${ERREUR}";' ERR
 
 # On s'assure que l'UID existe bien
