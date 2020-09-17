@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mardi 28 juillet[07] 2020
+# Dernière modification : Jeudi 17 septembre[09] 2020
 
 ###############################################################################
 #                   ___                             __                        #
@@ -74,7 +74,7 @@ set -o posix
 #set -x
 # Gestion des erreurs
 trap 'ERREUR="${?}";
-printf >&2 "\nErreur dans les définitions préliminaire ligne : ${LINENO}\n";
+printf >&2 "%s\n" "\nErreur dans les définitions préliminaire ligne : ${LINENO}";
 exit "${ERREUR}";' ERR
 
 # On s'assure que l'UID existe bien
@@ -153,7 +153,7 @@ trap 'interruption' INT
 # gestion_erreurs                   #{{{3
 function gestion_erreurs ()
 {
-    printf >&2 "\nLe script à subis une erreur ligne [ ${1} ]\n"
+    printf >&2 '\n%s\n' "Le script à subis une erreur ligne [ ${1} ]"
 }
 # Une erreur c'est produit durant l'exécution
 trap '' ERR
@@ -301,7 +301,7 @@ function separateur_section ()
 # message_ok                        #{{{3
 function message_ok ()
 {
-    printf >&2 "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
+    printf >&2 '%s' "${NEUTRE}${C_SUR___VERT}${C__BLANC}${M_GRAS} OK ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
@@ -311,7 +311,7 @@ function message_ok ()
 # message_erreur                    #{{{3
 function message_erreur ()
 {
-    printf >&2 "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
+    printf >&2 '%s' "${NEUTRE}${C_SUR__ROUGE}${C__BLANC}${M_GRAS} ERREUR ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
@@ -321,7 +321,7 @@ function message_erreur ()
 # message_attention                 #{{{3
 function message_attention ()
 {
-    printf >&2 "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} ATTENTION ! ${NEUTRE} "
+    printf >&2 '%s' "${NEUTRE}${C_SUR__JAUNE}${C__BLANC}${M_GRAS} ATTENTION ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
@@ -331,7 +331,7 @@ function message_attention ()
 # message_avertissement             #{{{3
 function message_avertissement ()
 {
-    printf >&2 "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} AVERTISSEMENT ! ${NEUTRE} "
+    printf >&2 '%s' "${NEUTRE}${C_SUR___CYAN}${C__BLANC}${M_GRAS} AVERTISSEMENT ! ${NEUTRE} "
     [[ "${#}" -gt 0 ]] && echo >&2 "${*}" || ligne_vide
     ligne_vide
 }
@@ -386,14 +386,14 @@ function executer_commande ()
     fi
 
     # Consigne l'exécution de la commande dans les logs.
-    printf >>"${FICHIER_LOG_EXECUTION}" "${info}"
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s' "${info}"
     affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
-    printf >>"${FICHIER_LOG_EXECUTION}" " ... "
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s' " ... "
 
     # Affiche l'exécution de la commande sur la sortie d'erreur standard.
-    printf >&2 "${info_console}${M_GRAS}${C__JAUNE}"
+    printf >&2 '%s' "${info_console}${M_GRAS}${C__JAUNE}"
     affichage_echappee >&2 "${@}"
-    printf >&2 "${NEUTRE}\n"
+    printf >&2 '%s\n' "${NEUTRE}"
 
     # Exécute la commande
     "${@}" && local -r Code_Erreur=0 || local -r Code_Erreur="${?}"
@@ -401,10 +401,10 @@ function executer_commande ()
     if [[ "${Code_Erreur}" -ne 0 ]]
     then
         message_erreur
-        printf >>"${FICHIER_LOG_EXECUTION}" "Erreur avec le code : ${Code_Erreur}\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "Erreur avec le code : ${Code_Erreur}"
     else
         message_ok
-        printf >>"${FICHIER_LOG_EXECUTION}" "OK\n"
+        printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "OK"
     fi
 
     return "${Code_Erreur}"
@@ -509,7 +509,7 @@ function afficher_aide ()
 # traitement_option_o               #{{{3
 function traitement_option_o ()
 {
-    printf "Option o\n"
+    printf '%s\n' "Option o"
 }
 
         #}}}3
@@ -518,7 +518,7 @@ function traitement_option_o ()
 function traitement_option_u ()
 {
     local -r ARGUMENT="${1}"
-    printf "Option u = ${ARGUMENT}\n"
+    printf '%s\n' "Option u = ${ARGUMENT}"
 }
 
         #}}}3
