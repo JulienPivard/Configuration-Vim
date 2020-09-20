@@ -70,6 +70,9 @@ for b:Item in g:ada#Keywords
    if b:Item['kind'] == "t" && exists ("g:ada_standard_types")
       execute 'syntax keyword adaBuiltinType ' . b:Item['word']
    endif
+   if b:Item['kind'] == "s"
+      execute 'syntax keyword adaSpark ' . b:Item['word'] . ' contained'
+   endif
 endfor
 
 "syntax keyword adaException Constraint_Error Program_Error Storage_Error
@@ -254,17 +257,17 @@ if line ('$') < 1000
                 \ start="\v<separate>\s+\(\k+(\.\k+)*\)\_s+<procedure>\s+\z(\k+)"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
-                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom,adaSpark
     syntax region adaPackage
                 \ start="\v(<package>\s+<body>|<package>)\s+\z(\k+(\.\k+)*)\_s+(<with>(\_s+\k+\s+\=\>\s+\k+,?\_s+)+)?<is>(\_s+<new>)@!"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
-                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom,adaSpark
     syntax region adaProject
                 \ start="\v^((<aggregate>(\s+<library>)?|<abstract>|<library>)\s+)?<project>\s+\z(\k+(\.\k+)*)\_s+(<extends>\s+(<all>\s+)?\"[a-zA-Z0-9/-_]+\.gpr\"\_s+)?<is>"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
-                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom
+                \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom,adaSpark
 endif
 
 " Section: Distinction entre with et with {{{1
@@ -299,7 +302,7 @@ syntax region adaWith
             \ start="\v^\s+<with>((\s+(function|procedure|package))@!)"
             \ end="\(;\|\<is\>\)"
             \ transparent keepend
-            \ contains=adaAttribute,adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString,adaConditional
+            \ contains=adaAttribute,adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString,adaSpark,adaConditional
 
 "}}}1
 
@@ -362,6 +365,7 @@ highlight adaDocTags            ctermfg=6
 highlight adaDocTagSuiviDunNom  ctermfg=6
 
 highlight def link adaAspect        Exception
+highlight def link adaSpark         Exception
 highlight def link adaAssignement   Special
 highlight def link adaAttribute	    Exception
 highlight def link adaBegin         Keyword
