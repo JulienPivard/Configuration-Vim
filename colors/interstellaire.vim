@@ -1,6 +1,6 @@
 " Name:         Interstellaire
 " Maintainer:   PIVARD Julien <pivardjulien@gmail.com>
-" Last Change:  Mercredi 29 juillet[07] 2020
+" Last Change:  Dimanche 20 septembre[09] 2020
 " Created:      1er janvier 2016
 
 "   @@@@@@    @@@@@@   @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  @@@@@@@@
@@ -449,6 +449,7 @@ exe 'highlight adaUseType'          . s:forme . s:underline . s:bold        . s:
 exe 'highlight adaStructure'        . s:forme . s:underline                 . s:texte . s:orangesombre      . s:fond . s:none
 exe 'highlight adaAttribute'        . s:forme . s:bold                      . s:texte . s:orangeclair       . s:fond . s:none
 exe 'highlight adaAspect'           . s:forme . s:bold                      . s:texte . s:orangeclair       . s:fond . s:none
+exe 'highlight adaSpark'            . s:forme . s:bold                      . s:texte . s:orangeclair       . s:fond . s:none
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " }}}
