@@ -299,7 +299,7 @@ syntax region adaWith
             \ start="\v^\s+<with>((\s+(function|procedure|package))@!)"
             \ end="\(;\|\<is\>\)"
             \ transparent keepend
-            \ contains=adaAttribute,adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString
+            \ contains=adaAttribute,adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString,adaConditional
 
 "}}}1
 
