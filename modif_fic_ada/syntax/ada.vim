@@ -94,7 +94,8 @@ syntax keyword  adaLabel	others
 
 " Section: Opérateurs {{{1
 "
-syntax keyword  adaOperateur abs mod not rem xor
+syntax keyword  adaOperateur abs mod rem xor
+syntax match    adaOperateur "\<not\>"
 syntax match    adaOperateur "\<and\>"
 syntax match    adaOperateur "\<and\s\+then\>"
 syntax match    adaOperateur "\<or\>"
@@ -199,6 +200,7 @@ syntax keyword adaStorageClass	constant delta digits of range
 syntax keyword adaStorageClass	tagged interface synchronized
 syntax match   adaStorageClass	"\<private\>"
 syntax match   adaStorageClass	"\<limited\>"
+syntax match   adaStorageClass	"\<not\>\s\+\<null\>\s\+\<access\>"
 
 syntax keyword adaTypeDef    subtype type
 
