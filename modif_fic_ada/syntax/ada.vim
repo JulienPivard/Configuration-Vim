@@ -178,8 +178,7 @@ syntax match    adaEnd       "\<end\>"
 syntax keyword  adaPreproc	 pragma
 
 syntax keyword  adaStatement accept goto raise requeue return
-syntax keyword  adaStatement terminate
-syntax match    adaStatement "\<abort\>"
+syntax keyword  adaStatement terminate abort
 syntax match    adaStatement "\<delay\>"
 syntax match    adaStatement "\<delay\>\s\+\<until\>"
 
@@ -211,10 +210,7 @@ syntax keyword adaTypeDef    subtype type
 
 " Section: Conditions {{{1
 "
-" "abort" après "then" est considéré comme une condition
-"
 syntax match    adaConditional  "\<then\>"
-syntax match    adaConditional	"\<then\>\s\+\<abort\>"
 syntax match    adaConditional	"\<else\>"
 syntax match    adaConditional	"\<end\>\s\+\<if\>"
 syntax match    adaConditional	"\<end\>\s\+\<case\>"
