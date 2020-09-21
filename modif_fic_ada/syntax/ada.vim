@@ -255,7 +255,7 @@ if line ('$') < 1000
                 \ transparent keepend extend
                 \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom,adaSpark
     syntax region adaPackage
-                \ start="\v(<package>\s+<body>|<package>)\s+\z(\k+(\.\k+)*)\_s+(<with>(\_s+\k+\s+\=\>\s+\k+,?\_s+)+)?<is>(\_s+<new>)@!"
+                \ start="\v(<package>\s+<body>|<package>)\s+\z([a-z_A-Z.0-9]+)(\_s+[a-z_A-Z.0-9 =>,]+){-}\_s+<is>(\_s+<new>)@!"
                 \ end="\<end\>\s\+\z1\s*;"
                 \ transparent keepend extend
                 \ contains=ALLBUT,adaInc,adaTodo,adaAspect,adaDocParamNom,adaDocTagSuiviDunNom,adaSpark
