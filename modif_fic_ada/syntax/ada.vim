@@ -219,7 +219,7 @@ syntax match    adaConditional	"\<else\>"
 syntax match    adaConditional	"\<end\>\s\+\<if\>"
 syntax match    adaConditional	"\<end\>\s\+\<case\>"
 syntax match    adaConditional	"\<end\>\s\+\<select\>"
-syntax match    adaConditional	"\<if\>" contains=adaBlocIf
+syntax match    adaConditional	"\<if\>"
 syntax keyword  adaConditional	case select
 syntax keyword  adaConditional	elsif when
 
@@ -321,7 +321,7 @@ syntax match adaUseType 	"\v<use>(\s+<all>)?\s+<type>"
 " Traite la reconnaissance des boucles en Ada
 "
 syntax keyword adaBoucle    exit for reverse while
-syntax match   adaBoucle    "\<loop\>" contains=adaBlocBoucle
+syntax match   adaBoucle    "\<loop\>"
 syntax match   adaBoucle    "\<end\>\s\+\<loop\>"
 
 "}}}1
