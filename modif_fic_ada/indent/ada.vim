@@ -46,15 +46,15 @@ set cpo&vim
 
 let s:AdaBlockStart   = '^\s*\('
 let s:AdaBlockStart ..= 'if\>\|else\>\|elsif\>\|then\>'
-let s:AdaBlockStart ..= '\|while\>\|loop\>\|for\>.*\<\(loop\|use\)\>'
+let s:AdaBlockStart ..= '\|while\>\|loop\>\|for\>.\+\<\(loop\|use\)\>'
 let s:AdaBlockStart ..= '\|declare\>\|begin\>\|package\>\|is\>'
-let s:AdaBlockStart ..= '\|type\>.*\<is\>[^;]*$\|\(type\>.*\)\=\<record\>'
+let s:AdaBlockStart ..= '\|type\>.\+\<is\>[^;]\+$\|\(type\>.\+\)\=\<record\>'
 let s:AdaBlockStart ..= '\|procedure\>\|function\>\|entry\>\|protected\>'
 let s:AdaBlockStart ..= '\|task\>\|accept\>\|do\>'
-let s:AdaBlockStart ..= '\|when\>\|select\>\|or\(\(\s*\<else\>\)\@!\)\>'
-let s:AdaBlockStart ..= '\|return\>\s*.*\s*\<do\>'
+let s:AdaBlockStart ..= '\|when\>\|select\>\|or\(\(\s\+\<else\>\)\@!\)\>'
+let s:AdaBlockStart ..= '\|return\>\s\+.\+\s\+\<do\>'
 let s:AdaBlockStart ..= '\|\<generic\>'
-let s:AdaBlockStart ..= '\|\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
+let s:AdaBlockStart ..= '\|\(\(\<tagged\>\s\+\)\@<!\)\s*\zs\<private\>\(\(\s\+\<with\>\)\@!\)'
 
 if exists("g:ada_with_gnat_project_files")
    let s:AdaBlockStart ..= '\|project\>\)'
@@ -228,7 +228,7 @@ function GetAdaIndent()
    if line =~ s:AdaBlockStart  ||  line =~ '(\s*$'
       " Check for false matches to AdaBlockStart
       let false_match = 0
-      if line =~ '^\s*\(procedure\|function\|package\)\>.*\<is\>\s*\<new\>'
+      if line =~ '^\s*\(procedure\|function\|package\)\>.\+\<is\>\s\+\<new\>'
 	 " Generic instantiation
 	 let false_match = 1
       elseif line =~ ')\s*;\s*$'  ||  line =~ '^\([^(]*([^)]*)\)*[^(]*;\s*$'
@@ -242,11 +242,11 @@ function GetAdaIndent()
    elseif line =~ '^\s*\(case\|exception\)\>'
       " Move indent in twice (next 'when' will move back)
       let ind = ind + 2 * shiftwidth()
-   elseif line =~ '^\s*end\>\s*\<record\>'
+   elseif line =~ '^\s*end\>\s\+\<record\>'
       " Move indent back to tallying 'type' preceeding the 'record'.
       " Allow indent to be equal to 'end record's.
       let ind = s:MainBlockIndent( ind+shiftwidth(), lnum, 'type\>', '' )
-   elseif line =~ '\(^\s*new\>.*\)\@<!)\s*[;,]\s*$'
+   elseif line =~ '\(^\s*new\>.\+\)\@<!)\s*[;,]\s*$'
       " Revert to indent of line that started this parenthesis pair
       exe lnum
       exe 'normal! $F)%'
@@ -287,42 +287,42 @@ function GetAdaIndent()
    elseif line =~ '^\s*\(procedure\|function\|package\)\>'
       let ind = s:MainBlockIndent( ind, lnum, 'generic\>', '\(procedure\|function\|declare\|package\|task\|protected\|entry\|begin\)\>' )
    elseif line =~ '^\s*do\>'
-      let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '\(if\|while\|for\|loop\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s*.*\s*\<do\)\>' )
-   elseif line =~ '^\s*or\(\(\s*\<else\>\)\@!\)\>'
+      let ind = s:MainBlockIndent( ind, lnum, 'accept\>', '\(if\|while\|for\|loop\|begin\|record\|case\|exception\|protected\|task\|package\|select\|return\>\s\+.\+\s\+\<do\)\>' )
+   elseif line =~ '^\s*or\(\(\s\+\<else\>\)\@!\)\>'
       " Le mot clef or sans else après.
       let ind = s:MainBlockIndent( ind, lnum, 'select\>', '\<if\>' )
    elseif line =~ '^\s*record\>'
-      let ind = s:MainBlockIndent( ind, lnum, 'type\>\|for\>.*\<use\>', '' ) + shiftwidth()
+      let ind = s:MainBlockIndent( ind, lnum, 'type\>\|for\>.\+\<use\>', '' ) + shiftwidth()
    elseif line =~ '^\s*\(else\|elsif\)\>'
       let ind = s:MainBlockIndent( ind, lnum, 'if\>', '' )
    elseif line =~ '^\s*when\>'
       " Align 'when' one /in/ from matching block start
       let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\|entry\|accept\)\>', '' ) + shiftwidth()
-   elseif line =~ '^\s*end\>\s*\<if\>'
+   elseif line =~ '^\s*end\>\s\+\<if\>'
       " End of if statements
-      let ind = s:EndBlockIndent( ind, lnum, 'if\>', 'end\>\s*\<if\>' )
-   elseif line =~ '^\s*end\>\s*\<loop\>'
+      let ind = s:EndBlockIndent( ind, lnum, 'if\>', 'end\>\s\+\<if\>' )
+   elseif line =~ '^\s*end\>\s\+\<loop\>'
       " End of loops
-      let ind = s:EndBlockIndent( ind, lnum, '\(\(while\|for\)\>.*\)\?\<loop\>', 'end\>\s*\<loop\>' )
-   elseif line =~ '^\s*end\>\s*\<record\>'
+      let ind = s:EndBlockIndent( ind, lnum, '\(\(while\|for\)\>.\+\)\?\<loop\>', 'end\>\s\+\<loop\>' )
+   elseif line =~ '^\s*end\>\s\+\<record\>'
       " End of records
-      let ind = s:EndBlockIndent( ind, lnum, '\(type\>.*\)\=\<record\>', 'end\>\s*\<record\>' )
-   elseif line =~ '^\s*end\>\s*\<procedure\>'
+      let ind = s:EndBlockIndent( ind, lnum, '\(type\>.\+\)\=\<record\>', 'end\>\s\+\<record\>' )
+   elseif line =~ '^\s*end\>\s\+\<procedure\>'
       " End of procedures
-      let ind = s:EndBlockIndent( ind, lnum, 'procedure\>.*\<is\>', 'end\>\s*\<procedure\>' )
-   elseif line =~ '^\s*end\>\s*\<case\>'
+      let ind = s:EndBlockIndent( ind, lnum, 'procedure\>.\+\<is\>', 'end\>\s\+\<procedure\>' )
+   elseif line =~ '^\s*end\>\s\+\<case\>'
       " End of case statement
-      let ind = s:EndBlockIndent( ind, lnum, 'case\>.*\<is\>', 'end\>\s*\<case\>' )
+      let ind = s:EndBlockIndent( ind, lnum, 'case\>.\+\<is\>', 'end\>\s\+\<case\>' )
    elseif line =~ '^\s*end\>'
       " General case for end
-      let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|\<package\>\(\(\s*.*\s*\<is\>\s*\<new\>\)\@!\)\|select\|return\>\s*.*\s*\<do\)\>', '' )
+      let ind = s:MainBlockIndent( ind, lnum, '\(if\|while\|for\|loop\|accept\|begin\|record\|case\|exception\|protected\|task\|\<package\>\(\(\s\+.\+\s\+\<is\>\s\+\<new\>\)\@!\)\|select\|return\>\s\+.\+\s\+\<do\)\>', '' )
    elseif line =~ '^\s*exception\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
    elseif line =~ '^\s*then\>'
       let ind = s:MainBlockIndent( ind, lnum, 'if\>', '' )
-   elseif line =~ '^\s*\(\(\<tagged\>\s*\)\@<!\)\s*\zs\<private\>\(\(\s*\<with\>\)\@!\)'
+   elseif line =~ '^\s*\(\(\<tagged\>\s\+\)\@<!\)\s*\zs\<private\>\(\(\s\+\<with\>\)\@!\)'
       "Le mot clef private, sans tagged devant et sans with après.
-      let ind = s:MainBlockIndent( ind, lnum, '\(\<package\>\(\(\s*.*\s*\<is\>\s*\<new\>\)\@!\)\|\<protected\>\)', '' )
+      let ind = s:MainBlockIndent( ind, lnum, '\(\<package\>\(\(\s\+.\+\s\+\<is\>\s\+\<new\>\)\@!\)\|\<protected\>\)', '' )
    endif
 
    return ind
