@@ -228,7 +228,7 @@ function GetAdaIndent()
    if line =~ s:AdaBlockStart  ||  line =~ '(\s*$'
       " Check for false matches to AdaBlockStart
       let false_match = 0
-      if line =~ '^\s*\(procedure\|function\|package\)\>.*\<is\s*new\>'
+      if line =~ '^\s*\(procedure\|function\|package\)\>.*\<is\>\s*\<new\>'
 	 " Generic instantiation
 	 let false_match = 1
       elseif line =~ ')\s*;\s*$'  ||  line =~ '^\([^(]*([^)]*)\)*[^(]*;\s*$'
@@ -242,7 +242,7 @@ function GetAdaIndent()
    elseif line =~ '^\s*\(case\|exception\)\>'
       " Move indent in twice (next 'when' will move back)
       let ind = ind + 2 * shiftwidth()
-   elseif line =~ '^\s*end\s*record\>'
+   elseif line =~ '^\s*end\>\s*\<record\>'
       " Move indent back to tallying 'type' preceeding the 'record'.
       " Allow indent to be equal to 'end record's.
       let ind = s:MainBlockIndent( ind+shiftwidth(), lnum, 'type\>', '' )
@@ -283,8 +283,6 @@ function GetAdaIndent()
 	 let ind = ind + shiftwidth()
       endif
    elseif line =~ '^\s*\(begin\|is\)\>'
-      let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\)\>', 'begin\>' )
-   elseif line =~ '^\s*\(begin\|is\)\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(procedure\|function\|declare\|package\|task\|protected\|entry\)\>', 'begin\>' )
    elseif line =~ '^\s*\(procedure\|function\|package\)\>'
       let ind = s:MainBlockIndent( ind, lnum, 'generic\>', '\(procedure\|function\|declare\|package\|task\|protected\|entry\|begin\)\>' )
@@ -299,7 +297,7 @@ function GetAdaIndent()
       let ind = s:MainBlockIndent( ind, lnum, 'if\>', '' )
    elseif line =~ '^\s*when\>'
       " Align 'when' one /in/ from matching block start
-      let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\)\>', '' ) + shiftwidth()
+      let ind = s:MainBlockIndent( ind, lnum, '\(case\|exception\|select\|or\|entry\|accept\)\>', '' ) + shiftwidth()
    elseif line =~ '^\s*end\>\s*\<if\>'
       " End of if statements
       let ind = s:EndBlockIndent( ind, lnum, 'if\>', 'end\>\s*\<if\>' )
