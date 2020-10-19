@@ -1,4 +1,4 @@
-" Dernière modification : Lundi 03 août[08] 2020
+" Dernière modification : Lundi 19 octobre[10] 2020
 
 scriptencoding utf-8
 
@@ -11,7 +11,12 @@ let g:gundo_right = 0               " Ouvre l'arbre à gauche.
 let g:gundo_preview_bottom = 1      " Pour que la fenêtre d'aperçus prenne toute la largeur.
 let g:gundo_close_on_revert = 1     " Fermer automatiquement après annulation.
 let g:gundo_auto_preview = 0        " Désactive l'affichage automatique des différence.
-let g:gundo_prefer_python3 = 1
+if has ( 'python3' )
+    let g:gundo_prefer_python3 = 1
+else
+    let g:gundo_prefer_python3 = 0
+endif
+
 let g:gundo_tree_statusline = '%<%t %=| %-10.(%l/%L,C%02c%V%) | %P |'
 let g:gundo_preview_statusline = '%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 
@@ -22,7 +27,7 @@ let g:gundo_preview_statusline = '%<%t %=%02B | %-10.(%l/%L,C%02c%V%) | %P |'
 " -----------------------
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0                 " N'effectue pas de vérification à la fermeture du fichier.
-let g:syntastic_always_populate_loc_list = 1        " Remplie ll avec les erreurs trouvé.
+let g:syntastic_always_populate_loc_list = 1    " Remplie ll avec les erreurs trouvé.
 let g:syntastic_auto_loc_list = 2               " ne pas ouvrir automatiquement ll mais fermer automatiquement.
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -208,21 +213,9 @@ augroup END
 " }}}
 
 " -----------------------
-" Réglage pour OmniCppComplete                                              "{{{
-" -----------------------
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " Montre les paramètres des fonctions.
-let OmniCpp_MayCompleteDot = 1      " auto complète après .
-let OmniCpp_MayCompleteArrow = 1    " auto complète après ->
-let OmniCpp_MayCompleteScope = 1    " auto complète après ::
-
-"}}}
-
-" -----------------------
 " Réglage pour airline                                                      "{{{
 " -----------------------
+let g:airline_disable_statusline = 0
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
@@ -304,6 +297,7 @@ let g:pencil#autoformat_config = {
 " -----------------------
 " Réglage pour ctrlP                                                        "{{{
 " -----------------------
+let g:loaded_ctrlp = 0
 let g:ctrlp_extensions = [ 'autoignore' ]
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
