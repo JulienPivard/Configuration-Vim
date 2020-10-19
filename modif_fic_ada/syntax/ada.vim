@@ -106,6 +106,7 @@ syntax match    adaOperateur "\<or\s\+else\>"
 syntax match    adaOperateur "[-+*/<>&]"
 syntax keyword  adaOperateur **
 syntax match    adaOperateur "[/<>]="
+syntax match    adaOperateur "|"
 syntax keyword  adaOperateur =>
 syntax match    adaOperateur "\.\."
 syntax match    adaOperateur "="
