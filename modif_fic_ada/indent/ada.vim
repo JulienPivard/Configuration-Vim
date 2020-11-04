@@ -77,7 +77,7 @@ endif
 function s:MainBlockIndent (prev_indent, prev_lnum, blockstart, stop_at)
    let lnum = a:prev_lnum
    let line = substitute( getline(lnum), g:ada#Comment, '', '' )
-   while lnum > 1
+   while lnum >= 1
       if a:stop_at != ''  &&  line =~ '^\s*' . a:stop_at  &&  indent(lnum) < a:prev_indent
 	 return a:prev_indent
       elseif line =~ '^\s*' . a:blockstart
