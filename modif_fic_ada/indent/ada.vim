@@ -319,7 +319,7 @@ function GetAdaIndent()
    elseif line =~ '^\s*exception\>'
       let ind = s:MainBlockIndent( ind, lnum, '\(begin\|accept\)\>', '' )
    elseif line =~ '^\s*then\>'
-      let ind = s:MainBlockIndent( ind, lnum, 'if\>', '' )
+      let ind = s:MainBlockIndent( ind, lnum, '\(if\|elsif\)\>', '' )
    elseif line =~ '^\s*\(\(\<tagged\>\s\+\)\@<!\)\s*\zs\<private\>\(\(\s\+\<with\>\)\@!\)'
       "Le mot clef private, sans tagged devant et sans with après.
       let ind = s:MainBlockIndent( ind, lnum, '\(\<package\>\(\(\s\+.\+\s\+\<is\>\s\+\<new\>\)\@!\)\|\<protected\>\)', '' )
