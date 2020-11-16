@@ -115,6 +115,17 @@ if exists ('g:ada_gnat_extensions')
     endfor
 endif
 
+" Section: add Ada Aspects    {{{2
+"
+for Item in ['Address', 'Alignment', 'Bit_Order', 'Component_Size', 'Input', 'Output', 'Priority', 'Read', 'Scalar_Storage_Order', 'Size', 'Storage_Pool', 'Storage_Size', 'Write']
+    let g:ada#Keywords += [{
+	    \ 'word':  Item,
+	    \ 'menu':  'aspect',
+	    \ 'info':  'Ada aspect.',
+	    \ 'kind':  'c',
+	    \ 'icase': 1}]
+endfor
+
 " Section: add Ada Attributes {{{2
 "
 for Item in ['Access', 'Address', 'Adjacent', 'Aft', 'Alignment', 'Base', 'Bit_Order', 'Body_Version', 'Callable', 'Caller', 'Ceiling', 'Class', 'Component_Size', 'Compose', 'Constrained', 'Copy_Sign', 'Count', 'Definite', 'Delta', 'Denorm', 'Digits', 'Emax', 'Exponent', 'External_Tag', 'Epsilon', 'First', 'First_Bit', 'Floor', 'Fore', 'Fraction', 'Identity', 'Image', 'Input', 'Large', 'Last', 'Last_Bit', 'Leading_Part', 'Length', 'Machine', 'Machine_Emax', 'Machine_Emin', 'Machine_Mantissa', 'Machine_Overflows', 'Machine_Radix', 'Machine_Rounding', 'Machine_Rounds', 'Mantissa', 'Max', 'Max_Size_In_Storage_Elements', 'Min', 'Mod', 'Model', 'Model_Emin', 'Model_Epsilon', 'Model_Mantissa', 'Model_Small', 'Modulus', 'Old',  'Output', 'Partition_ID', 'Pos', 'Position', 'Pred', 'Priority', 'Range', 'Read', 'Remainder', 'Result', 'Round', 'Rounding', 'Safe_Emax', 'Safe_First', 'Safe_Large', 'Safe_Last', 'Safe_Small', 'Scalar_Storage_Order', 'Scale', 'Scaling', 'Signed_Zeros', 'Size', 'Small', 'Storage_Pool', 'Storage_Size', 'Stream_Size', 'Succ', 'Tag', 'Terminated', 'Truncation', 'Unbiased_Rounding', 'Unchecked_Access', 'Val', 'Valid', 'Value', 'Version', 'Wide_Image', 'Wide_Value', 'Wide_Wide_Image', 'Wide_Wide_Value', 'Wide_Wide_Width', 'Wide_Width', 'Width', 'Write']

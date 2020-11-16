@@ -54,8 +54,10 @@ for b:Item in g:ada#Keywords
    if b:Item['kind'] == "x"
       execute 'syntax keyword adaException ' . b:Item['word']
    endif
-   if b:Item['kind'] == "a"
+   if b:Item['kind'] == "c"
       execute 'syntax keyword adaAspect ' . b:Item['word'] . ' contained'
+   endif
+   if b:Item['kind'] == "a"
       execute 'syntax match adaAttribute "\V''' . b:Item['word'] . '\>"'
    endif
    if b:Item['kind'] == "p"
@@ -299,7 +301,7 @@ syntax region adaWith
             \ start="\v^\s+<with>((\s+(function|procedure|package))@!)"
             \ end="\(;\|\<is\>\)"
             \ transparent keepend
-            \ contains=adaAttribute,adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString,adaSpark,adaConditional,adaComment,adaBoucle
+            \ contains=adaAttribute,adaAspect,adaMotClef,adaOperateur,adaNombres,adaSpecial,adaBooleens,adaString,adaSpark,adaConditional,adaComment,adaBoucle,adaBuiltinType
 
 "}}}1
 
