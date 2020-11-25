@@ -6,7 +6,7 @@ if system ('uname') =~? 'darwin'
     let &t_ZR="\e[23m"
 endif
 
-" Dernière modification : Mercredi 25 mars[03] 2020
+" Dernière modification : Mercredi 25 novembre[11] 2020
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -98,7 +98,7 @@ set   linebreak                         " Enroule la ligne a partir de la coupur
 set   matchpairs=(:),{:},[:],«:»        " Trouver la paire correspondante
 set   modeline                          " Options spécifiques à vim dans les premières lignes
 set   modelines=3                       " Nombres de lignes vérifiées à l'ouverture
-set   nrformats=alpha,octal,hex         " Pour utiliser ctrl-a/ctrl-x avec les lettres les octaux(0) et les hexadécimaux(0x)
+set   nrformats=alpha,hex               " Pour utiliser ctrl-a/ctrl-x avec les lettres et les hexadécimaux(0x)
 set   number                            " Affiche les numéros de ligne
 set   printencoding=utf-8               " Fixe l'encodage pour l'impression
 set   printoptions=paper:A4             " Permet de régler plusieurs options dont la taille du papier
