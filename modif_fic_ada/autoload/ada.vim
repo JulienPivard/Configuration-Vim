@@ -161,17 +161,6 @@ for Item in ['All_Calls_Remote', 'Assert', 'Assertion_Policy', 'Asynchronous', '
 	    \ 'icase': 1}]
 endfor
 
-" Section: add Ada Spark {{{2
-"
-for Item in ['Abstract_State', 'Contract_Cases', 'Depends', 'Default_Initial_Condition', 'Dynamic_Predicate', 'Ghost', 'Global', 'In_Out', 'Initializes', 'Input', 'Loop_Invariant', 'Output', 'Part_Of', 'Post', 'Post_Class', 'Pre', 'Pre_Class', 'Predicate', 'Refined_State', 'Spark_Mode', 'Static_Predicate', 'Type_Invariant', 'Volatile_Function']
-    let g:ada#Keywords += [{
-	    \ 'word':  Item,
-	    \ 'menu':  'spark',
-	    \ 'info':  'Ada spark.',
-	    \ 'kind':  's',
-	    \ 'icase': 1}]
-endfor
-
 " Section: add GNAT Pragmas {{{3
 "
 if exists ('g:ada_gnat_extensions')
@@ -185,6 +174,17 @@ if exists ('g:ada_gnat_extensions')
     endfor
 endif
 " 1}}}
+
+" Section: add Ada Spark {{{2
+"
+for Item in ['Abstract_State', 'Contract_Cases', 'Depends', 'Default_Initial_Condition', 'Dynamic_Predicate', 'Ghost', 'Global', 'In_Out', 'Initializes', 'Input', 'Loop_Invariant', 'Output', 'Part_Of', 'Post', 'Post_Class', 'Pre', 'Pre_Class', 'Predicate', 'Refined_State', 'Spark_Mode', 'Static_Predicate', 'Type_Invariant', 'Volatile_Function']
+    let g:ada#Keywords += [{
+	    \ 'word':  Item,
+	    \ 'menu':  'spark',
+	    \ 'info':  'Ada spark.',
+	    \ 'kind':  's',
+	    \ 'icase': 1}]
+endfor
 
 " Section: g:ada#Ctags_Kinds {{{1
 "
