@@ -117,7 +117,7 @@ endif
 
 " Section: add Ada Aspects    {{{2
 "
-for Item in ['Address', 'Alignment', 'Bit_Order', 'Component_Size', 'Independent_Component', 'Input', 'Output', 'Priority', 'Read', 'Scalar_Storage_Order', 'Size', 'Storage_Pool', 'Storage_Size', 'Write']
+for Item in ['Address', 'Alignment', 'Bit_Order', 'Component_Size', 'Default_Value', 'Independent_Component', 'Input', 'Output', 'Priority', 'Read', 'Scalar_Storage_Order', 'Size', 'Storage_Pool', 'Storage_Size', 'Write']
     let g:ada#Keywords += [{
 	    \ 'word':  Item,
 	    \ 'menu':  'aspect',
@@ -152,7 +152,7 @@ endif
 
 " Section: add Ada Pragmas {{{2
 "
-for Item in ['All_Calls_Remote', 'Assert', 'Assertion_Policy', 'Asynchronous', 'Atomic', 'Atomic_Components', 'Attach_Handler', 'Constant_Indexing', 'Controlled', 'Convention', 'Default_Iterator', 'Detect_Blocking', 'Discard_Names', 'Elaborate', 'Elaborate_All', 'Elaborate_Body', 'External_Name', 'Export', 'Implicit_Dereference', 'Import', 'Independent_Component', 'Inline', 'Inspection_Point', 'Iterator_Element', 'Interrupt_Handler', 'Interrupt_Priority', 'Linker_Options', 'List', 'Locking_Policy', 'No_Return', 'Normalize_Scalars', 'Optimize', 'Pack', 'Page', 'Partition_Elaboration_Policy', 'Preelaborable_Initialization', 'Preelaborate', 'Priority', 'Priority_Specific_Dispatching', 'Profile', 'Pure', 'Queueing_Policy', 'Relative_Deadline', 'Remote_Call_Interface', 'Remote_Types', 'Restrictions', 'Reviewable', 'Shared_Passive', 'Storage_Size', 'Suppress', 'Task_Dispatching_Policy', 'Unchecked_Union', 'Unsuppress', 'Variable_Indexing', 'Volatile', 'Volatile_Components']
+for Item in ['All_Calls_Remote', 'Assert', 'Assertion_Policy', 'Asynchronous', 'Atomic', 'Atomic_Components', 'Attach_Handler', 'Constant_Indexing', 'Controlled', 'Convention', 'Default_Iterator', 'Detect_Blocking', 'Discard_Names', 'Elaborate', 'Elaborate_All', 'Elaborate_Body', 'External_Name', 'Export', 'Implicit_Dereference', 'Import', 'Independent_Component', 'Inline', 'Inspection_Point', 'Iterator_Element', 'Interrupt_Handler', 'Interrupt_Priority', 'Linker_Options', 'List', 'Locking_Policy', 'No_Elaboration_Code_All', 'No_Return', 'Normalize_Scalars', 'Optimize', 'Pack', 'Page', 'Partition_Elaboration_Policy', 'Preelaborable_Initialization', 'Preelaborate', 'Priority', 'Priority_Specific_Dispatching', 'Profile', 'Pure', 'Queueing_Policy', 'Relative_Deadline', 'Remote_Call_Interface', 'Remote_Types', 'Restrictions', 'Reviewable', 'Shared_Passive', 'Storage_Size', 'Suppress', 'Task_Dispatching_Policy', 'Unchecked_Union', 'Unsuppress', 'Variable_Indexing', 'Volatile', 'Volatile_Components']
     let g:ada#Keywords += [{
 	    \ 'word':  Item,
 	    \ 'menu':  'pragma',
