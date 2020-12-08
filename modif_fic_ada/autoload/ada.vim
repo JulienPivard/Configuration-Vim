@@ -177,7 +177,7 @@ endif
 
 " Section: add Ada Spark {{{2
 "
-for Item in ['Abstract_State', 'Contract_Cases', 'Depends', 'Default_Initial_Condition', 'Dynamic_Predicate', 'Ghost', 'Global', 'In_Out', 'Initializes', 'Input', 'Loop_Invariant', 'Output', 'Part_Of', 'Post', 'Post_Class', 'Pre', 'Pre_Class', 'Predicate', 'Refined_State', 'Spark_Mode', 'Static_Predicate', 'Type_Invariant', 'Volatile_Function']
+for Item in ['Abstract_State', 'Async_Readers', 'Async_Writers', 'Contract_Cases', 'Depends', 'Default_Initial_Condition', 'Dynamic_Predicate', 'Effective_Reads', 'Effective_Writes', 'Ghost', 'Global', 'In_Out', 'Initial_Condition', 'Initializes', 'Input', 'Loop_Invariant', 'Output', 'Part_Of', 'Post', 'Post_Class', 'Pre', 'Pre_Class', 'Predicate', 'Refined_State', 'Spark_Mode', 'Static_Predicate', 'Type_Invariant', 'Volatile_Function']
     let g:ada#Keywords += [{
 	    \ 'word':  Item,
 	    \ 'menu':  'spark',
