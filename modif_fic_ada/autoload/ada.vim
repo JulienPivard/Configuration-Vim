@@ -140,7 +140,7 @@ endfor
 " Section: add GNAT Attributes {{{3
 "
 if exists ('g:ada_gnat_extensions')
-    for Item in ['Abort_Signal', 'Address_Size', 'Asm_Input', 'Asm_Output', 'AST_Entry', 'Bit', 'Bit_Position', 'Code_Address', 'Default_Bit_Order', 'Elaborated', 'Elab_Body', 'Elab_Spec', 'Emax', 'Enum_Rep', 'Epsilon', 'Fixed_Value', 'Has_Access_Values', 'Has_Discriminants', 'Img', 'Integer_Value', 'Machine_Size', 'Max_Interrupt_Priority', 'Max_Priority', 'Maximum_Alignment', 'Mechanism_Code', 'Null_Parameter', 'Object_Size', 'Passed_By_Reference', 'Range_Length', 'Storage_Unit', 'Target_Name', 'Tick', 'To_Address', 'Type_Class', 'UET_Address', 'Unconstrained_Array', 'Universal_Literal_String', 'Unrestricted_Access', 'VADS_Size', 'Value_Size', 'Wchar_T_Size', 'Word_Size']
+    for Item in ['Abort_Signal', 'Address_Size', 'Asm_Input', 'Asm_Output', 'AST_Entry', 'Bit', 'Bit_Position', 'Code_Address', 'Default_Bit_Order', 'Elaborated', 'Elab_Body', 'Elab_Spec', 'Emax', 'Enum_Rep', 'Enum_Val', 'Epsilon', 'Fixed_Value', 'Has_Access_Values', 'Has_Discriminants', 'Img', 'Integer_Value', 'Machine_Size', 'Max_Interrupt_Priority', 'Max_Priority', 'Maximum_Alignment', 'Mechanism_Code', 'Null_Parameter', 'Object_Size', 'Passed_By_Reference', 'Range_Length', 'Storage_Unit', 'Target_Name', 'Tick', 'To_Address', 'Type_Class', 'UET_Address', 'Unconstrained_Array', 'Universal_Literal_String', 'Unrestricted_Access', 'VADS_Size', 'Value_Size', 'Wchar_T_Size', 'Word_Size']
     let g:ada#Keywords += [{
 	    \ 'word':  Item,
 	    \ 'menu':  'attribute',
