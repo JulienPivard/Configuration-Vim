@@ -1,4 +1,4 @@
-" Dernière modification : Lundi 19 octobre[10] 2020
+" Dernière modification : Mardi 27 avril[04] 2021
 
 scriptencoding utf-8
 
@@ -314,6 +314,8 @@ try
     call arpeggio#load()
     Arpeggio noremap  jk <Esc>
     Arpeggio noremap! jk <Esc>
+    Arpeggio noremap  kj <Esc>
+    Arpeggio noremap! kj <Esc>
 catch
     echom "Problème avec le plugin arpegio."
 endtry
