@@ -117,7 +117,7 @@ endif
 
 " Section: add Ada Aspects    {{{2
 "
-for Item in ['Address', 'Alignment', 'Bit_Order', 'Component_Size', 'Default_Value', 'Independent_Components', 'Input', 'Output', 'Priority', 'Read', 'Scalar_Storage_Order', 'Size', 'Storage_Pool', 'Storage_Size', 'Write']
+for Item in ['Address', 'Alignment', 'Bit_Order', 'Component_Size', 'Default_Value', 'Independent_Components', 'Input', 'Output', 'Priority', 'Read', 'Scalar_Storage_Order', 'Size', 'Small', 'Storage_Pool', 'Storage_Size', 'Write']
     let g:ada#Keywords += [{
 	    \ 'word':  Item,
 	    \ 'menu':  'aspect',
