@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Jeudi 17 septembre[09] 2020
+# Dernière modification : Mercredi 28 juillet[07] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -222,7 +222,7 @@ trap 'maj_taille' WINCH
 #            Définition des couleurs            #{{{2
 ####################################################
 
-NEUTRE="" M_GRAS="" D_SOUL="" F_SOUL="" INVERS="" M__DIM=""
+NEUTRE='' M_GRAS='' D_SOUL='' F_SOUL='' INVERS='' M__DIM=''
 
 # Vérification de l'existence de la commande tput   #{{{3
 if test_cmd_exist tput
@@ -262,17 +262,17 @@ then
     declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
 else
     # Les couleurs sont mises à vide si tput n'est pas installé
-    declare -r C___NOIR="" C__ROUGE="" C___VERT="" C__JAUNE=""
-    declare -r C___BLEU="" C_VIOLET="" C___CYAN="" C__BLANC=""
+    declare -r C___NOIR='' C__ROUGE='' C___VERT='' C__JAUNE=''
+    declare -r C___BLEU='' C_VIOLET='' C___CYAN='' C__BLANC=''
 
-    declare -r C___INOIR="" C__IROUGE="" C___IVERT="" C__IJAUNE=""
-    declare -r C___IBLEU="" C_IVIOLET="" C___ICYAN="" C__IBLANC=""
+    declare -r C___INOIR='' C__IROUGE='' C___IVERT='' C__IJAUNE=''
+    declare -r C___IBLEU='' C_IVIOLET='' C___ICYAN='' C__IBLANC=''
 
-    declare -r C_SUR___NOIR="" C_SUR__ROUGE="" C_SUR___VERT="" C_SUR__JAUNE=""
-    declare -r C_SUR___BLEU="" C_SUR_VIOLET="" C_SUR___CYAN="" C_SUR__BLANC=""
+    declare -r C_SUR___NOIR='' C_SUR__ROUGE='' C_SUR___VERT='' C_SUR__JAUNE=''
+    declare -r C_SUR___BLEU='' C_SUR_VIOLET='' C_SUR___CYAN='' C_SUR__BLANC=''
 
-    declare -r C_SUR___INOIR="" C_SUR__IROUGE="" C_SUR___IVERT="" C_SUR__IJAUNE=""
-    declare -r C_SUR___IBLEU="" C_SUR_IVIOLET="" C_SUR___ICYAN="" C_SUR__IBLANC=""
+    declare -r C_SUR___INOIR='' C_SUR__IROUGE='' C_SUR___IVERT='' C_SUR__IJAUNE=''
+    declare -r C_SUR___IBLEU='' C_SUR_IVIOLET='' C_SUR___ICYAN='' C_SUR__IBLANC=''
 fi
 
         #}}}3
@@ -388,7 +388,7 @@ function executer_commande ()
     # Consigne l'exécution de la commande dans les logs.
     printf >>"${FICHIER_LOG_EXECUTION}" '%s' "${info}"
     affichage_echappee >>"${FICHIER_LOG_EXECUTION}" "${@}"
-    printf >>"${FICHIER_LOG_EXECUTION}" '%s' " ... "
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s' ' ... '
 
     # Affiche l'exécution de la commande sur la sortie d'erreur standard.
     printf >&2 '%s' "${info_console}${M_GRAS}${C__JAUNE}"
@@ -404,7 +404,7 @@ function executer_commande ()
         printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "Erreur avec le code : ${Code_Erreur}"
     else
         message_ok
-        printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "OK"
+        printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' 'OK'
     fi
 
     return "${Code_Erreur}"
@@ -509,7 +509,7 @@ function afficher_aide ()
 # traitement_option_o               #{{{3
 function traitement_option_o ()
 {
-    printf '%s\n' "Option o"
+    printf '%s\n' 'Option o'
 }
 
         #}}}3
@@ -534,7 +534,7 @@ function traitement_option_m ()
     # Parcours le tableau des options de m pour afficher
     for ((i = 0; i < ${#TAB_OPTION_M[*]}; i++))
     do
-        echo "$i  : ${TAB_OPTION_M[$i]}"
+        echo "${i}  : ${TAB_OPTION_M[${i}]}"
     done
     echo
 }
@@ -617,7 +617,7 @@ do
                     exit "${E_ARG_SUPERFLUS_OPT_LONGUE}";
                     ;;
                 umbra* | multiple* )
-                    afficher_erreur "L'option longue" "--${OPTARG}" "nécessite un argument."
+                    afficher_erreur "L'option longue" "--${OPTARG}" 'nécessite un argument.'
                     afficher_aide
                     exit "${E_OPT_LONGUE_NECESSITE_ARG}";
                     ;;
@@ -629,7 +629,7 @@ do
             esac
             ;;
         :)
-            afficher_erreur "L'option" "${OPTARG}" "nécessite un argument."
+            afficher_erreur "L'option" "${OPTARG}" 'nécessite un argument.'
             afficher_aide
             exit "${E_OPT_NECESSITE_ARG}";
             ;;
@@ -647,7 +647,7 @@ shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
 if [[ "${#}" -ne 0 ]]
 then
-    afficher_erreur "Le ou Les arguments suivant ne sont pas valide :" "${*}"
+    afficher_erreur 'Le ou Les arguments suivant ne sont pas valide :' "${*}"
     afficher_aide
     exit "${E_OPT_NON_TRAITEE}";
 fi
