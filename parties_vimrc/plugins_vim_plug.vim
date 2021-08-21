@@ -1,4 +1,4 @@
-" Dernière modification : Vendredi 02 octobre[10] 2020
+" Dernière modification : Jeudi 19 août[08] 2021
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -14,6 +14,7 @@ Plug 'kana/vim-arpeggio'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree', { 'on' : 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
 Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
