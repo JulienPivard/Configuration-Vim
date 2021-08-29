@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 28 juillet[07] 2021
+# Dernière modification : Dimanche 29 août[08] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -469,6 +469,17 @@ declare -r SYSTEM="$(uname -s)"
 declare -r OS
 declare -r MACHINE="$(uname -m)"
 
+if [[ "${HOSTNAME}vide" != 'vide' ]]
+then
+    declare -r NOM_PC="${HOSTNAME}"
+elif test_cmd_exist hostname
+then
+    declare -r NOM_PC="$(hostname)"
+elif [[ -e '/proc/sys/kernel/hostname' ]]
+then
+    declare -r NOM_PC="$(cat '/proc/sys/kernel/hostname')"
+fi
+
     #}}}2
 
 #}}}1
@@ -549,6 +560,7 @@ declare -r FICHIER_LOG_EXECUTION="./.log_${NOM_SCRIPT%.*}.log"
 cat <<EOF >>"${FICHIER_LOG_EXECUTION}"
 ---------------------------------- : `date '+%F %T'`
 --  Noyau               : ${SYSTEM}
+--  Nom PC              : ${NOM_PC}
 --  Operating System    : ${OS}
 --  Arch. Matériel      : ${MACHINE}
 --  BASH major version  : ${BASH_MAJOR_VERSION}
