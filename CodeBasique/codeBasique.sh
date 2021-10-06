@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 29 août[08] 2021
+# Dernière modification : Mercredi 06 octobre[10] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -478,6 +478,8 @@ then
 elif [[ -e '/proc/sys/kernel/hostname' ]]
 then
     declare -r NOM_PC="$(cat '/proc/sys/kernel/hostname')"
+else
+    declare -r NOM_PC="Pas de nom détecté"
 fi
 
     #}}}2
