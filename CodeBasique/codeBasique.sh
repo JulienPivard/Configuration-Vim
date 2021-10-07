@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 06 octobre[10] 2021
+# Dernière modification : Jeudi 07 octobre[10] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -227,8 +227,7 @@ NEUTRE='' M_GRAS='' D_SOUL='' F_SOUL='' INVERS='' M__DIM=''
 # Vérification de l'existence de la commande tput   #{{{3
 if test_cmd_exist tput
 then
-    [[ `tput colors 2>/dev/null` -ge 8 ]] &&
-        declare -ri NB_COULEURS=`tput colors` || declare -ri NB_COULEURS=0
+    declare -ri NB_COULEURS=`tput colors`
 
     declare -r NEUTRE="`tput sgr 0`" M_GRAS="`tput bold`" D_SOUL="`tput smul`"
     declare -r F_SOUL="`tput rmul`"  INVERS="`tput rev`"  M__DIM="`tput dim`"
@@ -239,27 +238,36 @@ fi
         #}}}3
 
 # Définition des couleurs                           #{{{3
-if [[ "${NB_COULEURS}" -gt 0 ]]
+if [[ "${NB_COULEURS}" -ge 8 ]]
 then
     declare -r C___NOIR="`tput setaf 0`" C__ROUGE="`tput setaf 1`"
     declare -r C___VERT="`tput setaf 2`" C__JAUNE="`tput setaf 3`"
     declare -r C___BLEU="`tput setaf 4`" C_VIOLET="`tput setaf 5`"
     declare -r C___CYAN="`tput setaf 6`" C__BLANC="`tput setaf 7`"
 
-    declare -r C___INOIR="`tput setaf 8`"  C__IROUGE="`tput setaf 9`"
-    declare -r C___IVERT="`tput setaf 10`" C__IJAUNE="`tput setaf 11`"
-    declare -r C___IBLEU="`tput setaf 12`" C_IVIOLET="`tput setaf 13`"
-    declare -r C___ICYAN="`tput setaf 14`" C__IBLANC="`tput setaf 15`"
-
     declare -r C_SUR___NOIR="`tput setab 0`" C_SUR__ROUGE="`tput setab 1`"
     declare -r C_SUR___VERT="`tput setab 2`" C_SUR__JAUNE="`tput setab 3`"
     declare -r C_SUR___BLEU="`tput setab 4`" C_SUR_VIOLET="`tput setab 5`"
     declare -r C_SUR___CYAN="`tput setab 6`" C_SUR__BLANC="`tput setab 7`"
 
-    declare -r C_SUR___INOIR="`tput setab 8`" C_SUR__IROUGE="`tput setab 9`"
-    declare -r C_SUR___IVERT="`tput setab 10`" C_SUR__IJAUNE="`tput setab 11`"
-    declare -r C_SUR___IBLEU="`tput setab 12`" C_SUR_IVIOLET="`tput setab 13`"
-    declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
+    if [[ "${NB_COULEURS}" -ge 16 ]]
+    then
+        declare -r C___INOIR="`tput setaf 8`"  C__IROUGE="`tput setaf 9`"
+        declare -r C___IVERT="`tput setaf 10`" C__IJAUNE="`tput setaf 11`"
+        declare -r C___IBLEU="`tput setaf 12`" C_IVIOLET="`tput setaf 13`"
+        declare -r C___ICYAN="`tput setaf 14`" C__IBLANC="`tput setaf 15`"
+
+        declare -r C_SUR___INOIR="`tput setab 8`" C_SUR__IROUGE="`tput setab 9`"
+        declare -r C_SUR___IVERT="`tput setab 10`" C_SUR__IJAUNE="`tput setab 11`"
+        declare -r C_SUR___IBLEU="`tput setab 12`" C_SUR_IVIOLET="`tput setab 13`"
+        declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
+    else
+        declare -r C___INOIR='' C__IROUGE='' C___IVERT='' C__IJAUNE=''
+        declare -r C___IBLEU='' C_IVIOLET='' C___ICYAN='' C__IBLANC=''
+
+        declare -r C_SUR___INOIR='' C_SUR__IROUGE='' C_SUR___IVERT='' C_SUR__IJAUNE=''
+        declare -r C_SUR___IBLEU='' C_SUR_IVIOLET='' C_SUR___ICYAN='' C_SUR__IBLANC=''
+    fi
 else
     # Les couleurs sont mises à vide si tput n'est pas installé
     declare -r C___NOIR='' C__ROUGE='' C___VERT='' C__JAUNE=''
