@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Jeudi 07 octobre[10] 2021
+# Dernière modification : Dimanche 17 octobre[10] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -206,7 +206,7 @@ function maj_taille ()
 {
     if test_cmd_exist tput
     then
-        NB_LIGNES=`tput lines` NB_COLONNES=`tput cols`
+        NB_LIGNES="`tput lines`" NB_COLONNES="`tput cols`"
     else
         NB_LIGNES=-1 NB_COLONNES=-1
     fi
@@ -227,7 +227,7 @@ NEUTRE='' M_GRAS='' D_SOUL='' F_SOUL='' INVERS='' M__DIM=''
 # Vérification de l'existence de la commande tput   #{{{3
 if test_cmd_exist tput
 then
-    declare -ri NB_COULEURS=`tput colors`
+    declare -ri NB_COULEURS="`tput colors`"
 
     declare -r NEUTRE="`tput sgr 0`" M_GRAS="`tput bold`" D_SOUL="`tput smul`"
     declare -r F_SOUL="`tput rmul`"  INVERS="`tput rev`"  M__DIM="`tput dim`"
@@ -487,7 +487,7 @@ elif [[ -e '/proc/sys/kernel/hostname' ]]
 then
     declare -r NOM_PC="$(cat '/proc/sys/kernel/hostname')"
 else
-    declare -r NOM_PC="Pas de nom détecté"
+    declare -r NOM_PC='Pas de nom détecté'
 fi
 
     #}}}2
@@ -601,7 +601,7 @@ fi
 
 # option o ne nécessite pas d'arguments en plus u si.
 # Le premier : permet de gérer manuellement les erreurs
-while getopts ":hou:m:-:" option
+while getopts ':hou:m:-:' option
 do
     case "${option}" in
         o)
