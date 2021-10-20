@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 17 octobre[10] 2021
+# Dernière modification : Mercredi 20 octobre[10] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -592,8 +592,13 @@ else
 fi
 printf >>"${FICHIER_LOG_EXECUTION}" '\n'
 
+declare -ri NB_ARG_MIN=1
+# Nombre d'arguments minimum en comptant les options
+declare -ri NB_ARG_MAX=1
+# Nombre d'arguments maximum après avoir traité les options
+
 #  Affiche l'aide si aucun arguments n'est donné
-if [[ "${#}" -eq 0 ]]
+if [[ "${#}" -lt "${NB_ARG_MIN}" ]]
 then
     afficher_aide
     exit "${EXIT_SUCCES}";
@@ -667,7 +672,7 @@ done
 # OPTIND indique la position de l'argument suivant à traiter par getopt
 shift $((OPTIND-1))
 # Si toutes les options n'ont pas été traitée on affiche une erreur
-if [[ "${#}" -ne 0 ]]
+if [[ "${#}" -gt "${NB_ARG_MAX}" ]]
 then
     afficher_erreur 'Le ou Les arguments suivant ne sont pas valide :' "${*}"
     afficher_aide
