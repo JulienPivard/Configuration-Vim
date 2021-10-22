@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 20 octobre[10] 2021
+# Dernière modification : Vendredi 22 octobre[10] 2021
 
 ###############################################################################
 #                   ___                             __                        #
@@ -426,26 +426,26 @@ function executer_commande ()
 function afficher_erreur ()
 {
     [[ -n "${1}" ]] || exit "${E_ARG_AFF_ERR_M}";
-    local AFFICHAGE="${1}" LOG="${1}"
-    if [[ "${#}" -ge 2 ]]
-    then
-        AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
-        AFFICHAGE="${AFFICHAGE}${2}"
-        AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
-        LOG="${LOG} [ ${2} ] "
-    fi
-    [[ "${#}" -ge 3 ]] && AFFICHAGE="${AFFICHAGE}${3}" LOG="${LOG}${3}"
-    if [[ "${#}" -ge 4 ]]
-    then
-        AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}"
-        AFFICHAGE="${AFFICHAGE}${4}"
-        AFFICHAGE="${AFFICHAGE}${NEUTRE}${C__ROUGE} ] "
-        LOG="${LOG} [ ${4} ] "
-    fi
-    [[ "${#}" -ge 5 ]] && AFFICHAGE="${AFFICHAGE}${5}"
-    [[ "${#}" -ge 5 ]] && LOG="${LOG}${5}"
+
+    local ETAPE_AFFICHAGE='rouge'
+    local AFFICHAGE="${C__ROUGE}" LOG=""
+
+    for Str in "$@"
+    do
+        if [[ "${ETAPE_AFFICHAGE}" == 'rouge' ]]
+        then
+            AFFICHAGE="${AFFICHAGE}${Str}"
+            LOG="${LOG}${Str}"
+            ETAPE_AFFICHAGE='violet'
+        else
+            AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}${Str}${NEUTRE}${C__ROUGE} ] "
+            LOG="${LOG} [ ${Str} ] "
+            ETAPE_AFFICHAGE='rouge'
+        fi
+    done
+
     printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${LOG}"
-    printf >&2 '%s\n' "${NEUTRE}${C__ROUGE}${AFFICHAGE}${NEUTRE}"
+    printf >&2 '%s\n' "${NEUTRE}${AFFICHAGE}${NEUTRE}"
 }
 
         #}}}3
