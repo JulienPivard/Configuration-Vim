@@ -1,4 +1,4 @@
-" Dernière modification : Lundi 08 juin[06] 2020
+" Dernière modification : Dimanche 14 novembre[11] 2021
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -359,7 +359,7 @@ endfunction
 
 " Fonction pour définir le logiciel à ouvrir selon le système d'exploitation
 " utilisé
-" Définition de variable global pour ouvrir un pdf                      "{{{
+" Définition de variable global pour ouvrir un pdf                          "{{{
 function! NomLecteurPDF()
     let l:systeme_en_cours_dutilisation = system( 'uname' )
     if l:systeme_en_cours_dutilisation =~? 'darwin'
@@ -409,6 +409,16 @@ function! MacrosLatexSpecifique()                                           "{{{
         noremap! <buffer> <S-F11> <Esc> :!bibtex %< <Return>
     endif
 
+endfunction
+
+"}}}
+
+" On désactive la correction orthographique pour les fichiers de diff
+function! FichierEnModeDiff()                                               "{{{
+    echom "fichier en mode diff [" .. bufname ("%") .. "]"
+    if bufname ("%") =~# "fugitive://.*"
+        setlocal nospell
+    endif
 endfunction
 
 "}}}

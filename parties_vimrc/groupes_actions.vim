@@ -1,4 +1,4 @@
-" Dernière modification : Vendredi 19 juin[06] 2020
+" Dernière modification : Dimanche 14 novembre[11] 2021
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -208,7 +208,7 @@ augroup END
 
 augroup diffMode
     autocmd!
-    autocmd BufEnter,BufNew * if &diff | set nospell | endif
+    autocmd BufEnter,BufNew * if &diff | call FichierEnModeDiff() | endif
 augroup END
 
 "}}}
