@@ -1,4 +1,4 @@
-" Dernière modification : Jeudi 05 octobre[10] 2017
+" Dernière modification : Dimanche 14 novembre[11] 2021
 
 " Mappage des touches utiles
 " Pour inverser une option booléenne utiliser set option!
@@ -54,9 +54,11 @@ nnoremap <leader>; :execute "normal! mqA;\e`q"<Return>
 nnoremap / /\v
 
 " Pour fugitive                                                             "{{{
-nnoremap <leader>gs :Gstatus<Return>
-nnoremap <leader>gd :Gdiff  <Return>
-nnoremap <leader>gv :Gitv   <Return>
+nnoremap <leader>gs  :Git               <Return>
+nnoremap <leader>gcc :Git commit        <Return>
+nnoremap <leader>gca :Git commit --amend<Return>
+nnoremap <leader>gd  :Gdiffsplit        <Return>
+nnoremap <leader>gv  :Gitv              <Return>
 
 "}}}
 
