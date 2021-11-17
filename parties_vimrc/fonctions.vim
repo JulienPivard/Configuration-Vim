@@ -1,4 +1,4 @@
-" Dernière modification : Dimanche 14 novembre[11] 2021
+" Dernière modification : Mercredi 17 novembre[11] 2021
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -415,7 +415,6 @@ endfunction
 
 " On désactive la correction orthographique pour les fichiers de diff
 function! FichierEnModeDiff()                                               "{{{
-    echom "fichier en mode diff [" .. bufname ("%") .. "]"
     if bufname ("%") =~# "fugitive://.*"
         setlocal nospell
     endif
