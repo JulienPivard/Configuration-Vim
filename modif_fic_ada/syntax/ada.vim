@@ -205,7 +205,6 @@ syntax keyword adaStorageClass	constant delta digits of range
 syntax keyword adaStorageClass	tagged interface synchronized
 syntax match   adaStorageClass	"\<private\>"
 syntax match   adaStorageClass	"\<limited\>"
-syntax match   adaStorageClass	"\<not\>\s\+\<null\>\s\+\<access\>"
 
 syntax keyword adaTypeDef    subtype type
 
@@ -227,6 +226,7 @@ syntax keyword  adaConditional	elsif when
 " Section: Autres mots clefs {{{1
 syntax match    adaMotClef	    "\<is\>"
 syntax match    adaMotClef	    "\<separate\>" contains=adaSeparate
+syntax match    adaMotClef	    "\<not\>\s\+\<null\>\s\+\<access\>"
 syntax keyword  adaMotClef	    all do exception in new null
 syntax keyword  adaMotClef	    out overriding some
 
