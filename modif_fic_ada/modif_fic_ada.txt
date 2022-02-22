@@ -4,7 +4,7 @@
 
 
 
-" Dans le fichier [compiler/gnat.vim] ligne 33 remplacer F7 par une autre commande
+" Remplacer le fichier [compiler/gnat.vim] par " ~/.vim/modif_fic_ada/compiler/gnat.vim
 
 
 
