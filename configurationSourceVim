@@ -564,6 +564,54 @@ printf >>"${FICHIER_LOG_EXECUTION}" '\n'
 declare -ri NB_ARG_MAX=0
 # Nombre d'arguments maximum après avoir traité les options
 
+#  Affiche l'aide si aucun arguments n'est donné
+if [[ "${#}" -lt "${NB_ARG_MIN}" ]]
+then
+    afficher_aide
+    exit "${EXIT_SUCCES}";
+fi
+
+# option o ne nécessite pas d'arguments en plus u si.
+# Le premier : permet de gérer manuellement les erreurs
+while getopts ':h' option
+do
+    case "${option}" in
+        h)
+            afficher_aide
+            exit "${EXIT_SUCCES}";
+            ;;
+        -)
+            LONG_OPTARG="${OPTARG#*=}"
+            case "${OPTARG}" in
+                help )
+                    afficher_aide
+                    exit "${EXIT_SUCCES}";
+                    ;;
+                help* )
+                    afficher_erreur "L'option longue" "--${OPTARG}" "ne prend pas d'arguments."
+                    afficher_aide
+                    exit "${E_ARG_SUPERFLUS_OPT_LONGUE}";
+                    ;;
+                *)
+                    afficher_erreur "L'option longue" "--${OPTARG}" "n'existe pas !"
+                    afficher_aide
+                    exit "${E_OPT_LONGUE_INCONNUE}";
+                    ;;
+            esac
+            ;;
+        :)
+            afficher_erreur "L'option" "${OPTARG}" 'nécessite un argument.'
+            afficher_aide
+            exit "${E_OPT_NECESSITE_ARG}";
+            ;;
+        ?)
+            afficher_erreur "L'option" "${OPTARG}" "n'existe pas."
+            afficher_aide
+            exit "${E_OPT_INCONNUE}";
+            ;;
+    esac
+done
+
 # Vérifie que toutes les options ont été traitées
 # OPTIND indique la position de l'argument suivant à traiter par getopt
 shift $((OPTIND-1))
