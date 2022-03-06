@@ -81,6 +81,10 @@ declare -ri EXIT_SUCCES=0
 
 declare -ri E_ARG_AFF_ERR_M=80
 
+declare -ri E_ARG_SUPERFLUS_OPT_LONGUE=81
+declare -ri E_OPT_LONGUE_INCONNUE=83
+declare -ri E_OPT_NECESSITE_ARG=84
+declare -ri E_OPT_INCONNUE=85
 declare -ri E_OPT_NON_TRAITEE=86
 
 
@@ -235,15 +239,15 @@ then
 
     if [[ "${NB_COULEURS}" -ge 16 ]]
     then
-    declare -r C___INOIR="`tput setaf 8`"  C__IROUGE="`tput setaf 9`"
-    declare -r C___IVERT="`tput setaf 10`" C__IJAUNE="`tput setaf 11`"
-    declare -r C___IBLEU="`tput setaf 12`" C_IVIOLET="`tput setaf 13`"
-    declare -r C___ICYAN="`tput setaf 14`" C__IBLANC="`tput setaf 15`"
+        declare -r C___INOIR="`tput setaf 8`"  C__IROUGE="`tput setaf 9`"
+        declare -r C___IVERT="`tput setaf 10`" C__IJAUNE="`tput setaf 11`"
+        declare -r C___IBLEU="`tput setaf 12`" C_IVIOLET="`tput setaf 13`"
+        declare -r C___ICYAN="`tput setaf 14`" C__IBLANC="`tput setaf 15`"
 
-    declare -r C_SUR___INOIR="`tput setab 8`" C_SUR__IROUGE="`tput setab 9`"
-    declare -r C_SUR___IVERT="`tput setab 10`" C_SUR__IJAUNE="`tput setab 11`"
-    declare -r C_SUR___IBLEU="`tput setab 12`" C_SUR_IVIOLET="`tput setab 13`"
-    declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
+        declare -r C_SUR___INOIR="`tput setab 8`" C_SUR__IROUGE="`tput setab 9`"
+        declare -r C_SUR___IVERT="`tput setab 10`" C_SUR__IJAUNE="`tput setab 11`"
+        declare -r C_SUR___IBLEU="`tput setab 12`" C_SUR_IVIOLET="`tput setab 13`"
+        declare -r C_SUR___ICYAN="`tput setab 14`" C_SUR__IBLANC="`tput setab 15`"
     else
         declare -r C___INOIR='' C__IROUGE='' C___IVERT='' C__IJAUNE=''
         declare -r C___IBLEU='' C_IVIOLET='' C___ICYAN='' C__IBLANC=''
