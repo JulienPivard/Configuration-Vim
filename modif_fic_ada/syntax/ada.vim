@@ -227,6 +227,7 @@ syntax keyword  adaConditional	elsif when
 syntax match    adaMotClef	    "\<is\>"
 syntax match    adaMotClef	    "\<separate\>" contains=adaSeparate
 syntax match    adaMotClef	    "\<not\>\s*\<null\>\s*\<access\>"
+syntax match    adaMotClef      "\<not\>\s*\<overriding\>"
 syntax keyword  adaMotClef	    all do exception in new null
 syntax keyword  adaMotClef	    out overriding some
 
