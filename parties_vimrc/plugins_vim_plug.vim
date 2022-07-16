@@ -1,4 +1,4 @@
-" Dernière modification : Jeudi 19 août[08] 2021
+" Dernière modification : Dimanche 24 avril[04] 2022
 
 call plug#begin( '~/.vim/bundle/' )
 
@@ -17,7 +17,6 @@ Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rdnetto/YCM-Generator', { 'branch' : 'stable' }
-Plug 'reedes/vim-pencil', { 'for' : 'markdown' }
 Plug 'scrooloose/nerdtree', { 'on' :  'NERDTreeToggle'  }
 Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim', { 'on' : 'GundoToggle' }
