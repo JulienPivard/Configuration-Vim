@@ -200,6 +200,7 @@ syntax match adaMotClef	    "\<record;"me=e-1
 " Section: type et classes {{{1
 "
 syntax match   adaStorageClass	"\<abstract\>"
+syntax match   adaStorageClass  "\<not\>\s*\<null\>\s*\<access\>"
 syntax keyword adaStorageClass	access aliased array at
 syntax keyword adaStorageClass	constant delta digits of range
 syntax keyword adaStorageClass	tagged interface synchronized
@@ -226,7 +227,6 @@ syntax keyword  adaConditional	elsif when
 " Section: Autres mots clefs {{{1
 syntax match    adaMotClef	    "\<is\>"
 syntax match    adaMotClef	    "\<separate\>" contains=adaSeparate
-syntax match    adaMotClef	    "\<not\>\s*\<null\>\s*\<access\>"
 syntax match    adaMotClef      "\<not\>\s*\<overriding\>"
 syntax keyword  adaMotClef	    all do exception in new null
 syntax keyword  adaMotClef	    out overriding some
