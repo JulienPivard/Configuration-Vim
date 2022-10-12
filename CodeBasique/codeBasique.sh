@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Vendredi 22 octobre[10] 2021
+# Dernière modification : Mercredi 12 octobre[10] 2022
 
 ###############################################################################
 #                   ___                             __                        #
@@ -416,6 +416,43 @@ function executer_commande ()
     fi
 
     return "${Code_Erreur}"
+}
+
+        #}}}3
+
+# Affichage simplifié des erreurs   #{{{3
+# Affichage : Affiche en couleur choisie arg1; en violet gras [arg2];
+# arg3 en couleur choisie...
+# Exemple afficher_en_couleur "couleur" "première partie" "deuxième partie" "troisième partie"
+# Donnera :
+#           v----couleur----v v----violet----v v----couleur-----v
+#           première partie [ deuxième  partie ] troisième partie
+function afficher_en_couleur ()
+{
+    [[ "${#}" -ge 2 ]] || exit "${E_ARG_AFF_ERR_M}";
+
+    local -r COULEUR_CHOISIE="${1}"
+
+    local ETAPE_AFFICHAGE='couleur'
+    local AFFICHAGE="${COULEUR_CHOISIE} " LOG=""
+
+    # On supprime le premier argument de la liste des arguments à afficher
+    shift 1
+    for Str in "${@}"
+    do
+        if [[ "${ETAPE_AFFICHAGE}" == 'couleur' ]]
+        then
+            AFFICHAGE="${AFFICHAGE}${Str}"
+            LOG="${LOG}${Str}"
+            ETAPE_AFFICHAGE='violet'
+        else
+            AFFICHAGE="${AFFICHAGE} [${C_VIOLET}${M_GRAS} ${Str} ${NEUTRE}${COULEUR_CHOISIE}] "
+            LOG="${LOG} [ ${Str} ] "
+            ETAPE_AFFICHAGE='couleur'
+        fi
+    done
+    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${LOG}"
+    printf >&2 '%s\n' "${NEUTRE}${AFFICHAGE} ${NEUTRE}"
 }
 
         #}}}3
