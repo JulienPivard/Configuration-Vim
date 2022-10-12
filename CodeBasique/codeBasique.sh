@@ -462,27 +462,7 @@ function afficher_en_couleur ()
 # arg3 en rouge...
 function afficher_erreur ()
 {
-    [[ -n "${1}" ]] || exit "${E_ARG_AFF_ERR_M}";
-
-    local ETAPE_AFFICHAGE='rouge'
-    local AFFICHAGE="${C__ROUGE}" LOG=""
-
-    for Str in "$@"
-    do
-        if [[ "${ETAPE_AFFICHAGE}" == 'rouge' ]]
-        then
-            AFFICHAGE="${AFFICHAGE}${Str}"
-            LOG="${LOG}${Str}"
-            ETAPE_AFFICHAGE='violet'
-        else
-            AFFICHAGE="${AFFICHAGE} [ ${C_VIOLET}${M_GRAS}${Str}${NEUTRE}${C__ROUGE} ] "
-            LOG="${LOG} [ ${Str} ] "
-            ETAPE_AFFICHAGE='rouge'
-        fi
-    done
-
-    printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${LOG}"
-    printf >&2 '%s\n' "${NEUTRE}${AFFICHAGE}${NEUTRE}"
+    afficher_en_couleur "${C__ROUGE}" "${@}"
 }
 
         #}}}3
