@@ -487,6 +487,16 @@ function afficher_erreur ()
 
         #}}}3
 
+# Affichage simplifié des infos     #{{{3
+# Affichage : Affiche en couleur rouge arg1; en violet gras [arg2];
+# arg3 en rouge...
+function afficher_info ()
+{
+    afficher_en_couleur "${C___BLEU}" "${@}"
+}
+
+        #}}}3
+
 # gestion_erreur_couleur            #{{{3
 function gestion_erreur_couleur ()
 {
