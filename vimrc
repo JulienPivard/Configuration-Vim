@@ -6,7 +6,7 @@ if system ('uname') =~? 'darwin'
     let &t_ZR="\e[23m"
 endif
 
-" Dernière modification : Lundi 15 août[08] 2022
+" Dernière modification : Mardi 25 octobre[10] 2022
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -198,9 +198,6 @@ source ~/.vim/parties_vimrc/groupes_actions.vim
 " ----------------------------------------------------------------------------- "
 
 source ~/.vim/parties_vimrc/mappage_touches.vim
-
-" On désactive le mapping Q qui passe en mode Ex
-nnoremap Q gq
 
 " ----------------------------------------------------------------------------- "
 " }}}                Fin des réglages des mappages de touches                   "

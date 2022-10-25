@@ -1,4 +1,4 @@
-" Dernière modification : Dimanche 14 novembre[11] 2021
+" Dernière modification : Mardi 25 octobre[10] 2022
 
 " Mappage des touches utiles
 " Pour inverser une option booléenne utiliser set option!
@@ -33,6 +33,9 @@ noremap  <S-F12>        :vsp ~/.vim/vimrc<Return>
 noremap! <S-F12>  <Esc> :vsp ~/.vim/vimrc<Return>
 
 "}}}
+
+" On désactive le mapping Q qui passe en mode Ex
+nnoremap Q gq
 
 nnoremap gy :YcmGenerateConfig -f<Return>
 nnoremap gh :call MontrerGroupeSyntax()<Return>
