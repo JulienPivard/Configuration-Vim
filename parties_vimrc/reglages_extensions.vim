@@ -1,4 +1,4 @@
-" Dernière modification : Mardi 27 avril[04] 2021
+" Dernière modification : Mardi 25 octobre[10] 2022
 
 scriptencoding utf-8
 
@@ -82,6 +82,7 @@ let NERDTreeSortHiddenFirst = 1
 let NERDTreeWinSize = 55
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 0          " Ferme automatiquement NERDTree quand on ouvre un fichier.
+let NERDTreeIgnore = ['ali$[[dir]]', 'doc$[[dir]]', 'lib$[[dir]]', 'obj$[[dir]]', 'bin$[[dir]]']
 
 "}}}
 
