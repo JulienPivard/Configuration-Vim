@@ -2,7 +2,7 @@
 % vim: foldmethod=marker:foldlevel=0:
 \documentclass[francais, a4paper, 10pt, onecolumn, draft]{article}
 
-% Dernière modification : Dimanche 12 février[02] 2023
+% Dernière modification : Samedi 18 février[02] 2023
 
 %\documentclass[francais, a4paper, 10pt, onecolumn, draft]{book}
 %\documentclass[francais, a4paper, 10pt, onecolumn, draft]{report}
@@ -62,6 +62,19 @@
 %\usepackage{setspace}           % Pour utiliser les commandes onehalfspace
 
     %}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            Touches et menus            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[os=mac]{menukeys}
+%\renewmenumacro{\menu}[>]{roundedmenus}         % Pour afficher les cascades de menu
+% Options possible : roundedmenus, angularmenus, menus
+%\renewmenumacro{\keys}[+]{roundedkeys}          % Pour afficher les combinaisons de touches
+% Options possible : roundedkeys, shadowedroundedkeys, angularkeys,
+%                    shadowedangularkeys, typewriterkeys,
+%\renewmenumacro{\directory}[/]{pathswithfolder} % Pour afficher les chemins
+% Options possible : paths, pathswithfolder, pathswithblackfolder,
+%                    hyphenatepaths, hyphenatepathswithfolder, hyphenatepathswithblackfolder
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       Personnaliser les titres         %
@@ -190,6 +203,15 @@
     %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Pour changer les marges         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour avoir des marges à l'échelle 0.65 par défaut         %{{{
+%\usepackage[xetex, scale=0.65]{geometry}
+%\usepackage[xetex, top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+
+    %}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Entête et pied de pages personnalisée  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage{fancyhdr}                                      %{{{
@@ -218,15 +240,6 @@
 %    \renewcommand{\footrulewidth}{0.5pt}
 %}
 %\pagestyle{plain}
-
-    %}}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%        Pour changer les marges         %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pour avoir des marges à l'échelle 0.65 par défaut         %{{{
-%\usepackage[xetex, scale=0.65]{geometry}
-%\usepackage[xetex, top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
 
     %}}}
 
