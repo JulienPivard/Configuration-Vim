@@ -202,7 +202,11 @@ Ada.Text_IO.New_Line (Spacing => ${1:1});$0
 endsnippet
 
 snippet obso "pragma Obsolescent"
-pragma Obsolescent ($1, "$2");$0
+pragma Obsolescent
+   (
+      Entity  => $1,
+      Message => "$2"
+   );$0
 endsnippet
 
 snippet unref "pragma Unreferenced"
