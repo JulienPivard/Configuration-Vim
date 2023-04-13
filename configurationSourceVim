@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Dimanche 26 février[02] 2023
+# Dernière modification : Jeudi 13 avril[04] 2023
 
 ###############################################################################
 #                   ___                             __                        #
@@ -650,7 +650,7 @@ fi
 
 affiche_section "${C_SUR___VERT}${C___NOIR}" 'Configuration de vim'
 
-declare -r Rep_Config_Python='/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu'
+declare -r Rep_Config_Python='/usr/lib/python3.9/config-3.9-x86_64-linux-gnu'
 
 executer_commande ./configure --with-features=huge \
             --with-compiledby=Asmodee \
@@ -658,7 +658,7 @@ executer_commande ./configure --with-features=huge \
             --enable-rubyinterp \
             --enable-perlinterp \
             --enable-python3interp=yes \
-            --enable-pythoninterp=yes \
+            --enable-pythoninterp=no \
             --enable-cscope --disable-netbeans \
             --enable-gui=auto --with-x --prefix=/usr \
             --with-python3-config-dir="${Rep_Config_Python}" \
