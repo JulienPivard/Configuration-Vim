@@ -4,9 +4,12 @@ set nocompatible                        " Casser compatible avec vielle version
 if system ('uname') =~? 'darwin'
     let &t_ZH="\e[3m"
     let &t_ZR="\e[23m"
+else
+    let &t_TI = ""
+    let &t_TE = ""
 endif
 
-" Dernière modification : Mardi 25 octobre[10] 2022
+" Dernière modification : Jeudi 13 avril[04] 2023
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
