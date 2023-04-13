@@ -1,9 +1,10 @@
-" Dernière modification : Dimanche 24 avril[04] 2022
+" Dernière modification : Jeudi 13 avril[04] 2023
 
 call plug#begin( '~/.vim/bundle/' )
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', { 'do' : function( 'BuildYCM' ), 'commit' : 'd91e0f03e2e88bc563ffe4c8f7901b0beb2a7d4f' }
+"Plug 'Valloric/YouCompleteMe', { 'do' : function( 'BuildYCM' ), 'commit' : 'd91e0f03e2e88bc563ffe4c8f7901b0beb2a7d4f' }
+Plug 'Valloric/YouCompleteMe', { 'do' : function( 'BuildYCM' ) }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
