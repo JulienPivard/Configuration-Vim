@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Mercredi 12 octobre[10] 2022
+# Dernière modification : Lundi 20 novembre[11] 2023
 
 ###############################################################################
 #                   ___                             __                        #
@@ -355,8 +355,8 @@ function demander_utilisateur ()
     do
         [[ "${reponse}" = [OoYyNn] ]] && printf >&2 '%s\n' "${reponse}"
         [[ "${reponse}" = [OoYyNn] ]] && printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${reponse}"
-        [[ "${reponse}" = [OoYy] ]] && return 0
-        [[ "${reponse}" = [Nn] ]] && return 1
+        [[ "${reponse}" = [OoYy]   ]] && return 0
+        [[ "${reponse}" = [Nn]     ]] && return 1
     done
 }
 
