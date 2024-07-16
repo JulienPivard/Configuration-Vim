@@ -214,4 +214,12 @@ snippet unref "pragma Unreferenced"
 pragma Unreferenced ($1);$0
 endsnippet
 
+snippet warn_comp "pragma Compile_Time_Warning"
+pragma Compile_Time_Warning (True, "$1");$0
+endsnippet
+
+snippet err_comp "pragma Compile_Time_Error"
+pragma Compile_Time_Error (True, "$1");$0
+endsnippet
+
 # vim:ft=snippets:
