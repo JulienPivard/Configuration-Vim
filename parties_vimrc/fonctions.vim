@@ -1,4 +1,4 @@
-" Dernière modification : Mercredi 17 novembre[11] 2021
+" Dernière modification : Dimanche 04 août[08] 2024
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -128,7 +128,8 @@ endfunction
 
 "}}}
 
-" Si il y a un makefile on exécute le fichier compilé du même nom que celui du dossier sans la première majuscule
+" Si il y a un makefile on exécute le fichier compilé du même nom que
+"   celui du dossier sans la première majuscule
 " sinon c'est le nom du fichier sans majuscule
 function! ExistMakeFileC()                                                  "{{{
 
@@ -357,8 +358,8 @@ endfunction
 
 "}}}
 
-" Fonction pour définir le logiciel à ouvrir selon le système d'exploitation
-" utilisé
+" Fonction pour définir le logiciel à ouvrir selon le système
+" d'exploitation utilisé
 " Définition de variable global pour ouvrir un pdf                          "{{{
 function! NomLecteurPDF()
     let l:systeme_en_cours_dutilisation = system( 'uname' )
@@ -373,7 +374,8 @@ endfunction
 " }}}
 
 
-" Fonction pour définir les macros Latex ouvrir facilement le fichier pdf généré par xetex
+" Fonction pour définir les macros Latex ouvrir facilement
+" le fichier pdf généré par xetex
 function! MacrosLatexSpecifique()                                           "{{{
 
     NoMatchParen
