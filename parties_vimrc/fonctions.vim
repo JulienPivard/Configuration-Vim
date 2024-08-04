@@ -483,4 +483,15 @@ endfunction
 
 "}}}
 
+" Fonction pour trouver le fichier correspondant en Ada
+function! Nom_Package_Vers_Nom_Fichier ()                                   "{{{
+    " On transforme les "." en "-"
+    let l:fichier=tr (v:fname, '.', '-')
+    " On met le fichier en minuscule
+    let l:fichier=substitute (l:fichier, '.*', '\L\0', 'g')
+    return l:fichier
+endfunction
+
+"}}}
+
 " vim:foldlevel=0:foldmethod=marker
