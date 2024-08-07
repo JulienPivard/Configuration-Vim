@@ -493,7 +493,9 @@ function! Nom_Package_Vers_Nom_Fichier ()                                   "{{{
     let l:fichier=substitute (l:fichier, '.*', '\L\0', 'g')
 
     const chemin_compilateur = ''
-    const pos_dossier = chemin_compilateur . ''
+    const pos_dossier = ''
+
+    const chemin_lib_std = chemin_compilateur . pos_dossier
 
     let l:dict_lib_std_ada = {
                 \'ada.assertions'                                                : 'a-assert',
@@ -1191,7 +1193,7 @@ function! Nom_Package_Vers_Nom_Fichier ()                                   "{{{
 
     if has_key (l:dict_lib_std_ada, l:fichier)
         " Si c'est un package standard du langage
-        let l:fichier = pos_dossier . l:dict_lib_std_ada[l:fichier]
+        let l:fichier = chemin_lib_std . l:dict_lib_std_ada[l:fichier]
 
     else
         " On transforme les "." en "-"
