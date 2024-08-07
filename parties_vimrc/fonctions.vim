@@ -1,4 +1,4 @@
-" Dernière modification : Dimanche 04 août[08] 2024
+" Dernière modification : Mercredi 07 août[08] 2024
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -487,10 +487,29 @@ endfunction
 
 " Fonction pour trouver le fichier correspondant en Ada
 function! Nom_Package_Vers_Nom_Fichier ()                                   "{{{
-    " On transforme les "." en "-"
-    let l:fichier=tr (v:fname, '.', '-')
+    let l:fichier=v:fname
+
     " On met le fichier en minuscule
     let l:fichier=substitute (l:fichier, '.*', '\L\0', 'g')
+
+    const chemin_compilateur = ''
+    const pos_dossier = chemin_compilateur . ''
+
+    let l:dict_lib_std_ada = {
+                \'system.address_image'                           : 's-addima',
+                \'system.tasking.async_delays.enqueue_calendar'   : 's-tadeca',
+                \'system.tasking.async_delays.enqueue_rt'         : 's-tadert',
+                \'unchecked_conversion'                           : 'unchconv'}
+
+    if has_key (l:dict_lib_std_ada, l:fichier)
+        " Si c'est un package standard du langage
+        let l:fichier = pos_dossier . l:dict_lib_std_ada[l:fichier]
+
+    else
+        " On transforme les "." en "-"
+        let l:fichier=tr (l:fichier, '.', '-')
+    endif
+
     return l:fichier
 endfunction
 
