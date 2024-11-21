@@ -230,4 +230,16 @@ pragma Compile_Time_Error
    );$0
 endsnippet
 
+snippet warn_off "pragma Warnings Off"
+pragma Warnings
+   (
+      GNAT, Off,
+      Reason => "$1"
+   );$0
+endsnippet
+
+snippet warn_on "pragma Warnings On"
+pragma Warnings (GNAT, On);$0
+endsnippet
+
 # vim:ft=snippets:
