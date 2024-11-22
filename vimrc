@@ -9,7 +9,7 @@ else
     let &t_TE = ""
 endif
 
-" Dernière modification : Jeudi 13 avril[04] 2023
+" Dernière modification : Vendredi 22 novembre[11] 2024
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -177,6 +177,7 @@ source ~/.vim/parties_vimrc/configuration_ligne_status.vim
 " ----------------------------------------------------------------------------- "
 
 source ~/.vim/parties_vimrc/fonctions.vim
+source ~/.vim/parties_vimrc/position_packages_ada.vim
 
 " ----------------------------------------------------------------------------- "
 " }}}                           Fin des fonctions                               "
