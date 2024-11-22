@@ -1,5 +1,7 @@
 " Dernière modification : Vendredi 22 novembre[11] 2024
 
+" for F in <chemin>/*.ads; do FF="${F##*/}"; printf "\\%-50s : %s,\n" $(echo "'${FF%%.*}'" | tr '-' '.') $(echo "'${FF%%.*}'") | sort; done
+
 " Fonction pour trouver le fichier correspondant en Ada
 function! Nom_Package_Vers_Nom_Fichier ()                                   "{{{
     let l:fichier=v:fname
