@@ -2,7 +2,7 @@
 # vim:foldmethod=marker:foldlevel=0
 # Changer les droits avec chmod u+x fichier
 
-# Dernière modification : Lundi 20 novembre[11] 2023
+# Dernière modification : Dimanche 26 octobre[10] 2025
 
 ###############################################################################
 #                   ___                             __                        #
@@ -351,12 +351,17 @@ function demander_utilisateur ()
 {
     printf >&2 '%s\n%s' "${*}" '(o/n) : '
     printf >>"${FICHIER_LOG_EXECUTION}" '%s\n%s' "${*}" '(o/n) : '
+
+    declare -r REPONSE_OUI='OoYy'
+    declare -r REPONSE_NON='Nn'
+    declare -r TOUTES_LES_REPONSES="${REPONSE_OUI}${REPONSE_NON}"
+
     while IFS= read -r -n 1 -s reponse
     do
-        [[ "${reponse}" = [OoYyNn] ]] && printf >&2 '%s\n' "${reponse}"
-        [[ "${reponse}" = [OoYyNn] ]] && printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${reponse}"
-        [[ "${reponse}" = [OoYy]   ]] && return 0
-        [[ "${reponse}" = [Nn]     ]] && return 1
+        [[ "${reponse}" = ["${TOUTES_LES_REPONSES}"] ]] && printf >&2 '%s\n' "${reponse}"
+        [[ "${reponse}" = ["${TOUTES_LES_REPONSES}"] ]] && printf >>"${FICHIER_LOG_EXECUTION}" '%s\n' "${reponse}"
+        [[ "${reponse}" = ["${REPONSE_OUI}"]         ]] && return 0
+        [[ "${reponse}" = ["${REPONSE_NON}"]         ]] && return 1
     done
 }
 
