@@ -1,4 +1,4 @@
-" Dernière modification : Vendredi 22 novembre[11] 2024
+" Dernière modification : Samedi 01 novembre[11] 2025
 
 " Définie l'affichage de la ligne de repli.
 function! MonFoldText()                                                     "{{{
@@ -58,6 +58,8 @@ function! Nettoyage()                                                       "{{{
     let curline = line( '.' )
     " Effectue la suppression des espaces en trop en fin de ligne.
     silent execute "normal! " . ':keeppatterns %s/\v\s+$//e' . "\<Return>" . ":nohlsearch\<Return>"
+    " Effectue la suppression des espaces NBSP en trop en fin de ligne.
+    silent execute "normal! " . ':keeppatterns %s/\v +$//e' . "\<Return>" . ":nohlsearch\<Return>"
     " On efface les lignes blanches inutiles en fin de fichier.
     if prevnonblank( line( '$' ) ) < line( '$' )
         silent execute "normal! :keeppatterns " . '%s/\v\n+%$//e' . "\<Return>" . ":nohlsearch\<Return>"

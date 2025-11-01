@@ -1,4 +1,4 @@
-" Dernière modification : Mardi 25 octobre[10] 2022
+" Dernière modification : Samedi 01 novembre[11] 2025
 
 scriptencoding utf-8
 
@@ -79,7 +79,7 @@ let NERDTreeCascadeSingleChildDir = 1
 let NERDTreeCascadeOpenSingleChildDir = 1
 let NERDTreeShowHidden = 0          " Pour afficher les fichiers caché.
 let NERDTreeSortHiddenFirst = 1
-let NERDTreeWinSize = 55
+let NERDTreeWinSize = 80
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 0          " Ferme automatiquement NERDTree quand on ouvre un fichier.
 let NERDTreeIgnore = ['ali$[[dir]]', 'doc$[[dir]]', 'lib$[[dir]]', 'obj$[[dir]]', 'bin$[[dir]]']
@@ -200,8 +200,8 @@ augroup END
 " Réglage de FSwitch pour les adb
 augroup fichierCorpAda
     autocmd!
-    autocmd BufEnter *.adb let b:fswitchdst  = 'ads'
-    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:./src'
+    autocmd BufEnter *.adb let b:fswitchdst  = 'ads,sa'
+    autocmd BufEnter *.adb let b:fswitchlocs = 'rel:./src,rel:../'
 augroup END
 " Réglage de FSwitch pour les ads
 augroup fichierSpecAda

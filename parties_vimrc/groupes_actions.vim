@@ -1,4 +1,4 @@
-" Dernière modification : Dimanche 04 août[08] 2024
+" Dernière modification : Samedi 01 novembre[11] 2025
 
 " Pour éviter les colonnes de limite de 80 et 150 caractères dans les quickfix
 augroup fichierQuickfix                                                     "{{{
@@ -19,7 +19,7 @@ augroup codeSourceAda                                                       "{{{
     autocmd Filetype ada setlocal shiftwidth=3
     autocmd FileType ada setlocal includeexpr=Nom_Package_Vers_Nom_Fichier()
     autocmd FileType ada setlocal suffixesadd=.ads,.adb
-    autocmd FileType ada setlocal path=.,/usr/include/,src/**,,
+    autocmd FileType ada setlocal path=.,/usr/include/,src/**,tests_unitaire_src/**,
     " \%-G\\s%#, ignorer lignes vide
     autocmd Filetype ada setlocal errorformat=
                 \%-G\\s%#,
