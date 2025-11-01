@@ -9,7 +9,7 @@ else
     let &t_TE = ""
 endif
 
-" Dernière modification : Vendredi 22 novembre[11] 2024
+" Dernière modification : Samedi 01 novembre[11] 2025
 " Voir : http://learnvimscriptthehardway.stevelosh.com/
 " Pour apprendre à écrire des scripts vim.
 
@@ -98,6 +98,7 @@ set   ignorecase                        " Désactive la casse pour utiliser la c
 set nojoinspaces                        " Ne met qu'un seul espace quand on joint des lignes
 set   laststatus=2                      " La barre de statut s'affiche toujours
 set   linebreak                         " Enroule la ligne a partir de la coupure d'un mot
+set   listchars=nbsp:¤,tab:<->,trail:§,eol:$,space:○,extends:▶,precedes:◀
 set   matchpairs=(:),{:},[:],«:»        " Trouver la paire correspondante
 set   modeline                          " Options spécifiques à vim dans les premières lignes
 set   modelines=3                       " Nombres de lignes vérifiées à l'ouverture
